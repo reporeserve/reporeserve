@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RepoReserve — Operational visibility for institutions participating in repo markets. Treasury collateral visibility and repo operations coordination platform.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>RepoReserve — Operational Visibility for Repo Market Institutions</title>
+  <!-- FAVICON: Replace data URI with your hosted favicon path -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <style>
+    /* ============================================================
+       CSS VARIABLES — Brand palette
+       ============================================================ */
+    :root {
+      --color-black:      #000000;
+      --color-near-black: #080808;
+      --color-dark-1:     #0A0A0A;
+      --color-dark-2:     #111111;
+      --color-dark-3:     #181818;
+      --color-dark-4:     #1E1E1E;
+      --color-dark-5:     #252525;
+      --color-dark-6:     #2A2A2A;
+      --color-blue:       #1A8CFF;
+      --color-blue-light: #3DA0FF;
+      --color-blue-dim:   #1470CC;
+      --color-blue-muted: #0E5299;
+      --color-white:      #FFFFFF;
+      --color-gray-50:    #F5F5F5;
+      --color-gray-100:   #E8E8E8;
+      --color-gray-200:   #CCCCCC;
+      --color-gray-300:   #AAAAAA;
+      --color-gray-400:   #888888;
+      --color-gray-500:   #666666;
+      --color-gray-600:   #444444;
+      --color-gray-700:   #333333;
+      --color-gray-800:   #222222;
+      --color-error:      #E04040;
+      --color-success:    #2ECC71;
+      --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --space-xs:  0.25rem;
+      --space-sm:  0.5rem;
+      --space-md:  1rem;
+      --space-lg:  1.5rem;
+      --space-xl:  2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+      --max-width: 1120px;
+      --radius:    3px;
+      --radius-lg: 6px;
+      --transition: 0.2s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-stack);
+      color: var(--color-gray-200);
+      background: var(--color-black);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+    :focus-visible {
+      outline: 2px solid var(--color-blue);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-lg); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .text-center { text-align: center; }
+
+    /* ============================================================
+       TYPOGRAPHY
+       ============================================================ */
+    h1, h2, h3, h4 { font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--color-white); }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+    h2 { font-size: clamp(1.35rem, 3vw, 1.875rem); margin-bottom: var(--space-md); }
+    h3 { font-size: 1.0625rem; }
+    p  { max-width: 62ch; }
+    .label-sm {
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       HEADER / NAV
+       ============================================================ */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-dark-5);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--color-white);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.01em;
+    }
+    .logo img {
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+    }
+    .logo-text-repo { color: var(--color-blue); }
+    .logo-text-reserve { color: var(--color-white); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--color-gray-400);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover, .nav-links a:focus { color: var(--color-white); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5625rem 1.125rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: var(--radius);
+      border: none;
+      transition: all var(--transition);
+    }
+    .btn-primary {
+      background: var(--color-blue);
+      color: var(--color-white);
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: var(--color-blue-light);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-blue);
+      border: 1.5px solid rgba(26,140,255,0.4);
+    }
+    .btn-outline:hover, .btn-outline:focus {
+      border-color: var(--color-blue);
+      background: rgba(26,140,255,0.08);
+    }
+    .btn-outline-light {
+      background: transparent;
+      color: var(--color-gray-200);
+      border: 1.5px solid var(--color-dark-6);
+    }
+    .btn-outline-light:hover, .btn-outline-light:focus {
+      border-color: var(--color-gray-400);
+      color: var(--color-white);
+    }
+    .btn-large { padding: 0.75rem 1.75rem; font-size: 0.875rem; }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-gray-300);
+      width: 40px; height: 40px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px; height: 1.5px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all var(--transition);
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position: relative;
+      background: var(--color-black);
+      color: var(--color-gray-200);
+      padding: calc(60px + var(--space-3xl)) 0 var(--space-3xl);
+      overflow: hidden;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 85%, rgba(26,140,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 15%, rgba(26,140,255,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    /* Horizontal rule accent */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-dark-5) 20%, var(--color-dark-5) 80%, transparent 100%);
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-inner { max-width: 620px; }
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--color-blue);
+      margin-bottom: var(--space-lg);
+    }
+    .hero h1 { margin-bottom: var(--space-lg); font-weight: 600; }
+    .hero-lead {
+      font-size: 1.125rem;
+      color: var(--color-gray-300);
+      margin-bottom: var(--space-xl);
+      line-height: 1.75;
+    }
+    .hero-sub {
+      font-size: 0.9375rem;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-xl);
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+
+    /* ============================================================
+       SECTION SHARED
+       ============================================================ */
+    section { padding: var(--space-3xl) 0; }
+    .section-eyebrow { color: var(--color-blue-muted); margin-bottom: var(--space-sm); }
+    .section-intro {
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-2xl);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .section-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--color-blue);
+      margin-bottom: var(--space-lg);
+      border: none;
+    }
+    .section-border-top {
+      border-top: 1px solid var(--color-dark-5);
+    }
+
+    /* ============================================================
+       INSTITUTIONAL FOCUS
+       ============================================================ */
+    #focus { background: var(--color-near-black); }
+    .focus-content {
+      max-width: 600px;
+    }
+    .focus-content p {
+      color: var(--color-gray-400);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ============================================================
+       SOLUTIONS
+       ============================================================ */
+    #solutions { background: var(--color-black); }
+    .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+    .solution-card {
+      padding: var(--space-xl) var(--space-lg);
+      border: 1px solid var(--color-dark-5);
+      border-radius: var(--radius);
+      background: var(--color-dark-1);
+      transition: border-color var(--transition);
+    }
+    .solution-card:hover {
+      border-color: var(--color-dark-6);
+    }
+    .solution-icon { width: 36px; height: 36px; margin-bottom: var(--space-md); color: var(--color-blue); }
+    .solution-card h3 { margin-bottom: var(--space-sm); font-size: 1rem; }
+    .solution-card p { color: var(--color-gray-500); font-size: 0.875rem; line-height: 1.7; }
+
+    /* ============================================================
+       ECOSYSTEM
+       ============================================================ */
+    #ecosystem { background: var(--color-near-black); }
+    .ecosystem-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      margin-top: var(--space-2xl);
+    }
+    .eco-node {
+      text-align: center;
+      padding: var(--space-lg) var(--space-xl);
+      border: 1px solid var(--color-dark-5);
+      border-radius: var(--radius);
+      min-width: 160px;
+      background: var(--color-dark-1);
+    }
+    .eco-node .label-sm { color: var(--color-gray-400); margin-bottom: var(--space-xs); display: block; }
+    .eco-node p { font-size: 0.8125rem; color: var(--color-gray-500); }
+    .eco-node--highlight {
+      border-color: var(--color-blue-dim);
+      background: rgba(26,140,255,0.04);
+    }
+    .eco-node--highlight .label-sm { color: var(--color-blue); }
+    .eco-connector {
+      width: 32px; height: 1px;
+      background: var(--color-dark-5);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .eco-connector::after {
+      content: '';
+      position: absolute;
+      right: 0; top: -3px;
+      width: 0; height: 0;
+      border-left: 5px solid var(--color-dark-5);
+      border-top: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+    }
+
+    /* ============================================================
+       ENGAGEMENT / ACCORDION
+       ============================================================ */
+    #engagement { background: var(--color-black); }
+    .engage-steps { max-width: 640px; }
+    .accordion-item { border-bottom: 1px solid var(--color-dark-4); }
+    .accordion-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-lg) 0;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-gray-200);
+      transition: color var(--transition);
+    }
+    .accordion-btn:hover, .accordion-btn:focus { color: var(--color-blue-light); }
+    .accordion-btn .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--color-dark-5);
+      color: var(--color-blue);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      margin-right: var(--space-md);
+      flex-shrink: 0;
+    }
+    .accordion-btn .chevron {
+      width: 18px; height: 18px;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+      color: var(--color-gray-600);
+    }
+    .accordion-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    .accordion-panel { overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
+    .accordion-panel-inner {
+      padding: 0 0 var(--space-lg) calc(26px + var(--space-md));
+      color: var(--color-gray-500);
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       CASE STUDY
+       ============================================================ */
+    #casestudy { background: var(--color-near-black); }
+    .case-quote {
+      border-left: 2px solid var(--color-blue-dim);
+      padding-left: var(--space-lg);
+      font-size: 1rem;
+      color: var(--color-gray-300);
+      font-style: italic;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+    .case-attribution {
+      margin-top: var(--space-md);
+      font-style: normal;
+      font-size: 0.75rem;
+      color: var(--color-gray-600);
+    }
+
+    /* ============================================================
+       TEAM
+       ============================================================ */
+    #team { background: var(--color-black); }
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); max-width: 480px; }
+    .team-card {
+      padding: var(--space-lg);
+      border: 1px solid var(--color-dark-5);
+      border-radius: var(--radius);
+      background: var(--color-dark-1);
+    }
+    .team-card h3 { font-size: 1rem; margin-bottom: 2px; }
+    .team-card .role {
+      font-size: 0.75rem;
+      color: var(--color-blue-muted);
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+    .team-card p { font-size: 0.875rem; color: var(--color-gray-500); line-height: 1.7; }
+
+    /* ============================================================
+       PARTNER LOGOS
+       ============================================================ */
+    #partners { background: var(--color-near-black); padding: var(--space-2xl) 0; }
+    .partner-bar { display: flex; align-items: center; justify-content: center; gap: var(--space-2xl); flex-wrap: wrap; }
+    .partner-placeholder {
+      width: 130px; height: 52px;
+      border: 1px dashed var(--color-dark-5);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .partner-placeholder span {
+      font-size: 0.5625rem;
+      color: var(--color-gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    #faq { background: var(--color-black); }
+    .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg) var(--space-xl); max-width: 880px; }
+    .faq-item { padding-bottom: var(--space-md); }
+    .faq-item h3 { font-size: 0.9375rem; margin-bottom: var(--space-sm); }
+    .faq-item p { color: var(--color-gray-500); font-size: 0.8125rem; line-height: 1.7; }
+
+    /* ============================================================
+       CTA BANNER
+       ============================================================ */
+    .cta-banner {
+      background: var(--color-near-black);
+      border-top: 1px solid var(--color-dark-5);
+      border-bottom: 1px solid var(--color-dark-5);
+      padding: var(--space-2xl) 0;
+    }
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .cta-inner h2 { margin-bottom: var(--space-xs); }
+    .cta-inner p { color: var(--color-gray-500); font-size: 0.875rem; }
+    .cta-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+    /* ============================================================
+       COMPANY IDENTITY BLOCK
+       ============================================================ */
+    .company-identity {
+      padding: var(--space-2xl) 0;
+      background: var(--color-black);
+      border-top: 1px solid var(--color-dark-4);
+    }
+    .identity-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+    .identity-block h3 {
+      font-size: 0.875rem;
+      margin-bottom: var(--space-xs);
+    }
+    .identity-block p {
+      font-size: 0.8125rem;
+      color: var(--color-gray-500);
+      line-height: 1.6;
+    }
+    .identity-block .identity-tagline {
+      font-size: 0.75rem;
+      color: var(--color-gray-600);
+      margin-top: var(--space-sm);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      background: var(--color-black);
+      border-top: 1px solid var(--color-dark-4);
+      padding: var(--space-xl) 0 var(--space-lg);
+      color: var(--color-gray-600);
+      font-size: 0.75rem;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .footer-company {
+      line-height: 1.6;
+    }
+    .footer-company strong {
+      color: var(--color-gray-400);
+      font-weight: 600;
+    }
+    .footer-contact a {
+      color: var(--color-blue-dim);
+      transition: color var(--transition);
+    }
+    .footer-contact a:hover { color: var(--color-blue); }
+    .footer-privacy {
+      font-style: italic;
+      font-size: 0.6875rem;
+      color: var(--color-gray-700);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-dark-4);
+    }
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .modal-overlay.is-active { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--color-dark-2);
+      border: 1px solid var(--color-dark-5);
+      border-radius: var(--radius-lg);
+      max-width: 460px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: var(--space-xl);
+      position: relative;
+      transform: translateY(12px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.is-active .modal { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: var(--space-md); right: var(--space-md);
+      background: none; border: none;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-gray-600);
+      border-radius: 50%;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal-close:hover, .modal-close:focus { background: var(--color-dark-5); color: var(--color-gray-300); }
+    .modal h2 { font-size: 1.125rem; margin-bottom: var(--space-sm); padding-right: 36px; }
+    .modal .modal-desc { color: var(--color-gray-500); font-size: 0.8125rem; margin-bottom: var(--space-lg); }
+
+    .form-group { margin-bottom: var(--space-md); }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-gray-300);
+      margin-bottom: var(--space-xs);
+      letter-spacing: 0.02em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.5625rem 0.75rem;
+      font-size: 0.875rem;
+      font-family: var(--font-stack);
+      border: 1px solid var(--color-dark-5);
+      border-radius: var(--radius);
+      background: var(--color-dark-3);
+      color: var(--color-gray-200);
+      transition: border-color var(--transition);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--color-gray-600);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-blue-dim);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(26,140,255,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 72px; }
+    .form-group .error-msg { font-size: 0.6875rem; color: var(--color-error); margin-top: var(--space-xs); display: none; }
+    .form-group.has-error input,
+    .form-group.has-error select { border-color: var(--color-error); }
+    .form-group.has-error .error-msg { display: block; }
+
+    .modal-success { text-align: center; padding: var(--space-xl) 0; display: none; }
+    .modal-success.is-visible { display: block; }
+    .modal-success .check-circle { width: 44px; height: 44px; margin: 0 auto var(--space-md); color: var(--color-success); }
+    .modal-success h3 { font-size: 1rem; margin-bottom: var(--space-sm); }
+    .modal-success p { color: var(--color-gray-500); font-size: 0.875rem; margin: 0 auto; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1200px) {
+      .solutions-grid { gap: var(--space-md); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.is-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; left: 0; right: 0;
+        background: rgba(0,0,0,0.97);
+        padding: var(--space-lg);
+        gap: var(--space-md);
+        border-bottom: 1px solid var(--color-dark-5);
+      }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .eco-connector { width: 1px; height: 24px; }
+      .eco-connector::after { display: none; }
+      .ecosystem-visual { flex-direction: column; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .footer-inner { flex-direction: column; }
+      .identity-inner { flex-direction: column; gap: var(--space-lg); }
+    }
+    @media (max-width: 640px) {
+      section { padding: var(--space-2xl) 0; }
+      .hero { padding: calc(60px + var(--space-2xl)) 0 var(--space-2xl); min-height: auto; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      h1 { font-size: 1.5rem; }
+      .modal { padding: var(--space-lg); margin: var(--space-sm); }
+    }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+      .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="#" class="logo" aria-label="RepoReserve home">
+        <img src="data:image/png;base64,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" alt="" width="30" height="30">
+        <span><span class="logo-text-repo">Repo</span><span class="logo-text-reserve">Reserve</span></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="nav-menu" class="nav-links" role="list">
+          <li><a href="#focus">Focus</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#engagement">Engagement</a></li>
+          <li><a href="#team">Leadership</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><button class="btn btn-primary" data-open-modal="meeting-modal">Request Discussion</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <span class="label-sm hero-eyebrow">Treasury Infrastructure</span>
+          <h1 id="hero-heading">Operational visibility for institutions participating in repo&nbsp;markets.</h1>
+          <p class="hero-lead">RepoReserve is a treasury collateral visibility and repo operations coordination platform. We serve institutional treasury teams, custodians, and clearinghouses with a unified view of collateral&nbsp;positioning.</p>
+          <p class="hero-sub">Designed for organizations that operate at the center of post-trade infrastructure — without compromising operational&nbsp;security.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-large" data-open-modal="meeting-modal">Request Confidential Discussion</button>
+            <a href="brochure.html" class="btn btn-outline btn-large" download>Download Institutional Overview</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INSTITUTIONAL FOCUS
+         ============================================================ -->
+    <section id="focus" class="section-border-top" aria-labelledby="focus-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">Institutional Focus</span>
+        <h2 id="focus-heading">Built for the Ecosystem</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <div class="focus-content fade-in">
+          <p>RepoReserve is designed for institutions that participate in secured funding markets through custodians and established market&nbsp;infrastructure.</p>
+          <p>Our goal is to support operational clarity without replacing existing financial market infrastructure. We work within the structures that institutions already trust — custodian banks, clearinghouses, and central&nbsp;counterparties.</p>
+          <p>We do not disintermediate. We&nbsp;coordinate.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SOLUTIONS
+         ============================================================ -->
+    <section id="solutions" class="section-border-top" aria-labelledby="solutions-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">What We Solve</span>
+        <h2 id="solutions-heading">Designed for Institutional Rigor</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <p class="section-intro">Fragmented collateral data leads to mispriced risk, delayed settlements, and manual reconciliation overhead. RepoReserve consolidates visibility across counterparties to reduce friction and strengthen&nbsp;governance.</p>
+        <div class="solutions-grid">
+          <article class="solution-card fade-in">
+            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect x="3" y="7" width="30" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="18" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="18" y1="10" x2="18" y2="13" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="18" y1="23" x2="18" y2="26" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>Collateral Visibility</h3>
+            <p>Unified, real-time oversight of collateral positions across custodians, counterparties, and internal&nbsp;books.</p>
+          </article>
+          <article class="solution-card fade-in">
+            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <circle cx="11" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="25" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="16" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>Operations Coordination</h3>
+            <p>Streamlined repo lifecycle coordination between treasury desks, custodians, and market infrastructure&nbsp;providers.</p>
+          </article>
+          <article class="solution-card fade-in">
+            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <path d="M18 4L32 12V24L18 32L4 24V12L18 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M18 12V24" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M11 16L18 20L25 16" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+            <h3>Risk &amp; Governance</h3>
+            <p>Institutional-grade audit trails and position reporting that support compliance, risk management, and board-level&nbsp;oversight.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ECOSYSTEM DIAGRAM
+         ============================================================ -->
+    <section id="ecosystem" class="section-border-top" aria-labelledby="ecosystem-heading">
+      <div class="container text-center">
+        <span class="label-sm section-eyebrow" style="color:var(--color-blue-dim);">Ecosystem Overview</span>
+        <h2 id="ecosystem-heading">Where RepoReserve Fits</h2>
+        <hr class="section-rule" style="margin-left:auto;margin-right:auto;" aria-hidden="true">
+        <p class="section-intro" style="margin-left:auto;margin-right:auto;">
+          An operational visibility layer that sits between institutional participants — without exposing proprietary&nbsp;workflows.
+        </p>
+        <div class="ecosystem-visual" role="img" aria-label="High-level ecosystem: Treasury Teams connect to Custodian Banks connect to Market Infrastructure, with RepoReserve as the operational visibility layer">
+          <div class="eco-node fade-in">
+            <span class="label-sm">Treasury Teams</span>
+            <p>Internal desks</p>
+          </div>
+          <div class="eco-connector" aria-hidden="true"></div>
+          <div class="eco-node fade-in">
+            <span class="label-sm">Custodian Banks</span>
+            <p>Asset safekeeping</p>
+          </div>
+          <div class="eco-connector" aria-hidden="true"></div>
+          <div class="eco-node fade-in">
+            <span class="label-sm">Market Infrastructure</span>
+            <p>Clearinghouses &amp; CCPs</p>
+          </div>
+          <div class="eco-connector" aria-hidden="true"></div>
+          <div class="eco-node eco-node--highlight fade-in">
+            <span class="label-sm">RepoReserve</span>
+            <p>Operational visibility layer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ENGAGEMENT (Accordion)
+         ============================================================ -->
+    <section id="engagement" class="section-border-top" aria-labelledby="engagement-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">How We Engage</span>
+        <h2 id="engagement-heading">A Structured, Confidential Process</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <p class="section-intro">Every engagement begins under NDA. We prioritize discretion and institutional trust above&nbsp;all.</p>
+        <div class="engage-steps">
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-1-panel" id="step-1-btn">
+              <span><span class="step-num" aria-hidden="true">1</span>Request a Confidential Discussion</span>
+              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="accordion-panel" id="step-1-panel" role="region" aria-labelledby="step-1-btn" hidden>
+              <div class="accordion-panel-inner">Submit a brief request via our secure form. We review every inquiry personally. There is no automated outreach — a member of our team will respond within two business&nbsp;days.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-2-panel" id="step-2-btn">
+              <span><span class="step-num" aria-hidden="true">2</span>Mutual NDA &amp; Scoping</span>
+              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="accordion-panel" id="step-2-panel" role="region" aria-labelledby="step-2-btn" hidden>
+              <div class="accordion-panel-inner">Before any detailed discussion, we execute a mutual non-disclosure agreement. This protects both parties and ensures all product detail remains&nbsp;confidential.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-3-panel" id="step-3-btn">
+              <span><span class="step-num" aria-hidden="true">3</span>Tailored Walkthrough &amp; Pilot Discussion</span>
+              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="accordion-panel" id="step-3-panel" role="region" aria-labelledby="step-3-btn" hidden>
+              <div class="accordion-panel-inner">Under NDA, we provide a tailored walkthrough aligned to your institution's treasury structure. If there is mutual interest, we outline a confidential pilot&nbsp;engagement.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CASE STUDY
+         ============================================================ -->
+    <section id="casestudy" class="section-border-top" aria-labelledby="case-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">Institutional Proof Point</span>
+        <h2 id="case-heading">What Our Pilot Participants Report</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <blockquote class="case-quote fade-in">
+          "Before RepoReserve, our overnight collateral reconciliation required three teams across two time zones. During the pilot, we reduced reconciliation touch-points by more than half and surfaced position discrepancies that had gone undetected for months. The platform's value was evident within the first reporting&nbsp;cycle."
+          <footer class="case-attribution">— Senior Treasury Officer, G-SIB Pilot Participant (identity withheld under&nbsp;NDA)</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TEAM
+         ============================================================ -->
+    <section id="team" class="section-border-top" aria-labelledby="team-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">Leadership</span>
+        <h2 id="team-heading">Founded by Practitioners</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <div class="team-grid">
+          <div class="team-card fade-in">
+            <h3>Rakesh Kottha</h3>
+            <span class="role label-sm">Founder</span>
+            <p>Focused on building institutional infrastructure for treasury collateral visibility and repo coordination. Background in financial technology and institutional&nbsp;operations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PARTNER LOGOS
+         ============================================================ -->
+    <section id="partners" aria-labelledby="partners-heading">
+      <div class="container text-center">
+        <span class="label-sm section-eyebrow" style="color:var(--color-gray-600);">Early Ecosystem Participants</span>
+        <h2 id="partners-heading" class="sr-only">Pilot Participants</h2>
+        <div class="partner-bar" style="margin-top:var(--space-lg);">
+          <div class="partner-placeholder" aria-label="Pilot participant — permission required">
+            <span>Pilot Participant</span>
+            <span style="font-size:0.5rem;opacity:0.5;">Permission Required</span>
+          </div>
+          <div class="partner-placeholder" aria-label="Pilot participant — permission required">
+            <span>Pilot Participant</span>
+            <span style="font-size:0.5rem;opacity:0.5;">Permission Required</span>
+          </div>
+          <div class="partner-placeholder" aria-label="Pilot participant — permission required">
+            <span>Pilot Participant</span>
+            <span style="font-size:0.5rem;opacity:0.5;">Permission Required</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section id="faq" class="section-border-top" aria-labelledby="faq-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">Frequently Asked Questions</span>
+        <h2 id="faq-heading">Common Inquiries</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <div class="faq-grid">
+          <div class="faq-item fade-in">
+            <h3>What does RepoReserve do?</h3>
+            <p>RepoReserve is a treasury collateral visibility and repo operations coordination platform. It provides institutional participants with a consolidated view of collateral positions across custodians and&nbsp;counterparties.</p>
+          </div>
+          <div class="faq-item fade-in">
+            <h3>Who is it designed for?</h3>
+            <p>Treasury teams at institutional banks, custodian banks, and clearinghouses that manage repo and collateral operations at&nbsp;scale.</p>
+          </div>
+          <div class="faq-item fade-in">
+            <h3>Is this a trading platform?</h3>
+            <p>No. RepoReserve is an operations coordination and visibility platform. It does not execute trades, provide pricing, or act as a&nbsp;broker.</p>
+          </div>
+          <div class="faq-item fade-in">
+            <h3>Why is an NDA required?</h3>
+            <p>Product details, architecture, and workflows are proprietary. We share these only with vetted institutional counterparties under mutual non-disclosure&nbsp;agreements.</p>
+          </div>
+          <div class="faq-item fade-in">
+            <h3>Can I see a demo before signing an&nbsp;NDA?</h3>
+            <p>We provide a general overview and this institutional brochure. Detailed demonstrations and documentation are available only after executing a mutual&nbsp;NDA.</p>
+          </div>
+          <div class="faq-item fade-in">
+            <h3>How do I get started?</h3>
+            <p>Submit a confidential discussion request. A member of our team will respond within two business days to schedule an initial&nbsp;conversation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA BANNER
+         ============================================================ -->
+    <section class="cta-banner" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="cta-inner">
+          <div>
+            <h2 id="cta-heading">Ready to Learn More?</h2>
+            <p>All detailed discussions are conducted under NDA. Start with a confidential&nbsp;request.</p>
+          </div>
+          <div class="cta-actions">
+            <button class="btn btn-primary btn-large" data-open-modal="meeting-modal">Request Confidential Discussion</button>
+            <a href="brochure.html" class="btn btn-outline btn-large" download>Download Institutional Overview</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       COMPANY IDENTITY + FOOTER
+       ============================================================ -->
+  <div class="company-identity">
+    <div class="container">
+      <div class="identity-inner">
+        <div class="identity-block">
+          <h3>RepoReserve Technologies Pvt Ltd</h3>
+          <p>Hyderabad, India</p>
+          <p class="identity-tagline">Institutional collateral visibility platform for treasury and custodian&nbsp;operations.</p>
+        </div>
+        <div class="identity-block">
+          <p><a href="mailto:contact@reporeserve.com" style="color:var(--color-blue-dim);">contact@reporeserve.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-company">
+          <strong>RepoReserve Technologies Pvt Ltd</strong><br>
+          Hyderabad, India
+        </div>
+        <div class="footer-contact">
+          <a href="mailto:contact@reporeserve.com">contact@reporeserve.com</a>
+        </div>
+      </div>
+      <p class="footer-privacy">We do not publish product workflows or dashboards online. Institutional demonstrations are available under&nbsp;NDA.</p>
+      <p style="margin-top:var(--space-sm);font-size:0.6875rem;color:var(--color-gray-700);">&copy; 2025 RepoReserve Technologies Pvt Ltd. All rights&nbsp;reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MEETING REQUEST MODAL
+       ============================================================ -->
+  <div class="modal-overlay" id="meeting-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close dialog" data-close-modal>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="3" y1="3" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="15" y1="3" x2="3" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div id="modal-form-view">
+        <h2 id="modal-title">Request Confidential Discussion</h2>
+        <p id="modal-desc" class="modal-desc">All inquiries are reviewed personally. We will follow up to confirm a suitable&nbsp;time.</p>
+        <form id="meeting-form" novalidate>
+          <div class="form-group">
+            <label for="field-name">Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="field-name" name="name" required autocomplete="name" placeholder="Full name">
+            <span class="error-msg" role="alert">Please enter your name.</span>
+          </div>
+          <div class="form-group">
+            <label for="field-institution">Institution <span aria-hidden="true">*</span></label>
+            <input type="text" id="field-institution" name="institution" required autocomplete="organization" placeholder="Organization name">
+            <span class="error-msg" role="alert">Please enter your institution.</span>
+          </div>
+          <div class="form-group">
+            <label for="field-role">Role</label>
+            <input type="text" id="field-role" name="role" autocomplete="organization-title" placeholder="Title or function">
+          </div>
+          <div class="form-group">
+            <label for="field-email">Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="Corporate email">
+            <span class="error-msg" role="alert">Please enter a valid email.</span>
+          </div>
+          <div class="form-group">
+            <label for="field-phone">Phone</label>
+            <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="Direct line (optional)">
+          </div>
+          <div class="form-group">
+            <label for="field-message">Message</label>
+            <textarea id="field-message" name="message" placeholder="Briefly describe your interest."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-large" style="width:100%;">Request Confidential Discussion</button>
+          <p style="font-size:0.6875rem;color:var(--color-gray-600);margin-top:var(--space-sm);text-align:center;">Your information is handled confidentially. No automated&nbsp;outreach.</p>
+        </form>
+      </div>
+
+      <div class="modal-success" id="modal-success-view" aria-live="polite">
+        <svg class="check-circle" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13 22L19 28L31 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Request Received</h3>
+        <p>We will follow up to confirm a suitable time. Expect a response within two business&nbsp;days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    (function() {
+      'use strict';
+
+      /* Mobile nav */
+      var navToggle = document.querySelector('.nav-toggle');
+      var navMenu   = document.getElementById('nav-menu');
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', String(!expanded));
+          navMenu.classList.toggle('is-open');
+        });
+      }
+
+      /* Modal */
+      var modalOverlay  = document.getElementById('meeting-modal');
+      var modalEl       = modalOverlay ? modalOverlay.querySelector('.modal') : null;
+      var closeBtn      = modalOverlay ? modalOverlay.querySelector('[data-close-modal]') : null;
+      var formView      = document.getElementById('modal-form-view');
+      var successView   = document.getElementById('modal-success-view');
+      var lastFocusedEl = null;
+
+      function openModal() {
+        if (!modalOverlay) return;
+        lastFocusedEl = document.activeElement;
+        modalOverlay.classList.add('is-active');
+        modalOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (formView) formView.style.display = '';
+        if (successView) successView.classList.remove('is-visible');
+        // Reset form
+        var form = document.getElementById('meeting-form');
+        if (form) {
+          form.reset();
+          form.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error'); });
+        }
+        var firstInput = modalEl.querySelector('input');
+        if (firstInput) setTimeout(function() { firstInput.focus(); }, 50);
+      }
+
+      function closeModal() {
+        if (!modalOverlay) return;
+        modalOverlay.classList.remove('is-active');
+        modalOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocusedEl) lastFocusedEl.focus();
+      }
+
+      document.querySelectorAll('[data-open-modal="meeting-modal"]').forEach(function(btn) {
+        btn.addEventListener('click', openModal);
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('is-active')) closeModal();
+      });
+
+      /* Focus trap */
+      if (modalEl) {
+        modalEl.addEventListener('keydown', function(e) {
+          if (e.key !== 'Tab') return;
+          var focusable = modalEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if (!focusable.length) return;
+          var first = focusable[0], last = focusable[focusable.length - 1];
+          if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+          else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+        });
+      }
+
+      /* Form validation */
+      var form = document.getElementById('meeting-form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var valid = true;
+          form.querySelectorAll('[required]').forEach(function(field) {
+            var group = field.closest('.form-group');
+            if (!field.value.trim()) { group.classList.add('has-error'); valid = false; }
+            else { group.classList.remove('has-error'); }
+            if (field.type === 'email' && field.value.trim()) {
+              if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())) { group.classList.add('has-error'); valid = false; }
+            }
+          });
+          if (!valid) { var err = form.querySelector('.has-error input'); if (err) err.focus(); return; }
+
+          /*
+           * REPLACE: POST form data to your endpoint
+           * fetch('/api/meeting-request', {
+           *   method: 'POST',
+           *   headers: { 'Content-Type': 'application/json' },
+           *   body: JSON.stringify({ name, institution, role, email, phone, message })
+           * });
+           */
+
+          if (formView) formView.style.display = 'none';
+          if (successView) successView.classList.add('is-visible');
+        });
+      }
+
+      /* Accordion */
+      document.querySelectorAll('.accordion-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          var panel = document.getElementById(btn.getAttribute('aria-controls'));
+          if (!panel) return;
+          document.querySelectorAll('.accordion-btn').forEach(function(b) {
+            b.setAttribute('aria-expanded', 'false');
+            var p = document.getElementById(b.getAttribute('aria-controls'));
+            if (p) { p.hidden = true; p.style.maxHeight = '0'; }
+          });
+          if (!expanded) {
+            btn.setAttribute('aria-expanded', 'true');
+            panel.hidden = false;
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+
+      /* Scroll fade-in */
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+      } else {
+        document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('is-visible'); });
+      }
+
+      /* Close mobile nav on anchor click */
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (navMenu && navMenu.classList.contains('is-open')) {
+            navMenu.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
