@@ -40,6 +40,9 @@
       --color-success:    #198754;
       /* Typography */
       --font-stack: Inter, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      /* Logo font: Poppins preferred — falls back to system geometric sans-serif.
+         To use Poppins: place Poppins-SemiBold.woff2 in assets/fonts/ and uncomment @font-face below */
+      --font-logo: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       /* Spacing scale */
       --sp-2xs: 0.125rem;
       --sp-xs:  0.25rem;
@@ -55,6 +58,20 @@
       --radius-lg: 8px;
       --transition: 0.2s ease;
     }
+
+    /*
+     * OPTIONAL: Uncomment to load Poppins SemiBold locally for the logo.
+     * Place Poppins-SemiBold.woff2 in assets/fonts/ and update --font-logo above
+     * to: "Poppins", -apple-system, system-ui, ...
+     *
+     * @font-face {
+     *   font-family: "Poppins";
+     *   src: url("assets/fonts/Poppins-SemiBold.woff2") format("woff2");
+     *   font-weight: 600;
+     *   font-style: normal;
+     *   font-display: swap;
+     * }
+     */
 
     /* ============================================================
        RESET
@@ -108,16 +125,20 @@
     .site-header .container {
       display:flex; align-items:center; justify-content:space-between; height:60px;
     }
-    /* Logo styles — ready for when logo is inserted */
+    /* Logo styles — Poppins SemiBold wordmark */
     .logo {
-      display:flex; align-items:center; gap:10px;
+      display:flex; align-items:center; gap:0;
+      text-decoration:none;
     }
-    .logo img {
-      height: 36px;
-      width: auto;
-      max-width: 160px;
-      display: block;
+    .logo-wordmark {
+      font-family: var(--font-logo);
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      line-height: 1;
     }
+    .logo-repo { color: var(--color-accent); }
+    .logo-reserve { color: var(--color-heading); }
     .nav-links { display:flex; align-items:center; gap:var(--sp-lg); list-style:none; }
     .nav-links a {
       color:var(--color-text-light); font-size:0.8125rem; font-weight:500;
@@ -395,6 +416,21 @@
     }
     .footer-disclaimer { font-size:0.6875rem; font-style:italic; color:var(--color-text-muted); }
     .footer-copy { font-size:0.6875rem; color:var(--color-text-muted); }
+    .footer-infra {
+      margin-top:var(--sp-lg); padding-top:var(--sp-md);
+      border-top:1px solid var(--color-border);
+      display:flex; align-items:center; gap:var(--sp-lg);
+      flex-wrap:wrap;
+    }
+    .footer-infra-title {
+      font-size:0.6875rem; font-weight:600; color:var(--color-text-light);
+      text-transform:uppercase; letter-spacing:0.1em;
+    }
+    .footer-infra a {
+      font-size:0.75rem; color:var(--color-text-light);
+      transition:color var(--transition);
+    }
+    .footer-infra a:hover { color:var(--color-accent); }
 
     /* ============================================================
        MODAL
@@ -509,34 +545,13 @@
 <body>
 
   <!-- ============================================================
-       HEADER — logo removed per owner request; nav only
+       HEADER — Poppins wordmark logo + nav
        ============================================================ -->
   <header class="site-header" role="banner">
     <div class="container">
-      <!-- LOGO WILL BE INSERTED HERE (owner will upload assets/logo.png to GitHub) -->
-     <a href="#" class="logo" aria-label="RepoReserve home">
-  <img
-    src="assets/logo.png"
-    alt="RepoReserve"
-    style="height:40px; width:auto; max-width:180px;"
-  >
-</a>
-
-  <nav>
-    <!-- navigation links -->
-  </nav>
-</header>
-        When ready, insert:
-        <a href="#" class="logo" aria-label="RepoReserve home">
-          <img
-            class="brand-logo"
-            src="assets/logo.png"
-            srcset="assets/logo@2x.png 2x"
-            alt="RepoReserve"
-            style="height:36px; width:auto; max-width:160px;"
-          >
-        </a>
-      -->
+      <a href="#" class="logo" aria-label="RepoReserve home">
+        <span class="logo-wordmark"><span class="logo-repo">Repo</span><span class="logo-reserve">Reserve</span></span>
+      </a>
       <nav aria-label="Primary navigation">
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
@@ -888,6 +903,13 @@
           <!-- REPLACE: contact@reporeserve.com -->
           <a href="mailto:contact@reporeserve.com">contact@reporeserve.com</a>
         </div>
+      </div>
+      <!-- Market Infrastructure links -->
+      <div class="footer-infra">
+        <span class="footer-infra-title">Market Infrastructure</span>
+        <a href="https://www.rbi.org.in" target="_blank" rel="noopener noreferrer">Reserve Bank of India</a>
+        <a href="https://www.ccilindia.com" target="_blank" rel="noopener noreferrer">Clearing Corporation of India Limited</a>
+        <a href="https://www.sebi.gov.in" target="_blank" rel="noopener noreferrer">Securities and Exchange Board of India</a>
       </div>
       <div class="footer-bottom">
         <span class="footer-disclaimer">We do not publish product workflows or dashboards online. Institutional demonstrations are available under&nbsp;NDA.</span>
