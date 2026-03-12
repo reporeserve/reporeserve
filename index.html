@@ -6,561 +6,233 @@
   <meta name="description" content="RepoReserve — Operational visibility for institutions participating in repo markets. Treasury collateral visibility and repo operations coordination platform.">
   <meta name="robots" content="noindex, nofollow">
   <title>RepoReserve — Operational Visibility for Repo Market Institutions</title>
-  <!-- REPLACE: favicon path — place your .ico or .png in assets/ -->
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <style>
-    /* ============================================================
-       CSS VARIABLES — Clean institutional white palette
-       ============================================================ */
     :root {
-      /* Backgrounds */
-      --color-bg:         #FFFFFF;
-      --color-bg-alt:     #F7F9FC;
-      --color-bg-card:    #FFFFFF;
-      --color-bg-raised:  #F0F4F8;
-      /* Borders */
-      --color-border:     #E2E8F0;
-      --color-border-dim: #EDF1F7;
-      /* Accent */
-      --color-accent:     #1F6FEB;
-      --color-accent-hover:#0F5CD6;
-      --color-accent-lt:  #4A90F0;
-      --color-accent-dim: #1A5BC4;
-      --color-accent-bg:  rgba(31,111,235,0.06);
-      /* Teal secondary */
-      --color-teal:       #0E8A7D;
-      /* Text */
-      --color-heading:    #0B1F33;
-      --color-text:       #4A5D73;
-      --color-text-light: #7B8FA3;
-      --color-text-muted: #9AAFC0;
-      --color-white:      #FFFFFF;
-      /* Utility */
-      --color-error:      #DC3545;
-      --color-success:    #198754;
-      /* Typography */
-      --font-stack: Inter, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      /* Logo font: Poppins preferred — falls back to system geometric sans-serif.
-         To use Poppins: place Poppins-SemiBold.woff2 in assets/fonts/ and uncomment @font-face below */
-      --font-logo: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      /* Spacing scale */
-      --sp-2xs: 0.125rem;
-      --sp-xs:  0.25rem;
-      --sp-sm:  0.5rem;
-      --sp-md:  1rem;
-      --sp-lg:  1.5rem;
-      --sp-xl:  2.5rem;
-      --sp-2xl: 4rem;
-      --sp-3xl: 6rem;
-      /* Layout */
-      --max-w:  1140px;
-      --radius: 6px;
-      --radius-lg: 8px;
-      --transition: 0.2s ease;
+      --bg:#FFFFFF;--surface:#F7F9FC;--text:#0B1F33;--muted:#6B7B89;
+      --accent:#1F6FEB;--accent-strong:#0F5CD6;--accent-bg:rgba(31,111,235,0.06);
+      --card-border:rgba(15,92,214,0.08);--border:#E2E8F0;--border-dim:#EDF1F7;
+      --teal:#0E8A7D;--error:#DC3545;--success:#198754;
+      --font:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      --sp-xs:0.25rem;--sp-sm:0.5rem;--sp-md:1rem;--sp-lg:1.5rem;
+      --sp-xl:2.5rem;--sp-2xl:4rem;--sp-3xl:6rem;
+      --max-w:1140px;--radius:10px;--tr:0.2s ease;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:var(--font);color:var(--muted);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;font-family:inherit}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--sp-lg)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    .text-center{text-align:center}
 
-    /*
-     * OPTIONAL: Uncomment to load Poppins SemiBold locally for the logo.
-     * Place Poppins-SemiBold.woff2 in assets/fonts/ and update --font-logo above
-     * to: "Poppins", -apple-system, system-ui, ...
-     *
-     * @font-face {
-     *   font-family: "Poppins";
-     *   src: url("assets/fonts/Poppins-SemiBold.woff2") format("woff2");
-     *   font-weight: 600;
-     *   font-style: normal;
-     *   font-display: swap;
-     * }
-     */
+    /* TYPOGRAPHY */
+    h1,h2,h3,h4{font-weight:700;line-height:1.15;letter-spacing:-0.02em;color:var(--text)}
+    h1{font-size:clamp(2rem,5.5vw,3.25rem);line-height:1.04}
+    h2{font-size:clamp(1.35rem,3vw,1.875rem);margin-bottom:var(--sp-md)}
+    h3{font-size:1.125rem;font-weight:600}
+    p{max-width:60ch;font-size:1rem;line-height:1.7}
+    .label-sm{font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600}
+    .section-eyebrow{color:var(--accent);margin-bottom:var(--sp-sm)}
+    .section-intro{color:var(--muted);margin-bottom:var(--sp-2xl);font-size:1rem;line-height:1.7}
+    .section-rule{width:40px;height:2px;background:var(--accent);margin-bottom:var(--sp-lg);border:none}
+    section{padding:var(--sp-3xl) 0}
+    .section-border-top{border-top:1px solid var(--border)}
 
-    /* ============================================================
-       RESET
-       ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--font-stack);
-      color: var(--color-text);
-      background: var(--color-bg);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-    img, svg { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { cursor: pointer; font-family: inherit; }
-    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    /* HEADER */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .site-header .container{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+    .logo{display:flex;align-items:center;text-decoration:none}
+    .logo svg{display:block;height:36px;width:auto}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin-left:auto}
+    .nav-links a{color:var(--muted);font-size:0.8125rem;font-weight:500;letter-spacing:0.02em;transition:color var(--tr)}
+    .nav-links a:hover,.nav-links a:focus{color:var(--text)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;font-size:0.8125rem;font-weight:600;letter-spacing:0.03em;border-radius:var(--radius);border:none;transition:all var(--tr)}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(31,111,235,0.15)}
+    .btn-primary:hover,.btn-primary:focus{background:var(--accent-strong);box-shadow:0 6px 20px rgba(31,111,235,0.25)}
+    .btn-outline{background:transparent;color:var(--accent);border:1.5px solid rgba(31,111,235,0.3)}
+    .btn-outline:hover,.btn-outline:focus{border-color:var(--accent);background:var(--accent-bg);transform:translateY(-1px)}
+    .btn-large{padding:12px 28px;font-size:0.875rem}
+    .nav-toggle{display:none;background:none;border:none;color:var(--muted);width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+    .nav-toggle span{display:block;width:20px;height:1.5px;background:currentColor;border-radius:1px;transition:all var(--tr)}
 
-    /* ============================================================
-       UTILITIES
-       ============================================================ */
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--sp-lg); }
-    .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
-    .text-center { text-align: center; }
+    /* HERO */
+    .hero{position:relative;background:var(--surface);padding:calc(72px + var(--sp-3xl)) 0 var(--sp-3xl);overflow:hidden;min-height:580px}
+    .hero-grid{position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(11,31,51,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(11,31,51,0.012) 1px,transparent 1px);background-size:96px 96px}
+    .hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 50% at 12% 88%,rgba(31,111,235,0.04) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 85% 15%,rgba(14,138,125,0.03) 0%,transparent 55%)}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--border)}
+    .hero .container{position:relative;z-index:1}
+    .hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2xl);align-items:center}
+    .hero-content{max-width:540px}
+    .hero-eyebrow{display:inline-block;color:var(--accent);margin-bottom:var(--sp-lg)}
+    .hero h1{margin-bottom:var(--sp-sm)}
+    .hero-micro{font-size:0.9375rem;color:var(--accent);font-weight:500;margin-bottom:var(--sp-xl);letter-spacing:0.01em}
+    .hero-lead{font-size:1.0625rem;color:var(--muted);margin-bottom:var(--sp-lg);line-height:1.75}
+    .hero-sub{font-size:0.9375rem;color:#8899aa;margin-bottom:var(--sp-xl);line-height:1.7}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:var(--sp-md)}
+    .hero-visual{display:flex;align-items:center;justify-content:center;position:relative}
+    .hero-illustration{width:100%;max-width:440px}
+    @keyframes rotateInfra{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-    /* ============================================================
-       TYPOGRAPHY
-       ============================================================ */
-    h1,h2,h3,h4 { font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--color-heading); }
-    h1 { font-size: clamp(1.75rem, 3.8vw, 2.625rem); }
-    h2 { font-size: clamp(1.3rem, 2.8vw, 1.75rem); margin-bottom: var(--sp-md); }
-    h3 { font-size: 1.0625rem; }
-    p  { max-width: 60ch; }
-    .label-sm {
-      font-size: 0.6875rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
+    /* TRUST STRIP */
+    .trust-strip{background:var(--bg);padding:var(--sp-xl) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .trust-title{font-size:0.6875rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:var(--sp-sm)}
+    .trust-links{display:flex;align-items:center;justify-content:center;gap:var(--sp-sm);flex-wrap:wrap}
+    .trust-links a{font-size:0.8125rem;color:var(--muted);font-weight:500;transition:color var(--tr)}
+    .trust-links a:hover{color:var(--accent)}
+    .trust-dot{color:var(--border);font-size:0.5rem}
 
-    /* ============================================================
-       HEADER / NAV
-       ============================================================ */
-    .site-header {
-      position: fixed; top:0; left:0; right:0; z-index:100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .site-header .container {
-      display:flex; align-items:center; justify-content:space-between; height:60px;
-    }
-    /* Logo styles — Poppins SemiBold wordmark */
-    .logo {
-      display:flex; align-items:center; gap:0;
-      text-decoration:none;
-    }
-    .logo-wordmark {
-      font-family: var(--font-logo);
-      font-weight: 600;
-      font-size: 1.25rem;
-      letter-spacing: -0.01em;
-      line-height: 1;
-    }
-    .logo-repo { color: var(--color-accent); }
-    .logo-reserve { color: var(--color-heading); }
-    .nav-links { display:flex; align-items:center; gap:var(--sp-lg); list-style:none; }
-    .nav-links a {
-      color:var(--color-text-light); font-size:0.8125rem; font-weight:500;
-      letter-spacing:0.02em; transition:color var(--transition);
-    }
-    .nav-links a:hover,.nav-links a:focus { color:var(--color-heading); }
+    /* PROBLEM / SOLUTIONS */
+    #solutions{background:var(--surface)}
+    .solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-lg)}
+    .solution-card{padding:28px 24px;border:1px solid var(--card-border);border-radius:var(--radius);background:#fff;box-shadow:0 4px 16px rgba(11,31,51,0.02);transition:all var(--tr)}
+    .solution-card:hover{border-color:rgba(31,111,235,0.18);transform:translateY(-3px);box-shadow:0 12px 32px rgba(11,31,51,0.06)}
+    .solution-icon{width:40px;height:40px;margin-bottom:var(--sp-md);color:var(--accent)}
+    .solution-card h3{margin-bottom:var(--sp-sm);font-size:1.125rem}
+    .solution-card p{color:var(--muted);font-size:0.875rem;line-height:1.7}
 
-    /* Buttons */
-    .btn {
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:0.5625rem 1.25rem; font-size:0.8125rem; font-weight:600;
-      letter-spacing:0.03em; border-radius:var(--radius); border:none;
-      transition: all var(--transition);
-    }
-    .btn-primary {
-      background: var(--color-accent); color:#fff;
-    }
-    .btn-primary:hover,.btn-primary:focus {
-      background: var(--color-accent-hover);
-      box-shadow: 0 4px 16px rgba(31,111,235,0.25);
-    }
-    .btn-outline {
-      background:transparent; color:var(--color-accent);
-      border:1.5px solid rgba(31,111,235,0.3);
-    }
-    .btn-outline:hover,.btn-outline:focus {
-      border-color:var(--color-accent);
-      background:var(--color-accent-bg);
-      transform: translateY(-1px);
-    }
-    .btn-large { padding:0.8125rem 2rem; font-size:0.875rem; border-radius:var(--radius-lg); }
+    /* ECOSYSTEM DIAGRAM */
+    #ecosystem{background:var(--bg)}
+    .eco-diagram-wrap{margin-top:var(--sp-2xl);display:flex;justify-content:center;overflow-x:auto}
+    .eco-diagram-wrap svg{max-width:100%;height:auto}
 
-    /* Mobile nav toggle */
-    .nav-toggle {
-      display:none; background:none; border:none; color:var(--color-text);
-      width:40px; height:40px; flex-direction:column; align-items:center;
-      justify-content:center; gap:5px;
-    }
-    .nav-toggle span { display:block; width:20px; height:1.5px; background:currentColor; border-radius:1px; transition:all var(--transition); }
+    /* PARTICIPANTS */
+    #participants{background:var(--surface)}
+    .participants-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-lg)}
+    .participant-card{padding:24px;border:1px solid var(--card-border);border-radius:var(--radius);background:#fff;transition:all var(--tr);position:relative}
+    .participant-card:hover{border-color:rgba(31,111,235,0.15);box-shadow:0 8px 24px rgba(11,31,51,0.04)}
+    .participant-card h3{font-size:0.9375rem;margin-bottom:4px;color:var(--text)}
+    .participant-card .p-type{font-size:0.75rem;color:var(--accent);font-weight:600;letter-spacing:0.04em;margin-bottom:var(--sp-sm)}
+    .participant-card p{font-size:0.8125rem;color:var(--muted);line-height:1.6}
+    .pilot-badge{display:inline-block;font-size:0.625rem;font-weight:600;color:var(--accent);background:var(--accent-bg);padding:3px 8px;border-radius:20px;letter-spacing:0.06em;text-transform:uppercase;margin-top:var(--sp-sm)}
 
-    /* ============================================================
-       HERO — two-column
-       ============================================================ */
-    .hero {
-      position:relative;
-      background: var(--color-bg-alt);
-      padding: calc(60px + var(--sp-3xl)) 0 var(--sp-3xl);
-      overflow:hidden;
-      min-height:560px;
-    }
-    /* Subtle grid */
-    .hero-grid {
-      position:absolute; inset:0; opacity:0.4; pointer-events:none;
-      background-image:
-        linear-gradient(var(--color-border-dim) 1px, transparent 1px),
-        linear-gradient(90deg, var(--color-border-dim) 1px, transparent 1px);
-      background-size: 72px 72px;
-    }
-    .hero::before {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(ellipse 55% 45% at 10% 90%, rgba(31,111,235,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 40% at 90% 20%, rgba(14,138,125,0.03) 0%, transparent 60%);
-    }
-    .hero::after {
-      content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
-      background: var(--color-border);
-    }
-    .hero .container { position:relative; z-index:1; }
-    .hero-layout {
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-2xl);
-      align-items: center;
-    }
-    .hero-content { max-width:540px; }
-    .hero-eyebrow {
-      display:inline-block; color:var(--color-accent); margin-bottom:var(--sp-lg);
-    }
-    .hero h1 { margin-bottom:var(--sp-lg); }
-    .hero-lead {
-      font-size:1.0625rem; color:var(--color-text);
-      margin-bottom:var(--sp-xl); line-height:1.75;
-    }
-    .hero-sub {
-      font-size:0.9375rem; color:var(--color-text-light);
-      margin-bottom:var(--sp-xl); line-height:1.7;
-    }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:var(--sp-md); }
-    .hero-visual {
-      display:flex; align-items:center; justify-content:center;
-      position: relative;
-    }
-    .hero-illustration { width: 100%; max-width: 420px; }
+    /* TESTIMONIALS */
+    #testimonials{background:var(--bg)}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-lg)}
+    .testimonial-card{padding:28px 24px;border:1px solid var(--card-border);border-radius:var(--radius);background:#fff;border-left:3px solid var(--accent);position:relative}
+    .testimonial-card blockquote{font-size:0.9375rem;color:var(--text);font-style:italic;line-height:1.75;margin-bottom:var(--sp-md);max-width:none}
+    .testimonial-card .t-source{font-size:0.75rem;color:var(--muted);font-style:normal;font-weight:500}
+    .testimonial-card .t-role{display:block;font-size:0.6875rem;color:#9AAFC0;margin-top:2px}
 
-    /* Subtle rotation for outer ring */
-    @keyframes rotateInfra {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
+    /* ENGAGEMENT / ACCORDION */
+    #engagement{background:var(--surface)}
+    .engage-steps{max-width:640px}
+    .accordion-item{border-bottom:1px solid var(--border)}
+    .accordion-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--sp-lg) 0;background:none;border:none;text-align:left;font-size:0.9375rem;font-weight:600;color:var(--text);transition:color var(--tr)}
+    .accordion-btn:hover,.accordion-btn:focus{color:var(--accent)}
+    .accordion-btn .step-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent-bg);color:var(--accent);font-size:0.75rem;font-weight:700;margin-right:var(--sp-md);flex-shrink:0}
+    .accordion-btn .chevron{width:18px;height:18px;transition:transform var(--tr);flex-shrink:0;color:#9AAFC0}
+    .accordion-btn[aria-expanded="true"] .chevron{transform:rotate(180deg)}
+    .accordion-panel{overflow:hidden;max-height:0;transition:max-height 0.35s ease}
+    .accordion-panel-inner{padding:0 0 var(--sp-lg) calc(28px + var(--sp-md));color:var(--muted);font-size:0.875rem;line-height:1.7}
 
-    /* ============================================================
-       SECTION SHARED
-       ============================================================ */
-    section { padding: var(--sp-3xl) 0; }
-    .section-eyebrow { color:var(--color-accent-dim); margin-bottom:var(--sp-sm); }
-    .section-intro { color:var(--color-text-light); margin-bottom:var(--sp-2xl); font-size:1rem; line-height:1.7; }
-    .section-rule { width:40px; height:2px; background:var(--color-accent); margin-bottom:var(--sp-lg); border:none; }
-    .section-border-top { border-top:1px solid var(--color-border); }
+    /* TEAM */
+    #team{background:var(--bg)}
+    .team-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-lg);max-width:480px}
+    .team-card{padding:24px;border:1px solid var(--card-border);border-radius:var(--radius);background:#fff;box-shadow:0 4px 16px rgba(11,31,51,0.02)}
+    .team-card h3{font-size:1rem;margin-bottom:2px}
+    .team-card .role{font-size:0.75rem;color:var(--accent);font-weight:600;margin-bottom:var(--sp-sm);display:block}
+    .team-card p{font-size:0.875rem;color:var(--muted);line-height:1.7}
 
-    /* ============================================================
-       INSTITUTIONAL FOCUS
-       ============================================================ */
-    #focus { background:var(--color-bg); }
-    .focus-content { max-width:600px; }
-    .focus-content p { color:var(--color-text); font-size:1rem; line-height:1.8; margin-bottom:var(--sp-md); }
-    .focus-highlight {
-      color:var(--color-teal); font-weight:600; font-size:1.0625rem;
-      margin-top:var(--sp-sm);
-    }
+    /* FAQ */
+    #faq{background:var(--surface)}
+    .faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-lg) var(--sp-xl);max-width:880px}
+    .faq-item h3{font-size:0.9375rem;margin-bottom:var(--sp-sm)}
+    .faq-item p{color:var(--muted);font-size:0.8125rem;line-height:1.7}
 
-    /* ============================================================
-       SOLUTIONS
-       ============================================================ */
-    #solutions { background:var(--color-bg-alt); }
-    .solutions-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-lg); }
-    .solution-card {
-      padding:var(--sp-xl) var(--sp-lg);
-      border:1px solid var(--color-border);
-      border-radius:var(--radius);
-      background:var(--color-bg-card);
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .solution-card:hover {
-      border-color:rgba(31,111,235,0.25);
-      transform:translateY(-2px);
-      box-shadow: 0 8px 24px rgba(11,31,51,0.06);
-    }
-    .solution-icon { width:36px; height:36px; margin-bottom:var(--sp-md); color:var(--color-accent); }
-    .solution-card h3 { margin-bottom:var(--sp-sm); font-size:1rem; }
-    .solution-card p { color:var(--color-text-light); font-size:0.875rem; line-height:1.7; }
+    /* CTA */
+    .cta-banner{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:var(--sp-2xl) 0}
+    .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-lg);flex-wrap:wrap}
+    .cta-inner h2{margin-bottom:var(--sp-xs)}
+    .cta-inner p{color:var(--muted);font-size:0.875rem}
+    .cta-actions{display:flex;gap:var(--sp-md);flex-wrap:wrap}
 
-    /* ============================================================
-       ECOSYSTEM — polished SVG diagram
-       ============================================================ */
-    #ecosystem { background:var(--color-bg); }
-    .eco-diagram-wrap {
-      margin-top:var(--sp-2xl);
-      display:flex; justify-content:center;
-    }
-    .eco-diagram-wrap svg { max-width: 100%; height:auto; }
+    /* FOOTER */
+    .site-footer{background:var(--surface);border-top:1px solid var(--border);padding:48px 0 24px;color:var(--muted);font-size:0.8125rem}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--sp-2xl);flex-wrap:wrap;margin-bottom:var(--sp-2xl)}
+    .footer-brand{max-width:280px}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px}
+    .footer-brand-name span:first-child{color:var(--accent)}
+    .footer-brand p{font-size:0.8125rem;line-height:1.6;color:var(--muted);margin-top:var(--sp-sm)}
+    .footer-nav{display:flex;gap:var(--sp-2xl);flex-wrap:wrap}
+    .footer-col h4{font-size:0.6875rem;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--sp-sm)}
+    .footer-col a{display:block;font-size:0.8125rem;color:var(--muted);line-height:2;transition:color var(--tr)}
+    .footer-col a:hover{color:var(--accent)}
+    .footer-bottom{padding-top:var(--sp-lg);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-sm)}
+    .footer-disclaimer{font-size:0.6875rem;font-style:italic;color:#9AAFC0}
+    .footer-copy{font-size:0.6875rem;color:#9AAFC0}
 
-    /* ============================================================
-       ENGAGEMENT / ACCORDION
-       ============================================================ */
-    #engagement { background:var(--color-bg-alt); }
-    .engage-steps { max-width:640px; }
-    .accordion-item { border-bottom:1px solid var(--color-border); }
-    .accordion-btn {
-      width:100%; display:flex; align-items:center; justify-content:space-between;
-      padding:var(--sp-lg) 0; background:none; border:none;
-      text-align:left; font-size:0.9375rem; font-weight:600;
-      color:var(--color-heading); transition:color var(--transition);
-    }
-    .accordion-btn:hover,.accordion-btn:focus { color:var(--color-accent); }
-    .accordion-btn .step-num {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:26px; height:26px; border-radius:50%;
-      background:var(--color-accent-bg); color:var(--color-accent);
-      font-size:0.6875rem; font-weight:700; margin-right:var(--sp-md); flex-shrink:0;
-    }
-    .accordion-btn .chevron {
-      width:18px; height:18px; transition:transform var(--transition);
-      flex-shrink:0; color:var(--color-text-muted);
-    }
-    .accordion-btn[aria-expanded="true"] .chevron { transform:rotate(180deg); }
-    .accordion-panel { overflow:hidden; max-height:0; transition:max-height 0.35s ease; }
-    .accordion-panel-inner {
-      padding:0 0 var(--sp-lg) calc(26px + var(--sp-md));
-      color:var(--color-text); font-size:0.875rem; line-height:1.7;
-    }
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(11,31,51,0.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:var(--sp-lg);opacity:0;visibility:hidden;transition:opacity 0.25s ease,visibility 0.25s ease}
+    .modal-overlay.is-active{opacity:1;visibility:visible}
+    .modal{background:var(--bg);border:1px solid var(--border);border-radius:12px;max-width:460px;width:100%;max-height:90vh;overflow-y:auto;padding:var(--sp-xl);position:relative;box-shadow:0 24px 64px rgba(11,31,51,0.15);transform:translateY(12px);transition:transform 0.25s ease}
+    .modal-overlay.is-active .modal{transform:translateY(0)}
+    .modal-close{position:absolute;top:var(--sp-md);right:var(--sp-md);background:none;border:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#9AAFC0;border-radius:50%;transition:all var(--tr)}
+    .modal-close:hover,.modal-close:focus{background:var(--surface);color:var(--text)}
+    .modal h2{font-size:1.125rem;margin-bottom:var(--sp-sm);padding-right:36px}
+    .modal .modal-desc{color:var(--muted);font-size:0.8125rem;margin-bottom:var(--sp-lg)}
+    .form-group{margin-bottom:var(--sp-md)}
+    .form-group label{display:block;font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:var(--sp-xs);letter-spacing:0.02em}
+    .form-group input,.form-group textarea{width:100%;padding:10px 12px;font-size:0.875rem;font-family:var(--font);border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);transition:border-color var(--tr)}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:#9AAFC0}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(31,111,235,0.08)}
+    .form-group textarea{resize:vertical;min-height:72px}
+    .form-group .error-msg{font-size:0.6875rem;color:var(--error);margin-top:var(--sp-xs);display:none}
+    .form-group.has-error input{border-color:var(--error)}
+    .form-group.has-error .error-msg{display:block}
+    .modal-success{text-align:center;padding:var(--sp-xl) 0;display:none}
+    .modal-success.is-visible{display:block}
+    .modal-success .check-icon{width:44px;height:44px;margin:0 auto var(--sp-md);color:var(--success)}
+    .modal-success h3{font-size:1rem;margin-bottom:var(--sp-sm)}
+    .modal-success p{color:var(--muted);font-size:0.875rem;margin:0 auto}
 
-    /* ============================================================
-       CASE STUDY
-       ============================================================ */
-    #casestudy { background:var(--color-bg); }
-    .case-quote {
-      border-left:3px solid var(--color-accent); padding-left:var(--sp-lg);
-      font-size:1rem; color:var(--color-text); font-style:italic;
-      max-width:600px; line-height:1.8;
+    /* RESPONSIVE */
+    @media(max-width:1200px){.solutions-grid,.testimonials-grid{gap:var(--sp-md)}.hero-layout{gap:var(--sp-xl)}.participants-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){
+      .nav-links{display:none}.nav-toggle{display:flex}
+      .nav-links.is-open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(255,255,255,0.98);padding:var(--sp-lg);gap:var(--sp-md);border-bottom:1px solid var(--border)}
+      .hero-layout{grid-template-columns:1fr}.hero-visual{display:none}
+      .solutions-grid,.testimonials-grid{grid-template-columns:1fr}.participants-grid{grid-template-columns:1fr}
+      .eco-diagram-wrap svg{max-width:360px}
+      .faq-grid{grid-template-columns:1fr}
+      .cta-inner{flex-direction:column;text-align:center}.cta-actions{justify-content:center}
+      .footer-top{flex-direction:column}.footer-nav{gap:var(--sp-xl)}
+      .footer-bottom{flex-direction:column;align-items:flex-start}
     }
-    .case-attribution { margin-top:var(--sp-md); font-style:normal; font-size:0.75rem; color:var(--color-text-muted); }
-
-    /* ============================================================
-       TEAM
-       ============================================================ */
-    #team { background:var(--color-bg-alt); }
-    .team-grid { display:grid; grid-template-columns:1fr; gap:var(--sp-lg); max-width:480px; }
-    .team-card {
-      padding:var(--sp-lg); border:1px solid var(--color-border);
-      border-radius:var(--radius); background:var(--color-bg-card);
+    @media(max-width:640px){
+      section{padding:var(--sp-2xl) 0}
+      .hero{padding:calc(72px + var(--sp-2xl)) 0 var(--sp-2xl);min-height:auto}
+      .hero-actions{flex-direction:column}.hero-actions .btn{width:100%;justify-content:center}
+      h1{font-size:1.75rem}.footer-nav{flex-direction:column;gap:var(--sp-lg)}
+      .modal{padding:var(--sp-lg);margin:var(--sp-sm)}
     }
-    .team-card h3 { font-size:1rem; margin-bottom:2px; }
-    .team-card .role { font-size:0.75rem; color:var(--color-accent); margin-bottom:var(--sp-sm); display:block; }
-    .team-card p { font-size:0.875rem; color:var(--color-text-light); line-height:1.7; }
-
-    /* ============================================================
-       PARTNER LOGOS
-       ============================================================ */
-    #partners { background:var(--color-bg); padding:var(--sp-2xl) 0; }
-    .partner-bar { display:flex; align-items:center; justify-content:center; gap:var(--sp-2xl); flex-wrap:wrap; }
-    .partner-placeholder {
-      width:130px; height:52px; border:1px dashed var(--color-border);
-      border-radius:var(--radius); display:flex; align-items:center;
-      justify-content:center; flex-direction:column; gap:2px;
-    }
-    .partner-placeholder span {
-      font-size:0.5625rem; color:var(--color-text-muted);
-      text-transform:uppercase; letter-spacing:0.08em; text-align:center; line-height:1.3;
-    }
-
-    /* ============================================================
-       FAQ
-       ============================================================ */
-    #faq { background:var(--color-bg-alt); }
-    .faq-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-lg) var(--sp-xl); max-width:880px; }
-    .faq-item h3 { font-size:0.9375rem; margin-bottom:var(--sp-sm); }
-    .faq-item p { color:var(--color-text-light); font-size:0.8125rem; line-height:1.7; }
-
-    /* ============================================================
-       CTA BANNER
-       ============================================================ */
-    .cta-banner {
-      background:var(--color-bg);
-      border-top:1px solid var(--color-border);
-      border-bottom:1px solid var(--color-border);
-      padding:var(--sp-2xl) 0;
-    }
-    .cta-inner {
-      display:flex; align-items:center; justify-content:space-between;
-      gap:var(--sp-lg); flex-wrap:wrap;
-    }
-    .cta-inner h2 { margin-bottom:var(--sp-xs); }
-    .cta-inner p { color:var(--color-text-light); font-size:0.875rem; }
-    .cta-actions { display:flex; gap:var(--sp-md); flex-wrap:wrap; }
-
-    /* ============================================================
-       FOOTER
-       ============================================================ */
-    .site-footer {
-      background:var(--color-bg-alt);
-      border-top:1px solid var(--color-border);
-      padding:var(--sp-2xl) 0 var(--sp-lg);
-      color:var(--color-text-light);
-      font-size:0.8125rem;
-    }
-    .footer-grid {
-      display:grid; grid-template-columns: 1fr auto;
-      gap: var(--sp-2xl); align-items: start;
-    }
-    .footer-company { line-height:1.7; }
-    .footer-company strong { color:var(--color-heading); font-weight:600; display:block; margin-bottom:2px; }
-    .footer-company .footer-tagline {
-      font-size:0.75rem; font-style:italic; color:var(--color-text-muted);
-      margin-top:var(--sp-sm);
-    }
-    .footer-contact { text-align:right; }
-    .footer-contact a { color:var(--color-accent); transition:color var(--transition); }
-    .footer-contact a:hover { color:var(--color-accent-hover); }
-    .footer-bottom {
-      margin-top:var(--sp-xl); padding-top:var(--sp-md);
-      border-top:1px solid var(--color-border);
-      display:flex; justify-content:space-between; align-items:center;
-      flex-wrap:wrap; gap:var(--sp-sm);
-    }
-    .footer-disclaimer { font-size:0.6875rem; font-style:italic; color:var(--color-text-muted); }
-    .footer-copy { font-size:0.6875rem; color:var(--color-text-muted); }
-    .footer-infra {
-      margin-top:var(--sp-lg); padding-top:var(--sp-md);
-      border-top:1px solid var(--color-border);
-      display:flex; align-items:center; gap:var(--sp-lg);
-      flex-wrap:wrap;
-    }
-    .footer-infra-title {
-      font-size:0.6875rem; font-weight:600; color:var(--color-text-light);
-      text-transform:uppercase; letter-spacing:0.1em;
-    }
-    .footer-infra a {
-      font-size:0.75rem; color:var(--color-text-light);
-      transition:color var(--transition);
-    }
-    .footer-infra a:hover { color:var(--color-accent); }
-
-    /* ============================================================
-       MODAL
-       ============================================================ */
-    .modal-overlay {
-      position:fixed; inset:0; z-index:1000;
-      background:rgba(11,31,51,0.45);
-      backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-      display:flex; align-items:center; justify-content:center;
-      padding:var(--sp-lg);
-      opacity:0; visibility:hidden;
-      transition:opacity 0.25s ease, visibility 0.25s ease;
-    }
-    .modal-overlay.is-active { opacity:1; visibility:visible; }
-    .modal {
-      background:var(--color-bg);
-      border:1px solid var(--color-border);
-      border-radius:var(--radius-lg);
-      max-width:460px; width:100%; max-height:90vh;
-      overflow-y:auto; padding:var(--sp-xl);
-      position:relative;
-      box-shadow: 0 20px 60px rgba(11,31,51,0.15);
-      transform:translateY(12px); transition:transform 0.25s ease;
-    }
-    .modal-overlay.is-active .modal { transform:translateY(0); }
-    .modal-close {
-      position:absolute; top:var(--sp-md); right:var(--sp-md);
-      background:none; border:none; width:32px; height:32px;
-      display:flex; align-items:center; justify-content:center;
-      color:var(--color-text-muted); border-radius:50%;
-      transition:background var(--transition), color var(--transition);
-    }
-    .modal-close:hover,.modal-close:focus { background:var(--color-bg-raised); color:var(--color-heading); }
-    .modal h2 { font-size:1.125rem; margin-bottom:var(--sp-sm); padding-right:36px; }
-    .modal .modal-desc { color:var(--color-text-light); font-size:0.8125rem; margin-bottom:var(--sp-lg); }
-
-    .form-group { margin-bottom:var(--sp-md); }
-    .form-group label {
-      display:block; font-size:0.75rem; font-weight:600;
-      color:var(--color-heading); margin-bottom:var(--sp-xs);
-      letter-spacing:0.02em;
-    }
-    .form-group input,
-    .form-group textarea {
-      width:100%; padding:0.5625rem 0.75rem; font-size:0.875rem;
-      font-family:var(--font-stack);
-      border:1px solid var(--color-border);
-      border-radius:var(--radius); background:var(--color-bg);
-      color:var(--color-heading); transition:border-color var(--transition);
-    }
-    .form-group input::placeholder,.form-group textarea::placeholder { color:var(--color-text-muted); }
-    .form-group input:focus,.form-group textarea:focus {
-      border-color:var(--color-accent); outline:none;
-      box-shadow:0 0 0 3px rgba(31,111,235,0.1);
-    }
-    .form-group textarea { resize:vertical; min-height:72px; }
-    .form-group .error-msg { font-size:0.6875rem; color:var(--color-error); margin-top:var(--sp-xs); display:none; }
-    .form-group.has-error input { border-color:var(--color-error); }
-    .form-group.has-error .error-msg { display:block; }
-
-    .modal-success { text-align:center; padding:var(--sp-xl) 0; display:none; }
-    .modal-success.is-visible { display:block; }
-    .modal-success .check-icon { width:44px; height:44px; margin:0 auto var(--sp-md); color:var(--color-success); }
-    .modal-success h3 { font-size:1rem; margin-bottom:var(--sp-sm); }
-    .modal-success p { color:var(--color-text-light); font-size:0.875rem; margin:0 auto; }
-
-    /* ============================================================
-       RESPONSIVE
-       ============================================================ */
-    @media (max-width:1200px) {
-      .solutions-grid { gap:var(--sp-md); }
-      .hero-layout { gap:var(--sp-xl); }
-    }
-    @media (max-width:768px) {
-      .nav-links { display:none; }
-      .nav-toggle { display:flex; }
-      .nav-links.is-open {
-        display:flex; flex-direction:column;
-        position:absolute; top:60px; left:0; right:0;
-        background:rgba(255,255,255,0.98); padding:var(--sp-lg);
-        gap:var(--sp-md); border-bottom:1px solid var(--color-border);
-      }
-      .hero-layout { grid-template-columns:1fr; }
-      .hero-visual { display:none; }
-      .solutions-grid { grid-template-columns:1fr; }
-      .eco-diagram-wrap svg { max-width:320px; }
-      .faq-grid { grid-template-columns:1fr; }
-      .cta-inner { flex-direction:column; text-align:center; }
-      .cta-actions { justify-content:center; }
-      .footer-grid { grid-template-columns:1fr; }
-      .footer-contact { text-align:left; }
-      .footer-bottom { flex-direction:column; align-items:flex-start; }
-    }
-    @media (max-width:640px) {
-      section { padding:var(--sp-2xl) 0; }
-      .hero { padding:calc(60px + var(--sp-2xl)) 0 var(--sp-2xl); min-height:auto; }
-      .hero-actions { flex-direction:column; }
-      .hero-actions .btn { width:100%; justify-content:center; }
-      h1 { font-size:1.5rem; }
-      .modal { padding:var(--sp-lg); margin:var(--sp-sm); }
-    }
-
-    /* ============================================================
-       ANIMATIONS
-       ============================================================ */
-    @media (prefers-reduced-motion: no-preference) {
-      .fade-in { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
-      .fade-in.is-visible { opacity:1; transform:translateY(0); }
+    @media(prefers-reduced-motion:no-preference){
+      .fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease}
+      .fade-in.is-visible{opacity:1;transform:translateY(0)}
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       HEADER — Poppins wordmark logo + nav
-       ============================================================ -->
+  <!-- HEADER -->
   <header class="site-header" role="banner">
     <div class="container">
       <a href="#" class="logo" aria-label="RepoReserve home">
-        <span class="logo-wordmark"><span class="logo-repo">Repo</span><span class="logo-reserve">Reserve</span></span>
+        <svg height="36" viewBox="0 0 265 38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RepoReserve">
+          <text x="0" y="29" font-family="Poppins,system-ui,-apple-system,sans-serif" font-weight="700" font-size="28">
+            <tspan fill="#1F6FEB">Repo</tspan><tspan fill="#0B1F33">Reserve</tspan>
+          </text>
+        </svg>
       </a>
       <nav aria-label="Primary navigation">
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
-          <span></span><span></span><span></span>
-        </button>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
         <ul id="nav-menu" class="nav-links" role="list">
-          <li><a href="#focus">Focus</a></li>
           <li><a href="#solutions">Solutions</a></li>
           <li><a href="#ecosystem">Ecosystem</a></li>
-          <li><a href="#engagement">Engagement</a></li>
+          <li><a href="#participants">Participants</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><button class="btn btn-primary" data-open-modal="meeting-modal">Request Discussion</button></li>
         </ul>
@@ -570,9 +242,7 @@
 
   <main id="main-content">
 
-    <!-- ============================================================
-         HERO — two-column: text left, diagram right
-         ============================================================ -->
+    <!-- HERO -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="container">
@@ -580,81 +250,76 @@
           <div class="hero-content">
             <span class="label-sm hero-eyebrow">Treasury Infrastructure</span>
             <h1 id="hero-heading">Operational visibility for institutions participating in repo&nbsp;markets.</h1>
+            <p class="hero-micro">Infrastructure for institutional treasury teams &amp; post-trade counterparties.</p>
             <p class="hero-lead">RepoReserve is a treasury collateral visibility and repo operations coordination platform. We serve institutional treasury teams, custodians, and clearinghouses with a unified view of collateral&nbsp;positioning.</p>
             <p class="hero-sub">Designed for organizations at the center of post-trade infrastructure — without compromising operational&nbsp;security.</p>
             <div class="hero-actions">
               <button class="btn btn-primary btn-large" data-open-modal="meeting-modal">Request Confidential Discussion</button>
-              <!-- REPLACE: assets/brochure/reporeserve-overview.pdf -->
               <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-outline btn-large" download target="_blank" rel="noopener">Download Institutional Overview</a>
             </div>
           </div>
-          <!-- Right column: institutional network illustration -->
-          <!-- REPLACE: swap inline SVG with assets/images/hero-illustration.png if custom image available -->
           <div class="hero-visual" aria-hidden="true">
-            <svg class="hero-illustration" viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="hero-illustration" viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="nodeGlow">
-                  <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="rgba(31,111,235,0.45)"/>
-                </filter>
+                <filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(31,111,235,0.35)"/></filter>
+                <filter id="nodeGlow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="rgba(31,111,235,0.3)"/></filter>
               </defs>
-              <!-- Outer ring — subtle slow rotation -->
-              <g style="transform-origin:200px 170px; animation: rotateInfra 40s linear infinite;">
-                <circle cx="200" cy="170" r="130" stroke="rgba(31,111,235,0.12)" stroke-width="1" fill="none"/>
-              </g>
-              <circle cx="200" cy="170" r="95" stroke="rgba(31,111,235,0.10)" stroke-width="1" fill="none"/>
-              <circle cx="200" cy="170" r="60" stroke="rgba(14,138,125,0.10)" stroke-width="1" fill="none"/>
-              <!-- Connection lines -->
-              <line x1="200" y1="40" x2="200" y2="110" stroke="rgba(31,111,235,0.55)" stroke-width="2"/>
-              <line x1="200" y1="230" x2="200" y2="300" stroke="rgba(31,111,235,0.55)" stroke-width="2"/>
-              <line x1="70" y1="170" x2="140" y2="170" stroke="rgba(31,111,235,0.55)" stroke-width="2"/>
-              <line x1="260" y1="170" x2="330" y2="170" stroke="rgba(31,111,235,0.55)" stroke-width="2"/>
-              <line x1="110" y1="80" x2="155" y2="125" stroke="rgba(31,111,235,0.35)" stroke-width="1.5"/>
-              <line x1="290" y1="80" x2="245" y2="125" stroke="rgba(31,111,235,0.35)" stroke-width="1.5"/>
-              <line x1="110" y1="260" x2="155" y2="215" stroke="rgba(31,111,235,0.35)" stroke-width="1.5"/>
-              <line x1="290" y1="260" x2="245" y2="215" stroke="rgba(31,111,235,0.35)" stroke-width="1.5"/>
-              <!-- Outer nodes -->
-              <circle cx="200" cy="40" r="6" fill="#1F6FEB" filter="url(#nodeGlow)"/>
-              <circle cx="200" cy="300" r="6" fill="#1F6FEB" filter="url(#nodeGlow)"/>
-              <circle cx="70" cy="170" r="6" fill="#1F6FEB" filter="url(#nodeGlow)"/>
-              <circle cx="330" cy="170" r="6" fill="#1F6FEB" filter="url(#nodeGlow)"/>
-              <circle cx="110" cy="80" r="6" fill="#0E8A7D" filter="url(#nodeGlow)"/>
-              <circle cx="290" cy="80" r="6" fill="#0E8A7D" filter="url(#nodeGlow)"/>
-              <circle cx="110" cy="260" r="6" fill="#0E8A7D" filter="url(#nodeGlow)"/>
-              <circle cx="290" cy="260" r="6" fill="#0E8A7D" filter="url(#nodeGlow)"/>
-              <!-- Center node — RepoReserve -->
-              <circle cx="200" cy="170" r="28" stroke="#1F6FEB" stroke-width="2" fill="none"/>
-              <circle cx="200" cy="170" r="18" fill="#1F6FEB"/>
-              <text x="200" y="174" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Inter,system-ui,sans-serif">RR</text>
-              <!-- Labels -->
-              <text x="200" y="22" text-anchor="middle" fill="#5B6B7F" font-size="12" font-family="Inter,system-ui,sans-serif" letter-spacing="0.4">TREASURY</text>
-              <text x="200" y="330" text-anchor="middle" fill="#5B6B7F" font-size="12" font-family="Inter,system-ui,sans-serif" letter-spacing="0.4">MARKET INFRA</text>
-              <text x="36" y="174" text-anchor="middle" fill="#5B6B7F" font-size="12" font-family="Inter,system-ui,sans-serif" letter-spacing="0.4">CUSTODIAN</text>
-              <text x="364" y="174" text-anchor="middle" fill="#5B6B7F" font-size="12" font-family="Inter,system-ui,sans-serif" letter-spacing="0.4">CUSTODIAN</text>
+              <!-- Rings -->
+              <g style="transform-origin:220px 190px;animation:rotateInfra 50s linear infinite"><circle cx="220" cy="190" r="150" stroke="rgba(31,111,235,0.08)" stroke-width="1" fill="none"/></g>
+              <circle cx="220" cy="190" r="110" stroke="rgba(31,111,235,0.06)" stroke-width="1" fill="none"/>
+              <circle cx="220" cy="190" r="70" stroke="rgba(14,138,125,0.06)" stroke-width="1" fill="none"/>
+              <!-- Lines -->
+              <line x1="220" y1="40" x2="220" y2="120" stroke="rgba(31,111,235,0.65)" stroke-width="2"/>
+              <line x1="220" y1="260" x2="220" y2="340" stroke="rgba(31,111,235,0.65)" stroke-width="2"/>
+              <line x1="70" y1="190" x2="150" y2="190" stroke="rgba(31,111,235,0.65)" stroke-width="2"/>
+              <line x1="290" y1="190" x2="370" y2="190" stroke="rgba(31,111,235,0.65)" stroke-width="2"/>
+              <line x1="115" y1="85" x2="170" y2="140" stroke="rgba(31,111,235,0.45)" stroke-width="1.5"/>
+              <line x1="325" y1="85" x2="270" y2="140" stroke="rgba(31,111,235,0.45)" stroke-width="1.5"/>
+              <line x1="115" y1="295" x2="170" y2="240" stroke="rgba(31,111,235,0.45)" stroke-width="1.5"/>
+              <line x1="325" y1="295" x2="270" y2="240" stroke="rgba(31,111,235,0.45)" stroke-width="1.5"/>
+              <!-- Nodes — 7px radius -->
+              <circle cx="220" cy="40" r="7" fill="#1F6FEB" filter="url(#nodeGlow)"/>
+              <circle cx="220" cy="340" r="7" fill="#1F6FEB" filter="url(#nodeGlow)"/>
+              <circle cx="70" cy="190" r="7" fill="#1F6FEB" filter="url(#nodeGlow)"/>
+              <circle cx="370" cy="190" r="7" fill="#1F6FEB" filter="url(#nodeGlow)"/>
+              <circle cx="115" cy="85" r="7" fill="#0E8A7D" filter="url(#nodeGlow)"/>
+              <circle cx="325" cy="85" r="7" fill="#0E8A7D" filter="url(#nodeGlow)"/>
+              <circle cx="115" cy="295" r="7" fill="#0E8A7D" filter="url(#nodeGlow)"/>
+              <circle cx="325" cy="295" r="7" fill="#0E8A7D" filter="url(#nodeGlow)"/>
+              <!-- Center — 20px radius -->
+              <circle cx="220" cy="190" r="32" stroke="#1F6FEB" stroke-width="2" fill="none" opacity="0.3"/>
+              <circle cx="220" cy="190" r="20" fill="#1F6FEB" filter="url(#glow)"/>
+              <text x="220" y="194" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Poppins,system-ui,sans-serif">RR</text>
+              <!-- Labels — 12px, #5B6B7F -->
+              <text x="220" y="22" text-anchor="middle" fill="#5B6B7F" font-size="11" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.4">TREASURY DESKS</text>
+              <text x="220" y="370" text-anchor="middle" fill="#5B6B7F" font-size="11" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.4">CLEARING CORPS</text>
+              <text x="32" y="194" text-anchor="middle" fill="#5B6B7F" font-size="11" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.4">CUSTODIANS</text>
+              <text x="410" y="194" text-anchor="middle" fill="#5B6B7F" font-size="11" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.4">MARKET INFRA</text>
+              <text x="85" y="72" text-anchor="middle" fill="#5B6B7F" font-size="10" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.3">COLLATERAL</text>
+              <text x="355" y="72" text-anchor="middle" fill="#5B6B7F" font-size="10" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.3">RISK</text>
+              <text x="85" y="316" text-anchor="middle" fill="#5B6B7F" font-size="10" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.3">COMPLIANCE</text>
+              <text x="355" y="316" text-anchor="middle" fill="#5B6B7F" font-size="10" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.3">SETTLEMENT</text>
             </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         INSTITUTIONAL FOCUS
-         ============================================================ -->
-    <section id="focus" class="section-border-top" aria-labelledby="focus-heading">
-      <div class="container">
-        <span class="label-sm section-eyebrow">Institutional Focus</span>
-        <h2 id="focus-heading">Built for the Ecosystem</h2>
-        <hr class="section-rule" aria-hidden="true">
-        <div class="focus-content fade-in">
-          <p>RepoReserve is designed for institutions that participate in secured funding markets through custodians and established market&nbsp;infrastructure.</p>
-          <p>Our goal is to support operational clarity without replacing existing financial market infrastructure. We work within the structures that institutions already trust — custodian banks, clearinghouses, and central&nbsp;counterparties.</p>
-          <p class="focus-highlight">We do not disintermediate. We&nbsp;coordinate.</p>
+    <!-- TRUST STRIP -->
+    <section class="trust-strip" aria-label="Market infrastructure context">
+      <div class="container text-center">
+        <p class="trust-title">Operating with established market infrastructure</p>
+        <div class="trust-links">
+          <a href="https://www.rbi.org.in" target="_blank" rel="noopener noreferrer">Reserve Bank of India</a>
+          <span class="trust-dot" aria-hidden="true">&bull;</span>
+          <a href="https://www.ccilindia.com" target="_blank" rel="noopener noreferrer">Clearing Corporation of India Ltd</a>
+          <span class="trust-dot" aria-hidden="true">&bull;</span>
+          <a href="https://www.sebi.gov.in" target="_blank" rel="noopener noreferrer">Securities and Exchange Board of India</a>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         SOLUTIONS
-         ============================================================ -->
+    <!-- WHAT WE SOLVE -->
     <section id="solutions" class="section-border-top" aria-labelledby="solutions-heading">
       <div class="container">
         <span class="label-sm section-eyebrow">What We Solve</span>
@@ -663,30 +328,17 @@
         <p class="section-intro">Fragmented collateral data leads to mispriced risk, delayed settlements, and manual reconciliation overhead. RepoReserve consolidates visibility across counterparties to reduce friction and strengthen&nbsp;governance.</p>
         <div class="solutions-grid">
           <article class="solution-card fade-in">
-            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <rect x="3" y="7" width="30" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="18" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <line x1="18" y1="10" x2="18" y2="13" stroke="currentColor" stroke-width="1.5"/>
-              <line x1="18" y1="23" x2="18" y2="26" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
+            <svg class="solution-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="3" y="7" width="34" height="26" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="10" x2="20" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="26" x2="20" y2="30" stroke="currentColor" stroke-width="1.5"/></svg>
             <h3>Collateral Visibility</h3>
             <p>Unified, real-time oversight of collateral positions across custodians, counterparties, and internal&nbsp;books.</p>
           </article>
           <article class="solution-card fade-in">
-            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <circle cx="11" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="25" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <line x1="16" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
+            <svg class="solution-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="13" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/><line x1="19" y1="20" x2="21" y2="20" stroke="currentColor" stroke-width="1.5"/></svg>
             <h3>Operations Coordination</h3>
             <p>Streamlined repo lifecycle coordination between treasury desks, custodians, and market infrastructure&nbsp;providers.</p>
           </article>
           <article class="solution-card fade-in">
-            <svg class="solution-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <path d="M18 4L32 12V24L18 32L4 24V12L18 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-              <path d="M18 12V24" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M11 16L18 20L25 16" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
+            <svg class="solution-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 4L36 13V27L20 36L4 27V13L20 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M20 13V27" stroke="currentColor" stroke-width="1.5"/><path d="M12 17L20 22L28 17" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
             <h3>Risk &amp; Governance</h3>
             <p>Institutional-grade audit trails and position reporting that support compliance, risk management, and board-level&nbsp;oversight.</p>
           </article>
@@ -694,53 +346,100 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         ECOSYSTEM DIAGRAM — polished inline SVG
-         ============================================================ -->
+    <!-- ECOSYSTEM FLOW -->
     <section id="ecosystem" class="section-border-top" aria-labelledby="eco-heading">
       <div class="container text-center">
-        <span class="label-sm section-eyebrow" style="color:var(--color-accent-dim);">Ecosystem Overview</span>
-        <h2 id="eco-heading">Where RepoReserve Fits</h2>
-        <hr class="section-rule" style="margin-left:auto;margin-right:auto;" aria-hidden="true">
-        <p class="section-intro" style="margin-left:auto;margin-right:auto;">
-          An operational visibility layer between institutional participants — without exposing proprietary&nbsp;workflows.
-        </p>
-        <div class="eco-diagram-wrap" role="img" aria-label="Ecosystem: Treasury Teams connect to Custodian Banks connect to Market Infrastructure, with RepoReserve as the operational visibility layer">
-          <svg viewBox="0 0 760 120" fill="none" xmlns="http://www.w3.org/2000/svg" width="760" height="120">
-            <!-- Node 1: Treasury Teams -->
-            <rect x="0" y="20" width="150" height="80" rx="6" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1"/>
-            <text x="75" y="52" text-anchor="middle" fill="var(--color-heading)" font-size="10" font-weight="600" font-family="Inter,system-ui,sans-serif" letter-spacing="0.1em">TREASURY TEAMS</text>
-            <text x="75" y="72" text-anchor="middle" fill="var(--color-text-light)" font-size="10" font-family="Inter,system-ui,sans-serif">Internal desks</text>
-            <!-- Connector 1→2 -->
-            <line x1="150" y1="60" x2="195" y2="60" stroke="var(--color-border)" stroke-width="1.5"/>
-            <polygon points="192,56 200,60 192,64" fill="var(--color-text-muted)"/>
-            <!-- Node 2: Custodian Banks -->
-            <rect x="200" y="20" width="150" height="80" rx="6" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1"/>
-            <text x="275" y="52" text-anchor="middle" fill="var(--color-heading)" font-size="10" font-weight="600" font-family="Inter,system-ui,sans-serif" letter-spacing="0.1em">CUSTODIAN BANKS</text>
-            <text x="275" y="72" text-anchor="middle" fill="var(--color-text-light)" font-size="10" font-family="Inter,system-ui,sans-serif">Asset safekeeping</text>
-            <!-- Connector 2→3 -->
-            <line x1="350" y1="60" x2="395" y2="60" stroke="var(--color-border)" stroke-width="1.5"/>
-            <polygon points="392,56 400,60 392,64" fill="var(--color-text-muted)"/>
-            <!-- Node 3: Market Infrastructure -->
-            <rect x="400" y="20" width="150" height="80" rx="6" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1"/>
-            <text x="475" y="52" text-anchor="middle" fill="var(--color-heading)" font-size="10" font-weight="600" font-family="Inter,system-ui,sans-serif" letter-spacing="0.1em">MARKET INFRA</text>
-            <text x="475" y="72" text-anchor="middle" fill="var(--color-text-light)" font-size="10" font-family="Inter,system-ui,sans-serif">Clearinghouses &amp; CCPs</text>
-            <!-- Connector 3→4 -->
-            <line x1="550" y1="60" x2="595" y2="60" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="4 3"/>
-            <polygon points="592,56 600,60 592,64" fill="var(--color-accent)"/>
-            <!-- Node 4: RepoReserve — highlighted -->
-            <rect x="600" y="16" width="158" height="88" rx="6" fill="var(--color-accent-bg)" stroke="var(--color-accent)" stroke-width="1.5"/>
-            <text x="679" y="50" text-anchor="middle" fill="var(--color-accent)" font-size="10" font-weight="700" font-family="Inter,system-ui,sans-serif" letter-spacing="0.14em">REPORESERVE</text>
-            <text x="679" y="70" text-anchor="middle" fill="var(--color-text)" font-size="10" font-family="Inter,system-ui,sans-serif">Operational visibility</text>
-            <text x="679" y="84" text-anchor="middle" fill="var(--color-text-light)" font-size="9" font-family="Inter,system-ui,sans-serif">layer</text>
+        <span class="label-sm section-eyebrow">Ecosystem Overview</span>
+        <h2 id="eco-heading">Operational Visibility Across the Repo Market</h2>
+        <hr class="section-rule" style="margin-left:auto;margin-right:auto" aria-hidden="true">
+        <p class="section-intro" style="margin-left:auto;margin-right:auto">An operational visibility layer between institutional participants — without exposing proprietary&nbsp;workflows.</p>
+        <div class="eco-diagram-wrap" role="img" aria-label="Flow: Treasury Teams to Custodian Banks to Market Infrastructure to RepoReserve operational visibility layer">
+          <svg viewBox="0 0 780 130" fill="none" xmlns="http://www.w3.org/2000/svg" width="780" height="130">
+            <defs><filter id="rrGlow"><feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="rgba(31,111,235,0.1)"/></filter></defs>
+            <rect x="0" y="22" width="155" height="86" rx="10" fill="#fff" stroke="var(--card-border)" stroke-width="1"/>
+            <text x="77" y="55" text-anchor="middle" fill="var(--text)" font-size="10.5" font-weight="600" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.08em">TREASURY TEAMS</text>
+            <text x="77" y="75" text-anchor="middle" fill="var(--muted)" font-size="10" font-family="Poppins,system-ui,sans-serif">Internal desks</text>
+            <!-- Arrow -->
+            <line x1="155" y1="65" x2="198" y2="65" stroke="var(--border)" stroke-width="2"/><polygon points="195,61 203,65 195,69" fill="#9AAFC0"/>
+            <rect x="203" y="22" width="155" height="86" rx="10" fill="#fff" stroke="var(--card-border)" stroke-width="1"/>
+            <text x="280" y="55" text-anchor="middle" fill="var(--text)" font-size="10.5" font-weight="600" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.08em">CUSTODIAN BANKS</text>
+            <text x="280" y="75" text-anchor="middle" fill="var(--muted)" font-size="10" font-family="Poppins,system-ui,sans-serif">Asset safekeeping</text>
+            <line x1="358" y1="65" x2="401" y2="65" stroke="var(--border)" stroke-width="2"/><polygon points="398,61 406,65 398,69" fill="#9AAFC0"/>
+            <rect x="406" y="22" width="155" height="86" rx="10" fill="#fff" stroke="var(--card-border)" stroke-width="1"/>
+            <text x="483" y="55" text-anchor="middle" fill="var(--text)" font-size="10.5" font-weight="600" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.08em">MARKET INFRA</text>
+            <text x="483" y="75" text-anchor="middle" fill="var(--muted)" font-size="10" font-family="Poppins,system-ui,sans-serif">Clearinghouses &amp; CCPs</text>
+            <!-- Dashed arrow to RR -->
+            <line x1="561" y1="65" x2="608" y2="65" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4"/><polygon points="605,61 613,65 605,69" fill="var(--accent)"/>
+            <!-- RepoReserve box — prominent -->
+            <rect x="613" y="15" width="165" height="100" rx="10" fill="var(--accent-bg)" stroke="var(--accent)" stroke-width="2" filter="url(#rrGlow)"/>
+            <text x="695" y="52" text-anchor="middle" fill="var(--accent)" font-size="11" font-weight="700" font-family="Poppins,system-ui,sans-serif" letter-spacing="0.12em">REPORESERVE</text>
+            <text x="695" y="72" text-anchor="middle" fill="var(--text)" font-size="10" font-family="Poppins,system-ui,sans-serif">Operational visibility</text>
+            <text x="695" y="88" text-anchor="middle" fill="var(--muted)" font-size="9.5" font-family="Poppins,system-ui,sans-serif">layer</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         ENGAGEMENT (Accordion)
-         ============================================================ -->
+    <!-- PILOT PARTICIPANTS -->
+    <section id="participants" class="section-border-top" aria-labelledby="participants-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">Early Ecosystem Participants</span>
+        <h2 id="participants-heading">Institutions in Our Pilot Programme</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <p class="section-intro">We work with a focused group of institutional participants across the repo market value chain.</p>
+        <div class="participants-grid">
+          <div class="participant-card fade-in">
+            <h3>Treasury Desk</h3>
+            <div class="p-type">Institutional Bank</div>
+            <p>Overnight and term repo operations across government securities and corporate bonds.</p>
+            <span class="pilot-badge">Pilot Participant</span>
+          </div>
+          <div class="participant-card fade-in">
+            <h3>Custodian Bank</h3>
+            <div class="p-type">Asset Servicing</div>
+            <p>Collateral safekeeping, tri-party repo support, and cross-counterparty position reporting.</p>
+            <span class="pilot-badge">Pilot Participant</span>
+          </div>
+          <div class="participant-card fade-in">
+            <h3>Market Infrastructure Provider</h3>
+            <div class="p-type">Clearing &amp; Settlement</div>
+            <p>Central counterparty clearing, settlement coordination, and risk margin computation.</p>
+            <span class="pilot-badge">Pilot Participant</span>
+          </div>
+          <div class="participant-card fade-in">
+            <h3>NBFC Treasury Team</h3>
+            <div class="p-type">Repo Funding Operations</div>
+            <p>Short-term secured funding through repo markets with collateral optimization&nbsp;needs.</p>
+            <span class="pilot-badge">Pilot Participant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section-border-top" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <span class="label-sm section-eyebrow">What Participants Report</span>
+        <h2 id="testimonials-heading">Institutional Proof Points</h2>
+        <hr class="section-rule" aria-hidden="true">
+        <div class="testimonials-grid">
+          <div class="testimonial-card fade-in">
+            <blockquote>"Before RepoReserve, our overnight collateral reconciliation required three teams across two time zones. During the pilot, we reduced reconciliation touch-points by more than half."</blockquote>
+            <div class="t-source">Senior Treasury Officer<span class="t-role">G-SIB Pilot Participant &middot; Identity under NDA</span></div>
+          </div>
+          <div class="testimonial-card fade-in">
+            <blockquote>"Position discrepancies that had gone undetected for months were surfaced within the first reporting cycle. The operational clarity was immediate."</blockquote>
+            <div class="t-source">Head of Custody Operations<span class="t-role">Custodian Bank &middot; Identity under NDA</span></div>
+          </div>
+          <div class="testimonial-card fade-in">
+            <blockquote>"We no longer reconcile collateral positions manually across three systems. RepoReserve gave us one consolidated view — that alone justified the&nbsp;pilot."</blockquote>
+            <div class="t-source">VP, Market Infrastructure<span class="t-role">Clearing Corporation &middot; Identity under NDA</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGAGEMENT -->
     <section id="engagement" class="section-border-top" aria-labelledby="engagement-heading">
       <div class="container">
         <span class="label-sm section-eyebrow">How We Engage</span>
@@ -749,61 +448,28 @@
         <p class="section-intro">Every engagement begins under NDA. We prioritize discretion and institutional trust above&nbsp;all.</p>
         <div class="engage-steps">
           <div class="accordion-item">
-            <button class="accordion-btn" aria-expanded="false" aria-controls="step-1-panel" id="step-1-btn">
-              <span><span class="step-num" aria-hidden="true">1</span>Request a Confidential Discussion</span>
-              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <div class="accordion-panel" id="step-1-panel" role="region" aria-labelledby="step-1-btn" hidden>
-              <div class="accordion-panel-inner">Submit a brief request via our secure form. We review every inquiry personally. There is no automated outreach — a member of our team will respond within two business&nbsp;days.</div>
-            </div>
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-1-panel" id="step-1-btn"><span><span class="step-num" aria-hidden="true">1</span>Request a Confidential Discussion</span><svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="accordion-panel" id="step-1-panel" role="region" aria-labelledby="step-1-btn" hidden><div class="accordion-panel-inner">Submit a brief request via our secure form. We review every inquiry personally. There is no automated outreach — a member of our team will respond within two business&nbsp;days.</div></div>
           </div>
           <div class="accordion-item">
-            <button class="accordion-btn" aria-expanded="false" aria-controls="step-2-panel" id="step-2-btn">
-              <span><span class="step-num" aria-hidden="true">2</span>Mutual NDA &amp; Scoping</span>
-              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <div class="accordion-panel" id="step-2-panel" role="region" aria-labelledby="step-2-btn" hidden>
-              <div class="accordion-panel-inner">Before any detailed discussion, we execute a mutual non-disclosure agreement. This protects both parties and ensures all product detail remains&nbsp;confidential.</div>
-            </div>
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-2-panel" id="step-2-btn"><span><span class="step-num" aria-hidden="true">2</span>Mutual NDA &amp; Scoping</span><svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="accordion-panel" id="step-2-panel" role="region" aria-labelledby="step-2-btn" hidden><div class="accordion-panel-inner">Before any detailed discussion, we execute a mutual non-disclosure agreement. This protects both parties and ensures all product detail remains&nbsp;confidential.</div></div>
           </div>
           <div class="accordion-item">
-            <button class="accordion-btn" aria-expanded="false" aria-controls="step-3-panel" id="step-3-btn">
-              <span><span class="step-num" aria-hidden="true">3</span>Tailored Walkthrough &amp; Pilot Discussion</span>
-              <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <div class="accordion-panel" id="step-3-panel" role="region" aria-labelledby="step-3-btn" hidden>
-              <div class="accordion-panel-inner">Under NDA, we provide a tailored walkthrough aligned to your institution's treasury structure. If there is mutual interest, we outline a confidential pilot&nbsp;engagement.</div>
-            </div>
+            <button class="accordion-btn" aria-expanded="false" aria-controls="step-3-panel" id="step-3-btn"><span><span class="step-num" aria-hidden="true">3</span>Tailored Walkthrough &amp; Pilot Discussion</span><svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="accordion-panel" id="step-3-panel" role="region" aria-labelledby="step-3-btn" hidden><div class="accordion-panel-inner">Under NDA, we provide a tailored walkthrough aligned to your institution's treasury structure. If there is mutual interest, we outline a confidential pilot&nbsp;engagement.</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         CASE STUDY
-         ============================================================ -->
-    <section id="casestudy" class="section-border-top" aria-labelledby="case-heading">
-      <div class="container">
-        <span class="label-sm section-eyebrow">Institutional Proof Point</span>
-        <h2 id="case-heading">What Our Pilot Participants Report</h2>
-        <hr class="section-rule" aria-hidden="true">
-        <blockquote class="case-quote fade-in">
-          "Before RepoReserve, our overnight collateral reconciliation required three teams across two time zones. During the pilot, we reduced reconciliation touch-points by more than half and surfaced position discrepancies that had gone undetected for months. The platform's value was evident within the first reporting&nbsp;cycle."
-          <footer class="case-attribution">— Senior Treasury Officer, G-SIB Pilot Participant (identity withheld under&nbsp;NDA)</footer>
-        </blockquote>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         TEAM
-         ============================================================ -->
+    <!-- TEAM -->
     <section id="team" class="section-border-top" aria-labelledby="team-heading">
       <div class="container">
         <span class="label-sm section-eyebrow">Leadership</span>
         <h2 id="team-heading">Founded by Practitioners</h2>
         <hr class="section-rule" aria-hidden="true">
         <div class="team-grid">
-          <!-- REPLACE: founder name, role, bio -->
           <div class="team-card fade-in">
             <h3>Rakesh Kottha</h3>
             <span class="role label-sm">Founder</span>
@@ -813,103 +479,66 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         PARTNER LOGOS
-         ============================================================ -->
-    <section id="partners" aria-labelledby="partners-heading">
-      <div class="container text-center">
-        <span class="label-sm section-eyebrow" style="color:var(--color-text-muted);">Early Ecosystem Participants</span>
-        <h2 id="partners-heading" class="sr-only">Pilot Participants</h2>
-        <!-- REPLACE: swap placeholders with real partner logos from assets/partners/ -->
-        <div class="partner-bar" style="margin-top:var(--sp-lg);">
-          <div class="partner-placeholder" aria-label="Pilot participant — permission required"><span>Pilot Participant</span><span style="font-size:0.5rem;opacity:0.5;">Permission Required</span></div>
-          <div class="partner-placeholder" aria-label="Pilot participant — permission required"><span>Pilot Participant</span><span style="font-size:0.5rem;opacity:0.5;">Permission Required</span></div>
-          <div class="partner-placeholder" aria-label="Pilot participant — permission required"><span>Pilot Participant</span><span style="font-size:0.5rem;opacity:0.5;">Permission Required</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         FAQ
-         ============================================================ -->
+    <!-- FAQ -->
     <section id="faq" class="section-border-top" aria-labelledby="faq-heading">
       <div class="container">
         <span class="label-sm section-eyebrow">Frequently Asked Questions</span>
         <h2 id="faq-heading">Common Inquiries</h2>
         <hr class="section-rule" aria-hidden="true">
         <div class="faq-grid">
-          <div class="faq-item fade-in">
-            <h3>What does RepoReserve do?</h3>
-            <p>RepoReserve is a treasury collateral visibility and repo operations coordination platform. It provides institutional participants with a consolidated view of collateral positions across custodians and&nbsp;counterparties.</p>
-          </div>
-          <div class="faq-item fade-in">
-            <h3>Who is it designed for?</h3>
-            <p>Treasury teams at institutional banks, custodian banks, and clearinghouses that manage repo and collateral operations at&nbsp;scale.</p>
-          </div>
-          <div class="faq-item fade-in">
-            <h3>Is this a trading platform?</h3>
-            <p>No. RepoReserve is an operations coordination and visibility platform. It does not execute trades, provide pricing, or act as a&nbsp;broker.</p>
-          </div>
-          <div class="faq-item fade-in">
-            <h3>Why is an NDA required?</h3>
-            <p>Product details, architecture, and workflows are proprietary. We share these only with vetted institutional counterparties under mutual non-disclosure&nbsp;agreements.</p>
-          </div>
-          <div class="faq-item fade-in">
-            <h3>Can I see a demo before signing an&nbsp;NDA?</h3>
-            <p>We provide a general overview and this institutional brochure. Detailed demonstrations and documentation are available only after executing a mutual&nbsp;NDA.</p>
-          </div>
-          <div class="faq-item fade-in">
-            <h3>How do I get started?</h3>
-            <p>Submit a confidential discussion request. A member of our team will respond within two business days to schedule an initial&nbsp;conversation.</p>
-          </div>
+          <div class="faq-item fade-in"><h3>What does RepoReserve do?</h3><p>RepoReserve is a treasury collateral visibility and repo operations coordination platform. It provides institutional participants with a consolidated view of collateral positions across custodians and&nbsp;counterparties.</p></div>
+          <div class="faq-item fade-in"><h3>Who is it designed for?</h3><p>Treasury teams at institutional banks, custodian banks, and clearinghouses that manage repo and collateral operations at&nbsp;scale.</p></div>
+          <div class="faq-item fade-in"><h3>Is this a trading platform?</h3><p>No. RepoReserve is an operations coordination and visibility platform. It does not execute trades, provide pricing, or act as a&nbsp;broker.</p></div>
+          <div class="faq-item fade-in"><h3>Why is an NDA required?</h3><p>Product details, architecture, and workflows are proprietary. We share these only with vetted institutional counterparties under mutual non-disclosure&nbsp;agreements.</p></div>
+          <div class="faq-item fade-in"><h3>Can I see a demo before signing an&nbsp;NDA?</h3><p>We provide a general overview and this institutional brochure. Detailed demonstrations and documentation are available only after executing a mutual&nbsp;NDA.</p></div>
+          <div class="faq-item fade-in"><h3>How do I get started?</h3><p>Submit a confidential discussion request. A member of our team will respond within two business days to schedule an initial&nbsp;conversation.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         CTA BANNER
-         ============================================================ -->
+    <!-- CTA -->
     <section class="cta-banner" aria-labelledby="cta-heading">
       <div class="container">
         <div class="cta-inner">
-          <div>
-            <h2 id="cta-heading">Ready to Learn More?</h2>
-            <p>All detailed discussions are conducted under NDA. Start with a confidential&nbsp;request.</p>
-          </div>
+          <div><h2 id="cta-heading">Ready to Learn More?</h2><p>All detailed discussions are conducted under NDA. Start with a confidential&nbsp;request.</p></div>
           <div class="cta-actions">
             <button class="btn btn-primary btn-large" data-open-modal="meeting-modal">Request Confidential Discussion</button>
-            <!-- REPLACE: assets/brochure/reporeserve-overview.pdf -->
             <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-outline btn-large" download target="_blank" rel="noopener">Download Institutional Overview</a>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
+  <!-- FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-company">
-          <!-- REPLACE: company name, location -->
-          <strong>RepoReserve Technologies Pvt Ltd</strong>
-          Hyderabad, India
-          <p class="footer-tagline">Institutional collateral visibility platform for treasury and custodian&nbsp;operations.</p>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-name"><span>Repo</span>Reserve</div>
+          <p>Treasury Infrastructure Platform</p>
+          <p style="font-size:0.75rem;color:#9AAFC0;margin-top:8px">RepoReserve Technologies Pvt Ltd<br>Hyderabad, India</p>
         </div>
-        <div class="footer-contact">
-          <!-- REPLACE: contact@reporeserve.com -->
-          <a href="mailto:contact@reporeserve.com">contact@reporeserve.com</a>
-        </div>
-      </div>
-      <!-- Market Infrastructure links -->
-      <div class="footer-infra">
-        <span class="footer-infra-title">Market Infrastructure</span>
-        <a href="https://www.rbi.org.in" target="_blank" rel="noopener noreferrer">Reserve Bank of India</a>
-        <a href="https://www.ccilindia.com" target="_blank" rel="noopener noreferrer">Clearing Corporation of India Limited</a>
-        <a href="https://www.sebi.gov.in" target="_blank" rel="noopener noreferrer">Securities and Exchange Board of India</a>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="#solutions">Solutions</a>
+            <a href="#ecosystem">Ecosystem</a>
+            <a href="#participants">Participants</a>
+            <a href="#engagement">Engagement</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="footer-col">
+            <h4>Market Infrastructure</h4>
+            <a href="https://www.rbi.org.in" target="_blank" rel="noopener noreferrer">Reserve Bank of India</a>
+            <a href="https://www.ccilindia.com" target="_blank" rel="noopener noreferrer">CCIL</a>
+            <a href="https://www.sebi.gov.in" target="_blank" rel="noopener noreferrer">SEBI</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:contact@reporeserve.com">contact@reporeserve.com</a>
+          </div>
+        </nav>
       </div>
       <div class="footer-bottom">
         <span class="footer-disclaimer">We do not publish product workflows or dashboards online. Institutional demonstrations are available under&nbsp;NDA.</span>
@@ -918,203 +547,50 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       MEETING REQUEST MODAL
-       ============================================================ -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="meeting-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
     <div class="modal">
-      <button class="modal-close" aria-label="Close dialog" data-close-modal>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-          <line x1="3" y1="3" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="15" y1="3" x2="3" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-
+      <button class="modal-close" aria-label="Close dialog" data-close-modal><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><line x1="3" y1="3" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="3" x2="3" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
       <div id="modal-form-view">
         <h2 id="modal-title">Request Confidential Discussion</h2>
         <p id="modal-desc" class="modal-desc">All inquiries are reviewed personally. We will follow up to confirm a suitable&nbsp;time.</p>
         <form id="meeting-form" novalidate>
-          <div class="form-group">
-            <label for="field-name">Name <span aria-hidden="true">*</span></label>
-            <input type="text" id="field-name" name="name" required autocomplete="name" placeholder="Full name">
-            <span class="error-msg" role="alert">Please enter your name.</span>
-          </div>
-          <div class="form-group">
-            <label for="field-institution">Institution <span aria-hidden="true">*</span></label>
-            <input type="text" id="field-institution" name="institution" required autocomplete="organization" placeholder="Organization name">
-            <span class="error-msg" role="alert">Please enter your institution.</span>
-          </div>
-          <div class="form-group">
-            <label for="field-role">Role</label>
-            <input type="text" id="field-role" name="role" autocomplete="organization-title" placeholder="Title or function">
-          </div>
-          <div class="form-group">
-            <label for="field-email">Email <span aria-hidden="true">*</span></label>
-            <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="Corporate email">
-            <span class="error-msg" role="alert">Please enter a valid email.</span>
-          </div>
-          <div class="form-group">
-            <label for="field-phone">Phone</label>
-            <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="Direct line (optional)">
-          </div>
-          <div class="form-group">
-            <label for="field-message">Brief Message</label>
-            <textarea id="field-message" name="message" placeholder="Briefly describe your interest or use case."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-large" style="width:100%;">Request Confidential Discussion</button>
-          <p style="font-size:0.6875rem;color:var(--color-text-muted);margin-top:var(--sp-sm);text-align:center;">Your information is handled confidentially. No automated&nbsp;outreach.</p>
+          <div class="form-group"><label for="field-name">Name <span aria-hidden="true">*</span></label><input type="text" id="field-name" name="name" required autocomplete="name" placeholder="Full name"><span class="error-msg" role="alert">Please enter your name.</span></div>
+          <div class="form-group"><label for="field-institution">Institution <span aria-hidden="true">*</span></label><input type="text" id="field-institution" name="institution" required autocomplete="organization" placeholder="Organization name"><span class="error-msg" role="alert">Please enter your institution.</span></div>
+          <div class="form-group"><label for="field-role">Role</label><input type="text" id="field-role" name="role" autocomplete="organization-title" placeholder="Title or function"></div>
+          <div class="form-group"><label for="field-email">Email <span aria-hidden="true">*</span></label><input type="email" id="field-email" name="email" required autocomplete="email" placeholder="Corporate email"><span class="error-msg" role="alert">Please enter a valid email.</span></div>
+          <div class="form-group"><label for="field-phone">Phone</label><input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="Direct line (optional)"></div>
+          <div class="form-group"><label for="field-message">Brief Message</label><textarea id="field-message" name="message" placeholder="Briefly describe your interest or use case."></textarea></div>
+          <button type="submit" class="btn btn-primary btn-large" style="width:100%">Request Confidential Discussion</button>
+          <p style="font-size:0.6875rem;color:#9AAFC0;margin-top:var(--sp-sm);text-align:center">Your information is handled confidentially. No automated&nbsp;outreach.</p>
         </form>
       </div>
-
       <div class="modal-success" id="modal-success-view" aria-live="polite">
-        <svg class="check-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-          <circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M13 22L19 28L31 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg class="check-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="1.5"/><path d="M13 22L19 28L31 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3>Request Received</h3>
         <p>We will follow up to confirm a suitable time. Expect a response within two business&nbsp;days.</p>
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       JAVASCRIPT — vanilla, unobtrusive
-       ============================================================ -->
   <script>
     (function(){
       'use strict';
-
-      /* ---- Mobile nav ---- */
       var navToggle=document.querySelector('.nav-toggle'),navMenu=document.getElementById('nav-menu');
-      if(navToggle&&navMenu){navToggle.addEventListener('click',function(){
-        var exp=navToggle.getAttribute('aria-expanded')==='true';
-        navToggle.setAttribute('aria-expanded',String(!exp));navMenu.classList.toggle('is-open');
-      });}
-
-      /* ---- Modal ---- */
-      var overlay=document.getElementById('meeting-modal'),
-          modal=overlay?overlay.querySelector('.modal'):null,
-          closeBtn=overlay?overlay.querySelector('[data-close-modal]'):null,
-          formView=document.getElementById('modal-form-view'),
-          successView=document.getElementById('modal-success-view'),
-          lastFocus=null;
-
-      function openModal(){
-        if(!overlay)return;
-        lastFocus=document.activeElement;
-        overlay.classList.add('is-active');overlay.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
-        if(formView)formView.style.display='';
-        if(successView)successView.classList.remove('is-visible');
-        var form=document.getElementById('meeting-form');
-        if(form){form.reset();form.querySelectorAll('.form-group').forEach(function(g){g.classList.remove('has-error');});}
-        var fi=modal.querySelector('input');if(fi)setTimeout(function(){fi.focus();},50);
-      }
-      function closeModal(){
-        if(!overlay)return;
-        overlay.classList.remove('is-active');overlay.setAttribute('aria-hidden','true');
-        document.body.style.overflow='';if(lastFocus)lastFocus.focus();
-      }
+      if(navToggle&&navMenu){navToggle.addEventListener('click',function(){var exp=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!exp));navMenu.classList.toggle('is-open');});}
+      var overlay=document.getElementById('meeting-modal'),modal=overlay?overlay.querySelector('.modal'):null,closeBtn=overlay?overlay.querySelector('[data-close-modal]'):null,formView=document.getElementById('modal-form-view'),successView=document.getElementById('modal-success-view'),lastFocus=null;
+      function openModal(){if(!overlay)return;lastFocus=document.activeElement;overlay.classList.add('is-active');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';if(formView)formView.style.display='';if(successView)successView.classList.remove('is-visible');var form=document.getElementById('meeting-form');if(form){form.reset();form.querySelectorAll('.form-group').forEach(function(g){g.classList.remove('has-error');});}var fi=modal.querySelector('input');if(fi)setTimeout(function(){fi.focus();},50);}
+      function closeModal(){if(!overlay)return;overlay.classList.remove('is-active');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus)lastFocus.focus();}
       document.querySelectorAll('[data-open-modal="meeting-modal"]').forEach(function(b){b.addEventListener('click',openModal);});
       if(closeBtn)closeBtn.addEventListener('click',closeModal);
       if(overlay)overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
-      document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'&&overlay&&overlay.classList.contains('is-active'))closeModal();
-      });
-
-      /* Focus trap */
-      if(modal)modal.addEventListener('keydown',function(e){
-        if(e.key!=='Tab')return;
-        var f=modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
-        if(!f.length)return;var first=f[0],last=f[f.length-1];
-        if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}
-        else{if(document.activeElement===last){e.preventDefault();first.focus();}}
-      });
-
-      /* ---- Form validation ---- */
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay&&overlay.classList.contains('is-active'))closeModal();});
+      if(modal)modal.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');if(!f.length)return;var first=f[0],last=f[f.length-1];if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}});
       var form=document.getElementById('meeting-form');
-      if(form)form.addEventListener('submit',function(e){
-        e.preventDefault();var valid=true;
-        form.querySelectorAll('[required]').forEach(function(field){
-          var g=field.closest('.form-group');
-          if(!field.value.trim()){g.classList.add('has-error');valid=false;}
-          else{g.classList.remove('has-error');}
-          if(field.type==='email'&&field.value.trim()){
-            if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())){g.classList.add('has-error');valid=false;}
-          }
-        });
-        if(!valid){var err=form.querySelector('.has-error input');if(err)err.focus();return;}
-
-        /*
-         * ============================================================
-         * REPLACE: Submit form data to your backend or service.
-         * ============================================================
-         *
-         * Option A — Direct POST:
-         * fetch('/api/meeting-request', {
-         *   method: 'POST',
-         *   headers: { 'Content-Type': 'application/json' },
-         *   body: JSON.stringify({
-         *     name:        form.elements.name.value,
-         *     institution: form.elements.institution.value,
-         *     role:        form.elements.role.value,
-         *     email:       form.elements.email.value,
-         *     phone:       form.elements.phone.value,
-         *     message:     form.elements.message.value,
-         *   })
-         * }).then(function(r){ if(!r.ok) throw new Error(r.status); })
-         *   .catch(function(err){ console.error('Submit error:', err); });
-         *
-         * Option B — Formspree:
-         * fetch('https://formspree.io/f/YOUR_FORM_ID', {
-         *   method: 'POST',
-         *   headers: { 'Accept': 'application/json' },
-         *   body: new FormData(form)
-         * });
-         *
-         * Option C — Zapier webhook:
-         * fetch('https://hooks.zapier.com/hooks/catch/XXXXX/YYYYY/', {
-         *   method: 'POST',
-         *   body: JSON.stringify({...})
-         * });
-         * ============================================================
-         */
-
-        if(formView)formView.style.display='none';
-        if(successView)successView.classList.add('is-visible');
-      });
-
-      /* ---- Accordion ---- */
-      document.querySelectorAll('.accordion-btn').forEach(function(btn){
-        btn.addEventListener('click',function(){
-          var exp=btn.getAttribute('aria-expanded')==='true';
-          var panel=document.getElementById(btn.getAttribute('aria-controls'));
-          if(!panel)return;
-          document.querySelectorAll('.accordion-btn').forEach(function(b){
-            b.setAttribute('aria-expanded','false');
-            var p=document.getElementById(b.getAttribute('aria-controls'));
-            if(p){p.hidden=true;p.style.maxHeight='0';}
-          });
-          if(!exp){btn.setAttribute('aria-expanded','true');panel.hidden=false;panel.style.maxHeight=panel.scrollHeight+'px';}
-        });
-      });
-
-      /* ---- Scroll fade-in ---- */
-      if('IntersectionObserver' in window){
-        var obs=new IntersectionObserver(function(entries){
-          entries.forEach(function(entry){
-            if(entry.isIntersecting){entry.target.classList.add('is-visible');obs.unobserve(entry.target);}
-          });
-        },{threshold:0.12});
-        document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
-      }else{document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('is-visible');});}
-
-      /* ---- Close mobile nav on anchor ---- */
-      document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(link){
-        link.addEventListener('click',function(){
-          if(navMenu&&navMenu.classList.contains('is-open')){navMenu.classList.remove('is-open');navToggle.setAttribute('aria-expanded','false');}
-        });
-      });
+      if(form)form.addEventListener('submit',function(e){e.preventDefault();var valid=true;form.querySelectorAll('[required]').forEach(function(field){var g=field.closest('.form-group');if(!field.value.trim()){g.classList.add('has-error');valid=false;}else{g.classList.remove('has-error');}if(field.type==='email'&&field.value.trim()){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())){g.classList.add('has-error');valid=false;}}});if(!valid){var err=form.querySelector('.has-error input');if(err)err.focus();return;}if(formView)formView.style.display='none';if(successView)successView.classList.add('is-visible');});
+      document.querySelectorAll('.accordion-btn').forEach(function(btn){btn.addEventListener('click',function(){var exp=btn.getAttribute('aria-expanded')==='true';var panel=document.getElementById(btn.getAttribute('aria-controls'));if(!panel)return;document.querySelectorAll('.accordion-btn').forEach(function(b){b.setAttribute('aria-expanded','false');var p=document.getElementById(b.getAttribute('aria-controls'));if(p){p.hidden=true;p.style.maxHeight='0';}});if(!exp){btn.setAttribute('aria-expanded','true');panel.hidden=false;panel.style.maxHeight=panel.scrollHeight+'px';}});});
+      if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});}else{document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('is-visible');});}
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(link){link.addEventListener('click',function(){if(navMenu&&navMenu.classList.contains('is-open')){navMenu.classList.remove('is-open');navToggle.setAttribute('aria-expanded','false');}});});
     })();
   </script>
 </body>
