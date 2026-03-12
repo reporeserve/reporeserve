@@ -1,0 +1,154 @@
+================================================================================
+REPORESERVE — COPY BLOCKS
+================================================================================
+
+HERO
+----
+Eyebrow:        Treasury Infrastructure
+Headline:       Operational visibility for institutions participating in
+                repo markets.
+Subhead:        RepoReserve is a treasury collateral visibility and repo
+                operations coordination platform. We serve institutional
+                treasury teams, custodians, and clearinghouses with a
+                unified view of collateral positioning.
+Supporting:     Designed for organizations at the center of post-trade
+                infrastructure — without compromising operational security.
+CTA Primary:    Request Confidential Discussion
+CTA Secondary:  Download Institutional Overview
+
+VALUE BULLETS (×3)
+------------------
+1. Collateral Visibility
+   Unified, real-time oversight of collateral positions across custodians,
+   counterparties, and internal books.
+
+2. Operations Coordination
+   Streamlined repo lifecycle coordination between treasury desks,
+   custodians, and market infrastructure providers.
+
+3. Risk & Governance
+   Institutional-grade audit trails and position reporting that support
+   compliance, risk management, and board-level oversight.
+
+INSTITUTIONAL FOCUS
+-------------------
+RepoReserve is designed for institutions that participate in secured
+funding markets through custodians and established market infrastructure.
+
+Our goal is to support operational clarity without replacing existing
+financial market infrastructure. We work within the structures that
+institutions already trust — custodian banks, clearinghouses, and
+central counterparties.
+
+We do not disintermediate. We coordinate.
+
+ENGAGEMENT STEPS (×3)
+---------------------
+Step 1 — Request a Confidential Discussion
+Submit a brief request via our secure form. We review every inquiry
+personally. There is no automated outreach — a member of our team
+will respond within two business days.
+
+Step 2 — Mutual NDA & Scoping
+Before any detailed discussion, we execute a mutual non-disclosure
+agreement. This protects both parties and ensures all product detail
+remains confidential.
+
+Step 3 — Tailored Walkthrough & Pilot Discussion
+Under NDA, we provide a tailored walkthrough aligned to your institution's
+treasury structure. If there is mutual interest, we outline a confidential
+pilot engagement.
+
+FOUNDER BIO
+-----------
+Rakesh Kottha — Founder
+Focused on building institutional infrastructure for treasury collateral
+visibility and repo coordination. Background in financial technology and
+institutional operations.
+
+ANONYMIZED CASE STUDY
+---------------------
+"Before RepoReserve, our overnight collateral reconciliation required
+three teams across two time zones. During the pilot, we reduced
+reconciliation touch-points by more than half and surfaced position
+discrepancies that had gone undetected for months. The platform's value
+was evident within the first reporting cycle."
+— Senior Treasury Officer, G-SIB Pilot Participant (identity withheld
+under NDA)
+
+FAQ (×6)
+--------
+Q1: What does RepoReserve do?
+A1: RepoReserve is a treasury collateral visibility and repo operations
+    coordination platform. It provides institutional participants with a
+    consolidated view of collateral positions across custodians and
+    counterparties.
+
+Q2: Who is it designed for?
+A2: Treasury teams at institutional banks, custodian banks, and
+    clearinghouses that manage repo and collateral operations at scale.
+
+Q3: Is this a trading platform?
+A3: No. RepoReserve is an operations coordination and visibility
+    platform. It does not execute trades, provide pricing, or act
+    as a broker.
+
+Q4: Why is an NDA required?
+A4: Product details, architecture, and workflows are proprietary. We
+    share these only with vetted institutional counterparties under
+    mutual non-disclosure agreements.
+
+Q5: Can I see a demo before signing an NDA?
+A5: We provide a general overview and this institutional brochure.
+    Detailed demonstrations and documentation are available only after
+    executing a mutual NDA.
+
+Q6: How do I get started?
+A6: Submit a confidential discussion request. A member of our team will
+    respond within two business days to schedule an initial conversation.
+
+MICROCOPY — FORMS & CTAs
+-------------------------
+Nav CTA:            Request Discussion
+Hero CTA:           Request Confidential Discussion
+Brochure CTA:       Download Institutional Overview
+Footer CTA:         Request Confidential Discussion
+Modal title:        Request Confidential Discussion
+Modal description:  All inquiries are reviewed personally. We will follow
+                    up to confirm a suitable time.
+Form labels:        Name* | Institution* | Role | Email* | Phone |
+                    Brief Message
+Submit button:      Request Confidential Discussion
+Form footnote:      Your information is handled confidentially.
+                    No automated outreach.
+Success heading:    Request Received
+Success body:       We will follow up to confirm a suitable time. Expect
+                    a response within two business days.
+Error — name:       Please enter your name.
+Error — institution:Please enter your institution.
+Error — email:      Please enter a valid email.
+Privacy footer:     We do not publish product workflows or dashboards
+                    online. Institutional demonstrations are available
+                    under NDA.
+
+ECOSYSTEM LABELS
+----------------
+Node 1: Treasury Teams — Internal desks
+Node 2: Custodian Banks — Asset safekeeping
+Node 3: Market Infrastructure — Clearinghouses & CCPs
+Node 4: RepoReserve — Operational visibility layer
+
+SECTION EYEBROWS
+----------------
+Focus:       Institutional Focus
+Solutions:   What We Solve
+Ecosystem:   Ecosystem Overview
+Engagement:  How We Engage
+Case Study:  Institutional Proof Point
+Team:        Leadership
+Partners:    Early Ecosystem Participants
+FAQ:         Frequently Asked Questions
+
+================================================================================
+END OF COPY BLOCKS
+================================================================================
