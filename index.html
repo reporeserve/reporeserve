@@ -1,18 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RepoReserve | Treasury Collateral Visibility</title>
+  <meta
+    name="description"
+    content="RepoReserve is a treasury collateral visibility and repo operations coordination platform for institutional market participants."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #0b1426;
+      --surface: #111c34;
+      --accent: #2f6bff;
+      --text: #e6edf7;
+      --muted: #a3b2cd;
+      --line: #223253;
+      --ring: rgba(47, 107, 255, 0.35);
+      --max-width: 1120px;
+      --radius: 14px;
+      --shadow: 0 20px 40px rgba(3, 8, 18, 0.35);
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 500px at 80% -20%, rgba(47, 107, 255, 0.18), transparent 55%),
+        radial-gradient(900px 400px at -15% 10%, rgba(35, 73, 168, 0.2), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      width: 40rem;
+      height: 40rem;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      opacity: 0.2;
+    }
+
+    body::before {
+      top: -18rem;
+      left: -12rem;
+      background: rgba(47, 107, 255, 0.55);
+      animation: drift-one 18s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      right: -14rem;
+      bottom: -20rem;
+      background: rgba(34, 67, 143, 0.5);
+      animation: drift-two 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift-one {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(80px, 42px) scale(1.1);
+      }
+    }
+
+    @keyframes drift-two {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(-70px, -52px) scale(1.14);
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), 92%);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(34, 50, 83, 0.8);
+      backdrop-filter: blur(8px);
+      background: rgba(11, 20, 38, 0.82);
+    }
+
+    .nav-wrap {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5b8bff, #2f6bff);
+      box-shadow: 0 0 0 5px rgba(47, 107, 255, 0.18);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-links a:not(.nav-cta) {
+      position: relative;
+    }
+
+    .nav-links a:not(.nav-cta)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: rgba(176, 201, 255, 0.9);
+      transition: width 0.28s ease;
+    }
+
+    .nav-links a:not(.nav-cta):hover::after,
+    .nav-links a:not(.nav-cta):focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      margin-left: 8px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.78rem 1.15rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #3f78ff, #2f6bff);
+      color: #f8fbff;
+      box-shadow: 0 10px 24px rgba(47, 107, 255, 0.32);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        102deg,
+        transparent 28%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 72%
+      );
+      transform: translateX(-120%);
+      transition: transform 0.65s ease;
+      pointer-events: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(47, 107, 255, 0.4);
+    }
+
+    .btn-primary:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn-secondary {
+      background: rgba(17, 28, 52, 0.6);
+      border-color: #2f436e;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: #3b5487;
+      background: rgba(17, 28, 52, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid #2f436e;
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .hero {
+      padding-top: 98px;
+      padding-bottom: 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.34rem 0.64rem;
+      border-radius: 99px;
+      border: 1px solid #2c4069;
+      background: rgba(17, 28, 52, 0.55);
+      color: #bad0ff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3.7vw, 3.2rem);
+      max-width: 16ch;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 61ch;
+      margin: 22px 0 32px;
+      font-size: 1.02rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-panel {
+      background: linear-gradient(160deg, rgba(24, 40, 72, 0.95), rgba(17, 28, 52, 0.8));
+      border: 1px solid #263a63;
+      border-radius: calc(var(--radius) + 6px);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease;
+    }
+
+    .hero-panel:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-panel h3 {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: #b6c4df;
+      font-size: 0.96rem;
+    }
+
+    .hero-list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-list li {
+      border: 1px solid #273a63;
+      border-radius: 10px;
+      padding: 11px 12px;
+      color: #d5e2f7;
+      font-size: 0.92rem;
+      background: rgba(10, 17, 34, 0.5);
+      transition: border-color 0.25s ease;
+    }
+
+    .hero-list li:hover {
+      border-color: #355186;
+    }
+
+    .trust {
+      padding-top: 28px;
+      padding-bottom: 76px;
+    }
+
+    .trust-box {
+      border: 1px solid #273a63;
+      border-radius: var(--radius);
+      background: rgba(17, 28, 52, 0.55);
+      padding: 28px 22px;
+      text-align: center;
+      color: #cad7ee;
+      font-size: 1.03rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      max-width: 740px;
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid #24365a;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(17, 28, 52, 0.95), rgba(17, 28, 52, 0.75));
+      padding: 24px;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      min-height: 196px;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #365286;
+      box-shadow: 0 14px 24px rgba(5, 10, 21, 0.26);
+    }
+
+    .card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #b8c6df;
+      font-size: 0.95rem;
+    }
+
+    .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      background: linear-gradient(160deg, rgba(71, 121, 255, 0.35), rgba(47, 107, 255, 0.12));
+      border: 1px solid rgba(78, 123, 237, 0.5);
+      display: grid;
+      place-items: center;
+      color: #bdd2ff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.28s ease;
+    }
+
+    .card:hover .icon {
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    .participants {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .participant {
+      border: 1px solid #26395f;
+      border-radius: 12px;
+      background: rgba(17, 28, 52, 0.7);
+      min-height: 114px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+      color: #d3def2;
+      font-weight: 500;
+      padding: 14px 10px;
+      transition: border-color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .participant:hover {
+      transform: translateY(-2px);
+      border-color: #3a5587;
+      box-shadow: 0 12px 20px rgba(6, 12, 24, 0.24);
+    }
+
+    .participant-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(47, 107, 255, 0.17);
+      border: 1px solid rgba(47, 107, 255, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 0.82rem;
+      color: #bfd2ff;
+      font-weight: 700;
+      transition: transform 0.28s ease;
+    }
+
+    .participant:hover .participant-mark {
+      transform: translateY(-1px);
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .security-card {
+      border: 1px solid #293c64;
+      border-radius: var(--radius);
+      padding: 22px;
+      background: rgba(13, 21, 38, 0.65);
+      transition: border-color 0.28s ease, transform 0.28s ease;
+    }
+
+    .security-card:hover {
+      transform: translateY(-2px);
+      border-color: #375486;
+    }
+
+    .security-card h3 {
+      font-size: 1.03rem;
+      margin-bottom: 10px;
+    }
+
+    .security-card p {
+      margin: 0;
+      color: #b6c4df;
+      font-size: 0.94rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid #27395f;
+      border-radius: 12px;
+      background: rgba(17, 28, 52, 0.68);
+      padding: 14px 16px;
+      transition: border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    details[open] {
+      border-color: #385385;
+      background: rgba(19, 31, 56, 0.85);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+      position: relative;
+      padding-right: 18px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #96b1e3;
+      font-weight: 600;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      margin: 10px 0 2px;
+      color: #bbcae3;
+      font-size: 0.95rem;
+      max-width: 70ch;
+    }
+
+    .cta-wrap {
+      border: 1px solid #2a3d66;
+      border-radius: calc(var(--radius) + 6px);
+      padding: 40px;
+      text-align: center;
+      background:
+        radial-gradient(500px 180px at 50% -20%, rgba(47, 107, 255, 0.34), transparent 75%),
+        rgba(17, 28, 52, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-wrap::before {
+      content: "";
+      position: absolute;
+      top: -32%;
+      left: -10%;
+      width: 140%;
+      height: 180%;
+      background: linear-gradient(
+        120deg,
+        transparent 40%,
+        rgba(89, 138, 255, 0.12) 50%,
+        transparent 60%
+      );
+      transform: translateX(-38%);
+      animation: cta-sheen 6.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes cta-sheen {
+      0% {
+        transform: translateX(-38%);
+      }
+      52% {
+        transform: translateX(-38%);
+      }
+      100% {
+        transform: translateX(38%);
+      }
+    }
+
+    .cta-wrap h2 {
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .cta-wrap p {
+      color: #bccbe4;
+      margin: 0 0 22px;
+      position: relative;
+    }
+
+    .cta-wrap .btn {
+      position: relative;
+    }
 
     footer {
       border-top: 1px solid rgba(37, 55, 90, 0.9);
-      padding: 34px 0 46px;
       padding: 40px 0 44px;
       color: #9bb0d2;
       background: rgba(8, 15, 30, 0.45);
     }
 
     .footer-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px 26px;
       display: grid;
       grid-template-columns: minmax(220px, 1.35fr) repeat(3, minmax(160px, 1fr));
       gap: 22px 28px;
@@ -85,6 +709,30 @@
     [data-reveal] {
       opacity: 1;
       transform: none;
+    }
+
+    .motion-ok [data-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.72s ease,
+        transform 0.72s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .motion-ok [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .cards,
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .participants {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -95,6 +743,61 @@
       .hero {
         padding-top: 84px;
       }
+    }
+
+    @media (max-width: 860px) {
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 4%;
+        right: 4%;
+        padding: 16px;
+        border: 1px solid #2e4370;
+        border-radius: 14px;
+        background: rgba(12, 21, 40, 0.97);
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        width: 100%;
+      }
+
+      .nav-cta.btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 74px 0;
+      }
+
+      .participants {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
       .cta-wrap {
         padding: 30px 18px;
       }
@@ -105,28 +808,233 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .motion-ok [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#top" class="logo" aria-label="RepoReserve Home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        RepoReserve
+      </a>
+      <button class="menu-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+      <nav id="site-nav" class="nav-links" aria-label="Main navigation">
+        <a href="#solutions">Solutions</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#participants">Participants</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta btn btn-primary">Request Institutional Briefing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div data-reveal style="--delay: 40ms;">
+          <span class="eyebrow">Institutional Financial Infrastructure</span>
+          <h1>Operational visibility for institutions participating in repo markets.</h1>
+          <p>
+            RepoReserve provides treasury teams with a unified operational layer for managing collateral visibility
+            and repo coordination across institutional counterparties.
           </p>
           <div class="hero-actions">
             <a href="#contact" class="btn btn-primary">Request Institutional Briefing</a>
-            <a href="#contact" class="btn btn-secondary">Download Institutional Overview</a>
             <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-secondary" download>Download Institutional Overview</a>
           </div>
         </div>
         <aside class="hero-panel" aria-label="Platform overview" data-reveal style="--delay: 150ms;">
+          <h3>Category Overview</h3>
+          <p>
+            RepoReserve is built for cross-institutional alignment, giving teams shared operational context while
+            preserving existing market relationships and controls.
+          </p>
+          <ul class="hero-list">
+            <li>Institution-focused visibility across counterparties</li>
+            <li>Coordination layer that supports existing operating models</li>
+            <li>Governance-oriented experience for treasury leadership</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust">
+      <div class="container">
+        <div class="trust-box" data-reveal>
+          Designed for institutions operating within regulated financial market infrastructure.
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Solutions</h2>
+          <p>Purpose-built capabilities that support institutional repo operations at a strategic level.</p>
+        </div>
+        <div class="cards">
+          <article class="card" data-reveal style="--delay: 40ms;">
+            <div class="icon" aria-hidden="true">CV</div>
+            <h3>Collateral Visibility</h3>
+            <p>
+              Consolidates high-level collateral context into a unified institutional view, enabling faster situational
+              awareness across eligible participants.
+            </p>
+          </article>
+          <article class="card" data-reveal style="--delay: 120ms;">
+            <div class="icon" aria-hidden="true">OC</div>
+            <h3>Operational Coordination</h3>
+            <p>
+              Supports coordinated operational execution between teams and counterparties through consistent workflows
+              and shared visibility standards.
+            </p>
+          </article>
+          <article class="card" data-reveal style="--delay: 200ms;">
+            <div class="icon" aria-hidden="true">RG</div>
+            <h3>Risk &amp; Governance</h3>
+            <p>
+              Strengthens oversight with institution-ready governance controls and audit-oriented traceability for
+              operational decisions.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ecosystem">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Ecosystem</h2>
+          <p>RepoReserve is designed to align stakeholders across the repo participation landscape.</p>
+        </div>
+        <div id="participants" class="participants">
+          <article class="participant" data-reveal style="--delay: 30ms;">
+            <span class="participant-mark" aria-hidden="true">TD</span>
+            Treasury desks
+          </article>
+          <article class="participant" data-reveal style="--delay: 70ms;">
+            <span class="participant-mark" aria-hidden="true">MF</span>
+            Mutual funds
+          </article>
+          <article class="participant" data-reveal style="--delay: 110ms;">
+            <span class="participant-mark" aria-hidden="true">NB</span>
+            NBFCs
+          </article>
+          <article class="participant" data-reveal style="--delay: 150ms;">
+            <span class="participant-mark" aria-hidden="true">CU</span>
+            Custodians
+          </article>
+          <article class="participant" data-reveal style="--delay: 190ms;">
+            <span class="participant-mark" aria-hidden="true">CP</span>
+            Clearing participants
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="security">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Security</h2>
+          <p>
+            Designed with a security and controls posture expected by institutional market participants, without
+            exposing internal infrastructure details.
+          </p>
+        </div>
+        <div class="security-grid">
+          <article class="security-card" data-reveal style="--delay: 40ms;">
+            <h3>Institutional-Grade Access Control</h3>
+            <p>Role-aware authorization boundaries support controlled access to operational information.</p>
+          </article>
+          <article class="security-card" data-reveal style="--delay: 110ms;">
+            <h3>Audit Logging</h3>
+            <p>Action traceability supports internal oversight, review readiness, and governance accountability.</p>
+          </article>
+          <article class="security-card" data-reveal style="--delay: 180ms;">
+            <h3>Operational Governance</h3>
+            <p>Policy-aligned controls help institutions maintain disciplined and consistent operating standards.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>FAQ</h2>
+          <p>High-level answers for institutions evaluating RepoReserve.</p>
+        </div>
+        <div class="faq-list">
+          <details data-reveal style="--delay: 30ms;">
+            <summary>What is RepoReserve?</summary>
+            <p>
+              RepoReserve is an institutional platform category focused on treasury collateral visibility and repo
+              operations coordination across participating organizations.
+            </p>
+          </details>
+          <details data-reveal style="--delay: 75ms;">
+            <summary>Who is it designed for?</summary>
+            <p>
+              It is designed for institutional market participants such as treasury teams, funds, custodial entities,
+              and clearing-aligned participants.
+            </p>
+          </details>
+          <details data-reveal style="--delay: 120ms;">
+            <summary>How can institutions request access?</summary>
+            <p>
+              Institutions can request an onboarding conversation through the institutional briefing channel to evaluate
+              alignment, use case fit, and participation requirements.
+            </p>
+          </details>
+          <details data-reveal style="--delay: 165ms;">
+            <summary>Does RepoReserve replace existing market infrastructure?</summary>
+            <p>
+              No. RepoReserve is positioned as a complementary operational coordination layer that supports existing
+              infrastructure and institutional processes.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta-wrap" data-reveal>
+          <h2>Explore RepoReserve</h2>
+          <p>Connect with our institutional team to receive a briefing and overview materials.</p>
+          <a href="mailto:contact@reporeserve.example" class="btn btn-primary">Request Institutional Briefing</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container footer-grid" data-reveal>
-      <div>
       <div class="footer-column footer-brand">
         <div class="footer-title">RepoReserve</div>
-        <div>Institutional Treasury Infrastructure</div>
         <div class="footer-subtitle">Treasury Infrastructure Platform</div>
         <div>RepoReserve Technologies Pvt Ltd</div>
         <div>Hyderabad, India</div>
       </div>
-      <div>
-        <div>Contact</div>
-        <a href="mailto:contact@reporeserve.example">contact@reporeserve.example</a>
       <div class="footer-column">
         <div class="footer-heading">Product</div>
         <ul class="footer-list">
@@ -159,3 +1067,61 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    const menuBtn = document.querySelector(".menu-btn");
+    const nav = document.querySelector(".nav-links");
+    const revealTargets = document.querySelectorAll("[data-reveal]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (menuBtn && nav) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) {
+          return;
+        }
+        if (!nav.contains(target) && !menuBtn.contains(target)) {
+          nav.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    if (prefersReducedMotion) {
+      revealTargets.forEach((el) => el.classList.add("visible"));
+    } else if ("IntersectionObserver" in window) {
+      document.body.classList.add("motion-ok");
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.16,
+          rootMargin: "0px 0px -8% 0px"
+        }
+      );
+
+      revealTargets.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealTargets.forEach((el) => el.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
