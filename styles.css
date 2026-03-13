@@ -144,6 +144,10 @@ html {
       outline: none;
     }
 
+    .nav-links a[aria-current="page"]:not(.nav-cta) {
+      color: var(--text);
+    }
+
     .nav-links a:not(.nav-cta) {
       position: relative;
     }
@@ -161,6 +165,10 @@ html {
 
     .nav-links a:not(.nav-cta):hover::after,
     .nav-links a:not(.nav-cta):focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-links a[aria-current="page"]:not(.nav-cta)::after {
       width: 100%;
     }
 
@@ -2422,6 +2430,64 @@ html {
       color: #edf3ff;
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 24px;
+      z-index: 44;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(101, 132, 199, 0.68);
+      border-radius: 999px;
+      padding: 0.56rem 0.84rem;
+      background: rgba(9, 18, 35, 0.92);
+      color: #dbe8ff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 28px rgba(2, 7, 16, 0.42);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition:
+        opacity 0.22s ease,
+        transform 0.22s var(--ease-premium),
+        border-color 0.22s ease,
+        background-color 0.22s ease,
+        color 0.22s ease;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      border-color: rgba(130, 164, 236, 0.94);
+      background: rgba(12, 24, 46, 0.97);
+      color: #eff5ff;
+      outline: none;
+    }
+
+    .back-to-top-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(116, 151, 223, 0.72);
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.78rem;
+      line-height: 1;
+      flex-shrink: 0;
+      color: #cfe0ff;
+      background: rgba(47, 107, 255, 0.16);
+    }
+
     .cookie-banner {
       border-top-color: rgba(90, 122, 194, 0.62);
       background: linear-gradient(180deg, rgba(7, 14, 27, 0.99), rgba(8, 15, 30, 0.995));
@@ -2798,6 +2864,16 @@ html {
 
       .demo-assurance {
         width: 100%;
+      }
+
+      .back-to-top {
+        right: 14px;
+        bottom: 16px;
+        padding: 0.5rem 0.64rem;
+      }
+
+      .back-to-top-text {
+        display: none;
       }
     }
 
