@@ -108,7 +108,10 @@ html {
     body.perf-lite .card,
     body.perf-lite .security-card,
     body.perf-lite .participant,
-    body.perf-lite .section-page-link {
+    body.perf-lite .section-page-link,
+    body.perf-lite .treps-input-panel,
+    body.perf-lite .treps-output-panel,
+    body.perf-lite .treps-result-card {
       box-shadow: none;
     }
 
@@ -825,6 +828,367 @@ html {
       margin: 0;
       color: #b8c6df;
       font-size: 0.95rem;
+    }
+
+    #treps-calculator {
+      padding-top: 66px;
+      padding-bottom: 66px;
+    }
+
+    #treps-calculator .section-header {
+      margin-bottom: 20px;
+      max-width: 1120px;
+    }
+
+    #treps-calculator .section-header h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      line-height: 1.2;
+    }
+
+    #treps-calculator .section-header p {
+      max-width: none;
+      margin: 0;
+      color: #b8cbe8;
+      font-size: 1.02rem;
+      line-height: 1.56;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1200px) {
+      #treps-calculator .section-header p {
+        white-space: normal;
+      }
+    }
+
+    /* Landing page text normalization: keep small body copy consistent */
+    .home-page {
+      --home-copy-size: 0.95rem;
+      --home-copy-line: 1.55;
+      --home-meta-size: 0.9rem;
+    }
+
+    .home-page .hero-subtext,
+    .home-page .hero-panel p,
+    .home-page .hero-list li,
+    .home-page .section-header p,
+    .home-page .card p,
+    .home-page .section-page-text,
+    .home-page .participant,
+    .home-page .security-card p,
+    .home-page .engagement-intro p,
+    .home-page .engagement-item p,
+    .home-page .leader-card p,
+    .home-page .leadership-note p,
+    .home-page .faq-intro-card p,
+    .home-page .faq-list details p,
+    .home-page .privacy-card p,
+    .home-page .treps-meaning-copy p,
+    .home-page .treps-disclaimer,
+    .home-page .treps-adjusted,
+    .home-page .cta-wrap p {
+      font-size: var(--home-copy-size);
+      line-height: var(--home-copy-line);
+    }
+
+    .home-page .treps-result-label,
+    .home-page .section-page-label,
+    .home-page .treps-chart-y-label,
+    .home-page .treps-chart-x-label,
+    .home-page .treps-chart-ticks {
+      font-size: var(--home-meta-size);
+    }
+
+    .treps-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .treps-left-column {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+      align-content: start;
+      min-height: 100%;
+    }
+
+    .treps-input-panel,
+    .treps-output-panel {
+      border: 1px solid #2b3e66;
+      border-radius: calc(var(--radius) + 2px);
+      background: linear-gradient(180deg, rgba(16, 27, 50, 0.94), rgba(12, 22, 42, 0.86));
+      box-shadow: 0 10px 22px rgba(2, 7, 16, 0.28);
+      padding: 16px;
+    }
+
+    .treps-input-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .treps-field {
+      display: grid;
+      gap: 7px;
+      color: #c5d6ef;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .treps-input {
+      width: 100%;
+      border: 1px solid rgba(86, 120, 189, 0.62);
+      border-radius: 9px;
+      background: rgba(11, 20, 38, 0.88);
+      color: #e6edf7;
+      font-size: 0.96rem;
+      line-height: 1.2;
+      padding: 0.62rem 0.72rem;
+    }
+
+    .treps-input:focus {
+      border-color: rgba(128, 164, 238, 0.92);
+      outline: 2px solid rgba(47, 107, 255, 0.26);
+      outline-offset: 0;
+      background: rgba(12, 22, 42, 0.95);
+    }
+
+    .treps-scenarios {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid rgba(67, 95, 148, 0.72);
+      border-radius: 10px;
+      background: rgba(9, 17, 32, 0.8);
+      overflow: hidden;
+    }
+
+    .treps-scenario {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      background: rgba(9, 17, 32, 0.58);
+      color: #b9cae6;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.012em;
+      line-height: 1.15;
+      min-height: 37px;
+      padding: 0.5rem 0.4rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .treps-scenario:hover,
+    .treps-scenario:focus-visible {
+      border-color: rgba(100, 134, 202, 0.82);
+      color: #e7f0ff;
+      background: rgba(19, 33, 60, 0.72);
+      outline: none;
+    }
+
+    .treps-scenario.is-active {
+      color: #edf4ff;
+      border-color: rgba(118, 152, 222, 0.92);
+      background: rgba(39, 71, 136, 0.48);
+      box-shadow:
+        inset 0 1px 0 rgba(233, 241, 255, 0.15),
+        0 4px 10px rgba(9, 20, 42, 0.26);
+    }
+
+    .treps-adjusted {
+      margin: 10px 0 0;
+      color: #a4bfdf;
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .treps-output-panel {
+      display: grid;
+      gap: 11px;
+      align-content: start;
+    }
+
+    .treps-result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .treps-result-card {
+      border: 1px solid #2f456f;
+      border-radius: 11px;
+      background: rgba(12, 21, 38, 0.76);
+      padding: 12px 12px 11px;
+    }
+
+    .treps-result-label {
+      margin: 0;
+      color: #adbfdf;
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .treps-result-value {
+      margin: 6px 0 0;
+      color: #edf4ff;
+      font-size: clamp(1.06rem, 2vw, 1.38rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .treps-chart-wrap {
+      margin-top: 0;
+      border: 1px solid #2f446f;
+      border-radius: 11px;
+      background: linear-gradient(180deg, rgba(11, 20, 37, 0.82), rgba(9, 17, 32, 0.76));
+      padding: 10px 10px 8px;
+    }
+
+    .treps-chart-y-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #9bb3da;
+      font-size: 0.73rem;
+      margin-bottom: 3px;
+      letter-spacing: 0.01em;
+    }
+
+    .treps-chart-y-label span:first-child {
+      color: #d9e6ff;
+      font-weight: 600;
+      font-size: 0.76rem;
+    }
+
+    .treps-chart {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .treps-axis-line {
+      stroke: rgba(119, 148, 210, 0.34);
+      stroke-width: 1.2;
+      shape-rendering: geometricPrecision;
+    }
+
+    .treps-chart-area {
+      fill: rgba(47, 107, 255, 0.14);
+    }
+
+    .treps-chart-line {
+      fill: none;
+      stroke: #78a7ff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .treps-chart-point {
+      fill: #8bb3ff;
+      opacity: 0.9;
+    }
+
+    .treps-current-guide {
+      stroke: rgba(134, 167, 237, 0.5);
+      stroke-width: 1.2;
+      stroke-dasharray: 4 5;
+    }
+
+    .treps-current-point {
+      fill: #d2e4ff;
+      stroke: #2f6bff;
+      stroke-width: 2;
+    }
+
+    .treps-chart-ticks {
+      margin-top: 2px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0;
+      color: #8ca8d5;
+      font-size: 0.71rem;
+      letter-spacing: 0.01em;
+    }
+
+    .treps-chart-ticks span {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .treps-chart-x-label {
+      margin: 5px 0 0;
+      color: #9fb7df;
+      font-size: 0.75rem;
+      text-align: right;
+    }
+
+    .treps-meaning-panel {
+      border: 1px solid rgba(64, 93, 146, 0.72);
+      border-radius: 11px;
+      background: linear-gradient(180deg, rgba(14, 24, 45, 0.9), rgba(11, 19, 36, 0.82));
+      padding: 13px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      height: 100%;
+    }
+
+    .treps-meaning-panel h3 {
+      margin: 0;
+      font-size: 0.94rem;
+      line-height: 1.25;
+      color: #e5efff;
+      letter-spacing: 0.01em;
+    }
+
+    .treps-meaning-copy {
+      display: grid;
+      gap: 7px;
+    }
+
+    .treps-meaning-copy p {
+      margin: 0;
+      color: #b8cae7;
+      font-size: 0.83rem;
+      line-height: 1.46;
+    }
+
+    .treps-insight-rows {
+      display: grid;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .treps-insight-row {
+      border: 1px solid rgba(73, 104, 162, 0.72);
+      border-radius: 9px;
+      background: rgba(11, 20, 38, 0.58);
+      padding: 8px 10px;
+      color: #c2d3ee;
+      font-size: 0.79rem;
+      line-height: 1.42;
+    }
+
+    .treps-disclaimer {
+      margin: 2px 0 0;
+      color: #97afd5;
+      font-size: 0.79rem;
+      line-height: 1.42;
+    }
+
+    .treps-cta {
+      margin-top: 2px;
+      align-self: start;
     }
 
     #solutions-diagram {
@@ -1630,6 +1994,17 @@ html {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: 20px;
       align-items: start;
+    }
+
+    /* Keep engagement subtitle in exactly two lines on desktop */
+    #engagement .section-header p {
+      max-width: 26ch;
+    }
+
+    @media (max-width: 980px) {
+      #engagement .section-header p {
+        max-width: none;
+      }
     }
 
     .engagement-panel {
@@ -3479,8 +3854,18 @@ html {
     @media (max-width: 980px) {
       .hero-grid,
       .cards,
-      .security-grid {
+      .security-grid,
+      .treps-shell {
         grid-template-columns: 1fr;
+      }
+
+      .treps-input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #treps-calculator .section-header h2,
+      #treps-calculator .section-header p {
+        max-width: none;
       }
 
       .solutions-diagram-grid {
@@ -3746,6 +4131,31 @@ html {
 
       .hero-actions .btn {
         width: 100%;
+      }
+
+      .treps-input-grid,
+      .treps-result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .treps-scenarios {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      .treps-scenario {
+        width: 100%;
+        text-align: center;
+        font-size: 0.8rem;
+        min-height: 34px;
+      }
+
+      .treps-chart-wrap {
+        padding: 10px 10px 8px;
+      }
+
+      .treps-chart-ticks {
+        font-size: 0.7rem;
       }
 
       .cta-wrap {

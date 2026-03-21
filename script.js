@@ -1,4 +1,7 @@
-if (window.location.pathname.toLowerCase().endsWith("/index.html")) {
+﻿const productionHosts = new Set(["reporeserve.com", "www.reporeserve.com"]);
+const isProductionHost = productionHosts.has(window.location.hostname.toLowerCase());
+
+if (isProductionHost && window.location.pathname.toLowerCase().endsWith("/index.html")) {
   const cleanPath = window.location.pathname.replace(/index\.html$/i, "");
   const targetUrl = `${window.location.origin}${cleanPath}${window.location.search}${window.location.hash}`;
   window.location.replace(targetUrl || `${window.location.origin}/`);
@@ -209,6 +212,176 @@ if (!enableRichMotion) {
 } else {
   revealTargets.forEach((el) => el.classList.add("visible"));
   sectionAnimatedTargets.forEach((section) => section.classList.add("section-live"));
+}
+
+const trepsCalculator = document.querySelector("[data-treps-calculator]");
+if (trepsCalculator) {
+  const dailyVolumeInput = document.getElementById("treps-daily-volume");
+  const inefficiencyInput = document.getElementById("treps-inefficiency-bps");
+  const activeDaysInput = document.getElementById("treps-active-days");
+  const scenarioButtons = trepsCalculator.querySelectorAll(".treps-scenario");
+  const adjustedBpsLabel = document.getElementById("treps-adjusted-bps");
+  const annualImpactOutput = document.getElementById("treps-annual-impact");
+  const savingsOutput = document.getElementById("treps-savings");
+  const chartLine = document.getElementById("treps-chart-line");
+  const chartArea = document.getElementById("treps-chart-area");
+  const chartPoints = document.getElementById("treps-chart-points");
+  const currentGuide = document.getElementById("treps-current-guide");
+  const currentPoint = document.getElementById("treps-current-point");
+  const bpsTicks = document.getElementById("treps-bps-ticks");
+  const chartYMax = document.getElementById("treps-chart-y-max");
+
+  const defaults = {
+    dailyVolume: 500,
+    inefficiencyBps: 3,
+    activeDays: 250
+  };
+
+  const scenarioMultipliers = {
+    conservative: 0.5,
+    realistic: 1,
+    aggressive: 1.5
+  };
+
+  let activeScenario = "realistic";
+
+  const readNonNegative = (input, fallback, min = 0) => {
+    const rawValue = Number.parseFloat(input?.value || "");
+    if (!Number.isFinite(rawValue) || rawValue < min) {
+      return fallback;
+    }
+    return rawValue;
+  };
+
+  const formatCrCurrency = (value) => {
+    const absolute = Math.abs(value);
+    const digits = absolute >= 100 ? 1 : 2;
+    const formatted = Number(value).toLocaleString("en-IN", {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits
+    });
+    return `\u20B9 ${formatted} Cr`;
+  };
+
+  const formatBpsTick = (value) => {
+    const rounded = Math.round(value * 10) / 10;
+    return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+  };
+
+  const setScenarioState = (scenario) => {
+    activeScenario = scenarioMultipliers[scenario] ? scenario : "realistic";
+    scenarioButtons.forEach((button) => {
+      const isActive = button.getAttribute("data-scenario") === activeScenario;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  const updateTrepsOutputs = () => {
+    const dailyVolume = readNonNegative(dailyVolumeInput, defaults.dailyVolume);
+    const inefficiencyBps = readNonNegative(inefficiencyInput, defaults.inefficiencyBps);
+    const activeDays = readNonNegative(activeDaysInput, defaults.activeDays, 1);
+    const scenarioMultiplier = scenarioMultipliers[activeScenario] || scenarioMultipliers.realistic;
+    const adjustedBps = inefficiencyBps * scenarioMultiplier;
+
+    const annualImpact = dailyVolume * (adjustedBps / 10000) * activeDays;
+    const optimizedImpact = dailyVolume * (1 / 10000) * activeDays;
+    const potentialSavings = Math.max(annualImpact - optimizedImpact, 0);
+
+    if (adjustedBpsLabel) {
+      adjustedBpsLabel.textContent = `Scenario-adjusted inefficiency: ${adjustedBps.toFixed(2)} bps`;
+    }
+    if (annualImpactOutput) {
+      annualImpactOutput.textContent = formatCrCurrency(annualImpact);
+    }
+    if (savingsOutput) {
+      savingsOutput.textContent = formatCrCurrency(potentialSavings);
+    }
+
+    const maxBps = Math.max(6, Math.ceil(Math.max(adjustedBps, inefficiencyBps, 1) * 1.6));
+    const bpsSeries = Array.from({ length: 6 }, (_, index) => (maxBps / 5) * index);
+    const costSeries = bpsSeries.map((bps) => dailyVolume * (bps / 10000) * activeDays);
+    const maxCost = Math.max(...costSeries, annualImpact, 0.01);
+
+    const chartLeft = 54;
+    const chartRight = 540;
+    const chartTop = 18;
+    const chartBottom = 212;
+    const chartWidth = chartRight - chartLeft;
+    const chartHeight = chartBottom - chartTop;
+
+    const xFromBps = (bps) => chartLeft + (bps / maxBps) * chartWidth;
+    const yFromCost = (cost) => chartBottom - (cost / maxCost) * chartHeight;
+
+    const pointCoords = bpsSeries.map((bps, index) => ({
+      x: xFromBps(bps),
+      y: yFromCost(costSeries[index])
+    }));
+
+    const linePoints = pointCoords.map((point) => `${point.x.toFixed(2)},${point.y.toFixed(2)}`).join(" ");
+    const areaPoints = `${chartLeft},${chartBottom} ${linePoints} ${chartRight},${chartBottom}`;
+
+    if (chartLine) {
+      chartLine.setAttribute("points", linePoints);
+    }
+    if (chartArea) {
+      chartArea.setAttribute("points", areaPoints);
+    }
+    if (chartPoints) {
+      chartPoints.innerHTML = pointCoords
+        .map(
+          (point) =>
+            `<circle class="treps-chart-point" cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="3.2"></circle>`
+        )
+        .join("");
+    }
+
+    const currentX = xFromBps(Math.min(adjustedBps, maxBps));
+    const currentY = yFromCost(annualImpact);
+
+    if (currentGuide) {
+      currentGuide.setAttribute("x1", currentX.toFixed(2));
+      currentGuide.setAttribute("x2", currentX.toFixed(2));
+      currentGuide.setAttribute("y1", chartBottom.toFixed(2));
+      currentGuide.setAttribute("y2", currentY.toFixed(2));
+    }
+    if (currentPoint) {
+      currentPoint.setAttribute("cx", currentX.toFixed(2));
+      currentPoint.setAttribute("cy", currentY.toFixed(2));
+    }
+    if (bpsTicks) {
+      bpsTicks.innerHTML = bpsSeries.map((bps) => `<span>${formatBpsTick(bps)}</span>`).join("");
+    }
+    if (chartYMax) {
+      chartYMax.textContent = formatCrCurrency(maxCost);
+    }
+  };
+
+  if (dailyVolumeInput && inefficiencyInput && activeDaysInput) {
+    if (!dailyVolumeInput.value) dailyVolumeInput.value = String(defaults.dailyVolume);
+    if (!inefficiencyInput.value) inefficiencyInput.value = String(defaults.inefficiencyBps);
+    if (!activeDaysInput.value) activeDaysInput.value = String(defaults.activeDays);
+
+    scenarioButtons.forEach((button) => {
+      if (button.classList.contains("is-active")) {
+        activeScenario = button.getAttribute("data-scenario") || "realistic";
+      }
+
+      button.addEventListener("click", () => {
+        const selectedScenario = button.getAttribute("data-scenario") || "realistic";
+        setScenarioState(selectedScenario);
+        updateTrepsOutputs();
+      });
+    });
+
+    [dailyVolumeInput, inefficiencyInput, activeDaysInput].forEach((input) => {
+      input.addEventListener("input", updateTrepsOutputs);
+      input.addEventListener("blur", updateTrepsOutputs);
+    });
+
+    setScenarioState(activeScenario);
+    updateTrepsOutputs();
+  }
 }
 
 const getCookieDecision = () => {

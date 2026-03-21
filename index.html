@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +12,7 @@
   <meta name="author" content="RepoReserve" />
   <meta name="theme-color" content="#0B1426" />
   <link rel="canonical" href="https://reporeserve.com/" />
-  <link rel="manifest" href="/manifest.json" />
+  <link rel="manifest" href="manifest.json" />
   <meta property="og:site_name" content="RepoReserve" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
@@ -92,7 +92,7 @@
   <link rel="preload" href="styles.css" as="style" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="home-page">
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="#top" class="logo" aria-label="RepoReserve Home">
@@ -110,7 +110,7 @@
         <span aria-hidden="true">&#9776;</span>
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Main navigation">
-        <a href="/" aria-current="page">Home</a>
+        <a href="index.html" aria-current="page">Home</a>
         <a href="solutions.html">Solutions</a>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="participants.html">Participants</a>
@@ -205,6 +205,124 @@
             <span class="section-page-text">Review full capability coverage and institutional outcomes.</span>
             <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="treps-calculator" data-section-animate>
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Execution Cost Impact Calculator</h2>
+          <p>
+            Even small inefficiencies in secured funding execution can compound into meaningful annual cost impact.
+          </p>
+        </div>
+        <div class="treps-shell" data-reveal>
+          <div class="treps-left-column">
+            <article class="treps-input-panel" data-treps-calculator>
+              <div class="treps-input-grid">
+                <label class="treps-field" for="treps-daily-volume">
+                  <span>Daily Volume (&#8377; Cr)</span>
+                  <input
+                    id="treps-daily-volume"
+                    class="treps-input"
+                    type="number"
+                    min="0"
+                    step="1"
+                    value="500"
+                    inputmode="decimal"
+                  />
+                </label>
+                <label class="treps-field" for="treps-inefficiency-bps">
+                  <span>Inefficiency (bps)</span>
+                  <input
+                    id="treps-inefficiency-bps"
+                    class="treps-input"
+                    type="number"
+                    min="0"
+                    step="0.1"
+                    value="3"
+                    inputmode="decimal"
+                  />
+                </label>
+                <label class="treps-field" for="treps-active-days">
+                  <span>Active Days per Year</span>
+                  <input
+                    id="treps-active-days"
+                    class="treps-input"
+                    type="number"
+                    min="1"
+                    step="1"
+                    value="250"
+                    inputmode="numeric"
+                  />
+                </label>
+              </div>
+              <div class="treps-scenarios" role="group" aria-label="TREPS inefficiency scenarios">
+                <button type="button" class="treps-scenario" data-scenario="conservative" aria-pressed="false">
+                  Conservative
+                </button>
+                <button type="button" class="treps-scenario is-active" data-scenario="realistic" aria-pressed="true">
+                  Realistic
+                </button>
+                <button type="button" class="treps-scenario" data-scenario="aggressive" aria-pressed="false">
+                  Aggressive
+                </button>
+              </div>
+              <p class="treps-adjusted" id="treps-adjusted-bps">Scenario-adjusted inefficiency: 3.00 bps</p>
+            </article>
+
+            <aside class="treps-meaning-panel" aria-label="Interpretation of annual cost impact">
+              <h3>What this means</h3>
+              <div class="treps-meaning-copy">
+                <p>A small basis-point difference can create meaningful annual cost leakage at institutional scale.</p>
+                <p>The impact rises quickly as daily volume and execution inconsistency increase.</p>
+                <p>Better visibility and execution intelligence help reduce this recurring cost drag.</p>
+              </div>
+              <div class="treps-insight-rows" aria-label="Key institutional insights">
+                <div class="treps-insight-row">Small bps gaps can compound into material annual impact.</div>
+                <div class="treps-insight-row">Higher daily volume amplifies hidden cost leakage.</div>
+                <div class="treps-insight-row">Execution visibility supports stronger funding discipline.</div>
+              </div>
+            </aside>
+          </div>
+
+          <article class="treps-output-panel">
+            <div class="treps-result-grid">
+              <div class="treps-result-card">
+                <p class="treps-result-label">Estimated Annual Cost Impact</p>
+                <p class="treps-result-value" id="treps-annual-impact">&#8377; 0 Cr</p>
+              </div>
+              <div class="treps-result-card">
+                <p class="treps-result-label">Potential Savings vs 1 bps Baseline</p>
+                <p class="treps-result-value" id="treps-savings">&#8377; 0 Cr</p>
+              </div>
+            </div>
+
+            <div class="treps-chart-wrap" role="img" aria-label="Trend chart showing annual TREPS cost impact as inefficiency in basis points increases.">
+              <div class="treps-chart-y-label">
+                <span id="treps-chart-y-max">&#8377; 0 Cr</span>
+                <span>Annual cost impact</span>
+              </div>
+              <svg class="treps-chart" viewBox="0 0 560 220" aria-hidden="true" focusable="false">
+                <line class="treps-axis-line" x1="54" y1="18" x2="54" y2="212"></line>
+                <line class="treps-axis-line" x1="54" y1="212" x2="540" y2="212"></line>
+                <polygon id="treps-chart-area" class="treps-chart-area" points=""></polygon>
+                <polyline id="treps-chart-line" class="treps-chart-line" points=""></polyline>
+                <g id="treps-chart-points"></g>
+                <line id="treps-current-guide" class="treps-current-guide" x1="54" y1="212" x2="54" y2="212"></line>
+                <circle id="treps-current-point" class="treps-current-point" cx="54" cy="212" r="5"></circle>
+              </svg>
+              <div class="treps-chart-ticks" id="treps-bps-ticks"></div>
+              <p class="treps-chart-x-label">Inefficiency (bps)</p>
+            </div>
+
+            <p class="treps-disclaimer">
+              This is an indicative estimate for illustration only. Actual impact depends on execution consistency,
+              timing, and market conditions.
+            </p>
+            <a href="#contact" class="btn btn-primary treps-cta">See How RepoReserve Helps</a>
+          </article>
         </div>
       </div>
     </section>
