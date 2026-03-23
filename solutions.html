@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -390,7 +390,6 @@
         <div class="footer-heading">Contact</div>
         <ul class="footer-list">
           <li><a href="mailto:ceo@reporeserve.com">ceo@reporeserve.com</a></li>
-          <li><a href="tel:+917780143759">+91 7780143759</a></li>
           <li><span>Institutional response: within 2 business days</span></li>
         </ul>
       </div>
@@ -512,9 +511,171 @@
     <span class="back-to-top-text">Back to Top</span>
   </button>
 
+  
+
+  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie Consent">
+    <div class="cookie-banner-content">
+      <p class="cookie-banner-text">
+        This website stores cookies on your computer. These cookies are used to improve website experience, support
+        core functionality, and provide secure institutional access. To find out more about the cookies we use, refer
+        to our policy links in the footer.
+      </p>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-secondary cookie-settings">Cookie Settings</button>
+        <button type="button" class="btn btn-secondary cookie-reject">Reject All</button>
+        <button type="button" class="btn btn-primary cookie-accept">Accept All Cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" aria-hidden="true">
+    <div class="cookie-modal-panel">
+      <button type="button" class="cookie-modal-close" aria-label="Close Cookie Settings">x</button>
+      <h2 id="cookie-modal-title">RepoReserve Cookie Settings</h2>
+      <p class="cookie-modal-copy">
+        Manage how RepoReserve uses cookies. Necessary cookies remain enabled to ensure secure site functionality.
+        Optional categories can be customized below.
+      </p>
+
+      <article class="cookie-category">
+        <div class="cookie-category-head">
+          <h3>Necessary</h3>
+          <span class="cookie-status">Always Active</span>
+        </div>
+        <p>Required for secure access, navigation integrity, and basic website operations.</p>
+      </article>
+
+      <article class="cookie-category">
+        <div class="cookie-category-head">
+          <h3>Functional</h3>
+          <button
+            type="button"
+            class="cookie-switch"
+            data-cookie-key="functional"
+            role="switch"
+            aria-checked="true"
+            aria-label="Functional Cookies"
+          >
+            <span class="cookie-switch-track"><span class="cookie-switch-thumb"></span></span>
+          </button>
+        </div>
+        <p>Enables preference memory and user experience enhancements across sessions.</p>
+      </article>
+
+      <article class="cookie-category">
+        <div class="cookie-category-head">
+          <h3>Analytics</h3>
+          <button
+            type="button"
+            class="cookie-switch"
+            data-cookie-key="analytics"
+            role="switch"
+            aria-checked="true"
+            aria-label="Analytics Cookies"
+          >
+            <span class="cookie-switch-track"><span class="cookie-switch-thumb"></span></span>
+          </button>
+        </div>
+        <p>Helps RepoReserve understand aggregate usage patterns to improve platform communication.</p>
+      </article>
+
+      <div class="cookie-modal-actions">
+        <button type="button" class="btn btn-secondary cookie-modal-reject">Reject All</button>
+        <button type="button" class="btn btn-secondary cookie-modal-save">Save My Preferences</button>
+        <button type="button" class="btn btn-primary cookie-modal-accept">Accept All Cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" aria-hidden="true">
+    <div class="demo-modal-panel">
+      <button type="button" class="demo-modal-close" aria-label="Close Request a Demo form">x</button>
+      <h2 id="demo-modal-title">Request a Demo</h2>
+      <form class="demo-form" novalidate>
+        <div class="demo-field">
+          <label for="business-email">Business Email<span>*</span></label>
+          <input id="business-email" name="business_email" type="email" required />
+        </div>
+
+        <div class="demo-grid-two">
+          <div class="demo-field">
+            <label for="first-name">First Name<span>*</span></label>
+            <input id="first-name" name="first_name" type="text" required />
+          </div>
+          <div class="demo-field">
+            <label for="last-name">Last Name<span>*</span></label>
+            <input id="last-name" name="last_name" type="text" required />
+          </div>
+        </div>
+
+        <div class="demo-grid-two">
+          <div class="demo-field">
+            <label for="company-name">Company Name<span>*</span></label>
+            <input id="company-name" name="company_name" type="text" required />
+          </div>
+          <div class="demo-field">
+            <label for="job-title">Job Title<span>*</span></label>
+            <input id="job-title" name="job_title" type="text" required />
+          </div>
+        </div>
+
+        <div class="demo-field">
+          <label>Service Region</label>
+          <input type="text" value="India" readonly />
+          <input type="hidden" name="service_region" value="India" />
+        </div>
+
+        <div class="demo-field">
+          <label for="phone-number">Phone Number (India)<span>*</span></label>
+          <input
+            id="phone-number"
+            name="phone_number"
+            type="tel"
+            required
+            pattern="[0-9]{10}"
+            inputmode="numeric"
+            placeholder="10-digit mobile number"
+          />
+        </div>
+
+        <div class="demo-field">
+          <label for="solution-interest">What is your solution interest?</label>
+          <select id="solution-interest" name="solution_interest">
+            <option value="">Select</option>
+            <option>Collateral visibility</option>
+            <option>Operational coordination</option>
+            <option>Risk and governance</option>
+            <option>Institutional briefing</option>
+          </select>
+        </div>
+
+        <div class="demo-assurance" aria-hidden="true">
+          <div class="demo-assurance-title">Institutional Request Handling</div>
+          <div class="demo-assurance-meta">All submissions are reviewed by our internal team.</div>
+        </div>
+
+        <p class="demo-privacy-text">
+          RepoReserve needs the contact information provided to communicate with you about products and services. For
+          information on privacy practices, review the policy links in the footer.
+        </p>
+
+        <div class="demo-actions">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <p class="demo-success" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <button type="button" class="back-to-top" aria-label="Back to Top" aria-hidden="true">
+    <span class="back-to-top-icon" aria-hidden="true">&#8593;</span>
+    <span class="back-to-top-text">Back to Top</span>
+  </button>
+
   <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
 
