@@ -3268,6 +3268,8 @@ html {
       width: min(760px, 96vw);
       max-height: min(90vh, 860px);
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
       border-radius: 12px;
       border: 1px solid #c5d2e7;
       background: #edf2fa;
@@ -3567,6 +3569,12 @@ html {
 
     .briefing-actions {
       margin-top: 2px;
+    }
+
+    .briefing-trigger {
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
     }
 
     :root {
@@ -4475,6 +4483,7 @@ html {
       .demo-modal-panel {
         width: 100%;
         padding: 14px;
+        max-height: calc(100dvh - 20px);
       }
 
       .demo-grid-two {
