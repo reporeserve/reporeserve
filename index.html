@@ -144,7 +144,7 @@
               for collateral visibility and repo coordination across institutional counterparties.
             </p>
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Request Institutional Briefing</a>
+              <a href="#" class="btn btn-primary briefing-trigger" data-open-briefing>Request Institutional Briefing</a>
               <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-secondary" download>Download Institutional Overview</a>
             </div>
           </div>
@@ -588,7 +588,7 @@
               Submit a confidential discussion request. A member of our team will respond within two business days
               to schedule an initial conversation.
             </p>
-            <a href="mailto:ceo@reporeserve.com" class="btn btn-secondary">Request Confidential Discussion</a>
+            <a href="#" class="btn btn-secondary briefing-trigger" data-open-briefing>Request Confidential Discussion</a>
           </article>
           <div class="faq-list">
             <details data-reveal style="--delay: 30ms;">
@@ -655,7 +655,7 @@
             Engage directly with our team to review operational fit, governance expectations, and onboarding pathways
             under mutual NDA.
           </p>
-          <a href="mailto:ceo@reporeserve.com" class="btn btn-primary">Request Institutional Briefing</a>
+          <a href="#" class="btn btn-primary briefing-trigger" data-open-briefing>Request Institutional Briefing</a>
         </div>
       </div>
     </section>
@@ -893,6 +893,128 @@
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <p class="demo-success" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="briefing-modal demo-modal" role="dialog" aria-modal="true" aria-labelledby="briefing-modal-title" aria-hidden="true">
+    <div class="demo-modal-panel briefing-modal-panel">
+      <button type="button" class="demo-modal-close briefing-modal-close" aria-label="Close Request Institutional Briefing form">x</button>
+      <h2 id="briefing-modal-title">Request Institutional Briefing</h2>
+      <div class="briefing-intro">
+        <p class="briefing-kicker">Institutional Intake</p>
+        <p class="briefing-copy">
+          Share a small amount of institutional context so we can prepare the right executive briefing and route your request appropriately.
+        </p>
+        <div class="briefing-chip-row" aria-hidden="true">
+          <span class="briefing-chip">Confidential review</span>
+          <span class="briefing-chip">Institution-only</span>
+          <span class="briefing-chip">Direct response</span>
+        </div>
+      </div>
+      <form class="demo-form briefing-form" novalidate>
+        <div class="briefing-grid">
+          <div class="demo-field briefing-field">
+            <label for="briefing-business-email">Institutional Email<span>*</span></label>
+            <input id="briefing-business-email" name="business_email" type="email" required />
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-contact-name">Primary Contact<span>*</span></label>
+            <input id="briefing-contact-name" name="contact_name" type="text" required />
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-institution-name">Institution Name<span>*</span></label>
+            <input id="briefing-institution-name" name="institution_name" type="text" required />
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-role-function">Role / Function<span>*</span></label>
+            <input id="briefing-role-function" name="role_function" type="text" required />
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-institution-type">Institution Type<span>*</span></label>
+            <select id="briefing-institution-type" name="institution_type" required>
+              <option value="">Select</option>
+              <option>Bank Treasury</option>
+              <option>Custodian</option>
+              <option>Mutual Fund / Asset Manager</option>
+              <option>NBFC</option>
+              <option>Clearing Participant</option>
+              <option>Other Institutional Participant</option>
+            </select>
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-phone-number">Phone Number (India)<span>*</span></label>
+            <input
+              id="briefing-phone-number"
+              name="phone_number"
+              type="tel"
+              required
+              pattern="[0-9]{10}"
+              inputmode="numeric"
+              placeholder="10-digit mobile number"
+            />
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-purpose">Briefing Purpose<span>*</span></label>
+            <select id="briefing-purpose" name="briefing_purpose" required>
+              <option value="">Select</option>
+              <option>Executive platform overview</option>
+              <option>Collateral visibility evaluation</option>
+              <option>Repo coordination discussion</option>
+              <option>Risk and governance review</option>
+              <option>Institutional fit assessment</option>
+            </select>
+          </div>
+
+          <div class="demo-field briefing-field">
+            <label for="briefing-timeline">Expected Timeline</label>
+            <select id="briefing-timeline" name="briefing_timeline">
+              <option value="">Select</option>
+              <option>Immediate</option>
+              <option>Within 30 days</option>
+              <option>Within this quarter</option>
+              <option>Exploratory</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="demo-field briefing-field briefing-field-wide">
+          <label for="briefing-notes">Briefing Context</label>
+          <textarea
+            id="briefing-notes"
+            name="briefing_notes"
+            rows="4"
+            placeholder="Share the institutional context, evaluation objective, or discussion priorities."
+          ></textarea>
+        </div>
+
+        <div class="demo-field briefing-field">
+          <label>Service Region</label>
+          <input type="text" value="India" readonly />
+          <input type="hidden" name="service_region" value="India" />
+        </div>
+
+        <div class="briefing-assurance" aria-hidden="true">
+          <div class="briefing-assurance-title">Confidential Institutional Intake</div>
+          <div class="briefing-assurance-text">
+            Requests are reviewed for relevance, confidentiality alignment, and the appropriate briefing path.
+          </div>
+        </div>
+
+        <p class="demo-privacy-text briefing-privacy-text">
+          RepoReserve uses the information provided to coordinate confidential institutional briefings and respond to the submitted request.
+        </p>
+
+        <div class="demo-actions briefing-actions">
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+        </div>
+        <p class="demo-success briefing-success" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>

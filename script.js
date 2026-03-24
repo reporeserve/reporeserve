@@ -45,11 +45,12 @@ const ensureCookieFab = () => {
   cookieFab.className = "cookie-fab footer-cookie-settings";
   cookieFab.setAttribute("aria-label", "Cookie Settings");
   cookieFab.setAttribute("title", "Cookie Settings");
+  const cookieIconSources = ["images/cookie-icon.svg", "assets/cookie-icon.svg", "images/icon.svg"];
   cookieFab.innerHTML = `
     <span class="cookie-fab-shell" aria-hidden="true">
       <img
         class="cookie-fab-image"
-        src="assets/cookie-icon.svg"
+        src="${cookieIconSources[0]}"
         alt=""
         width="20"
         height="20"
@@ -61,12 +62,18 @@ const ensureCookieFab = () => {
 
   const cookieFabImage = cookieFab.querySelector(".cookie-fab-image");
   if (cookieFabImage instanceof HTMLImageElement) {
+    let currentSourceIndex = 0;
     cookieFabImage.addEventListener(
       "error",
       () => {
+        currentSourceIndex += 1;
+        if (currentSourceIndex < cookieIconSources.length) {
+          cookieFabImage.src = cookieIconSources[currentSourceIndex];
+          return;
+        }
         cookieFabImage.style.display = "none";
       },
-      { once: true }
+      false
     );
   }
 
@@ -93,13 +100,24 @@ const demoModal = document.querySelector(".demo-modal");
 const demoModalCloseBtn = document.querySelector(".demo-modal-close");
 const demoForm = document.querySelector(".demo-form");
 const demoSuccess = document.querySelector(".demo-success");
+const briefingTriggers = document.querySelectorAll("[data-open-briefing]");
+const briefingModal = document.querySelector(".briefing-modal");
+const briefingModalCloseBtn = document.querySelector(".briefing-modal-close");
+const briefingForm = document.querySelector(".briefing-form");
+const briefingSuccess = document.querySelector(".briefing-success");
 const demoRecipientEmail = "ceo@reporeserve.com";
 const demoSubmitEndpoint = `https://formsubmit.co/ajax/${demoRecipientEmail}`;
 const demoSubmitButton = demoForm ? demoForm.querySelector('button[type="submit"]') : null;
+const briefingSubmitButton = briefingForm ? briefingForm.querySelector('button[type="submit"]') : null;
 const recaptchaSiteKey = "6Ld5CYosAAAAAIFjOFyUUrQ7ysDR3h7i9A9ywjH4";
 let demoRecaptchaWidgetId = null;
 let demoRecaptchaContainer = null;
 let demoSubmissionInFlight = false;
+let briefingRecaptchaWidgetId = null;
+let briefingRecaptchaContainer = null;
+let briefingSubmissionInFlight = false;
+let recaptchaScriptRequested = false;
+const recaptchaReadyCallbacks = [];
 
 const cookieDecisionKey = "reporeserve_cookie_consent_v1";
 const cookiePreferenceKey = "reporeserve_cookie_preferences_v1";
@@ -521,6 +539,9 @@ const openDemoModal = () => {
   if (!demoModal) {
     return;
   }
+  if (briefingModal && briefingModal.classList.contains("show")) {
+    closeBriefingModal();
+  }
   demoModal.classList.add("show");
   demoModal.setAttribute("aria-hidden", "false");
   syncModalLock();
@@ -532,6 +553,27 @@ const closeDemoModal = () => {
   }
   demoModal.classList.remove("show");
   demoModal.setAttribute("aria-hidden", "true");
+  syncModalLock();
+};
+
+const openBriefingModal = () => {
+  if (!briefingModal) {
+    return;
+  }
+  if (demoModal && demoModal.classList.contains("show")) {
+    closeDemoModal();
+  }
+  briefingModal.classList.add("show");
+  briefingModal.setAttribute("aria-hidden", "false");
+  syncModalLock();
+};
+
+const closeBriefingModal = () => {
+  if (!briefingModal) {
+    return;
+  }
+  briefingModal.classList.remove("show");
+  briefingModal.setAttribute("aria-hidden", "true");
   syncModalLock();
 };
 
@@ -552,6 +594,25 @@ const setDemoSubmitState = (isSubmitting) => {
   demoSubmitButton.disabled = isSubmitting;
   demoSubmitButton.setAttribute("aria-busy", String(isSubmitting));
   demoSubmitButton.textContent = isSubmitting ? "Submitting..." : "Submit";
+};
+
+const setBriefingStatus = (message, isError = false) => {
+  if (!briefingSuccess) {
+    return;
+  }
+  briefingSuccess.textContent = message;
+  briefingSuccess.classList.toggle("is-error", Boolean(isError));
+};
+
+const setBriefingSubmitState = (isSubmitting) => {
+  briefingSubmissionInFlight = isSubmitting;
+  if (!briefingSubmitButton) {
+    return;
+  }
+
+  briefingSubmitButton.disabled = isSubmitting;
+  briefingSubmitButton.setAttribute("aria-busy", String(isSubmitting));
+  briefingSubmitButton.textContent = isSubmitting ? "Submitting..." : "Submit Request";
 };
 
 const ensureDemoRecaptchaMarkup = () => {
@@ -595,6 +656,47 @@ const ensureDemoRecaptchaMarkup = () => {
   demoRecaptchaContainer = container;
 };
 
+const ensureBriefingRecaptchaMarkup = () => {
+  if (!briefingForm) {
+    return;
+  }
+
+  if (briefingRecaptchaContainer) {
+    return;
+  }
+
+  const existingContainer = briefingForm.querySelector(".demo-recaptcha");
+  if (existingContainer) {
+    briefingRecaptchaContainer = existingContainer;
+    return;
+  }
+
+  const wrap = document.createElement("div");
+  wrap.className = "demo-recaptcha-wrap";
+
+  const title = document.createElement("div");
+  title.className = "demo-recaptcha-title";
+  title.textContent = "Security Verification";
+
+  const container = document.createElement("div");
+  container.className = "demo-recaptcha";
+  container.setAttribute("data-recaptcha-widget", "true");
+
+  const note = document.createElement("p");
+  note.className = "demo-recaptcha-note";
+  note.textContent = "Complete this verification before submitting your briefing request.";
+
+  wrap.append(title, container, note);
+  const privacyText = briefingForm.querySelector(".demo-privacy-text");
+  if (privacyText) {
+    briefingForm.insertBefore(wrap, privacyText);
+  } else {
+    briefingForm.append(wrap);
+  }
+
+  briefingRecaptchaContainer = container;
+};
+
 const renderDemoRecaptchaWidget = () => {
   if (!demoRecaptchaContainer || !window.grecaptcha || demoRecaptchaWidgetId !== null) {
     return;
@@ -606,24 +708,43 @@ const renderDemoRecaptchaWidget = () => {
   });
 };
 
-const loadDemoRecaptchaScript = () => {
-  if (!demoForm) {
+const renderBriefingRecaptchaWidget = () => {
+  if (!briefingRecaptchaContainer || !window.grecaptcha || briefingRecaptchaWidgetId !== null) {
     return;
   }
 
-  ensureDemoRecaptchaMarkup();
+  briefingRecaptchaWidgetId = window.grecaptcha.render(briefingRecaptchaContainer, {
+    sitekey: recaptchaSiteKey,
+    theme: "dark"
+  });
+};
+
+const ensureRecaptchaScript = (onReady) => {
+  if (typeof onReady !== "function") {
+    return;
+  }
 
   if (window.grecaptcha) {
-    renderDemoRecaptchaWidget();
+    onReady();
     return;
   }
 
-  if (document.querySelector('script[data-recaptcha-loader="reporeserve"]')) {
+  recaptchaReadyCallbacks.push(onReady);
+
+  if (recaptchaScriptRequested || document.querySelector('script[data-recaptcha-loader="reporeserve"]')) {
     return;
   }
+
+  recaptchaScriptRequested = true;
 
   window.reporeserveRecaptchaOnload = () => {
-    renderDemoRecaptchaWidget();
+    recaptchaScriptRequested = false;
+    while (recaptchaReadyCallbacks.length) {
+      const callback = recaptchaReadyCallbacks.shift();
+      if (typeof callback === "function") {
+        callback();
+      }
+    }
   };
 
   const script = document.createElement("script");
@@ -634,10 +755,29 @@ const loadDemoRecaptchaScript = () => {
   document.head.append(script);
 };
 
+const loadDemoRecaptchaScript = () => {
+  if (!demoForm) {
+    return;
+  }
+
+  ensureDemoRecaptchaMarkup();
+  ensureRecaptchaScript(renderDemoRecaptchaWidget);
+};
+
+const loadBriefingRecaptchaScript = () => {
+  if (!briefingForm) {
+    return;
+  }
+
+  ensureBriefingRecaptchaMarkup();
+  ensureRecaptchaScript(renderBriefingRecaptchaWidget);
+};
+
 function syncModalLock() {
   const hasOpenModal =
     (cookieModal && cookieModal.classList.contains("show")) ||
-    (demoModal && demoModal.classList.contains("show"));
+    (demoModal && demoModal.classList.contains("show")) ||
+    (briefingModal && briefingModal.classList.contains("show"));
 
   if (hasOpenModal) {
     document.body.classList.add("modal-open");
@@ -738,6 +878,17 @@ if (demoTriggers.length) {
   });
 }
 
+if (briefingTriggers.length) {
+  briefingTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openBriefingModal();
+      loadBriefingRecaptchaScript();
+      renderBriefingRecaptchaWidget();
+    });
+  });
+}
+
 if (cookieModalAcceptBtn) {
   cookieModalAcceptBtn.addEventListener("click", () => {
     applyCookieChoice("accepted", {
@@ -790,6 +941,20 @@ if (demoModal) {
   demoModal.addEventListener("click", (event) => {
     if (event.target === demoModal) {
       closeDemoModal();
+    }
+  });
+}
+
+if (briefingModalCloseBtn) {
+  briefingModalCloseBtn.addEventListener("click", () => {
+    closeBriefingModal();
+  });
+}
+
+if (briefingModal) {
+  briefingModal.addEventListener("click", (event) => {
+    if (event.target === briefingModal) {
+      closeBriefingModal();
     }
   });
 }
@@ -886,6 +1051,102 @@ if (demoForm) {
   });
 }
 
+if (briefingForm) {
+  briefingForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (briefingSubmissionInFlight) {
+      return;
+    }
+
+    if (!briefingForm.checkValidity()) {
+      briefingForm.reportValidity();
+      return;
+    }
+
+    if (!window.grecaptcha || briefingRecaptchaWidgetId === null) {
+      setBriefingStatus("Security verification is still loading. Please try again in a moment.", true);
+      return;
+    }
+
+    const recaptchaToken = window.grecaptcha.getResponse(briefingRecaptchaWidgetId);
+    if (!recaptchaToken) {
+      setBriefingStatus("Please complete the security verification before submitting.", true);
+      return;
+    }
+
+    const formData = new FormData(briefingForm);
+    const businessEmail = String(formData.get("business_email") || "").trim();
+    const contactName = String(formData.get("contact_name") || "").trim();
+    const institutionName = String(formData.get("institution_name") || "").trim();
+    const roleFunction = String(formData.get("role_function") || "").trim();
+    const institutionType = String(formData.get("institution_type") || "Not specified").trim();
+    const phoneNumber = String(formData.get("phone_number") || "").trim();
+    const serviceRegion = String(formData.get("service_region") || "India").trim();
+    const briefingPurpose = String(formData.get("briefing_purpose") || "Not specified").trim();
+    const briefingTimeline = String(formData.get("briefing_timeline") || "Not specified").trim();
+    const briefingNotes = String(formData.get("briefing_notes") || "").trim();
+    const subject = `RepoReserve Institutional Briefing Request - ${institutionName || contactName || "Institution"}`;
+    const submissionData = new FormData();
+
+    submissionData.append("_subject", subject);
+    submissionData.append("_replyto", businessEmail);
+    submissionData.append("_template", "table");
+    submissionData.append("Request Type", "Institutional Briefing");
+    submissionData.append("Business Email", businessEmail);
+    submissionData.append("Primary Contact", contactName);
+    submissionData.append("Institution Name", institutionName);
+    submissionData.append("Role / Function", roleFunction);
+    submissionData.append("Institution Type", institutionType);
+    submissionData.append("Phone Number", phoneNumber);
+    submissionData.append("Service Region", serviceRegion);
+    submissionData.append("Briefing Purpose", briefingPurpose);
+    submissionData.append("Expected Timeline", briefingTimeline);
+    submissionData.append("Briefing Context", briefingNotes || "Not provided");
+    submissionData.append("Source Page", window.location.href);
+
+    setBriefingSubmitState(true);
+    setBriefingStatus("Submitting your request...");
+
+    try {
+      const response = await fetch(demoSubmitEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: submissionData
+      });
+
+      const result = await response.json().catch(() => null);
+      const requestFailed =
+        !response.ok ||
+        (result && (result.success === false || result.success === "false"));
+
+      if (requestFailed) {
+        throw new Error("Automatic delivery failed.");
+      }
+
+      setBriefingStatus("Briefing request submitted successfully. The details will be sent to ceo@reporeserve.com.");
+
+      window.setTimeout(() => {
+        briefingForm.reset();
+        setBriefingStatus("");
+        if (window.grecaptcha && briefingRecaptchaWidgetId !== null) {
+          window.grecaptcha.reset(briefingRecaptchaWidgetId);
+        }
+        closeBriefingModal();
+      }, 1200);
+    } catch (error) {
+      setBriefingStatus(
+        "Automatic submission could not be completed. Please verify the form endpoint activation for ceo@reporeserve.com.",
+        true
+      );
+    } finally {
+      setBriefingSubmitState(false);
+    }
+  });
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") {
     return;
@@ -893,6 +1154,11 @@ document.addEventListener("keydown", (event) => {
 
   if (demoModal && demoModal.classList.contains("show")) {
     closeDemoModal();
+    return;
+  }
+
+  if (briefingModal && briefingModal.classList.contains("show")) {
+    closeBriefingModal();
     return;
   }
 
