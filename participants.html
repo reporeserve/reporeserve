@@ -10,7 +10,9 @@
   />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="RepoReserve" />
+  <meta name="theme-color" content="#0B1426" />
   <link rel="canonical" href="https://reporeserve.com/participants.html" />
+  <link rel="manifest" href="manifest.json" />
   <meta property="og:site_name" content="RepoReserve" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
@@ -86,6 +88,7 @@
           width="188"
           height="42"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
       </a>
@@ -355,6 +358,7 @@
               width="188"
               height="42"
               loading="lazy"
+              fetchpriority="low"
               decoding="async"
             />
           </a>
@@ -581,86 +585,6 @@
         <button type="button" class="btn btn-secondary cookie-modal-save">Save My Preferences</button>
         <button type="button" class="btn btn-primary cookie-modal-accept">Accept All Cookies</button>
       </div>
-    </div>
-  </div>
-
-  <div class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" aria-hidden="true">
-    <div class="demo-modal-panel">
-      <button type="button" class="demo-modal-close" aria-label="Close Request a Demo form">x</button>
-      <h2 id="demo-modal-title">Request a Demo</h2>
-      <form class="demo-form" novalidate>
-        <div class="demo-field">
-          <label for="business-email">Business Email<span>*</span></label>
-          <input id="business-email" name="business_email" type="email" required />
-        </div>
-
-        <div class="demo-grid-two">
-          <div class="demo-field">
-            <label for="first-name">First Name<span>*</span></label>
-            <input id="first-name" name="first_name" type="text" required />
-          </div>
-          <div class="demo-field">
-            <label for="last-name">Last Name<span>*</span></label>
-            <input id="last-name" name="last_name" type="text" required />
-          </div>
-        </div>
-
-        <div class="demo-grid-two">
-          <div class="demo-field">
-            <label for="company-name">Company Name<span>*</span></label>
-            <input id="company-name" name="company_name" type="text" required />
-          </div>
-          <div class="demo-field">
-            <label for="job-title">Job Title<span>*</span></label>
-            <input id="job-title" name="job_title" type="text" required />
-          </div>
-        </div>
-
-        <div class="demo-field">
-          <label>Service Region</label>
-          <input type="text" value="India" readonly />
-          <input type="hidden" name="service_region" value="India" />
-        </div>
-
-        <div class="demo-field">
-          <label for="phone-number">Phone Number (India)<span>*</span></label>
-          <input
-            id="phone-number"
-            name="phone_number"
-            type="tel"
-            required
-            pattern="[0-9]{10}"
-            inputmode="numeric"
-            placeholder="10-digit mobile number"
-          />
-        </div>
-
-        <div class="demo-field">
-          <label for="solution-interest">What is your solution interest?</label>
-          <select id="solution-interest" name="solution_interest">
-            <option value="">Select</option>
-            <option>Collateral visibility</option>
-            <option>Operational coordination</option>
-            <option>Risk and governance</option>
-            <option>Institutional briefing</option>
-          </select>
-        </div>
-
-        <div class="demo-assurance" aria-hidden="true">
-          <div class="demo-assurance-title">Institutional Request Handling</div>
-          <div class="demo-assurance-meta">All submissions are reviewed by our internal team.</div>
-        </div>
-
-        <p class="demo-privacy-text">
-          RepoReserve needs the contact information provided to communicate with you about products and services. For
-          information on privacy practices, review the policy links in the footer.
-        </p>
-
-        <div class="demo-actions">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <p class="demo-success" role="status" aria-live="polite"></p>
-      </form>
     </div>
   </div>
 

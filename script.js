@@ -30,6 +30,52 @@ const runWhenIdle = (callback, timeout = 1200) => {
   window.setTimeout(callback, timeout);
 };
 
+const ensureCookieFab = () => {
+  if (!document.body) {
+    return null;
+  }
+
+  const existingFab = document.querySelector(".cookie-fab");
+  if (existingFab) {
+    return existingFab;
+  }
+
+  const cookieFab = document.createElement("button");
+  cookieFab.type = "button";
+  cookieFab.className = "cookie-fab footer-cookie-settings";
+  cookieFab.setAttribute("aria-label", "Cookie Settings");
+  cookieFab.setAttribute("title", "Cookie Settings");
+  cookieFab.innerHTML = `
+    <span class="cookie-fab-shell" aria-hidden="true">
+      <img
+        class="cookie-fab-image"
+        src="assets/cookie-icon.svg"
+        alt=""
+        width="20"
+        height="20"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </span>
+  `;
+
+  const cookieFabImage = cookieFab.querySelector(".cookie-fab-image");
+  if (cookieFabImage instanceof HTMLImageElement) {
+    cookieFabImage.addEventListener(
+      "error",
+      () => {
+        cookieFabImage.style.display = "none";
+      },
+      { once: true }
+    );
+  }
+
+  document.body.append(cookieFab);
+  return cookieFab;
+};
+
+ensureCookieFab();
+
 const cookieBanner = document.querySelector(".cookie-banner");
 const cookieAcceptBtn = document.querySelector(".cookie-accept");
 const cookieRejectBtn = document.querySelector(".cookie-reject");
@@ -48,9 +94,12 @@ const demoModalCloseBtn = document.querySelector(".demo-modal-close");
 const demoForm = document.querySelector(".demo-form");
 const demoSuccess = document.querySelector(".demo-success");
 const demoRecipientEmail = "ceo@reporeserve.com";
+const demoSubmitEndpoint = `https://formsubmit.co/ajax/${demoRecipientEmail}`;
+const demoSubmitButton = demoForm ? demoForm.querySelector('button[type="submit"]') : null;
 const recaptchaSiteKey = "6Ld5CYosAAAAAIFjOFyUUrQ7ysDR3h7i9A9ywjH4";
 let demoRecaptchaWidgetId = null;
 let demoRecaptchaContainer = null;
+let demoSubmissionInFlight = false;
 
 const cookieDecisionKey = "reporeserve_cookie_consent_v1";
 const cookiePreferenceKey = "reporeserve_cookie_preferences_v1";
@@ -435,6 +484,7 @@ const showCookieBanner = () => {
   }
   cookieBanner.classList.add("show");
   cookieBanner.setAttribute("aria-hidden", "false");
+  document.body.classList.add("cookie-banner-visible");
 };
 
 const hideCookieBanner = () => {
@@ -443,6 +493,7 @@ const hideCookieBanner = () => {
   }
   cookieBanner.classList.remove("show");
   cookieBanner.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("cookie-banner-visible");
 };
 
 const openCookieModal = () => {
@@ -490,6 +541,17 @@ const setDemoStatus = (message, isError = false) => {
   }
   demoSuccess.textContent = message;
   demoSuccess.classList.toggle("is-error", Boolean(isError));
+};
+
+const setDemoSubmitState = (isSubmitting) => {
+  demoSubmissionInFlight = isSubmitting;
+  if (!demoSubmitButton) {
+    return;
+  }
+
+  demoSubmitButton.disabled = isSubmitting;
+  demoSubmitButton.setAttribute("aria-busy", String(isSubmitting));
+  demoSubmitButton.textContent = isSubmitting ? "Submitting..." : "Submit";
 };
 
 const ensureDemoRecaptchaMarkup = () => {
@@ -733,8 +795,12 @@ if (demoModal) {
 }
 
 if (demoForm) {
-  demoForm.addEventListener("submit", (event) => {
+  demoForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    if (demoSubmissionInFlight) {
+      return;
+    }
 
     if (!demoForm.checkValidity()) {
       demoForm.reportValidity();
@@ -761,37 +827,62 @@ if (demoForm) {
     const phoneNumber = String(formData.get("phone_number") || "").trim();
     const serviceRegion = String(formData.get("service_region") || "India").trim();
     const solutionInterest = String(formData.get("solution_interest") || "Not specified").trim();
+    const contactName = `${firstName} ${lastName}`.trim();
+    const subject = `RepoReserve Demo Request - ${companyName || contactName || "Institution"}`;
+    const submissionData = new FormData();
 
-    const subject = encodeURIComponent(
-      `RepoReserve Demo Request - ${companyName || `${firstName} ${lastName}`.trim() || "Institution"}`
-    );
-    const body = encodeURIComponent(
-      [
-        "New demo request submitted from reporeserve website.",
-        "",
-        `Business Email: ${businessEmail}`,
-        `First Name: ${firstName}`,
-        `Last Name: ${lastName}`,
-        `Company Name: ${companyName}`,
-        `Job Title: ${jobTitle}`,
-        `Phone Number: ${phoneNumber}`,
-        `Service Region: ${serviceRegion}`,
-        `Solution Interest: ${solutionInterest}`
-      ].join("\n")
-    );
+    submissionData.append("_subject", subject);
+    submissionData.append("_replyto", businessEmail);
+    submissionData.append("_template", "table");
+    submissionData.append("Business Email", businessEmail);
+    submissionData.append("First Name", firstName);
+    submissionData.append("Last Name", lastName);
+    submissionData.append("Company Name", companyName);
+    submissionData.append("Job Title", jobTitle);
+    submissionData.append("Phone Number", phoneNumber);
+    submissionData.append("Service Region", serviceRegion);
+    submissionData.append("Solution Interest", solutionInterest);
+    submissionData.append("Source Page", window.location.href);
 
-    setDemoStatus("Opening your email client with your request details...");
+    setDemoSubmitState(true);
+    setDemoStatus("Submitting your request...");
 
-    window.location.href = `mailto:${demoRecipientEmail}?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(demoSubmitEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: submissionData
+      });
 
-    window.setTimeout(() => {
-      demoForm.reset();
-      setDemoStatus("");
-      if (window.grecaptcha && demoRecaptchaWidgetId !== null) {
-        window.grecaptcha.reset(demoRecaptchaWidgetId);
+      const result = await response.json().catch(() => null);
+      const requestFailed =
+        !response.ok ||
+        (result && (result.success === false || result.success === "false"));
+
+      if (requestFailed) {
+        throw new Error("Automatic delivery failed.");
       }
-      closeDemoModal();
-    }, 900);
+
+      setDemoStatus("Request submitted successfully. The details will be sent to ceo@reporeserve.com.");
+
+      window.setTimeout(() => {
+        demoForm.reset();
+        setDemoStatus("");
+        if (window.grecaptcha && demoRecaptchaWidgetId !== null) {
+          window.grecaptcha.reset(demoRecaptchaWidgetId);
+        }
+        closeDemoModal();
+      }, 1200);
+    } catch (error) {
+      setDemoStatus(
+        "Automatic submission could not be completed. Please verify the form endpoint activation for ceo@reporeserve.com.",
+        true
+      );
+    } finally {
+      setDemoSubmitState(false);
+    }
   });
 }
 

@@ -103,6 +103,7 @@
           width="188"
           height="42"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
       </a>
@@ -123,41 +124,43 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content" data-reveal style="--delay: 40ms;">
-          <span class="eyebrow hero-eyebrow">
-            <span class="eyebrow-icon" aria-hidden="true">
-              <svg viewBox="0 0 10 10" focusable="false">
-                <rect x="1" y="1" width="3" height="3" rx="0.6"></rect>
-                <rect x="6" y="1" width="3" height="3" rx="0.6"></rect>
-                <rect x="1" y="6" width="3" height="3" rx="0.6"></rect>
-                <rect x="6" y="6" width="3" height="3" rx="0.6"></rect>
-              </svg>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content" data-reveal style="--delay: 40ms;">
+            <span class="eyebrow hero-eyebrow">
+              <span class="eyebrow-icon" aria-hidden="true">
+                <svg viewBox="0 0 10 10" focusable="false">
+                  <rect x="1" y="1" width="3" height="3" rx="0.6"></rect>
+                  <rect x="6" y="1" width="3" height="3" rx="0.6"></rect>
+                  <rect x="1" y="6" width="3" height="3" rx="0.6"></rect>
+                  <rect x="6" y="6" width="3" height="3" rx="0.6"></rect>
+                </svg>
+              </span>
+              Institutional Financial Infrastructure
             </span>
-            Institutional Financial Infrastructure
-          </span>
-          <h1 class="hero-title">Operational visibility for institutions participating in repo markets.</h1>
-          <p class="hero-subtext">
-            RepoReserve is a financial infrastructure platform that gives treasury teams a unified operational layer
-            for collateral visibility and repo coordination across institutional counterparties.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Request Institutional Briefing</a>
-            <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-secondary" download>Download Institutional Overview</a>
+            <h1 class="hero-title">Operational visibility for institutions participating in repo markets.</h1>
+            <p class="hero-subtext">
+              RepoReserve is a financial infrastructure platform that gives treasury teams a unified operational layer
+              for collateral visibility and repo coordination across institutional counterparties.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Request Institutional Briefing</a>
+              <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-secondary" download>Download Institutional Overview</a>
+            </div>
           </div>
+          <aside class="hero-panel" aria-label="Platform overview" data-reveal style="--delay: 150ms;">
+            <h3>Category Overview</h3>
+            <p>
+              RepoReserve is built for cross-institutional alignment, giving teams shared operational context while
+              preserving existing market relationships and controls.
+            </p>
+            <ul class="hero-list">
+              <li>Institution-focused visibility across counterparties</li>
+              <li>Coordination layer that supports existing operating models</li>
+              <li>Governance-oriented experience for treasury leadership</li>
+            </ul>
+          </aside>
         </div>
-        <aside class="hero-panel" aria-label="Platform overview" data-reveal style="--delay: 150ms;">
-          <h3>Category Overview</h3>
-          <p>
-            RepoReserve is built for cross-institutional alignment, giving teams shared operational context while
-            preserving existing market relationships and controls.
-          </p>
-          <ul class="hero-list">
-            <li>Institution-focused visibility across counterparties</li>
-            <li>Coordination layer that supports existing operating models</li>
-            <li>Governance-oriented experience for treasury leadership</li>
-          </ul>
-        </aside>
       </div>
     </section>
 
@@ -537,12 +540,12 @@
 	          <article class="leader-card" data-reveal style="--delay: 40ms;">
 	            <div class="leader-avatar" aria-hidden="true">RK</div>
 	            <div>
-	              <div class="leader-head" style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px;">
-	                <div>
-	                  <h3>Rakesh Kottha</h3>
-	                  <p class="leader-role">Founder</p>
-	                </div>
-	                <div class="leader-actions" style="display:flex; align-items:center; flex-shrink:0; margin-left:auto;">
+		              <div class="leader-head" style="position:relative; margin-bottom:10px; min-height:38px; padding-right:126px;">
+		                <div>
+		                  <h3>Rakesh Kottha</h3>
+		                  <p class="leader-role">Founder</p>
+		                </div>
+		                <div class="leader-actions" style="position:absolute; top:0; right:0; display:flex; align-items:center;">
 	                  <a
 	                    href="https://www.linkedin.com/in/rakesh-kottha"
 	                    class="btn btn-secondary leader-link"
@@ -671,6 +674,7 @@
               width="188"
               height="42"
               loading="lazy"
+              fetchpriority="low"
               decoding="async"
             />
           </a>
