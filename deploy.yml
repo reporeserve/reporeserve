@@ -32,10 +32,27 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Package GitHub Pages artifact
+        run: |
+          mkdir -p "$RUNNER_TEMP/pages-artifact"
+          tar \
+            --dereference \
+            --hard-dereference \
+            --directory . \
+            -cvf "$RUNNER_TEMP/pages-artifact/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+          gzip -f "$RUNNER_TEMP/pages-artifact/artifact.tar"
+
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
-          path: .
+          name: github-pages
+          path: ${{ runner.temp }}/pages-artifact/artifact.tar.gz
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         id: deployment
