@@ -4500,12 +4500,10 @@ html {
 
       .demo-recaptcha-wrap {
         width: 100%;
-        overflow: hidden;
+        overflow: visible;
       }
 
       .demo-recaptcha {
-        transform: scale(0.92);
-        transform-origin: left top;
         min-height: 72px;
       }
 

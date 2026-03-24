@@ -118,6 +118,8 @@ let briefingRecaptchaContainer = null;
 let briefingSubmissionInFlight = false;
 let recaptchaScriptRequested = false;
 const recaptchaReadyCallbacks = [];
+const recaptchaBaseWidth = 304;
+const recaptchaBaseHeight = 78;
 
 const cookieDecisionKey = "reporeserve_cookie_consent_v1";
 const cookiePreferenceKey = "reporeserve_cookie_preferences_v1";
@@ -697,6 +699,32 @@ const ensureBriefingRecaptchaMarkup = () => {
   briefingRecaptchaContainer = container;
 };
 
+const fitRecaptchaContainer = (container) => {
+  if (!(container instanceof HTMLElement)) {
+    return;
+  }
+
+  const wrapper = container.closest(".demo-recaptcha-wrap");
+  const widthSource =
+    (wrapper instanceof HTMLElement ? wrapper.clientWidth : 0) ||
+    container.clientWidth ||
+    recaptchaBaseWidth;
+
+  const usableWidth = Math.max(0, widthSource - 24);
+  const scale = Math.min(1, usableWidth / recaptchaBaseWidth);
+  const visualScale = scale < 1 ? scale : 1;
+
+  container.style.width = `${recaptchaBaseWidth}px`;
+  container.style.maxWidth = "none";
+  container.style.transformOrigin = "left top";
+  container.style.transform = scale < 1 ? `scale(${scale})` : "none";
+  container.style.minHeight = `${Math.ceil(recaptchaBaseHeight * visualScale)}px`;
+
+  if (wrapper instanceof HTMLElement) {
+    wrapper.style.minHeight = `${Math.ceil(recaptchaBaseHeight * visualScale) + 52}px`;
+  }
+};
+
 const renderDemoRecaptchaWidget = () => {
   if (!demoRecaptchaContainer || !window.grecaptcha || demoRecaptchaWidgetId !== null) {
     return;
@@ -705,6 +733,9 @@ const renderDemoRecaptchaWidget = () => {
   demoRecaptchaWidgetId = window.grecaptcha.render(demoRecaptchaContainer, {
     sitekey: recaptchaSiteKey,
     theme: "dark"
+  });
+  window.requestAnimationFrame(() => {
+    fitRecaptchaContainer(demoRecaptchaContainer);
   });
 };
 
@@ -716,6 +747,9 @@ const renderBriefingRecaptchaWidget = () => {
   briefingRecaptchaWidgetId = window.grecaptcha.render(briefingRecaptchaContainer, {
     sitekey: recaptchaSiteKey,
     theme: "dark"
+  });
+  window.requestAnimationFrame(() => {
+    fitRecaptchaContainer(briefingRecaptchaContainer);
   });
 };
 
@@ -888,6 +922,19 @@ if (briefingTriggers.length) {
     });
   });
 }
+
+window.addEventListener(
+  "resize",
+  () => {
+    if (demoRecaptchaContainer) {
+      fitRecaptchaContainer(demoRecaptchaContainer);
+    }
+    if (briefingRecaptchaContainer) {
+      fitRecaptchaContainer(briefingRecaptchaContainer);
+    }
+  },
+  { passive: true }
+);
 
 if (cookieModalAcceptBtn) {
   cookieModalAcceptBtn.addEventListener("click", () => {
