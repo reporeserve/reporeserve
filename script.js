@@ -283,7 +283,11 @@ if (!enableRichMotion) {
   sectionAnimatedTargets.forEach((section) => section.classList.add("section-live"));
 }
 
-const trepsCalculator = document.querySelector("[data-treps-calculator]");
+const trepsCalculatorSection = document.getElementById("treps-calculator");
+const trepsCalculator = trepsCalculatorSection?.hidden
+  ? null
+  : document.querySelector("[data-treps-calculator]");
+
 if (trepsCalculator) {
   const dailyVolumeInput = document.getElementById("treps-daily-volume");
   const inefficiencyInput = document.getElementById("treps-inefficiency-bps");
