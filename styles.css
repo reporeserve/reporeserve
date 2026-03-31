@@ -2926,9 +2926,8 @@ html {
     }
 
     .home-page .footer-subtitle-home {
-      display: grid;
-      gap: 6px;
-      max-width: 260px;
+      display: block;
+      max-width: 280px;
       margin: 14px 0 18px;
       color: inherit;
       letter-spacing: 0;
@@ -2939,21 +2938,13 @@ html {
       content: none;
     }
 
-    .home-page .footer-subtitle-home-label {
-      color: #7e9bc4;
-      font-size: 0.62rem;
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
     .home-page .footer-subtitle-home-text {
-      color: #d6e3f8;
-      font-size: 0.96rem;
-      font-weight: 560;
-      line-height: 1.32;
-      letter-spacing: -0.015em;
+      display: inline-block;
+      color: #d6e4f8;
+      font-size: 0.93rem;
+      font-weight: 540;
+      line-height: 1.36;
+      letter-spacing: -0.012em;
       text-wrap: balance;
     }
 
