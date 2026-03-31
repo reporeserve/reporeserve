@@ -2905,9 +2905,56 @@ html {
     }
 
     .footer-subtitle {
-      color: #c4d4ee;
-      margin-bottom: 12px;
-      font-weight: 500;
+      display: inline-block;
+      max-width: 250px;
+      margin: 14px 0 16px;
+      color: #d7e4f8;
+      font-size: 0.76rem;
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-subtitle::after {
+      content: "";
+      display: block;
+      width: 42px;
+      height: 1px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, rgba(118, 152, 219, 0.9), rgba(118, 152, 219, 0));
+    }
+
+    .home-page .footer-subtitle-home {
+      display: grid;
+      gap: 6px;
+      max-width: 260px;
+      margin: 14px 0 18px;
+      color: inherit;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .home-page .footer-subtitle-home::after {
+      content: none;
+    }
+
+    .home-page .footer-subtitle-home-label {
+      color: #7e9bc4;
+      font-size: 0.62rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .home-page .footer-subtitle-home-text {
+      color: #d6e3f8;
+      font-size: 0.96rem;
+      font-weight: 560;
+      line-height: 1.32;
+      letter-spacing: -0.015em;
+      text-wrap: balance;
     }
 
     .footer-company-id-home {
@@ -2919,18 +2966,19 @@ html {
 
     .footer-company-id-kicker {
       color: #819bc3;
-      font-size: 0.64rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
       line-height: 1.35;
       text-transform: uppercase;
+      opacity: 0.92;
     }
 
     .footer-company-id-primary {
       margin-top: 6px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       flex-wrap: wrap;
     }
 
@@ -2952,24 +3000,24 @@ html {
 
     .footer-company-id-code {
       color: #d9e6fb;
-      font-size: 0.92rem;
+      font-size: 0.91rem;
       font-weight: 500;
       line-height: 1.35;
-      letter-spacing: 0.012em;
+      letter-spacing: 0.01em;
       font-variant-numeric: tabular-nums;
       word-break: break-word;
     }
 
     .footer-company-id-secondary {
-      margin-top: 5px;
+      margin-top: 6px;
       display: flex;
       align-items: baseline;
       gap: 8px;
       flex-wrap: wrap;
-      color: #9db3d7;
-      font-size: 0.82rem;
-      line-height: 1.45;
-      letter-spacing: 0.01em;
+      color: #a8bcdd;
+      font-size: 0.81rem;
+      line-height: 1.4;
+      letter-spacing: 0.008em;
     }
 
     .footer-company-id-secondary-label {
