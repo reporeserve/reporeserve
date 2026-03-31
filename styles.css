@@ -6,6 +6,10 @@
       --muted: #a3b2cd;
       --line: #223253;
       --ring: rgba(47, 107, 255, 0.35);
+      --scrollbar-track: rgba(10, 19, 35, 0.96);
+      --scrollbar-thumb: linear-gradient(180deg, rgba(94, 132, 214, 0.92), rgba(55, 95, 182, 0.94));
+      --scrollbar-thumb-border: rgba(154, 183, 243, 0.18);
+      --scrollbar-thumb-hover: linear-gradient(180deg, rgba(116, 152, 229, 0.96), rgba(66, 109, 198, 0.98));
       --max-width: 1120px;
       --radius: 14px;
       --shadow: 0 20px 40px rgba(3, 8, 18, 0.35);
@@ -20,6 +24,55 @@
 
 html {
       scroll-behavior: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(88, 124, 204, 0.92) rgba(10, 19, 35, 0.96);
+      scrollbar-gutter: stable;
+    }
+
+    body,
+    .cookie-modal-panel,
+    .demo-modal-panel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(88, 124, 204, 0.92) rgba(10, 19, 35, 0.96);
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    .cookie-modal-panel::-webkit-scrollbar,
+    .demo-modal-panel::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    html::-webkit-scrollbar-track,
+    body::-webkit-scrollbar-track,
+    .cookie-modal-panel::-webkit-scrollbar-track,
+    .demo-modal-panel::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+
+    html::-webkit-scrollbar-thumb,
+    body::-webkit-scrollbar-thumb,
+    .cookie-modal-panel::-webkit-scrollbar-thumb,
+    .demo-modal-panel::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 999px;
+      border: 2px solid rgba(10, 19, 35, 0.96);
+      box-shadow: inset 0 0 0 1px var(--scrollbar-thumb-border);
+    }
+
+    html::-webkit-scrollbar-thumb:hover,
+    body::-webkit-scrollbar-thumb:hover,
+    .cookie-modal-panel::-webkit-scrollbar-thumb:hover,
+    .demo-modal-panel::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb-hover);
+    }
+
+    html::-webkit-scrollbar-corner,
+    body::-webkit-scrollbar-corner,
+    .cookie-modal-panel::-webkit-scrollbar-corner,
+    .demo-modal-panel::-webkit-scrollbar-corner {
+      background: var(--scrollbar-track);
     }
 
     body {
@@ -2857,6 +2910,81 @@ html {
       font-weight: 500;
     }
 
+    .footer-company-id-home {
+      margin-top: 14px;
+      padding: 2px 0 2px 14px;
+      border-left: 1.5px solid rgba(96, 129, 188, 0.72);
+      max-width: 432px;
+    }
+
+    .footer-company-id-kicker {
+      color: #819bc3;
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .footer-company-id-primary {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-company-id-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.14rem 0.38rem;
+      border: 1px solid rgba(88, 116, 171, 0.54);
+      border-radius: 999px;
+      background: rgba(17, 30, 55, 0.28);
+      color: #90abd2;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .footer-company-id-code {
+      color: #d9e6fb;
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.012em;
+      font-variant-numeric: tabular-nums;
+      word-break: break-word;
+    }
+
+    .footer-company-id-secondary {
+      margin-top: 5px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: #9db3d7;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+
+    .footer-company-id-secondary-label {
+      color: #7f9bc4;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .footer-company-id-secondary-value {
+      color: #aabfe0;
+    }
+
     .footer-heading {
       color: #d8e5fa;
       font-weight: 600;
@@ -4222,6 +4350,19 @@ html {
       .footer-disclosures {
         grid-template-columns: 1fr;
         gap: 10px;
+      }
+
+      .footer-company-id-home {
+        margin-top: 10px;
+        padding-left: 12px;
+      }
+
+      .footer-company-id-primary {
+        gap: 6px;
+      }
+
+      .footer-company-id-secondary {
+        gap: 6px;
       }
 
       .hero {

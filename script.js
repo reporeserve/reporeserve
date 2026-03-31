@@ -16,6 +16,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const enableRichMotion = !prefersReducedMotion && !isMobileViewport;
 const revealTargets = enableRichMotion ? document.querySelectorAll("[data-reveal]") : [];
 const sectionAnimatedTargets = enableRichMotion ? document.querySelectorAll("[data-section-animate]") : [];
+let activeScrollAnimationFrame = null;
 
 if (isMobileViewport) {
   document.body.classList.add("perf-lite");
@@ -28,6 +29,65 @@ const runWhenIdle = (callback, timeout = 1200) => {
   }
 
   window.setTimeout(callback, timeout);
+};
+
+const cancelSmoothScroll = () => {
+  if (activeScrollAnimationFrame !== null) {
+    window.cancelAnimationFrame(activeScrollAnimationFrame);
+    activeScrollAnimationFrame = null;
+  }
+};
+
+const easePremiumScroll = (progress) => {
+  if (progress < 0.5) {
+    return 4 * progress * progress * progress;
+  }
+
+  return 1 - Math.pow(-2 * progress + 2, 3) / 2;
+};
+
+const smoothScrollToPosition = (top, options = {}) => {
+  const targetTop = Math.max(0, Math.round(top));
+  const shouldAnimate = !prefersReducedMotion && !options.instant;
+  const startTop = window.scrollY;
+  const distance = targetTop - startTop;
+
+  if (!shouldAnimate || Math.abs(distance) < 8) {
+    cancelSmoothScroll();
+    window.scrollTo({
+      top: targetTop,
+      behavior: "auto"
+    });
+    return;
+  }
+
+  cancelSmoothScroll();
+
+  const duration = Math.min(920, Math.max(520, Math.abs(distance) * 0.48));
+  let startTime = null;
+
+  const step = (timestamp) => {
+    if (startTime === null) {
+      startTime = timestamp;
+    }
+
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easePremiumScroll(progress);
+    window.scrollTo({
+      top: startTop + distance * easedProgress,
+      behavior: "auto"
+    });
+
+    if (progress < 1) {
+      activeScrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    activeScrollAnimationFrame = null;
+  };
+
+  activeScrollAnimationFrame = window.requestAnimationFrame(step);
 };
 
 const ensureCookieFab = () => {
@@ -154,7 +214,7 @@ if (menuBtn && nav) {
   });
 }
 
-const scrollToHashWithOffset = (hash, updateUrl = false) => {
+const scrollToHashWithOffset = (hash, updateUrl = false, options = {}) => {
   const target = document.querySelector(hash);
   if (!target) {
     return;
@@ -164,10 +224,7 @@ const scrollToHashWithOffset = (hash, updateUrl = false) => {
   const headerHeight = header ? header.offsetHeight : 0;
   const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
 
-  window.scrollTo({
-    top: Math.max(0, top),
-    behavior: "auto"
-  });
+  smoothScrollToPosition(top, options);
 
   if (updateUrl) {
     history.pushState(null, "", hash);
@@ -194,7 +251,7 @@ if (inPageLinks.length) {
 
 if (window.location.hash) {
   window.setTimeout(() => {
-    scrollToHashWithOffset(window.location.hash, false);
+    scrollToHashWithOffset(window.location.hash, false, { instant: true });
   }, 10);
 }
 
@@ -231,10 +288,7 @@ if (backToTopBtn) {
       }, 460);
     }
 
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? "auto" : "smooth"
-    });
+    smoothScrollToPosition(0);
   });
 }
 
