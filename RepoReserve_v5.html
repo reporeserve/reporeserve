@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RepoReserve v5 — Treasury Orchestration Platform</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0174FC;--bl:#3B9AFF;--bg0:#0B0F17;--bg1:#0F1420;--bgc:#111827;--bgp:#1F2937;--bgh:#1a2332;--bge:#172033;--bdr:#1E293B;--bdrl:#334155;--t1:#E5E7EB;--t2:#9CA3AF;--th:#F9FAFB;--tw:#FFF;--ok:#22C55E;--wn:#F59E0B;--er:#EF4444;--inf:#38BDF8;--mu:#6B7280;--r:10px;--sh:0 1px 3px rgba(0,0,0,.3);--she:0 10px 30px rgba(0,0,0,.4)}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg0);color:var(--t1);font-size:14px;-webkit-font-smoothing:antialiased;font-feature-settings:'tnum' on,'lnum' on}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+input,select,textarea{font-family:'Inter',sans-serif;background:var(--bgp);border:1px solid var(--bdr);border-radius:6px;padding:9px 12px;color:var(--t1);font-size:13px;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(1,116,252,.12)}
+button{font-family:'Inter',sans-serif;cursor:pointer;transition:all .2s}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:11px 14px;color:var(--t2);font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid var(--bdr);background:var(--bgc);position:sticky;top:0;z-index:2}
+td{padding:11px 14px;border-bottom:1px solid var(--bdr);color:var(--t1);transition:background .15s}
+tr:hover td{background:var(--bgh)}
+@keyframes slideIn{from{transform:translateX(80px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes skPulse{0%{opacity:.6}50%{opacity:.3}100%{opacity:.6}}
+
+.shell{display:flex;min-height:100vh;flex-direction:column}
+.shell-inner{display:flex;flex:1}
+.sidebar{width:240px;background:var(--bg1);border-right:1px solid var(--bdr);display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow:hidden;transition:width .25s}
+.sidebar.c{width:56px}
+.slogo{padding:16px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:11px;cursor:pointer}
+.sidebar.c .slogo{padding:16px 12px;justify-content:center}
+.lm{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#0174FC,#38BDF8);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:15px;color:#fff}
+.ln{font-weight:800;font-size:16px;color:var(--tw);letter-spacing:-.5px}.ln span{color:var(--bl)}
+.sidebar.c .ln,.sidebar.c .nl,.sidebar.c .nb,.sidebar.c .sf{display:none}
+.sn{flex:1;padding:10px 8px;overflow-y:auto}
+.ni{display:flex;align-items:center;gap:11px;width:100%;padding:9px 14px;border-radius:8px;border:none;background:transparent;color:var(--t2);font-size:13px;font-weight:500;margin-bottom:1px;transition:all .15s}
+.sidebar.c .ni{padding:10px;justify-content:center}
+.ni.on{background:rgba(1,116,252,.22);color:var(--bl);font-weight:600}
+.ni:hover:not(.on){background:var(--bgh);color:var(--t1)}
+.nb{margin-left:auto;background:var(--er);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700}
+.sf{padding:14px 16px;border-top:1px solid var(--bdr);font-size:10px;color:var(--t2)}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;border-bottom:1px solid var(--bdr);background:var(--bg1);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:8px}
+.htag{font-size:10px;color:var(--wn);background:rgba(245,158,11,.1);padding:3px 10px;border-radius:4px;border:1px solid rgba(245,158,11,.2);font-weight:600;cursor:pointer}
+.wsd{width:8px;height:8px;border-radius:4px;display:inline-block}.wsd.live{background:var(--ok);animation:pulse 2s infinite}.wsd.off{background:var(--er)}
+.rchip{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;background:rgba(1,116,252,.12);border:1px solid rgba(1,116,252,.2);font-size:12px;font-weight:600;color:var(--bl)}
+.cnt{flex:1;padding:28px;overflow-y:auto}
+.aftr{padding:10px 28px;border-top:1px solid var(--bdr);background:var(--bg1);display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--mu);flex-shrink:0}
+
+.card{background:var(--bgc);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.bp{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;box-shadow:0 2px 8px rgba(1,116,252,.3)}.bp:hover{background:var(--bl);transform:translateY(-1px)}
+.bs{background:transparent;color:var(--t2);border:1px solid var(--bdr);border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px}.bs:hover{border-color:var(--brand);color:var(--bl)}
+.bsm{padding:5px 12px;font-size:11px}
+.bok{background:var(--ok);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600}
+.ber{background:var(--er);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:600}
+.bdg{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace}
+.ts{font-size:11px}.tx{font-size:10px}.tm{color:var(--t2)}.ta{color:var(--bl)}.tok{color:var(--ok)}.te{color:var(--er)}.tw{color:var(--wn)}
+.f5{font-weight:500}.f6{font-weight:600}.f7{font-weight:700}.f8{font-weight:800}
+.uc{text-transform:uppercase;letter-spacing:.8px}
+.g5{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.g3e{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g2a{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.fx{display:flex}.fxc{flex-direction:column}.aic{align-items:center}.jcb{justify-content:space-between}
+.gap4{gap:4px}.gap6{gap:6px}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb14{margin-bottom:14px}.mb16{margin-bottom:16px}.mb20{margin-bottom:20px}.mb24{margin-bottom:24px}.mt12{margin-top:12px}
+.oa{overflow:auto}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--t2);transition:all .2s}.pill.on{border-color:var(--brand);background:rgba(1,116,252,.22);color:var(--bl)}
+.mo{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}.mo.hid{display:none}
+.mod{background:var(--bgc);border:1px solid var(--bdr);border-radius:14px;width:580px;max-width:95vw;max-height:85vh;overflow:auto;box-shadow:var(--she)}.mod.wide{width:92%;max-width:1140px}
+.mh{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--bdr)}.mh h3{font-size:17px;font-weight:700;color:var(--th)}
+.mx{background:none;border:none;color:var(--mu);cursor:pointer;padding:4px;font-size:20px}
+.mbd{padding:22px 24px}
+.tc{position:fixed;top:18px;right:18px;z-index:2000;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--she);animation:slideIn .3s;max-width:400px;color:#fff}.toast.info{background:var(--brand)}.toast.success{background:var(--ok)}.toast.error{background:var(--er)}
+.toggle{width:44px;height:24px;border-radius:12px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}.toggle.on{background:var(--brand)}.toggle.off{background:var(--bdrl)}
+.tk{width:18px;height:18px;border-radius:9px;background:#fff;position:absolute;top:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}.toggle.on .tk{left:23px}.toggle.off .tk{left:3px}
+.mc{position:relative;overflow:hidden}.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0}
+.mc.br::before{background:var(--brand)}.mc.wr::before{background:var(--wn)}.mc.ir::before{background:var(--inf)}.mc.er::before{background:var(--er)}.mc.sr::before{background:var(--ok)}
+.cc{position:relative;height:220px;width:100%}.ccs{position:relative;height:200px;width:100%}
+.lu{font-size:9px;color:var(--mu);font-weight:500;margin-top:6px;font-family:'JetBrains Mono',monospace}
+.info-only{display:inline-block;font-size:8px;padding:1px 6px;border-radius:3px;background:rgba(56,189,248,.15);color:var(--inf);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-left:6px}
+.sd{width:10px;height:10px;border-radius:5px;display:inline-block}
+.rcirc{width:100px;height:100px;border-radius:50px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;border-width:4px;border-style:solid}
+.step-bar{display:flex;gap:4px;margin-bottom:24px}.step-seg{flex:1;text-align:center}.step-l{height:3px;border-radius:2px;margin-bottom:6px}.step-l.on{background:var(--brand)}.step-l.off{background:var(--bdr)}
+.tab-c{display:none}.tab-c.active{display:block;animation:fadeIn .3s}
+.bucket{background:var(--bgp);border-radius:8px;padding:16px;text-align:center;border:1px solid var(--bdr)}
+.ae{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--bdr)}.ae-dc{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px}.ae-dot{width:10px;height:10px;border-radius:5px}.ae-line{width:1px;flex:1;background:var(--bdr)}
+.tri-btn{padding:4px 10px;border-radius:4px;font-size:10px;font-weight:700;border:1px solid var(--bdr);cursor:pointer}.tri-btn.a-st{background:var(--ok);color:#fff;border-color:var(--ok)}.tri-btn.t-st{background:var(--wn);color:#000;border-color:var(--wn)}.tri-btn.i-st{background:var(--bgp);color:var(--t2)}
+.diff-old{background:rgba(239,68,68,.1);color:#fca5a5;padding:8px 12px;border-radius:6px;text-decoration:line-through;font-family:'JetBrains Mono',monospace;font-size:13px}
+.diff-new{background:rgba(34,197,94,.1);color:#86efac;padding:8px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px}
+.prog-t{height:6px;background:var(--bgp);border-radius:3px}.prog-f{height:6px;border-radius:3px;transition:width .4s}
+/* Custodian card */
+.cust-card{background:var(--bgp);border:1px solid var(--bdr);border-radius:10px;padding:16px;cursor:pointer;transition:border-color .15s}.cust-card:hover{border-color:var(--brand)}
+.cust-val{font-size:18px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--brand);margin:8px 0 4px}
+/* Reserve badge */
+.res-bdg{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;background:rgba(168,85,247,.15);color:#A855F7;border:1px solid rgba(168,85,247,.3)}
+/* Conflict box */
+.conflict-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:20px;margin:12px 0}
+/* Exec preview */
+.exec-pre{background:var(--bgp);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin:12px 0}
+.exec-pre pre{background:var(--bg0);border:1px solid var(--bdr);border-radius:8px;padding:14px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--bl);overflow:auto;max-height:300px;margin-top:8px}
+.cap-hero{background:linear-gradient(135deg,rgba(1,116,252,.08),rgba(56,189,248,.04));border:1px solid rgba(1,116,252,.15);border-radius:14px;padding:24px}
+.scen-tool{background:var(--bgp);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-top:16px}
+.rates-w{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rate-card{background:var(--bgp);border:1px solid var(--bdr);border-radius:8px;padding:14px;text-align:center}
+.glos{padding:12px;background:var(--bgp);border-radius:6px;border:1px solid var(--bdr)}
+.sbox{background:var(--bgp);border:1px solid var(--bdr);border-radius:10px;padding:20px;cursor:pointer;text-align:left;transition:all .15s}.sbox:hover{border-color:var(--brand)}
+.health-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bgp);border-radius:8px;border:1px solid var(--bdr);margin-bottom:8px}
+/* Skeleton loading */
+.skel{background:var(--bgp);border-radius:6px;animation:skPulse 1.5s infinite}
+/* Exec lifecycle progress */
+.exec-life{display:flex;gap:4px;align-items:center;margin:12px 0}
+.exec-step{flex:1;height:4px;border-radius:2px;background:var(--bdr)}.exec-step.done{background:var(--ok)}.exec-step.active{background:var(--brand);animation:pulse 1s infinite}.exec-step.fail{background:var(--er)}
+
+@media(max-width:1024px){.g2,.g2a,.g3e{grid-template-columns:1fr}.sidebar{width:56px}.sidebar .ln,.sidebar .nl,.sidebar .nb,.sidebar .sf{display:none}.sidebar .ni{padding:10px;justify-content:center}.sidebar .slogo{padding:16px 12px;justify-content:center}}
+@media(max-width:768px){.g5,.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}.cnt{padding:16px}.rates-w{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell"><div class="shell-inner">
+<nav class="sidebar" id="sb"><div class="slogo" onclick="document.getElementById('sb').classList.toggle('c')"><div class="lm">R</div><div class="ln">Repo<span>Reserve</span></div></div><div class="sn" id="sn"></div><div class="sf"><strong style="display:block;margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;font-size:9px;color:var(--mu)">Security</strong>TLS 1.3 · OAuth2/JWT · AES-256 · Idempotency · calc_v1.0</div></nav>
+<div class="main"><header class="hdr"><div class="fx aic gap16"><h2 id="hT" style="font-size:17px;font-weight:700;color:var(--th)">Dashboard</h2><span class="htag" onclick="regM()" title="Regulatory info" aria-label="Regulatory notice">⚠ Phase-1 — No Trade Matching — Execution Packets Only</span></div>
+<div class="fx aic gap12"><div class="fx aic gap6"><span class="wsd live" id="wsD"></span><span class="ts tm" id="wsL">Live</span></div>
+<select style="width:auto;font-size:12px;padding:6px 10px;font-weight:500;background:var(--bgc)" onchange="Z.role=this.value;document.getElementById('rD').textContent=this.value;rT(Z.tab)" aria-label="Role"><option>TreasuryUser</option><option>RiskManager</option><option>Admin</option><option>Auditor</option></select>
+<div class="rchip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg><span id="rD">TreasuryUser</span></div></div></header>
+<main class="cnt" id="cnt"><div class="tab-c active" id="t-dashboard"></div><div class="tab-c" id="t-capacity"></div><div class="tab-c" id="t-requests"></div><div class="tab-c" id="t-approvals"></div><div class="tab-c" id="t-collateral"></div><div class="tab-c" id="t-execution"></div><div class="tab-c" id="t-liquidity"></div><div class="tab-c" id="t-analytics"></div><div class="tab-c" id="t-reports"></div><div class="tab-c" id="t-policy"></div><div class="tab-c" id="t-audit"></div><div class="tab-c" id="t-settings"></div><div class="tab-c" id="t-help"></div></main></div></div>
+<footer class="aftr"><div>RepoReserve Phase-1 · <strong style="color:var(--wn)">No Trade Matching</strong> · Execution Packets Only</div><div class="fx gap16"><span>TLS 1.3</span><span>OAuth2/JWT</span><span>Idempotency Keys</span><span class="mono" style="color:var(--t2)">calc_version: 1.0.0</span></div></footer></div>
+<div class="tc" id="tC"></div>
+<div class="mo hid" id="mO" onclick="cM()"><div class="mod" id="mB" onclick="event.stopPropagation()"><div class="mh"><h3 id="mT"></h3><button class="mx" onclick="cM()" aria-label="Close modal">✕</button></div><div class="mbd" id="mBd"></div></div></div>
+<script>
+/* ═══ STATE (Single Source of Truth) ═══ */
+const Z={tab:'dashboard',role:'TreasuryUser',ws:true,idc:6,exc:9002,auc:6,trc:200,
+req:[],col:[],exec:[],aud:[],pol:[],rpt:[],
+usedIKs:new Set(['IK-RR0001-001']),
+custSummary:[
+  {id:"CB-ACC-001",name:"HDFC Bank",last_sync:Date.now()-60000,latency_ms:1200,status:"ok"},
+  {id:"CB-ACC-002",name:"ICICI Bank",last_sync:Date.now()-90000,latency_ms:3400,status:"ok"},
+  {id:"CB-ACC-003",name:"Axis Bank",last_sync:Date.now()-300000,latency_ms:900,status:"ok"},
+  {id:"CB-ACC-004",name:"SBI",last_sync:Date.now()-600000,latency_ms:5200,status:"delayed"}
+],
+met:{cap:0,util:0,exp:0,head:0,utilPct:0,gap:0,pend:0,alerts:0,lastUp:Date.now()},
+ch:{},wS:0,wF:{},wSel:[],wR:null,shc:0,smv:0,
+health:{custodian:{s:'green',ms:45,t:Date.now()},market:{s:'green',ms:120,t:Date.now()},ccil:{s:'green',ms:200,t:Date.now()},ws:{s:'green',ms:15,t:Date.now()}}};
+
+const SC={Draft:"#6B7280",Submitted:"#0174FC","Risk Review":"#F59E0B",Approved:"#22C55E",Rejected:"#EF4444","Submitted to CCIL":"#0174FC","Pending Settlement":"#F59E0B",Settled:"#22C55E",Failed:"#EF4444",Closed:"#6B7280"};
+const DC={request:"#0174FC",approval:"#22C55E",policy:"#F59E0B",system:"#A855F7",execution:"#38BDF8"};
+const TABS=[{id:"dashboard",l:"Dashboard"},{id:"capacity",l:"Capacity Calculator"},{id:"requests",l:"Repo Requests"},{id:"approvals",l:"Approvals"},{id:"collateral",l:"Collateral"},{id:"execution",l:"Execution"},{id:"liquidity",l:"Liquidity Planner"},{id:"analytics",l:"Analytics"},{id:"reports",l:"Reports"},{id:"policy",l:"Policy Rules"},{id:"audit",l:"Audit Log"},{id:"settings",l:"Settings"},{id:"help",l:"Help / Sandbox"}];
+
+/* ═══ SEED ═══ */
+const SD_C=[
+{isin:"IN000A0XXXX1",instrument:"GOI 7.26% 2032",type:"G-Sec",market_value:1200000000,free_balance:1180000000,haircut_pct:3,custody_account:"CB-ACC-001",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()},
+{isin:"IN000A0XXXX2",instrument:"GOI 6.54% 2025",type:"G-Sec",market_value:850000000,free_balance:850000000,haircut_pct:2.5,custody_account:"CB-ACC-001",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()},
+{isin:"IN000B0YYYY3",instrument:"T-Bill 91D Mar-26",type:"T-Bill",market_value:495000000,free_balance:495000000,haircut_pct:1,custody_account:"CB-ACC-002",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()},
+{isin:"IN000C0ZZZZ4",instrument:"SDL Kerala 7.8% 2028",type:"SDL",market_value:600000000,free_balance:580000000,haircut_pct:5,custody_account:"CB-ACC-003",encumbered:true,reserved_by:"user_treasury_2",sync:"yellow",last_sync:Date.now()-180000},
+{isin:"IN000D0WWWW5",instrument:"Corp Bond AAA 8.1% 2027",type:"Corp Bond",market_value:400000000,free_balance:400000000,haircut_pct:10,custody_account:"CB-ACC-004",encumbered:false,reserved_by:null,sync:"red",last_sync:Date.now()-400000},
+{isin:"IN000E0VVVV6",instrument:"GOI 7.10% 2029",type:"G-Sec",market_value:950000000,free_balance:930000000,haircut_pct:3,custody_account:"CB-ACC-001",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()},
+{isin:"IN000F0UUUU7",instrument:"T-Bill 364D Jun-26",type:"T-Bill",market_value:970000000,free_balance:970000000,haircut_pct:1.5,custody_account:"CB-ACC-002",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()},
+{isin:"IN000G0TTTT8",instrument:"SDL MH 7.5% 2030",type:"SDL",market_value:720000000,free_balance:700000000,haircut_pct:5,custody_account:"CB-ACC-003",encumbered:false,reserved_by:null,sync:"green",last_sync:Date.now()}];
+
+const SD_R=[
+{request_id:"RR-0001",created_by:"user_treasury_1",amount:1000000000,tenor_days:3,collateral:[{isin:"IN000A0XXXX1",market_value:1200000000,haircut_pct:3}],preferred_venue:"TREPS",requested_rate:6.5,status:"Settled",risk_score:"Low",policy_flags:[],created_at:"2026-03-05T09:15:00Z",desk:"Fixed Income"},
+{request_id:"RR-0002",created_by:"user_treasury_2",amount:500000000,tenor_days:7,collateral:[{isin:"IN000B0YYYY3",market_value:495000000,haircut_pct:1}],preferred_venue:"Broker",requested_rate:6.7,status:"Approved",risk_score:"Low",policy_flags:[],created_at:"2026-03-06T14:30:00Z",desk:"Money Market"},
+{request_id:"RR-0003",created_by:"user_treasury_1",amount:2000000000,tenor_days:1,collateral:[{isin:"IN000A0XXXX1",market_value:1200000000,haircut_pct:3},{isin:"IN000E0VVVV6",market_value:950000000,haircut_pct:3}],preferred_venue:"TREPS",requested_rate:6.4,status:"Risk Review",risk_score:"High",policy_flags:["single_txn_limit_exceeded","insufficient_headroom"],created_at:"2026-03-07T08:00:00Z",desk:"Fixed Income"},
+{request_id:"RR-0004",created_by:"user_treasury_2",amount:300000000,tenor_days:14,collateral:[{isin:"IN000F0UUUU7",market_value:970000000,haircut_pct:1.5}],preferred_venue:"TREPS",requested_rate:6.55,status:"Submitted",risk_score:"Low",policy_flags:[],created_at:"2026-03-07T10:20:00Z",desk:"ALM"},
+{request_id:"RR-0005",created_by:"user_treasury_1",amount:750000000,tenor_days:3,collateral:[{isin:"IN000G0TTTT8",market_value:720000000,haircut_pct:5}],preferred_venue:"Broker",requested_rate:6.8,status:"Draft",risk_score:"Medium",policy_flags:["insufficient_headroom"],created_at:"2026-03-07T11:45:00Z",desk:"Fixed Income"}];
+
+const SD_E=[{execution_id:"EX-9001",request_id:"RR-0001",counterparty:"ABC Mutual Fund",amount:1000000000,rate:6.5,collateral:"IN000A0XXXX1",venue:"TREPS",status:"Settled",timestamp:"2026-03-05T09:33:00Z",ik:"IK-RR0001-001"}];
+const SD_L=[{date:"2026-03-08",type:"CP_MATURITY",amount:800000000,party:"Corp A",direction:"outflow"},{date:"2026-03-09",type:"REPO_MATURITY",amount:1000000000,party:"XYZ MF",rate:6.6,direction:"outflow"},{date:"2026-03-10",type:"COUPON",amount:20000000,instrument:"IN000A0XXXX1",direction:"inflow"},{date:"2026-03-11",type:"REPO_BORROW",amount:500000000,party:"DEF Bank",rate:6.5,direction:"inflow"},{date:"2026-03-12",type:"CP_MATURITY",amount:450000000,party:"Corp B",direction:"outflow"},{date:"2026-03-13",type:"COUPON",amount:35000000,instrument:"IN000E0VVVV6",direction:"inflow"},{date:"2026-03-14",type:"REPO_MATURITY",amount:750000000,party:"GHI Fund",rate:6.55,direction:"outflow"}];
+const SD_P=[{id:"PR-01",name:"Single Txn Limit",description:"Max per repo",threshold:1500000000,scope:"global",status:"Active"},{id:"PR-02",name:"Max Daily Borrowing",description:"Max aggregate/day",threshold:5000000000,scope:"global",status:"Active"},{id:"PR-03",name:"Min Collateral Quality",description:"Min rating",threshold:"AA",scope:"global",status:"Active"},{id:"PR-04",name:"CP Concentration",description:"Max single CP %",threshold:25,scope:"counterparty",status:"Active"},{id:"PR-05",name:"Tenor Limit",description:"Max days",threshold:90,scope:"global",status:"Inactive"},{id:"PR-06",name:"Haircut Floor",description:"Min haircut %",threshold:2,scope:"global",status:"Test"}];
+const SD_A=[{id:"AL-001",ts:"2026-03-05T09:15:00Z",user:"user_treasury_1",action:"Created Request",entity:"RR-0001",type:"request",ip:"10.0.1.45",ctx:{new_status:"Draft"},trace_id:"t-100"},{id:"AL-002",ts:"2026-03-05T09:20:00Z",user:"risk_manager_1",action:"Approved",entity:"RR-0001",type:"approval",ip:"10.0.1.50",ctx:{old:"Submitted",new:"Approved"},trace_id:"t-101"},{id:"AL-003",ts:"2026-03-05T09:30:00Z",user:"user_treasury_1",action:"Executed → CCIL",entity:"EX-9001",type:"execution",ip:"10.0.1.45",ctx:{ik:"IK-RR0001-001"},trace_id:"t-102"},{id:"AL-004",ts:"2026-03-05T09:33:00Z",user:"SYSTEM",action:"Settled",entity:"EX-9001",type:"system",ip:"system",ctx:{status:"Settled"},trace_id:"t-103"},{id:"AL-005",ts:"2026-03-05T09:33:01Z",user:"SYSTEM",action:"encumbrance_event",entity:"IN000A0XXXX1",type:"system",ip:"system",ctx:{encumbered:true,request_id:"RR-0001"},trace_id:"t-104"}];
+const SD_RPT=[{id:"RPT-001",name:"Daily Treasury Position",type:"Daily",period:"2026-03-06",generated:"2026-03-07T06:00:00Z",size:"245 KB",status:"Ready",schedule:"daily",format:"CSV"},{id:"RPT-002",name:"Weekly Repo Summary",type:"Weekly",period:"W10 2026",generated:"2026-03-07T06:30:00Z",size:"1.2 MB",status:"Ready",schedule:"weekly",format:"PDF"},{id:"RPT-003",name:"RBI SLR Return",type:"Regulatory",period:"2026-03",generated:null,size:"-",status:"Not Generated",schedule:"monthly",format:"XML"}];
+
+/* ═══ HELPERS ═══ */
+const fmt=n=>{if(Math.abs(n)>=1e7)return`₹${(n/1e7).toFixed(2)} Cr`;if(Math.abs(n)>=1e5)return`₹${(n/1e5).toFixed(2)} L`;return`₹${n.toLocaleString('en-IN')}`};
+const fS=n=>Math.abs(n)>=1e7?`${(n/1e7).toFixed(1)}Cr`:n.toLocaleString('en-IN');
+const now=()=>new Date().toISOString();
+const hms=()=>new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+const trid=()=>`t-${Z.trc++}`;
+const bg=(l,c)=>`<span class="bdg" style="background:${c}18;color:${c};border:1px solid ${c}30">${l}</span>`;
+const rBg=s=>bg(s,s==='Low'?'#22C55E':s==='Medium'?'#F59E0B':'#EF4444');
+const sBg=s=>bg(s,SC[s]||'#6B7280');
+const vBg=v=>bg(v,v==='TREPS'?'#0174FC':'#A855F7');
+const fD=d=>new Date(d).toLocaleString('en',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+const fDS=d=>new Date(d).toLocaleDateString('en',{month:'short',day:'numeric',weekday:'short'});
+const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
+const cp=c=>c.market_value*(1-c.haircut_pct/100);
+const cpA=c=>c.market_value*(1+Z.smv/100)*(1-(c.haircut_pct+Z.shc)/100);
+const syncClr=ms=>{const ago=(Date.now()-ms)/1000;return ago<60?'#22C55E':ago<300?'#F59E0B':'#EF4444'};
+const custRepo=cid=>Z.col.filter(c=>c.custody_account===cid&&!c.encumbered).reduce((s,c)=>s+cp(c),0);
+
+/* ═══ RECALCULATE ALL (single source of truth) ═══ */
+function recalcAll(){const m=Z.met;
+m.cap=Z.col.filter(c=>!c.encumbered).reduce((s,c)=>s+cp(c),0);
+m.util=Z.req.filter(r=>r.status==='Settled').reduce((s,r)=>s+r.amount,0);
+m.exp=Z.req.filter(r=>!['Draft','Rejected','Closed','Failed'].includes(r.status)).reduce((s,r)=>s+r.amount,0);
+m.head=m.cap-m.util;m.utilPct=m.cap>0?(m.util/m.cap)*100:0;
+m.pend=Z.req.filter(r=>['Submitted','Risk Review'].includes(r.status)).length;
+m.alerts=Z.req.filter(r=>r.policy_flags?.length>0&&!['Settled','Closed','Rejected','Failed'].includes(r.status)).length;
+const inf=SD_L.filter(e=>e.direction==='inflow').reduce((s,e)=>s+e.amount,0);
+const outf=SD_L.filter(e=>e.direction==='outflow').reduce((s,e)=>s+e.amount,0);
+m.gap=inf-outf;m.lastUp=Date.now();
+Z.custSummary.forEach(cs=>{cs.repoable=custRepo(cs.id)})}
+
+/* ═══ CORE UI ═══ */
+function toast(m,t='info'){const c=document.getElementById('tC'),el=document.createElement('div');el.className=`toast ${t}`;el.textContent=m;c.appendChild(el);setTimeout(()=>el.remove(),4000)}
+function oM(t,h,w=false){document.getElementById('mT').textContent=t;document.getElementById('mBd').innerHTML=h;document.getElementById('mB').className=w?'mod wide':'mod';document.getElementById('mO').classList.remove('hid')}
+function cM(){document.getElementById('mO').classList.add('hid')}
+function addA(u,a,e,t,ctx={}){Z.aud.unshift({id:`AL-${String(Z.auc++).padStart(3,'0')}`,ts:now(),user:u,action:a,entity:e,type:t,ip:'10.0.1.'+Math.floor(Math.random()*254+1),ctx,trace_id:trid()})}
+function cRisk(amt,coll,pol,reqs){const fl=[];const stl=pol.find(r=>r.id==='PR-01');if(stl?.status==='Active'&&amt>stl.threshold)fl.push('single_txn_limit_exceeded');const tc=coll.reduce((s,c)=>s+c.market_value*(1-c.haircut_pct/100),0);if(amt>tc)fl.push('insufficient_headroom');const cn=pol.find(r=>r.id==='PR-04');if(cn?.status==='Active'){const te=reqs.filter(r=>!['Draft','Rejected','Closed','Failed'].includes(r.status)).reduce((s,r)=>s+r.amount,0)+amt;if(te>0&&(amt/te)*100>cn.threshold)fl.push('counterparty_concentration')}return{flags:fl,score:fl.length===0?'Low':fl.length===1?'Medium':'High'}}
+function regM(){oM('Regulatory Notice','<div style="line-height:1.8;font-size:13px;color:var(--t2)"><strong style="color:var(--th);font-size:15px;display:block;margin-bottom:12px">RepoReserve — Phase 1</strong>Prepares <strong>Execution Packets</strong> only. Does <strong style="color:var(--wn)">NOT</strong> match trades.<br><br>Matching/clearing by <strong>CCIL (TREPS)</strong> under <strong>RBI</strong> rules.<br><br><code style="font-size:11px;color:var(--bl)">repo_capacity = market_value × (1 − haircut_pct / 100)</code></div>')}
+function stateChanged(reason){recalcAll();buildNav();rT(Z.tab);toast(`${reason} — sync ${hms()}`,'info')}
+
+/* ═══ FEATURE 3: RESERVATION SYSTEM ═══ */
+function reserveISIN(isin){const c=Z.col.find(x=>x.isin===isin);if(!c)return;
+if(c.encumbered||c.reserved_by){
+  oM('Reservation Conflict — 409',`<div class="conflict-box"><div class="f7 te mb12">⚠ ISIN already reserved/encumbered</div><div class="ts tm mb8">Reserved by: <strong>${esc(c.reserved_by||'(settlement)')}</strong></div><div class="ts tm mb12">ISIN: <span class="mono ta">${c.isin}</span> — ${c.instrument}</div><div class="fx gap8"><button class="bs" onclick="toast('Watching ${c.isin}','info');cM()">Notify & Watch</button><button class="bp" onclick="cM();goTab('collateral')">Choose Alternate</button></div></div>`);return}
+c.reserved_by=`user_${Z.role.toLowerCase()}_1`;
+addA(c.reserved_by,'Reserved (201)',isin,'system',{reserved_by:c.reserved_by,trace_id:trid()});
+stateChanged(`Reserved ${isin}`)}
+function releaseISIN(isin){const c=Z.col.find(x=>x.isin===isin);if(!c)return;c.reserved_by=null;c.encumbered=false;addA(`user_${Z.role.toLowerCase()}_1`,'Released',isin,'system',{});stateChanged(`Released ${isin}`)}
+
+/* ═══ NAV ═══ */
+function buildNav(){const nav=document.getElementById('sn');const pc=Z.met.pend;nav.innerHTML=TABS.map(t=>{const a=Z.tab===t.id?'on':'';const bdg=t.id==='approvals'&&pc>0?`<span class="nb">${pc}</span>`:'';return`<button class="ni ${a}" onclick="goTab('${t.id}')" aria-label="${t.l}"><span class="nl">${t.l}</span>${bdg}</button>`}).join('')}
+function goTab(id){Z.tab=id;document.querySelectorAll('.tab-c').forEach(e=>e.classList.remove('active'));document.getElementById('t-'+id)?.classList.add('active');document.getElementById('hT').textContent=TABS.find(t=>t.id===id)?.l||'';buildNav();rT(id)}
+function rT(id){Object.keys(Z.ch).forEach(k=>{if(k.startsWith(id+'_')){Z.ch[k].destroy();delete Z.ch[k]}});({dashboard:rDash,capacity:rCap,requests:rReqs,approvals:rAppr,collateral:rColl,execution:rExec,liquidity:rLiq,analytics:rAna,reports:rRpts,policy:rPol,audit:rAud,settings:rSet,help:rHelp})[id]?.()}
+function dlFile(n,c){const b=new Blob([c],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click()}
+
+/* ═══ GAUGE ═══ */
+function drawGauge(id,pct){const cv=document.getElementById(id);if(!cv)return;const ctx=cv.getContext('2d'),w=cv.width,h=cv.height,cx=w/2,cy=h-20,r=Math.min(cx,cy)-10;ctx.clearRect(0,0,w,h);ctx.lineWidth=18;
+ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,2*Math.PI);ctx.strokeStyle='#1E293B';ctx.stroke();
+[[0,.6,'#22C55E33'],[.6,.8,'#F59E0B33'],[.8,1,'#EF444433']].forEach(([s,e,c])=>{ctx.beginPath();ctx.arc(cx,cy,r,Math.PI+Math.PI*s,Math.PI+Math.PI*e);ctx.strokeStyle=c;ctx.stroke()});
+const p=Math.min(Math.max(pct,0),100)/100,clr=p<.6?'#22C55E':p<.8?'#F59E0B':'#EF4444';
+ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,Math.PI+Math.PI*p);ctx.strokeStyle=clr;ctx.lineCap='round';ctx.stroke();
+ctx.fillStyle=clr;ctx.font='800 26px Inter';ctx.textAlign='center';ctx.fillText(`${pct.toFixed(1)}%`,cx,cy-10);
+ctx.fillStyle='#9CA3AF';ctx.font='600 10px Inter';ctx.fillText('Utilization',cx,cy+8)}
+
+/* ═══ FEATURE 1: CUSTODIAN VISIBILITY CARDS ═══ */
+function custCardsHTML(){const totRepo=Z.custSummary.reduce((s,cs)=>s+(cs.repoable||0),0);
+return`<div class="fx jcb aic mb14"><div class="tx f7 tm uc">Custodian Visibility · Total Repoable: <span class="ta">${fmt(totRepo)}</span></div><div class="lu">Click card → positions</div></div><div class="g4 mb20">${Z.custSummary.map(cs=>{const sc=syncClr(cs.last_sync);const latC=cs.latency_ms<2000?'var(--ok)':cs.latency_ms<4000?'var(--wn)':'var(--er)';return`<div class="cust-card" onclick="showCustDet('${cs.id}')"><div class="fx jcb aic"><div class="f7" style="font-size:13px;color:var(--th)">${cs.name}</div><span class="sd" style="background:${sc}"></span></div><div class="cust-val">${fmt(cs.repoable||custRepo(cs.id))}</div><div class="fx jcb tx tm"><span>Lat: <span style="color:${latC}" class="f6">${cs.latency_ms}ms</span></span><span>Sync: ${new Date(cs.last_sync).toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'})}</span></div></div>`}).join('')}</div>`}
+function showCustDet(cid){const cs=Z.custSummary.find(x=>x.id===cid);const pos=Z.col.filter(c=>c.custody_account===cid);oM(`${cs?.name||cid} — Positions`,`<div class="mb16"><div class="fx jcb aic"><span class="f7">${cs?.name}</span><span class="tx tm">${cid} · ${cs?.latency_ms}ms</span></div><div class="mono f8 ta mb12" style="font-size:18px;margin-top:8px">Repoable: ${fmt(custRepo(cid))}</div></div><table><thead><tr><th>ISIN</th><th>Instrument</th><th>MV</th><th>Free Bal</th><th>Status</th><th>Sync</th></tr></thead><tbody>${pos.map(c=>`<tr><td class="mono ts">${c.isin}</td><td>${c.instrument}</td><td class="mono">${fmt(c.market_value)}</td><td class="mono">${fmt(c.free_balance)}</td><td>${c.encumbered?bg('Encumbered','#EF4444'):c.reserved_by?`<span class="res-bdg">${c.reserved_by}</span>`:bg('Free','#22C55E')}</td><td><span class="sd" style="background:${syncClr(c.last_sync)}"></span></td></tr>`).join('')}</tbody></table>`,true)}
+
+/* ═══ DASHBOARD ═══ */
+function rDash(){const el=document.getElementById('t-dashboard');const m=Z.met;const lu=hms();
+const cards=[
+  {l:'Repo Capacity',v:fmt(m.cap),cls:'br',p:1,c:'#0174FC'},
+  {l:'Utilized',v:fmt(m.util),cls:'wr',p:0,c:'#F59E0B'},
+  {l:'Headroom',v:fmt(m.head),cls:'sr',p:m.head>0,c:'#22C55E'},
+  {l:'Pending',v:m.pend,cls:'ir',p:m.pend===0,c:'#38BDF8'},
+  {l:'Liquidity Gap',v:fmt(Math.abs(m.gap))+(m.gap<0?' deficit':' surplus'),cls:m.gap<0?'er':'sr',p:m.gap>=0,c:m.gap<0?'#EF4444':'#22C55E'},
+];
+const recent=[...Z.req].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,6);
+el.innerHTML=`
+<div class="g5 mb20">${cards.map(c=>`<div class="card mc ${c.cls}" style="padding-top:24px"><div class="tx tm f6 uc mb8">${c.l}</div><div class="mono f8" style="font-size:20px;color:var(--th)">${c.v}</div><div class="lu">Last: ${lu}</div></div>`).join('')}</div>
+
+<div class="card mb20">${custCardsHTML()}</div>
+
+<div class="card mb20"><div class="tx f7 tm uc mb14">Market Repo Rates<span class="info-only">indicative</span></div><div class="rates-w">${[{l:'O/N',v:'6.45%',d:'+0.02'},{l:'3D',v:'6.52%',d:'-0.03'},{l:'7D',v:'6.60%',d:'+0.05'}].map(r=>`<div class="rate-card"><div class="tx tm f6 mb8">${r.l}</div><div class="mono f8" style="font-size:18px;color:var(--th)">${r.v}</div><div class="tx f6 ${r.d.startsWith('+')?'tok':'te'}" style="margin-top:4px">${r.d}</div></div>`).join('')}</div></div>
+
+<div class="fx gap10 mb20"><button class="bp" onclick="openWiz()">+ New Request</button><button class="bs" onclick="goTab('capacity')">⚡ Capacity</button></div>
+
+<div class="g2a mb20"><div class="card"><div class="tx f7 tm uc mb14">Funding Demand 7D (₹Cr)</div><div class="cc"><canvas id="dFC"></canvas></div></div><div class="card"><div class="tx f7 tm uc mb14">Collateral</div><div class="cc"><canvas id="dDC"></canvas></div></div></div>
+
+<div class="card"><div class="fx jcb aic mb14"><div class="tx f7 tm uc">Recent Requests</div><div class="lu">WebSocket · ${lu}</div></div><div class="oa"><table><thead><tr><th>ID</th><th>Desk</th><th>Amount</th><th>Venue</th><th>Status</th><th>Time</th></tr></thead><tbody>${recent.map(r=>`<tr style="cursor:pointer" onclick="showRD('${r.request_id}')"><td class="mono ta f6 ts">${r.request_id}</td><td><div class="ts">${esc(r.desk)}</div><div class="tx tm">${esc(r.created_by)}</div></td><td class="mono">${fmt(r.amount)}</td><td>${vBg(r.preferred_venue)}</td><td>${sBg(r.status)}</td><td class="ts tm">${fD(r.created_at)}</td></tr>`).join('')}</tbody></table></div></div>`;
+
+const fd=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en',{weekday:'short'})});const fv=Array.from({length:7},()=>Math.floor(Math.random()*200+100));const cL=m.cap/1e7;
+Z.ch['dashboard_f']=new Chart(document.getElementById('dFC'),{type:'bar',data:{labels:fd,datasets:[{label:'Demand',data:fv,backgroundColor:fv.map(v=>v>cL?'#EF4444':'#0174FC'),borderRadius:5},{label:'Cap',data:Array(7).fill(cL),type:'line',borderColor:'#22C55E',borderDash:[6,4],pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF',font:{size:11}}}},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}},y:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}}}}});
+const ct={};Z.col.forEach(c=>{ct[c.type]=(ct[c.type]||0)+c.market_value});
+Z.ch['dashboard_d']=new Chart(document.getElementById('dDC'),{type:'doughnut',data:{labels:Object.keys(ct),datasets:[{data:Object.values(ct),backgroundColor:['#0174FC','#38BDF8','#F59E0B','#EF4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF'}},tooltip:{callbacks:{label:x=>fmt(x.raw)}}}}});}
+
+/* ═══ FEATURE 2: CAPACITY ENGINE ═══ */
+function rCap(){const el=document.getElementById('t-capacity');const m=Z.met,co=Z.col;
+const tMV=co.reduce((s,c)=>s+c.market_value,0),fMV=co.filter(c=>!c.encumbered).reduce((s,c)=>s+c.market_value,0),adjC=co.reduce((s,c)=>s+cpA(c),0);
+const rec=Math.max(0,Math.abs(m.gap));const cheap=co.filter(c=>!c.encumbered&&!c.reserved_by).sort((a,b)=>(a.haircut_pct+Z.shc)-(b.haircut_pct+Z.shc)).slice(0,5);
+el.innerHTML=`<div class="cap-hero mb24"><div class="fx jcb aic mb16"><div><div class="f8" style="font-size:20px;color:var(--th)">Repo Capacity Calculator</div><div class="ts tm mt12">Sync: ${hms()} · calc_v1.0</div></div></div>
+<div class="g5">${[{l:'Total Securities',v:fmt(tMV),c:'#0174FC'},{l:'Free Collateral',v:fmt(fMV),c:'#A855F7'},{l:'Haircut-Adj Cap',v:fmt(adjC),c:'#38BDF8'},{l:'Recommended',v:fmt(rec),c:'#10B981',i:1},{l:'Liquidity Gap',v:fmt(Math.abs(m.gap))+(m.gap<0?' (deficit)':' (surplus)'),c:m.gap<0?'#EF4444':'#22C55E'}].map(c=>`<div class="card" style="background:var(--bgp);padding:16px"><div class="fx aic gap8 mb8"><span class="tx f7 uc tm">${c.l}</span>${c.i?'<span class="info-only">informational</span>':''}</div><div class="mono f8" style="font-size:18px;color:${c.c}">${c.v}</div><div class="lu">${hms()}</div></div>`).join('')}</div></div>
+
+<div class="card mb20">${custCardsHTML()}</div>
+
+<div class="g3e mb24"><div class="card fx fxc aic" style="justify-content:center"><div class="tx f7 tm uc mb12">Utilization</div><canvas id="gCV" width="240" height="140"></canvas><div class="fx gap16 mt12 ts"><span class="tm">Borrowed: <strong style="color:var(--th)">${fmt(m.util)}</strong></span><span class="tm">Free: <strong class="tok">${fmt(m.head)}</strong></span></div></div>
+<div class="card"><div class="tx f7 tm uc mb14">Breakdown</div><div style="height:200px"><canvas id="capDC"></canvas></div></div>
+<div class="card"><div class="tx f7 tm uc mb14">Cheapest to Raise</div>${cheap.map((c,i)=>`<div class="fx jcb aic" style="padding:7px 0;border-bottom:1px solid var(--bdr)"><div class="fx aic gap8"><span class="mono f7 ta ts">#${i+1}</span><div><div class="ts f6">${c.instrument}</div><div class="tx tm">${c.isin} · ${c.haircut_pct+Z.shc}%</div></div></div><div class="mono f6 ts">${fmt(cpA(c))}</div></div>`).join('')}<button class="bp" style="width:100%;margin-top:14px;justify-content:center" onclick="Z.wS=0;Z.wF={amount:String(Math.abs(Z.met.gap)),tenor_days:'3',venue:'TREPS',rate:'6.5',desk:'Fixed Income'};Z.wSel=[];Z.wR=null;renderWiz()">Create Request</button></div></div>
+
+<div class="scen-tool mb20"><div class="f7 mb12">Scenario Tool (client-only, not persisted)</div><div class="fx gap16 aic"><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Haircut ±%</label><input type="number" id="sHC" value="${Z.shc}" step="0.5" style="width:130px" onchange="Z.shc=Number(this.value);rCap()"></div><div><label class="tx tm f6" style="display:block;margin-bottom:4px">MV ±%</label><input type="number" id="sMV" value="${Z.smv}" step="1" style="width:130px" onchange="Z.smv=Number(this.value);rCap()"></div><button class="bs" style="margin-top:18px" onclick="Z.shc=0;Z.smv=0;rCap()">Reset</button></div></div>
+
+<div class="card oa"><div class="tx f7 tm uc mb14">Full Inventory</div><table><thead><tr><th>ISIN</th><th>Instrument</th><th>Type</th><th>MV</th><th>Haircut</th><th>Capacity</th><th>Custodian</th><th>Status</th><th>Sync</th></tr></thead><tbody>${co.map(c=>`<tr><td class="mono ts">${c.isin}</td><td>${c.instrument}</td><td>${bg(c.type,'#0174FC')}</td><td class="mono">${fmt(c.market_value*(1+Z.smv/100))}</td><td>${c.haircut_pct+Z.shc}%</td><td class="mono f6 ta" title="MV×(1−haircut/100)">${fmt(cpA(c))}</td><td class="ts">${c.custody_account}</td><td>${c.encumbered?bg('Encumbered','#EF4444'):c.reserved_by?`<span class="res-bdg">${c.reserved_by}</span>`:bg('Free','#22C55E')}</td><td><span class="sd" style="background:${syncClr(c.last_sync)}"></span></td></tr>`).join('')}</tbody></table></div>`;
+setTimeout(()=>drawGauge('gCV',m.utilPct),50);
+const ctt={};Z.col.forEach(c=>{ctt[c.type]=(ctt[c.type]||0)+c.market_value});
+Z.ch['capacity_d']=new Chart(document.getElementById('capDC'),{type:'doughnut',data:{labels:Object.keys(ctt),datasets:[{data:Object.values(ctt),backgroundColor:['#0174FC','#38BDF8','#F59E0B','#EF4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF'}},tooltip:{callbacks:{label:x=>fmt(x.raw)}}}}});}
+
+/* ═══ REQUEST DETAIL ═══ */
+function showRD(id){const r=Z.req.find(x=>x.request_id===id);if(!r)return;const ep={request_id:r.request_id,created_by:r.created_by,amount:r.amount,tenor_days:r.tenor_days,collateral:r.collateral,preferred_venue:r.preferred_venue,status:r.status,risk_score:r.risk_score,calc_version:'1.0.0'};oM(`${r.request_id}`,`<div class="g2"><div><div class="mb16">${sBg(r.status)} ${rBg(r.risk_score)}</div>${[['Amount',fmt(r.amount)],['Tenor',r.tenor_days+'d'],['Venue',r.preferred_venue],['Rate',r.requested_rate+'%'],['Desk',r.desk]].map(([l,v])=>`<div class="mb12"><div class="tx tm uc f6">${l}</div><div class="f6">${esc(v)}</div></div>`).join('')}${r.policy_flags?.length?r.policy_flags.map(f=>bg(f.replace(/_/g,' '),'#EF4444')).join(' '):''}</div><div><div class="tx tm uc f6 mb12">Execution Packet</div><pre style="background:var(--bg0);border:1px solid var(--bdr);border-radius:8px;padding:14px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--bl);overflow:auto;max-height:400px">${esc(JSON.stringify(ep,null,2))}</pre></div></div>`,true)}
+
+/* ═══ FEATURE 4: WIZARD (Request → Approval → Execution) ═══ */
+function openWiz(){Z.wS=0;Z.wF={amount:'',tenor_days:'3',venue:'TREPS',rate:'6.5',desk:'Fixed Income'};Z.wSel=[];Z.wR=null;renderWiz()}
+function renderWiz(){const step=Z.wS,f=Z.wF,steps=['Details','Collateral','Risk','Preview & Submit'];
+const bar=`<div class="step-bar">${steps.map((s,i)=>`<div class="step-seg"><div class="step-l ${i<=step?'on':'off'}"></div><span style="font-size:11px;color:${i<=step?'var(--bl)':'var(--t2)'};font-weight:${i===step?700:400}">${s}</span></div>`).join('')}</div>`;
+let body='';
+if(step===0)body=`<div class="g2"><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Amount (₹)</label><input id="wa" type="number" style="width:100%" value="${f.amount}" placeholder="1000000000"></div><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Tenor</label><select id="wt" style="width:100%">${[1,3,7,14,30,60,90].map(d=>`<option value="${d}" ${f.tenor_days==d?'selected':''}>${d}d</option>`).join('')}</select></div><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Venue</label><select id="wv" style="width:100%"><option ${f.venue==='TREPS'?'selected':''}>TREPS</option><option ${f.venue==='Broker'?'selected':''}>Broker</option></select></div><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Rate (%)</label><input id="wr" type="number" step="0.01" style="width:100%" value="${f.rate}"></div><div><label class="tx tm f6" style="display:block;margin-bottom:4px">Desk</label><select id="wd" style="width:100%">${['Fixed Income','Money Market','ALM','Treasury Ops'].map(d=>`<option ${f.desk===d?'selected':''}>${d}</option>`).join('')}</select></div></div>`;
+else if(step===1){const av=Z.col.filter(c=>!c.encumbered),sel=Z.wSel,tc=av.filter(c=>sel.includes(c.isin)).reduce((s,c)=>s+cp(c),0);body=`<div style="max-height:300px;overflow:auto"><table><thead><tr><th></th><th>ISIN</th><th>Instrument</th><th>MV</th><th>Capacity</th><th>Reserved</th></tr></thead><tbody>${av.map(c=>`<tr><td><input type="checkbox" ${sel.includes(c.isin)?'checked':''} onchange="twc('${c.isin}')"></td><td class="mono ts">${c.isin}</td><td>${c.instrument}</td><td class="mono">${fmt(c.market_value)}</td><td class="mono ta f6">${fmt(cp(c))}</td><td>${c.reserved_by?`<span class="res-bdg">${c.reserved_by}</span>`:'—'}</td></tr>`).join('')}</tbody></table></div><div style="margin-top:12px;padding:12px;background:var(--bgp);border-radius:8px" class="fx jcb aic"><span class="ts tm">Selected: ${sel.length}</span><span class="mono f7" style="color:${tc>=Number(f.amount)?'var(--ok)':'var(--er)'}">Capacity: ${fmt(tc)}</span></div>`}
+else if(step===2){const r=Z.wR;if(!r)body='<div class="tm" style="text-align:center;padding:40px">Computing...</div>';else{const c=r.score==='Low'?'var(--ok)':r.score==='Medium'?'var(--wn)':'var(--er)';body=`<div class="fx fxc aic gap16" style="padding:20px"><div class="f7" style="font-size:16px">Risk Assessment</div><div class="rcirc" style="border-color:${c};color:${c}">${r.score}</div>${r.flags.length?`<div class="fx gap6" style="flex-wrap:wrap;justify-content:center">${r.flags.map(f=>bg(f.replace(/_/g,' '),'#EF4444')).join(' ')}</div>`:`<span class="ts tok f6">All checks passed</span>`}</div>`}}
+else{const sc=Z.col.filter(c=>Z.wSel.includes(c.isin)),tc=sc.reduce((s,c)=>s+cp(c),0),r=Z.wR,pkt={request_id:'RR-XXXX',amount:Number(f.amount),tenor_days:Number(f.tenor_days),collateral:sc.map(c=>({isin:c.isin,market_value:c.market_value,haircut_pct:c.haircut_pct})),preferred_venue:f.venue,requested_rate:Number(f.rate),created_by:`user_${Z.role.toLowerCase()}_1`,timestamp:now(),calc_version:'1.0.0'};body=`<div class="g2 mb16">${[['Amount',fmt(Number(f.amount))],['Tenor',f.tenor_days+'d'],['Venue',f.venue],['Rate',f.rate+'%'],['Desk',f.desk],['Capacity',fmt(tc)],['Risk',r?.score||'—']].map(([l,v])=>`<div><div class="tx tm uc f6">${l}</div><div class="f7">${v}</div></div>`).join('')}</div><div class="exec-pre"><div class="tx f7 tm uc">Execution Packet Preview</div><pre>${esc(JSON.stringify(pkt,null,2))}</pre></div>`}
+oM('New Repo Request',bar+body+`<div class="fx jcb" style="margin-top:24px;padding-top:16px;border-top:1px solid var(--bdr)"><button class="bs" onclick="${step===0?'cM()':'wBk()'}">${step===0?'Cancel':'Back'}</button><div class="fx gap8">${step===3?'<button class="bs" onclick="wSb(1)">Save Draft</button>':''}${step<3?`<button class="bp" onclick="wNx()">Next</button>`:`<button class="bp" onclick="wSb(0)">Submit Request</button>`}</div></div>`,true)}
+function wNx(){const f=Z.wF;if(Z.wS===0){f.amount=document.getElementById('wa').value;f.tenor_days=document.getElementById('wt').value;f.venue=document.getElementById('wv').value;f.rate=document.getElementById('wr').value;f.desk=document.getElementById('wd').value;if(!f.amount){toast('Enter amount','error');return}}if(Z.wS===1){if(!Z.wSel.length){toast('Select collateral','error');return}Z.wR=cRisk(Number(f.amount),Z.col.filter(c=>Z.wSel.includes(c.isin)).map(c=>({isin:c.isin,market_value:c.market_value,haircut_pct:c.haircut_pct})),Z.pol,Z.req)}Z.wS++;renderWiz()}
+function wBk(){Z.wS--;renderWiz()}
+function twc(isin){const i=Z.wSel.indexOf(isin);if(i>=0)Z.wSel.splice(i,1);else Z.wSel.push(isin);renderWiz()}
+function wSb(draft){const f=Z.wF,id=`RR-${String(Z.idc++).padStart(4,'0')}`,sc=Z.col.filter(c=>Z.wSel.includes(c.isin)).map(c=>({isin:c.isin,market_value:c.market_value,haircut_pct:c.haircut_pct})),risk=Z.wR||cRisk(Number(f.amount),sc,Z.pol,Z.req);Z.req.unshift({request_id:id,created_by:`user_${Z.role.toLowerCase()}_1`,amount:Number(f.amount),tenor_days:Number(f.tenor_days),collateral:sc,preferred_venue:f.venue,requested_rate:Number(f.rate),status:draft?'Draft':'Submitted',risk_score:risk.score,policy_flags:risk.flags,created_at:now(),desk:f.desk});addA(`user_${Z.role.toLowerCase()}_1`,draft?'Draft':'Submitted',id,'request',{});cM();stateChanged(draft?'Draft saved':'Request submitted')}
+
+/* ═══ REQUESTS TAB ═══ */
+let rF='All';
+function rReqs(){const el=document.getElementById('t-requests');const fs=['All','Draft','Submitted','Risk Review','Approved','Executed','Closed'];const fl=rF==='All'?Z.req:Z.req.filter(r=>r.status===rF||(rF==='Executed'&&['Settled','Submitted to CCIL','Pending Settlement'].includes(r.status)));el.innerHTML=`<div class="fx jcb aic mb16"><div class="pills">${fs.map(f=>`<button class="pill ${rF===f?'on':''}" onclick="rF='${f}';rReqs()">${f}</button>`).join('')}</div><button class="bp" onclick="openWiz()">+ New</button></div><div class="card oa"><table><thead><tr><th>ID</th><th>By</th><th>Amount</th><th>Venue</th><th>Risk</th><th>Status</th><th>Time</th><th>Actions</th></tr></thead><tbody>${fl.map(r=>`<tr><td class="mono ta f6 ts" style="cursor:pointer" onclick="showRD('${r.request_id}')">${r.request_id}</td><td class="ts">${esc(r.created_by)}</td><td class="mono">${fmt(r.amount)}</td><td>${vBg(r.preferred_venue)}</td><td>${rBg(r.risk_score)}</td><td>${sBg(r.status)}</td><td class="ts tm">${fD(r.created_at)}</td><td class="fx gap4">${r.status==='Draft'?`<button class="bp bsm" onclick="Z.req.find(x=>x.request_id==='${r.request_id}').status='Submitted';addA(Z.role,'Submitted','${r.request_id}','request',{});stateChanged('Submitted')">Submit</button>`:''}${['Draft','Submitted'].includes(r.status)?`<button class="ber bsm" onclick="Z.req.find(x=>x.request_id==='${r.request_id}').status='Closed';addA(Z.role,'Withdrew','${r.request_id}','request',{});stateChanged('Withdrawn')">WD</button>`:''}</td></tr>`).join('')}</tbody></table>${fl.length===0?'<div style="text-align:center;padding:40px" class="tm">No requests</div>':''}</div>`}
+
+/* ═══ APPROVALS ═══ */
+function rAppr(){const el=document.getElementById('t-approvals');if(!['RiskManager','Admin'].includes(Z.role)){el.innerHTML=`<div style="text-align:center;padding:80px" class="tm"><div class="f7 mt12">Access Restricted</div></div>`;return}const pn=Z.req.filter(r=>['Submitted','Risk Review'].includes(r.status));el.innerHTML=`<div class="card oa"><table><thead><tr><th>ID</th><th>Amount</th><th>Risk</th><th>Flags</th><th>Status</th><th></th></tr></thead><tbody>${pn.map(r=>`<tr><td class="mono ta f6 ts">${r.request_id}</td><td class="mono">${fmt(r.amount)}</td><td>${rBg(r.risk_score)}</td><td>${r.policy_flags?.length?r.policy_flags.map(f=>bg(f.replace(/_/g,' '),'#EF4444')).join(' '):'—'}</td><td>${sBg(r.status)}</td><td><button class="bp bsm" onclick="rvM('${r.request_id}')">Review</button></td></tr>`).join('')}</tbody></table>${pn.length===0?'<div style="text-align:center;padding:40px" class="tm">No pending</div>':''}</div>`}
+function rvM(id){const r=Z.req.find(x=>x.request_id===id);if(!r)return;oM(`Review ${r.request_id}`,`<div class="g2"><div>${[['Amount',fmt(r.amount)],['Tenor',r.tenor_days+'d'],['Venue',r.preferred_venue],['Risk',r.risk_score]].map(([l,v])=>`<div class="mb12"><div class="tx tm uc f6">${l}</div><div class="f7">${v}</div></div>`).join('')}${r.policy_flags?.length?r.policy_flags.map(f=>bg(f.replace(/_/g,' '),'#EF4444')).join(' '):''}</div><div><div class="mb12"><label class="tx tm f6" style="display:block;margin-bottom:4px">Execution Method</label><select id="rvm" style="width:100%"><option>TREPS</option><option>Broker</option></select></div><div class="mb12"><label class="tx tm f6" style="display:block;margin-bottom:4px">Comments</label><textarea id="rvc" style="width:100%;height:80px;resize:vertical" placeholder="Required for reject..."></textarea></div><div class="fx gap8"><button class="bok" onclick="Z.req.find(x=>x.request_id==='${r.request_id}').status='Approved';addA('risk_manager_1','Approved','${r.request_id}','approval',{method:document.getElementById('rvm')?.value});cM();stateChanged('Approved → Ready')">Approve</button><button class="ber" onclick="if(!document.getElementById('rvc').value.trim()){toast('Comment required for reject','error');return}Z.req.find(x=>x.request_id==='${r.request_id}').status='Rejected';addA('risk_manager_1','Rejected','${r.request_id}','approval',{comment:document.getElementById('rvc').value});cM();stateChanged('Rejected')">Reject</button></div></div></div>`,true)}
+
+/* ═══ COLLATERAL (with Reserve/Release) ═══ */
+function rColl(){const el=document.getElementById('t-collateral');const c=Z.col,m=Z.met;el.innerHTML=`<div class="g4 mb20">${[{l:'Total MV',v:fmt(c.reduce((s,x)=>s+x.market_value,0)),c:'#0174FC'},{l:'Capacity',v:fmt(m.cap),c:'#38BDF8'},{l:'Utilized',v:fmt(m.util),c:'#F59E0B'},{l:'Headroom',v:fmt(m.head),c:'#22C55E'}].map(x=>`<div class="card" style="border-left:3px solid ${x.c}"><div class="tx tm f6 mb8">${x.l}</div><div class="mono f8" style="font-size:20px">${x.v}</div><div class="lu">${hms()}</div></div>`).join('')}</div>
+<div class="fx jcb aic mb14"><input id="cS" style="width:300px" placeholder="Search ISIN..." oninput="rColl()"><button class="bs" onclick="dlFile('collateral.csv','ISIN,MV,Haircut,Capacity,Encumbered\\n'+Z.col.map(c=>c.isin+','+c.market_value+','+c.haircut_pct+','+cp(c).toFixed(0)+','+c.encumbered).join('\\n'));toast('Exported','success')">📥 CSV</button></div>
+<div class="card oa"><table><thead><tr><th>ISIN</th><th>Instrument</th><th>Type</th><th>MV</th><th>Haircut</th><th>Capacity</th><th>Custodian</th><th>Status</th><th>Sync</th><th>Actions</th></tr></thead><tbody>${c.filter(x=>{const s=(document.getElementById('cS')?.value||'').toLowerCase();return!s||x.isin.toLowerCase().includes(s)||x.instrument.toLowerCase().includes(s)}).map(x=>`<tr><td class="mono ts">${x.isin}</td><td>${x.instrument}</td><td>${bg(x.type,'#0174FC')}</td><td class="mono">${fmt(x.market_value)}</td><td>${x.haircut_pct}%</td><td class="mono ta f6">${fmt(cp(x))}</td><td class="ts">${x.custody_account}</td><td>${x.encumbered?bg('Encumbered','#EF4444'):x.reserved_by?`<span class="res-bdg">${x.reserved_by}</span>`:bg('Free','#22C55E')}</td><td><span class="sd" style="background:${syncClr(x.last_sync)}" title="Synced ${new Date(x.last_sync).toLocaleTimeString()}"></span></td><td>${!x.encumbered&&!x.reserved_by?`<button class="bp bsm" onclick="reserveISIN('${x.isin}')">Reserve</button>`:x.reserved_by?`<button class="bs bsm" onclick="releaseISIN('${x.isin}')">Release</button>`:''}</td></tr>`).join('')}</tbody></table></div>`}
+
+/* ═══ FEATURE 5: EXECUTION with Packet Preview + IK Dedup ═══ */
+let eF='All';
+function rExec(){const el=document.getElementById('t-execution'),ap=Z.req.filter(r=>r.status==='Approved'),exs=eF==='All'?Z.exec:Z.exec.filter(e=>e.status.toLowerCase().includes(eF.toLowerCase()));el.innerHTML=`<div class="pills mb16">${['All','Submitted','Pending Settlement','Settled','Failed'].map(f=>`<button class="pill ${eF===f?'on':''}" onclick="eF='${f}';rExec()">${f}</button>`).join('')}</div>${ap.length?`<div class="card mb20" style="border-left:3px solid var(--brand)"><div class="tx f7 tm uc mb12">Ready to Execute (${ap.length})</div>${ap.map(r=>`<div class="fx jcb aic" style="padding:10px 0;border-bottom:1px solid var(--bdr)"><div><span class="mono ta f7 ts">${r.request_id}</span><span class="ts" style="margin-left:12px">${fmt(r.amount)} · ${r.preferred_venue}</span></div><button class="bp bsm" onclick="showExecPreview('${r.request_id}')">Preview & Execute</button></div>`).join('')}</div>`:''}<div class="card oa"><table><thead><tr><th>Exec</th><th>Req</th><th>Amount</th><th>Venue</th><th>Status</th><th>IK</th><th>Time</th><th></th></tr></thead><tbody>${exs.map(e=>`<tr><td class="mono f7 ts">${e.execution_id}</td><td class="mono ta ts">${e.request_id}</td><td class="mono">${fmt(e.amount)}</td><td>${vBg(e.venue)}</td><td>${sBg(e.status)}</td><td class="mono tx tm">${e.ik||'—'}</td><td class="ts tm">${fD(e.timestamp)}</td><td>${e.status==='Failed'?`<button class="ber bsm" onclick="retryExec('${e.execution_id}')">Retry</button>`:''}</td></tr>`).join('')}</tbody></table>${exs.length===0?'<div style="text-align:center;padding:40px" class="tm">No records</div>':''}</div>`}
+
+function showExecPreview(rid){if(!['TreasuryUser','Admin'].includes(Z.role)){toast('No permission','error');return}
+const r=Z.req.find(x=>x.request_id===rid);if(!r)return;const ik=`IK-${rid}-${Date.now().toString(36)}`;
+const pkt={request_id:r.request_id,amount:r.amount,collateral:r.collateral,venue:r.preferred_venue,tenor_days:r.tenor_days,created_by:r.created_by,timestamp:now(),calc_version:'1.0.0'};
+oM('Confirm Execution',`<div class="exec-pre"><div class="tx f7 tm uc">Execution Packet</div><pre>${esc(JSON.stringify(pkt,null,2))}</pre></div><div class="fx jcb aic mb12 mt12"><div><span class="tx tm f6">Idempotency Key:</span><span class="mono ta ts" style="margin-left:8px">${ik}</span></div><div class="tx tm">POST /api/ccil/submit</div></div><div class="exec-life"><div class="exec-step" id="es1"></div><div class="exec-step" id="es2"></div><div class="exec-step" id="es3"></div></div><div class="fx gap8 mt12"><button class="bp" id="execBtn" onclick="execConfirmed('${rid}','${ik}')">Confirm Execute</button><button class="bs" onclick="cM()">Cancel</button></div>`)}
+
+function execConfirmed(rid,ik){
+if(Z.usedIKs.has(ik)){toast(`Duplicate IK: ${ik} — existing execution returned (409)`,'error');cM();return}
+Z.usedIKs.add(ik);
+const r=Z.req.find(x=>x.request_id===rid);if(!r)return;
+const eid=`EX-${Z.exc++}`;
+Z.exec.unshift({execution_id:eid,request_id:rid,counterparty:'—',amount:r.amount,rate:r.requested_rate,collateral:r.collateral.map(c=>c.isin).join(', '),venue:r.preferred_venue,status:'Submitted',timestamp:now(),ik});
+r.status='Submitted to CCIL';
+addA(`user_${Z.role.toLowerCase()}_1`,'Executed → CCIL',eid,'execution',{ik,trace_id:trid()});
+// Show progress in modal
+const btn=document.getElementById('execBtn');if(btn){btn.disabled=true;btn.textContent='Submitting...'}
+const s1=document.getElementById('es1');if(s1)s1.className='exec-step done';
+stateChanged(`${eid} submitted`);
+// Phase 2: Pending Settlement (2s)
+setTimeout(()=>{const ex=Z.exec.find(e=>e.execution_id===eid);if(ex)ex.status='Pending Settlement';r.status='Pending Settlement';const s2=document.getElementById('es2');if(s2)s2.className='exec-step active';if(btn)btn.textContent='Pending Settlement...';addA('SYSTEM','execution_update → pending',eid,'system',{trace_id:trid()});if(Z.tab==='execution')rExec();toast(`${eid} → Pending Settlement`,'info')},2000);
+// Phase 3: Settled or Failed (5s)
+setTimeout(()=>{const fail=Math.random()<.15;const ex=Z.exec.find(e=>e.execution_id===eid);if(ex){ex.status=fail?'Failed':'Settled';ex.timestamp=now()}
+r.status=fail?'Failed':'Settled';
+// ATOMIC: On settled, encumber collateral + publish encumbrance_event + metric_update
+if(!fail){r.collateral.forEach(rc=>{const c=Z.col.find(x=>x.isin===rc.isin);if(c){c.encumbered=true;c.reserved_by=null}});
+addA('SYSTEM','encumbrance_event',eid,'system',{isins:r.collateral.map(c=>c.isin),encumbered:true,trace_id:trid()})}
+addA('SYSTEM',fail?'settlement_failure':'execution_update → settled',eid,'system',{status:fail?'Failed':'Settled',ik,trace_id:trid()});
+cM();stateChanged(fail?`${eid} FAILED`:`${eid} settled — collateral encumbered — metrics updated atomically`)},5000)}
+
+function retryExec(eid){const ex=Z.exec.find(e=>e.execution_id===eid);if(!ex)return;
+const newIk=`IK-${ex.request_id}-${Date.now().toString(36)}`;Z.usedIKs.add(newIk);
+ex.status='Submitted';ex.timestamp=now();ex.ik=newIk;
+addA(Z.role,'Retried (new IK)',eid,'execution',{ik:newIk,trace_id:trid()});
+toast(`${eid} retrying...`,'info');rExec();
+setTimeout(()=>{ex.status='Settled';ex.timestamp=now();const r=Z.req.find(x=>x.request_id===ex.request_id);if(r){r.status='Settled';r.collateral.forEach(rc=>{const c=Z.col.find(x=>x.isin===rc.isin);if(c){c.encumbered=true;c.reserved_by=null}})}addA('SYSTEM','Settled (retry)',eid,'system',{trace_id:trid()});stateChanged(`${eid} settled on retry`)},3000)}
+
+/* ═══ REMAINING TABS ═══ */
+let lS='Base';
+function rLiq(){const el=document.getElementById('t-liquidity');const mult=lS.includes('Haircut')?.7:lS.includes('CP')?1.3:1;const sm={tn:-200000000*mult,g7:Z.met.gap*mult,rec:Math.abs(Z.met.gap*mult)};const cal=SD_L;
+const bkts=[{l:'O/N',mx:1},{l:'1-7D',mn:1,mx:7},{l:'8-30D',mn:7,mx:30},{l:'31-90D',mn:30,mx:90},{l:'>90D',mn:90,mx:999}].map(b=>{const items=cal.filter(c=>{const d=(new Date(c.date)-new Date())/(864e5);return(b.mn===undefined||d>b.mn)&&d<=b.mx});return{...b,items,net:items.reduce((s,c)=>s+(c.direction==='inflow'?c.amount:-c.amount),0)}});
+el.innerHTML=`<div class="fx jcb aic mb20"><div class="pills">${['Base','Stress (Haircut)','Stress (Rate)','Stress (CP)'].map(s=>`<button class="pill ${lS===s?'on':''}" onclick="lS='${s}';rLiq()">${s}</button>`).join('')}</div><button class="bs" onclick="dlFile('liq.csv',SD_L.map(c=>c.date+','+c.type+','+c.amount+','+c.direction).join('\\n'));toast('Exported','success')">📥</button></div><div class="g3 mb20">${[{l:'Today Net',v:sm.tn,c:sm.tn<0?'#EF4444':'#22C55E'},{l:'7D Gap',v:sm.g7,c:sm.g7<0?'#EF4444':'#22C55E'},{l:'Recommended',v:sm.rec,c:'#0174FC',i:1}].map(x=>`<div class="card" style="border-left:3px solid ${x.c}"><div class="fx aic gap6 mb8"><span class="tx tm f6">${x.l}</span>${x.i?'<span class="info-only">informational</span>':''}</div><div class="mono f8" style="font-size:20px;color:${x.c}">${fmt(Math.abs(x.v))}${x.v<0?' (deficit)':''}</div></div>`).join('')}</div><div class="g2a mb20"><div class="card"><div class="tx f7 tm uc mb14">Cashflow (₹Cr)</div><div class="cc"><canvas id="lqC"></canvas></div></div><div class="card"><div class="tx f7 tm uc mb14">Maturity Ladder</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">${bkts.map(b=>`<div class="bucket"><div class="tx tm f6 mb8">${b.l}</div><div class="mono f8" style="font-size:14px;color:${b.net<0?'var(--er)':b.net>0?'var(--ok)':'var(--t2)'}">${fS(b.net*mult)}</div></div>`).join('')}</div></div></div>`;
+Z.ch['liquidity_c']=new Chart(document.getElementById('lqC'),{type:'bar',data:{labels:cal.map(c=>new Date(c.date).toLocaleDateString('en',{month:'short',day:'numeric'})),datasets:[{label:'In',data:cal.map(c=>c.direction==='inflow'?c.amount/1e7:0),backgroundColor:'#22C55E',borderRadius:3},{label:'Out',data:cal.map(c=>c.direction==='outflow'?-c.amount/1e7:0),backgroundColor:'#EF4444',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF'}}},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}},y:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}}}}});}
+
+let aR='30d';
+function rAna(){const el=document.getElementById('t-analytics');const d=aR==='7d'?7:aR==='30d'?30:90,lb=Array.from({length:d},(_,i)=>i+1);el.innerHTML=`<div class="fx" style="justify-content:flex-end;margin-bottom:16px">${['7d','30d','90d'].map(r=>`<button class="pill ${aR===r?'on':''}" style="margin-left:6px" onclick="aR='${r}';rAna()">${r}</button>`).join('')}</div><div class="g2 mb16"><div class="card"><div class="tx f7 tm uc mb12">Exposure (₹Cr)</div><div class="ccs"><canvas id="aE"></canvas></div></div><div class="card"><div class="tx f7 tm uc mb12">CP Concentration</div><div class="ccs"><canvas id="aC"></canvas></div></div></div><div class="g2"><div class="card"><div class="tx f7 tm uc mb12">Rate Trend</div><div class="ccs"><canvas id="aRt"></canvas></div></div><div class="card"><div class="tx f7 tm uc mb12">Collateral Usage</div><div class="ccs"><canvas id="aCl"></canvas></div></div></div>`;
+Z.ch['analytics_e']=new Chart(document.getElementById('aE'),{type:'line',data:{labels:lb,datasets:[{data:lb.map(()=>300+Math.random()*100),borderColor:'#0174FC',backgroundColor:'#0174FC18',fill:true,tension:.3,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}},y:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}}}}});
+Z.ch['analytics_c']=new Chart(document.getElementById('aC'),{type:'bar',data:{labels:['ABC MF','XYZ Bank','DEF Ins','GHI','Others'],datasets:[{data:[30,22,18,15,15],backgroundColor:'#0174FC',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}},y:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}}}}});
+Z.ch['analytics_r']=new Chart(document.getElementById('aRt'),{type:'line',data:{labels:lb,datasets:[{label:'TREPS',data:lb.map(()=>6.3+Math.random()*.5),borderColor:'#0174FC',tension:.3,pointRadius:0},{label:'Broker',data:lb.map(()=>6.5+Math.random()*.6),borderColor:'#F59E0B',tension:.3,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF'}}},scales:{x:{grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}},y:{min:6,max:7.5,grid:{color:'#1E293B'},ticks:{color:'#9CA3AF'}}}}});
+const ct={};Z.col.forEach(c=>{ct[c.type]=(ct[c.type]||0)+c.market_value});
+Z.ch['analytics_cl']=new Chart(document.getElementById('aCl'),{type:'doughnut',data:{labels:Object.keys(ct),datasets:[{data:Object.values(ct),backgroundColor:['#0174FC','#38BDF8','#F59E0B','#EF4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#9CA3AF'}},tooltip:{callbacks:{label:x=>fmt(x.raw)}}}}});}
+
+function rRpts(){const el=document.getElementById('t-reports');el.innerHTML=`<div class="card oa"><table><thead><tr><th>Report</th><th>Type</th><th>Schedule</th><th>Status</th><th>Actions</th></tr></thead><tbody>${Z.rpt.map(r=>`<tr><td class="f6">${esc(r.name)}</td><td>${bg(r.type,r.type==='Regulatory'?'#EF4444':'#0174FC')}</td><td><select style="padding:4px;font-size:11px"><option ${r.schedule==='daily'?'selected':''}>daily</option><option ${r.schedule==='weekly'?'selected':''}>weekly</option><option ${r.schedule==='monthly'?'selected':''}>monthly</option></select></td><td>${bg(r.status,r.status==='Ready'?'#22C55E':'#6B7280')}</td><td class="fx gap6">${r.status==='Ready'?`<button class="bs bsm" onclick="dlFile('report.csv','Report\\ncalc_v1.0');toast('Downloaded','success')">DL</button>`:''}<button class="bp bsm" onclick="const rp=Z.rpt.find(x=>x.id==='${r.id}');rp.status='Processing';rRpts();setTimeout(()=>{rp.status='Ready';rp.generated=now();addA(Z.role,'Generated','${r.id}','system',{});toast('Ready','success');rRpts()},2000)">Gen</button></td></tr>`).join('')}</tbody></table></div>`}
+
+let edP=null;
+function rPol(){const el=document.getElementById('t-policy');el.innerHTML=`<div style="margin-bottom:16px;padding:16px;background:rgba(1,116,252,.12);border-radius:10px;border:1px solid rgba(1,116,252,.15);font-size:13px;color:var(--bl)" class="f6">Changes recompute risk immediately.</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">${Z.pol.map(r=>`<div class="card" style="opacity:${r.status==='Active'?1:r.status==='Test'?.8:.5}"><div class="fx jcb mb12" style="align-items:flex-start"><div><div class="f7">${r.name}</div><div class="ts tm mt12">${r.description}</div></div><div class="fx gap4">${['Active','Test','Inactive'].map(st=>`<button class="tri-btn ${r.status===st?(st==='Active'?'a-st':st==='Test'?'t-st':'i-st'):''}" onclick="const p=Z.pol.find(x=>x.id==='${r.id}');const o=p.status;p.status='${st}';let cnt=0;Z.req.filter(r=>['Submitted','Risk Review','Draft'].includes(r.status)).forEach(req=>{const risk=cRisk(req.amount,req.collateral,Z.pol,Z.req);if(risk.score!==req.risk_score){req.risk_score=risk.score;req.policy_flags=risk.flags;cnt++}});addA(Z.role,'Policy → ${st}','${r.id}','policy',{old:o,new:'${st}'});stateChanged('${r.name} → ${st}'+(cnt?' ('+cnt+' updated)':''))">${st}</button>`).join('')}</div></div><div class="fx jcb aic"><div><span class="tx tm uc f7">Threshold: </span>${edP===r.id?`<span class="fx gap4 aic"><input id="pe_${r.id}" style="width:120px;padding:4px 8px" value="${r.threshold}"><button class="bp bsm" onclick="const p=Z.pol.find(x=>x.id==='${r.id}');const o=p.threshold;const v=document.getElementById('pe_${r.id}').value;p.threshold=isNaN(Number(v))?v:Number(v);edP=null;let cnt=0;Z.req.filter(r=>['Submitted','Risk Review','Draft'].includes(r.status)).forEach(req=>{const risk=cRisk(req.amount,req.collateral,Z.pol,Z.req);if(risk.score!==req.risk_score){req.risk_score=risk.score;req.policy_flags=risk.flags;cnt++}});addA(Z.role,'Threshold','${r.id}','policy',{old:o,new:p.threshold});stateChanged('Updated'+(cnt?' — '+cnt+' recomputed':''))">Save</button></span>`:`<span class="mono f7 ta" style="cursor:pointer" onclick="edP='${r.id}';rPol()">${typeof r.threshold==='number'?r.threshold.toLocaleString():r.threshold}</span>`}</div>${bg(r.scope,'#0174FC')}</div></div>`).join('')}</div>`}
+
+let auF='All';
+function rAud(){const el=document.getElementById('t-audit');const fs=['All','Requests','Approvals','Policy','System'];const tm={'Requests':'request','Approvals':'approval','Policy':'policy','System':'system'};const fl=Z.aud.filter(e=>auF==='All'||e.type===tm[auF]);el.innerHTML=`<div class="fx jcb aic mb16"><div class="pills">${fs.map(f=>`<button class="pill ${auF===f?'on':''}" onclick="auF='${f}';rAud()">${f}</button>`).join('')}</div><button class="bs" onclick="if(Z.role!=='Admin'){toast('Admin only','error');return}dlFile('audit.csv',Z.aud.map(e=>e.ts+','+e.user+','+e.action+','+e.entity+','+(e.trace_id||'')).join('\\n'));toast('Exported','success')">📥 CSV</button></div><div class="card"><div style="max-height:600px;overflow:auto">${fl.map(e=>`<div class="ae"><div class="ae-dc"><div class="ae-dot" style="background:${DC[e.type]||'#6B7280'}"></div><div class="ae-line"></div></div><div style="flex:1"><div class="fx jcb aic"><div><span class="f7">${esc(e.action)}</span><span class="mono ta ts" style="margin-left:8px">${esc(e.entity)}</span></div><span class="tx tm">${new Date(e.ts).toLocaleString()}</span></div><div class="ts tm mt12">by <strong>${esc(e.user)}</strong> · ${e.ip}${e.trace_id?` · <span class="mono tx ta">${e.trace_id}</span>`:''}</div>${e.ctx?.old!==undefined?`<div class="fx gap8 mt12"><div class="diff-old">${esc(String(e.ctx.old))}</div><div class="diff-new">${esc(String(e.ctx.new))}</div></div>`:(e.ctx&&Object.keys(e.ctx).length?`<code class="tx tm" style="display:block;margin-top:6px;padding:4px 8px;background:var(--bgp);border-radius:4px;font-size:10px">${esc(JSON.stringify(e.ctx))}</code>`:'')}</div></div>`).join('')}${fl.length===0?'<div style="text-align:center;padding:40px" class="tm">No entries</div>':''}</div></div>`}
+
+function rSet(){const el=document.getElementById('t-settings');if(Z.role!=='Admin'){el.innerHTML=`<div style="text-align:center;padding:80px" class="tm"><div class="f7 mt12">Admin Only</div></div>`;return}
+const eps=[{n:'Custodian',b:'TLS',k:'custodian'},{n:'Market Data',b:'OAuth2',k:'market'},{n:'CCIL/TREPS',b:'Idempotency',k:'ccil'},{n:'WebSocket',b:'JWT',k:'ws'}];
+el.innerHTML=`<div class="card mb20"><div class="f7 mb16" style="font-size:16px">Integrations & Health</div>${eps.map(e=>{const h=Z.health[e.k];return`<div class="health-row"><div class="fx aic"><span class="sd" style="background:${h.s==='green'?'#22C55E':'#EF4444'};margin-right:8px"></span><span class="f6">${e.n}</span></div><div class="fx gap8 aic">${bg(e.b,'#F59E0B')}<span class="mono ts tm">${h.ms}ms</span><button class="bs bsm" onclick="const h=Z.health['${e.k}'];const f=Math.random()<.2;h.s=f?'red':'green';h.ms=f?9999:Math.floor(Math.random()*200+20);h.t=Date.now();addA('Admin','Test','${e.k}','system',{});toast('${e.n}: '+(f?'FAIL':'OK'),f?'error':'success');rSet()">Test</button></div></div>`}).join('')}</div>
+<div class="card mb20"><div class="fx jcb aic"><div><div class="f7">WebSocket Feed</div><div class="ts tm mt12">Toggle live updates</div></div><button class="toggle ${Z.ws?'on':'off'}" onclick="Z.ws=!Z.ws;document.getElementById('wsD').className='wsd '+(Z.ws?'live':'off');document.getElementById('wsL').textContent=Z.ws?'Live':'Off';toast('WS '+(Z.ws?'on':'off'),'info');rSet()"><div class="tk"></div></button></div></div>
+<div class="card"><div class="f7 mb16">Security</div>${[['TLS 1.3 / mTLS','CCIL endpoints'],['OAuth2 / JWT','API auth'],['AES-256','Encryption at rest'],['Idempotency Keys','POST dedup (409 on duplicate)'],['Circuit Breaker','Failover'],['WORM Audit','Immutable + trace_id + calc_version']].map(([t,d])=>`<div style="padding:10px;background:var(--bgp);border-radius:8px;border-left:3px solid var(--wn);margin-bottom:8px"><span class="f7 ts">${t}</span><span class="tx tm" style="margin-left:8px">${d}</span></div>`).join('')}</div>`}
+
+function rHelp(){const el=document.getElementById('t-help');el.innerHTML=`<div class="card mb20" style="border-left:3px solid var(--brand)"><div class="f8 mb12" style="font-size:17px;color:var(--th)">Regulatory</div><div style="font-size:13px;color:var(--t2);line-height:1.8">RepoReserve prepares <strong>Execution Packets</strong> only. Does <strong class="tw">NOT</strong> match trades. Clearing by <strong>CCIL (TREPS)</strong> under <strong>RBI</strong> rules.</div></div>
+<div class="card mb20"><div class="f7 mb16">Sandbox</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+<button class="sbox" onclick="if(confirm('Fail next settlements?')){addA('SANDBOX','CCIL Failure','SIM','system',{trace_id:trid()});toast('Next settlements will fail','error')}"><div class="f7 mb8" style="color:var(--th)">CCIL Failure</div><div class="tx tm">Next settlement → failed</div></button>
+<button class="sbox" onclick="if(confirm('+2% haircuts?')){Z.col.forEach(c=>c.haircut_pct+=2);addA('SANDBOX','Haircut +2%','ALL','system',{trace_id:trid()});stateChanged('Haircut shock +2%')}"><div class="f7 mb8" style="color:var(--th)">Haircut +2%</div><div class="tx tm">Capacity drops</div></button>
+<button class="sbox" onclick="if(confirm('Custodian outage 8s?')){Z.col.forEach(c=>{c.sync='red';c.last_sync=Date.now()-600000});Z.health.custodian.s='red';Z.custSummary.forEach(cs=>{cs.last_sync=Date.now()-600000;cs.status='delayed'});addA('SANDBOX','Outage','ALL','system',{trace_id:trid()});stateChanged('Custodian outage');setTimeout(()=>{Z.col.forEach(c=>{c.sync='green';c.last_sync=Date.now()});Z.health.custodian.s='green';Z.custSummary.forEach(cs=>{cs.last_sync=Date.now();cs.status='ok'});stateChanged('Restored')},8000)}"><div class="f7 mb8" style="color:var(--th)">Custodian Outage</div><div class="tx tm">Red 8s → auto-recover</div></button></div></div>
+<div class="card"><div class="f7 mb16">Glossary</div><div class="g2" style="gap:10px">${[['TREPS','Tri-party Repo (CCIL)'],['CCIL','Clearing Corp of India'],['Haircut','Margin on collateral MV'],['Execution Packet','JSON for clearing venue'],['Encumbered','Pledged / locked'],['Reserved','Pre-locked by ops (409 on conflict)'],['Idempotency Key','POST dedup header'],['trace_id','Event ordering ID'],['calc_version','Formula version tag'],['metric_update','Server-computed authoritative totals']].map(([t,d])=>`<div class="glos"><span class="f7 ta ts">${t}</span><span class="ts tm" style="margin-left:8px">${d}</span></div>`).join('')}</div></div>`}
+
+/* ═══ SIMULATED WEBSOCKET (custodian_sync + metric_update) ═══ */
+setInterval(()=>{if(!Z.ws)return;
+const rc=Z.col[Math.floor(Math.random()*Z.col.length)];
+if(rc){rc.free_balance=rc.market_value*(0.95+Math.random()*0.05);rc.last_sync=Date.now()}
+Z.custSummary.forEach(cs=>{cs.last_sync=Date.now()-Math.random()*120000;cs.latency_ms=Math.floor(Math.random()*3000+200)});
+recalcAll();
+if(Z.tab==='dashboard'){const els=document.querySelectorAll('.mc .mono.f8');if(els[0])els[0].textContent=fmt(Z.met.cap);if(els[2])els[2].textContent=fmt(Z.met.head)}},5000);
+
+/* ═══ INIT ═══ */
+function init(){Z.req=JSON.parse(JSON.stringify(SD_R));Z.col=JSON.parse(JSON.stringify(SD_C));Z.exec=JSON.parse(JSON.stringify(SD_E));Z.aud=JSON.parse(JSON.stringify(SD_A));Z.pol=JSON.parse(JSON.stringify(SD_P));Z.rpt=JSON.parse(JSON.stringify(SD_RPT));recalcAll();buildNav();rDash()}
+document.addEventListener('DOMContentLoaded',init);
+</script></body></html>
