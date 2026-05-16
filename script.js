@@ -9,6 +9,7 @@ if (isProductionHost && window.location.pathname.toLowerCase().endsWith("/index.
 
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector(".nav-links");
+const navDropdowns = document.querySelectorAll(".nav-dropdown");
 const backToTopBtn = document.querySelector(".back-to-top");
 const inPageLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
 const isMobileViewport = window.matchMedia("(max-width: 900px)").matches;
@@ -16,7 +17,6 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const enableRichMotion = !prefersReducedMotion && !isMobileViewport;
 const revealTargets = enableRichMotion ? document.querySelectorAll("[data-reveal]") : [];
 const sectionAnimatedTargets = enableRichMotion ? document.querySelectorAll("[data-section-animate]") : [];
-let activeScrollAnimationFrame = null;
 
 if (isMobileViewport) {
   document.body.classList.add("perf-lite");
@@ -29,65 +29,6 @@ const runWhenIdle = (callback, timeout = 1200) => {
   }
 
   window.setTimeout(callback, timeout);
-};
-
-const cancelSmoothScroll = () => {
-  if (activeScrollAnimationFrame !== null) {
-    window.cancelAnimationFrame(activeScrollAnimationFrame);
-    activeScrollAnimationFrame = null;
-  }
-};
-
-const easePremiumScroll = (progress) => {
-  if (progress < 0.5) {
-    return 4 * progress * progress * progress;
-  }
-
-  return 1 - Math.pow(-2 * progress + 2, 3) / 2;
-};
-
-const smoothScrollToPosition = (top, options = {}) => {
-  const targetTop = Math.max(0, Math.round(top));
-  const shouldAnimate = !prefersReducedMotion && !options.instant;
-  const startTop = window.scrollY;
-  const distance = targetTop - startTop;
-
-  if (!shouldAnimate || Math.abs(distance) < 8) {
-    cancelSmoothScroll();
-    window.scrollTo({
-      top: targetTop,
-      behavior: "auto"
-    });
-    return;
-  }
-
-  cancelSmoothScroll();
-
-  const duration = Math.min(920, Math.max(520, Math.abs(distance) * 0.48));
-  let startTime = null;
-
-  const step = (timestamp) => {
-    if (startTime === null) {
-      startTime = timestamp;
-    }
-
-    const elapsed = timestamp - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = easePremiumScroll(progress);
-    window.scrollTo({
-      top: startTop + distance * easedProgress,
-      behavior: "auto"
-    });
-
-    if (progress < 1) {
-      activeScrollAnimationFrame = window.requestAnimationFrame(step);
-      return;
-    }
-
-    activeScrollAnimationFrame = null;
-  };
-
-  activeScrollAnimationFrame = window.requestAnimationFrame(step);
 };
 
 const ensureCookieFab = () => {
@@ -189,16 +130,51 @@ const defaultCookiePreferences = {
   analytics: true
 };
 
+const closeNavDropdowns = (except = null) => {
+  navDropdowns.forEach((dropdown) => {
+    if (dropdown === except) {
+      return;
+    }
+
+    dropdown.classList.remove("open");
+    const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+};
+
+if (navDropdowns.length) {
+  navDropdowns.forEach((dropdown) => {
+    const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+    if (!toggle) {
+      return;
+    }
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      const willOpen = !dropdown.classList.contains("open");
+      closeNavDropdowns(dropdown);
+      dropdown.classList.toggle("open", willOpen);
+      toggle.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+}
+
 if (menuBtn && nav) {
   menuBtn.addEventListener("click", () => {
     const isOpen = nav.classList.toggle("open");
     menuBtn.setAttribute("aria-expanded", String(isOpen));
+    if (!isOpen) {
+      closeNavDropdowns();
+    }
   });
 
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       nav.classList.remove("open");
       menuBtn.setAttribute("aria-expanded", "false");
+      closeNavDropdowns();
     });
   });
 
@@ -210,11 +186,22 @@ if (menuBtn && nav) {
     if (!nav.contains(target) && !menuBtn.contains(target)) {
       nav.classList.remove("open");
       menuBtn.setAttribute("aria-expanded", "false");
+      closeNavDropdowns();
     }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    nav.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    closeNavDropdowns();
   });
 }
 
-const scrollToHashWithOffset = (hash, updateUrl = false, options = {}) => {
+const scrollToHashWithOffset = (hash, updateUrl = false) => {
   const target = document.querySelector(hash);
   if (!target) {
     return;
@@ -224,7 +211,10 @@ const scrollToHashWithOffset = (hash, updateUrl = false, options = {}) => {
   const headerHeight = header ? header.offsetHeight : 0;
   const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
 
-  smoothScrollToPosition(top, options);
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: "auto"
+  });
 
   if (updateUrl) {
     history.pushState(null, "", hash);
@@ -251,7 +241,7 @@ if (inPageLinks.length) {
 
 if (window.location.hash) {
   window.setTimeout(() => {
-    scrollToHashWithOffset(window.location.hash, false, { instant: true });
+    scrollToHashWithOffset(window.location.hash, false);
   }, 10);
 }
 
@@ -288,7 +278,10 @@ if (backToTopBtn) {
       }, 460);
     }
 
-    smoothScrollToPosition(0);
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth"
+    });
   });
 }
 

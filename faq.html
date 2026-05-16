@@ -146,7 +146,22 @@
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Main navigation">
         <a href="index.html">Home</a>
-        <a href="solutions.html">Solutions</a>
+        <div class="nav-dropdown">
+          <button
+            type="button"
+            class="nav-dropdown-toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="solutions-menu"
+          >
+            Solutions
+            <span class="nav-dropdown-caret" aria-hidden="true"></span>
+          </button>
+          <div id="solutions-menu" class="nav-dropdown-menu" role="menu">
+            <a href="solutions.html" role="menuitem">Collateral Optimization</a>
+            <a href="fx.html" role="menuitem">FX Optimization</a>
+          </div>
+        </div>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="participants.html">Participants</a>
         <a href="security.html">Security</a>
@@ -359,18 +374,7 @@
         </div>
         <div class="footer-subtitle">Treasury Infrastructure Platform</div>
         <div>RepoReserve Technologies Pvt Ltd</div>
-        <div>Registered Office: Hyderabad, India</div>
-        <div class="footer-company-id footer-company-id-home" aria-label="Corporate registration details">
-          <div class="footer-company-id-kicker">Corporate Registration</div>
-          <div class="footer-company-id-primary">
-            <span class="footer-company-id-tag">CIN</span>
-            <span class="footer-company-id-code">U62099TS2026PTC213868</span>
-          </div>
-          <div class="footer-company-id-secondary">
-            <span class="footer-company-id-secondary-label">Jurisdiction</span>
-            <span class="footer-company-id-secondary-value">Registered in India</span>
-          </div>
-        </div>
+        <div>Hyderabad, India</div>
       </div>
       <div class="footer-column">
         <div class="footer-heading">Product</div>

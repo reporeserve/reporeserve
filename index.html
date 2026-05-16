@@ -113,7 +113,22 @@
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Main navigation">
         <a href="index.html" aria-current="page">Home</a>
-        <a href="solutions.html">Solutions</a>
+        <div class="nav-dropdown">
+          <button
+            type="button"
+            class="nav-dropdown-toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="solutions-menu"
+          >
+            Solutions
+            <span class="nav-dropdown-caret" aria-hidden="true"></span>
+          </button>
+          <div id="solutions-menu" class="nav-dropdown-menu" role="menu">
+            <a href="solutions.html" role="menuitem">Collateral Optimization</a>
+            <a href="fx.html" role="menuitem">FX Optimization</a>
+          </div>
+        </div>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="participants.html">Participants</a>
         <a href="security.html">Security</a>
@@ -137,28 +152,28 @@
                   <rect x="6" y="6" width="3" height="3" rx="0.6"></rect>
                 </svg>
               </span>
-              Institutional Financial Infrastructure
+              Treasury Optimization Infrastructure
             </span>
-            <h1 class="hero-title">Operational visibility for institutions participating in repo markets.</h1>
+            <h1 class="hero-title">Treasury optimization for modern cross-border businesses.</h1>
             <p class="hero-subtext">
-              RepoReserve is a financial infrastructure platform that gives treasury teams a unified operational layer
-              for collateral visibility and repo coordination across institutional counterparties.
+              RepoReserve helps treasury teams optimize FX execution, liquidity coordination, banking workflows, and
+              collateral visibility through a unified operational platform.
             </p>
             <div class="hero-actions">
-              <button type="button" class="btn btn-primary briefing-trigger" data-open-briefing>Request Institutional Briefing</button>
-              <a href="assets/brochure/reporeserve-overview.pdf" class="btn btn-secondary" download>Download Institutional Overview</a>
+              <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Treasury Demo</button>
+              <a href="#solutions" class="btn btn-secondary">Explore Platform Overview</a>
             </div>
           </div>
           <aside class="hero-panel" aria-label="Platform overview" data-reveal style="--delay: 150ms;">
-            <h3>Category Overview</h3>
+            <h3>Treasury Operations Overview</h3>
             <p>
-              RepoReserve is built for cross-institutional alignment, giving teams shared operational context while
-              preserving existing market relationships and controls.
+              RepoReserve provides operational visibility across treasury workflows while preserving existing banking
+              relationships and execution structures.
             </p>
             <ul class="hero-list">
-              <li>Institution-focused visibility across counterparties</li>
-              <li>Coordination layer that supports existing operating models</li>
-              <li>Governance-oriented experience for treasury leadership</li>
+              <li>FX execution optimization across banking counterparties</li>
+              <li>Liquidity and funding coordination workflows</li>
+              <li>Collateral visibility and treasury governance</li>
             </ul>
           </aside>
         </div>
@@ -177,28 +192,28 @@
       <div class="container">
         <div class="section-header" data-reveal>
           <h2>Solutions</h2>
-          <p>Purpose-built capabilities that support institutional repo operations at a strategic level.</p>
+          <p>Treasury workflows designed for modern cross-border operations and institutional coordination.</p>
         </div>
         <div class="cards">
           <article class="card" data-reveal style="--delay: 40ms;">
-            <h3>Collateral Visibility</h3>
+            <h3>FX Optimization</h3>
             <p>
-              Consolidates high-level collateral context into a unified institutional view, enabling faster situational
-              awareness across eligible participants.
+              Optimize FX execution across banking counterparties with improved visibility into spreads, execution
+              routes, and treasury workflows.
             </p>
           </article>
           <article class="card" data-reveal style="--delay: 120ms;">
-            <h3>Operational Coordination</h3>
+            <h3>Liquidity Coordination</h3>
             <p>
-              Supports coordinated operational execution between teams and counterparties through consistent workflows
-              and shared visibility standards.
+              Coordinate funding decisions, treasury operations, and banking relationships through a unified
+              operational layer.
             </p>
           </article>
           <article class="card" data-reveal style="--delay: 200ms;">
-            <h3>Risk &amp; Governance</h3>
+            <h3>Collateral Visibility</h3>
             <p>
-              Strengthens oversight with institution-ready governance controls and audit-oriented traceability for
-              operational decisions.
+              Maintain structured oversight across collateral operations, governance workflows, and institutional
+              treasury activities.
             </p>
           </article>
         </div>
@@ -206,7 +221,7 @@
           <a class="section-page-link" href="solutions.html" aria-label="Explore detailed solutions page">
             <span class="section-page-label">Detailed Page</span>
             <span class="section-page-title">Solutions</span>
-            <span class="section-page-text">Review full capability coverage and institutional outcomes.</span>
+            <span class="section-page-text">Explore treasury optimization capabilities across FX, liquidity, and collateral workflows.</span>
             <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
           </a>
         </div>
@@ -335,70 +350,138 @@
       <div class="container">
         <div class="section-header" data-reveal>
           <h2>Ecosystem</h2>
-          <p>RepoReserve is designed to align stakeholders across the repo participation landscape.</p>
+          <p>
+            RepoReserve connects treasury participants across FX execution, liquidity coordination, banking workflows,
+            and institutional operations.
+          </p>
         </div>
         <div class="ecosystem-network" data-reveal>
           <div class="ecosystem-network-canvas">
             <svg
-              class="ecosystem-svg"
-              viewBox="0 0 980 460"
+              class="ecosystem-svg treasury-flow-svg"
+              viewBox="0 0 920 400"
               role="img"
               aria-labelledby="ecosystem-title ecosystem-desc"
             >
-              <title id="ecosystem-title">RepoReserve Institutional Ecosystem</title>
+              <title id="ecosystem-title">RepoReserve Treasury Coordination Ecosystem</title>
               <desc id="ecosystem-desc">
-                RepoReserve connected with Treasury desks, Mutual funds, NBFCs, Custodians, and Clearing participants.
+                RepoReserve shown as a treasury intelligence layer coordinating importers, exporters, treasury teams,
+                banks, and financial institutions across treasury visibility and FX coordination.
               </desc>
 
-              <g class="net-link">
-                <line x1="490" y1="227" x2="190" y2="98"></line>
-                <line x1="490" y1="227" x2="490" y2="86"></line>
-                <line x1="490" y1="227" x2="790" y2="98"></line>
-                <line x1="490" y1="227" x2="215" y2="350"></line>
-                <line x1="490" y1="227" x2="765" y2="350"></line>
+              <defs>
+                <linearGradient id="flow-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#315dbe" stop-opacity="0.08"></stop>
+                  <stop offset="45%" stop-color="#8fb4ff" stop-opacity="0.62"></stop>
+                  <stop offset="100%" stop-color="#2f6bff" stop-opacity="0.14"></stop>
+                </linearGradient>
+                <radialGradient id="hub-glow" cx="50%" cy="50%" r="62%">
+                  <stop offset="0%" stop-color="#2f6bff" stop-opacity="0.2"></stop>
+                  <stop offset="72%" stop-color="#2f6bff" stop-opacity="0.05"></stop>
+                  <stop offset="100%" stop-color="#2f6bff" stop-opacity="0"></stop>
+                </radialGradient>
+                <filter id="flow-soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.7" result="blur"></feGaussianBlur>
+                  <feMerge>
+                    <feMergeNode in="blur"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+                <linearGradient
+                  id="primary-energy"
+                  x1="460"
+                  y1="160"
+                  x2="460"
+                  y2="118"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stop-color="#9bbdff" stop-opacity="0.46"></stop>
+                  <stop offset="55%" stop-color="#7fa8ff" stop-opacity="0.24"></stop>
+                  <stop offset="100%" stop-color="#7fa8ff" stop-opacity="0.04"></stop>
+                </linearGradient>
+              </defs>
+
+              <g class="treasury-grid" aria-hidden="true">
+                <path d="M96 200 H824"></path>
+                <path d="M460 54 V346"></path>
+                <path d="M150 84 C260 136 342 166 460 200 C578 166 660 136 770 84"></path>
+                <path d="M150 316 C270 266 352 232 460 200 C568 232 650 266 770 316"></path>
               </g>
 
-              <g class="net-node net-participant" transform="translate(70 52)">
-                <rect width="240" height="92" rx="12"></rect>
-                <rect class="net-chip" x="14" y="14" width="36" height="36" rx="9"></rect>
-                <text class="net-chip-text" x="32" y="37">TD</text>
-                <text class="net-label" x="62" y="40">Treasury desks</text>
+              <g class="hub-halo" aria-hidden="true">
+                <ellipse cx="460" cy="200" rx="204" ry="92"></ellipse>
+                <ellipse cx="460" cy="200" rx="132" ry="56"></ellipse>
               </g>
 
-              <g class="net-node net-participant" transform="translate(370 40)">
-                <rect width="240" height="92" rx="12"></rect>
-                <rect class="net-chip" x="14" y="14" width="36" height="36" rx="9"></rect>
-                <text class="net-chip-text" x="32" y="37">MF</text>
-                <text class="net-label" x="62" y="40">Mutual funds</text>
+              <g class="flow-lines" aria-hidden="true">
+                <path class="flow-path" d="M460 200 C384 158 302 126 156 90"></path>
+                <path class="flow-path" d="M460 200 C460 154 460 120 460 78"></path>
+                <path class="flow-path" d="M460 200 C536 158 618 126 764 90"></path>
+                <path class="flow-path" d="M460 200 C382 244 292 274 176 312"></path>
+                <path class="flow-path" d="M460 200 C538 244 628 274 744 312"></path>
+
+                <path class="flow-pulse flow-pulse-1" d="M156 90 C302 126 384 158 460 200"></path>
+                <path class="flow-pulse flow-pulse-2" d="M460 78 C460 120 460 154 460 200"></path>
+                <path class="flow-pulse flow-pulse-3" d="M764 90 C618 126 536 158 460 200"></path>
+                <path class="flow-pulse flow-pulse-4" d="M176 312 C292 274 382 244 460 200"></path>
+                <path class="flow-pulse flow-pulse-5" d="M744 312 C628 274 538 244 460 200"></path>
               </g>
 
-              <g class="net-node net-participant" transform="translate(670 52)">
-                <rect width="240" height="92" rx="12"></rect>
-                <rect class="net-chip" x="14" y="14" width="36" height="36" rx="9"></rect>
-                <text class="net-chip-text" x="32" y="37">NB</text>
-                <text class="net-label" x="62" y="40">NBFCs</text>
+              <g class="treasury-primary-channel" aria-hidden="true">
+                <path class="primary-link-aura" d="M460 160 L460 118"></path>
+                <path class="primary-link-base" d="M460 160 L460 118"></path>
+                <path class="primary-link-pulse" d="M460 160 L460 118"></path>
               </g>
 
-              <g class="net-node net-center" transform="translate(328 168)">
-                <rect width="324" height="118" rx="14"></rect>
-                <rect class="net-chip" x="18" y="18" width="42" height="42" rx="10"></rect>
-                <text class="net-chip-text" x="39" y="45">RR</text>
-                <text class="net-center-title" x="74" y="47">RepoReserve</text>
-                <text class="net-center-subtitle" x="74" y="74">Operational Coordination Layer</text>
+              <g class="net-node net-participant treasury-node" transform="translate(44 50)">
+                <rect width="236" height="78" rx="13"></rect>
+                <rect class="net-chip" x="18" y="20" width="34" height="34" rx="9"></rect>
+                <text class="net-chip-text" x="35" y="41">IM</text>
+                <text class="net-label" x="70" y="41">Importers</text>
               </g>
 
-              <g class="net-node net-participant" transform="translate(95 304)">
-                <rect width="240" height="92" rx="12"></rect>
-                <rect class="net-chip" x="14" y="14" width="36" height="36" rx="9"></rect>
-                <text class="net-chip-text" x="32" y="37">CU</text>
-                <text class="net-label" x="62" y="40">Custodians</text>
+              <g class="net-node net-participant treasury-node" transform="translate(342 40)">
+                <rect width="236" height="78" rx="13"></rect>
+                <rect class="net-chip" x="18" y="20" width="34" height="34" rx="9"></rect>
+                <text class="net-chip-text" x="35" y="41">TT</text>
+                <text class="net-label" x="70" y="41">Treasury Teams</text>
               </g>
 
-              <g class="net-node net-participant" transform="translate(645 304)">
-                <rect width="240" height="92" rx="12"></rect>
-                <rect class="net-chip" x="14" y="14" width="36" height="36" rx="9"></rect>
-                <text class="net-chip-text" x="32" y="37">CP</text>
-                <text class="net-label" x="62" y="40">Clearing participants</text>
+              <g class="net-node net-participant treasury-node" transform="translate(640 50)">
+                <rect width="236" height="78" rx="13"></rect>
+                <rect class="net-chip" x="18" y="20" width="34" height="34" rx="9"></rect>
+                <text class="net-chip-text" x="35" y="41">BK</text>
+                <text class="net-label" x="70" y="41">Banks</text>
+              </g>
+
+              <g class="net-node net-center treasury-hub" transform="translate(324 160)">
+                <rect class="hub-card" width="272" height="82" rx="16"></rect>
+                <rect class="net-logo-frame" x="16" y="17" width="48" height="48" rx="12"></rect>
+                <image
+                  class="net-logo-img"
+                  href="assets/box-logo.svg"
+                  x="16"
+                  y="17"
+                  width="48"
+                  height="48"
+                  preserveAspectRatio="xMidYMid meet"
+                ></image>
+                <text class="net-center-title" x="82" y="39">RepoReserve</text>
+                <text class="net-center-subtitle" x="82" y="62">Treasury Intelligence Layer</text>
+              </g>
+
+              <g class="net-node net-participant treasury-node" transform="translate(62 272)">
+                <rect width="236" height="78" rx="13"></rect>
+                <rect class="net-chip" x="18" y="20" width="34" height="34" rx="9"></rect>
+                <text class="net-chip-text" x="35" y="41">EX</text>
+                <text class="net-label" x="70" y="41">Exporters</text>
+              </g>
+
+              <g class="net-node net-participant treasury-node" transform="translate(622 272)">
+                <rect width="250" height="78" rx="13"></rect>
+                <rect class="net-chip" x="18" y="20" width="34" height="34" rx="9"></rect>
+                <text class="net-chip-text" x="35" y="41">FI</text>
+                <text class="net-label" x="70" y="41">Financial Institutions</text>
               </g>
             </svg>
           </div>
@@ -406,28 +489,28 @@
             <article class="eco-mobile-center">
               <span class="eco-mobile-chip">RR</span>
               <h3>RepoReserve</h3>
-              <p>Operational coordination layer for institutional participants.</p>
+              <p>Treasury intelligence layer for modern cross-border financial operations.</p>
             </article>
             <div class="eco-mobile-grid">
               <article class="eco-mobile-node">
-                <span class="eco-mobile-chip">TD</span>
-                <h4>Treasury desks</h4>
+                <span class="eco-mobile-chip">IM</span>
+                <h4>Importers</h4>
               </article>
               <article class="eco-mobile-node">
-                <span class="eco-mobile-chip">MF</span>
-                <h4>Mutual funds</h4>
+                <span class="eco-mobile-chip">TT</span>
+                <h4>Treasury Teams</h4>
               </article>
               <article class="eco-mobile-node">
-                <span class="eco-mobile-chip">NB</span>
-                <h4>NBFCs</h4>
+                <span class="eco-mobile-chip">BK</span>
+                <h4>Banks</h4>
               </article>
               <article class="eco-mobile-node">
-                <span class="eco-mobile-chip">CU</span>
-                <h4>Custodians</h4>
+                <span class="eco-mobile-chip">EX</span>
+                <h4>Exporters</h4>
               </article>
               <article class="eco-mobile-node">
-                <span class="eco-mobile-chip">CP</span>
-                <h4>Clearing participants</h4>
+                <span class="eco-mobile-chip">FI</span>
+                <h4>Financial Institutions</h4>
               </article>
             </div>
           </div>
@@ -436,13 +519,13 @@
           <a class="section-page-link" href="ecosystem.html" aria-label="Explore detailed ecosystem page">
             <span class="section-page-label">Detailed Page</span>
             <span class="section-page-title">Ecosystem</span>
-            <span class="section-page-text">See participant relationships and institutional landscape context.</span>
+            <span class="section-page-text">Understand treasury participant relationships across cross-border financial operations.</span>
             <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
           </a>
           <a class="section-page-link" href="participants.html" aria-label="Explore participant profile page">
             <span class="section-page-label">Detailed Page</span>
             <span class="section-page-title">Participants</span>
-            <span class="section-page-text">Understand role-specific fit across treasury and operations teams.</span>
+            <span class="section-page-text">Explore how treasury teams, importers, exporters, and institutions interact within RepoReserve.</span>
             <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
           </a>
         </div>
@@ -454,29 +537,29 @@
         <div class="section-header" data-reveal>
           <h2>Security</h2>
           <p>
-            Designed with a security and controls posture expected by institutional market participants, without
-            exposing internal infrastructure details.
+            Built with operational controls and visibility standards designed for modern treasury workflows and
+            cross-border financial operations.
           </p>
         </div>
         <div class="security-grid">
           <article class="security-card" data-reveal style="--delay: 40ms;">
-            <h3>Institutional-Grade Access Control</h3>
-            <p>Role-aware authorization boundaries support controlled access to operational information.</p>
+            <h3>Treasury Access Controls</h3>
+            <p>Role-based permissions help teams securely manage treasury workflows and operational visibility.</p>
           </article>
           <article class="security-card" data-reveal style="--delay: 110ms;">
-            <h3>Audit Logging</h3>
-            <p>Action traceability supports internal oversight, review readiness, and governance accountability.</p>
+            <h3>Operational Audit Trails</h3>
+            <p>Maintain traceability across treasury actions, execution workflows, and internal review processes.</p>
           </article>
           <article class="security-card" data-reveal style="--delay: 180ms;">
-            <h3>Operational Governance</h3>
-            <p>Policy-aligned controls help institutions maintain disciplined and consistent operating standards.</p>
+            <h3>Governance &amp; Oversight</h3>
+            <p>Support structured treasury operations with consistent controls and operational accountability.</p>
           </article>
         </div>
         <div class="section-page-links" data-reveal style="--delay: 220ms;">
           <a class="section-page-link" href="security.html" aria-label="Explore detailed security page">
-            <span class="section-page-label">Detailed Page</span>
+            <span class="section-page-label">DETAILED PAGE</span>
             <span class="section-page-title">Security &amp; Governance</span>
-            <span class="section-page-text">Review control structure, assurance themes, and oversight context.</span>
+            <span class="section-page-text">Explore operational controls, treasury governance standards, and workflow oversight capabilities.</span>
             <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
           </a>
         </div>
@@ -486,43 +569,43 @@
     <section id="engagement" data-section-animate>
       <div class="container">
         <div class="section-header" data-reveal>
-          <h2>How We Engage</h2>
-          <p>A Structured, Confidential Process</p>
+          <h2>How RepoReserve Works</h2>
+          <p>A structured onboarding and treasury optimization process.</p>
         </div>
         <div class="engagement-layout">
           <article class="engagement-panel" data-reveal>
-            <h3>Confidential by Design</h3>
+            <h3>Collaborative Treasury Review</h3>
             <p>
-              Every engagement begins under NDA. We prioritize discretion and institutional trust above all.
+              We begin with an operational review of your treasury workflows, banking relationships, and FX execution
+              processes.
             </p>
             <ul class="engagement-principles">
-              <li>Institution-first discretion and controlled information sharing</li>
-              <li>Mutual confidentiality standards from first conversation onward</li>
-              <li>Structured, transparent path from discussion to pilot</li>
+              <li>Treasury workflow assessment</li>
+              <li>Banking coordination review</li>
+              <li>Structured onboarding and implementation</li>
             </ul>
           </article>
           <ol class="engagement-timeline">
             <li class="engagement-item" data-reveal style="--delay: 40ms;">
               <span class="step-index">01</span>
               <div class="step-content">
-                <h3>Request a Confidential Discussion</h3>
-                <p>Begin with a focused institutional conversation on objectives and fit.</p>
+                <h3>Discovery Call</h3>
+                <p>Understand treasury structure, FX exposure, and operational priorities.</p>
               </div>
             </li>
             <li class="engagement-item" data-reveal style="--delay: 110ms;">
               <span class="step-index">02</span>
               <div class="step-content">
-                <h3>Mutual NDA &amp; Scoping</h3>
-                <p>We align on confidentiality terms and define the engagement scope.</p>
+                <h3>Workflow Assessment</h3>
+                <p>Review banking routes, liquidity coordination, and treasury execution processes.</p>
               </div>
             </li>
             <li class="engagement-item" data-reveal style="--delay: 180ms;">
               <span class="step-index">03</span>
               <div class="step-content">
-                <h3>Tailored Walkthrough &amp; Pilot Discussion</h3>
+                <h3>Platform Walkthrough</h3>
                 <p>
-                  Under NDA, we provide a tailored walkthrough aligned to your institution's treasury structure. If there is
-                  mutual interest, we outline a confidential pilot engagement.
+                  Demonstrate how RepoReserve improves treasury visibility and operational decision-making.
                 </p>
               </div>
             </li>
@@ -580,70 +663,73 @@
       <div class="container">
         <div class="section-header faq-main-header" data-reveal>
           <h2>Frequently Asked Questions</h2>
-          <p>Common Inquiries</p>
+          <p>Guidance on treasury workflows, FX coordination, operational visibility, and platform participation.</p>
         </div>
         <div class="faq-layout">
-          <article class="faq-intro-card" data-reveal style="--delay: 40ms;">
-            <h3>Confidential Institutional Engagement</h3>
-            <p>
-              Submit a confidential discussion request. A member of our team will respond within two business days
-              to schedule an initial conversation.
-            </p>
-            <button type="button" class="btn btn-secondary briefing-trigger" data-open-briefing>Request Confidential Discussion</button>
-          </article>
+          <div class="faq-side">
+            <article class="faq-trust-card" data-reveal style="--delay: 40ms;">
+              <h3>Operational Transparency</h3>
+              <p>
+                RepoReserve is designed to work alongside existing banking relationships while improving treasury
+                visibility and operational coordination.
+              </p>
+              <div class="faq-trust-tags" aria-label="RepoReserve operational focus areas">
+                <span>FX Optimization</span>
+                <span>Treasury Visibility</span>
+                <span>Banking Coordination</span>
+              </div>
+            </article>
+            <a class="faq-nav-card" href="faq.html" data-reveal style="--delay: 95ms;" aria-label="Open detailed FAQ and platform guidance page">
+              <span class="faq-nav-label">DETAILED PAGE</span>
+              <span class="faq-nav-title">FAQ &amp; Platform Guidance</span>
+              <span class="faq-nav-text">
+                Explore detailed answers around FX optimization, treasury coordination, onboarding workflows, and
+                operational visibility.
+              </span>
+              <span class="faq-nav-arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
           <div class="faq-list">
             <details data-reveal style="--delay: 30ms;">
               <summary>What does RepoReserve do?</summary>
               <p>
-                RepoReserve is a treasury collateral visibility and repo operations coordination platform. It provides
-                institutional participants with a consolidated view of collateral positions across custodians and
-                counterparties.
+                RepoReserve helps treasury teams optimize FX execution, liquidity coordination, banking workflows, and
+                operational treasury visibility.
               </p>
             </details>
             <details data-reveal style="--delay: 75ms;">
-              <summary>Who is it designed for?</summary>
+              <summary>Who is RepoReserve designed for?</summary>
               <p>
-                Treasury teams at institutional banks, custodian banks, and clearinghouses that manage repo and
-                collateral operations at scale.
+                Importers, exporters, treasury teams, financial institutions, and businesses managing cross-border
+                financial operations.
               </p>
             </details>
             <details data-reveal style="--delay: 120ms;">
-              <summary>Is this a trading platform?</summary>
+              <summary>Does RepoReserve replace banking relationships?</summary>
               <p>
-                No. RepoReserve is an operations coordination and visibility platform. It does not execute trades,
-                provide pricing, or act as a broker.
+                No. RepoReserve is designed to work alongside existing banking and treasury relationships.
               </p>
             </details>
             <details data-reveal style="--delay: 165ms;">
-              <summary>Why is an NDA required?</summary>
+              <summary>Is RepoReserve a trading platform?</summary>
               <p>
-                Product details, architecture, and workflows are proprietary. We share these only with vetted
-                institutional counterparties under mutual non-disclosure agreements.
+                No. RepoReserve provides treasury workflow visibility and operational coordination infrastructure.
               </p>
             </details>
             <details data-reveal style="--delay: 210ms;">
-              <summary>Can I see a demo before signing an NDA?</summary>
+              <summary>How does RepoReserve improve FX execution?</summary>
               <p>
-                We provide a general overview and this institutional brochure. Detailed demonstrations and documentation
-                are available only after executing a mutual NDA.
+                RepoReserve helps treasury teams evaluate execution routes, banking spreads, and treasury workflows
+                more effectively.
               </p>
             </details>
             <details data-reveal style="--delay: 255ms;">
               <summary>How do I get started?</summary>
               <p>
-                Submit a confidential discussion request. A member of our team will respond within two business days to
-                schedule an initial conversation.
+                Request a platform walkthrough to discuss your treasury operations and explore operational fit.
               </p>
             </details>
           </div>
-        </div>
-        <div class="section-page-links" data-reveal style="--delay: 300ms;">
-          <a class="section-page-link" href="faq.html" aria-label="Open complete FAQ page">
-            <span class="section-page-label">Detailed Page</span>
-            <span class="section-page-title">FAQ</span>
-            <span class="section-page-text">Access the complete institutional Q&amp;A and evaluation guidance.</span>
-            <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
-          </a>
         </div>
       </div>
     </section>
@@ -651,12 +737,11 @@
     <section id="contact">
       <div class="container">
         <div class="cta-wrap" data-reveal>
-          <h2>Request a Confidential Institutional Briefing</h2>
+          <h2>Explore RepoReserve</h2>
           <p>
-            Engage directly with our team to review operational fit, governance expectations, and onboarding pathways
-            under mutual NDA.
+            See how RepoReserve supports treasury visibility, FX coordination, and operational workflows.
           </p>
-          <button type="button" class="btn btn-primary briefing-trigger" data-open-briefing>Request Institutional Briefing</button>
+          <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Walkthrough</button>
         </div>
       </div>
     </section>
@@ -680,22 +765,9 @@
             />
           </a>
         </div>
-        <div class="footer-subtitle footer-subtitle-home">
-          <span class="footer-subtitle-home-text">Institutional Treasury Infrastructure</span>
-        </div>
+        <div class="footer-subtitle">Treasury Infrastructure Platform</div>
         <div>RepoReserve Technologies Pvt Ltd</div>
-        <div>Registered Office: Hyderabad, India</div>
-        <div class="footer-company-id footer-company-id-home" aria-label="Corporate registration details">
-          <div class="footer-company-id-kicker">Corporate Registration</div>
-          <div class="footer-company-id-primary">
-            <span class="footer-company-id-tag">CIN</span>
-            <span class="footer-company-id-code">U62099TS2026PTC213868</span>
-          </div>
-          <div class="footer-company-id-secondary">
-            <span class="footer-company-id-secondary-label">Jurisdiction</span>
-            <span class="footer-company-id-secondary-value">Registered in India</span>
-          </div>
-        </div>
+        <div>Hyderabad, India</div>
       </div>
       <div class="footer-column">
         <div class="footer-heading">Product</div>
