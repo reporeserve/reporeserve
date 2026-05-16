@@ -181,140 +181,70 @@
       </div>
     </section>
 
-    <section id="fx-intelligence" data-section-animate>
+    <section id="fx-engine" data-section-animate>
       <div class="container">
         <div class="section-header" data-reveal>
-          <h2>FX Workflow Intelligence</h2>
-          <p>
-            A controlled treasury coordination layer for cross-border execution visibility, banking workflows, and
-            operational oversight.
-          </p>
+          <h2>FX Optimization Engine</h2>
+          <p>Reduce import and treasury FX costs through intelligent routing, forward analysis, and liquidity optimization.</p>
         </div>
 
-        <div class="fx-network" data-reveal style="--delay: 80ms;" aria-label="FX optimization workflow network">
-          <div class="fx-network-canvas" aria-hidden="true">
-            <svg class="fx-network-svg" viewBox="0 0 900 420" role="img" aria-label="RepoReserve FX workflow network">
-              <defs>
-                <linearGradient id="fx-link-gradient" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#85aaff" stop-opacity="0.18" />
-                  <stop offset="48%" stop-color="#78a4ff" stop-opacity="0.74" />
-                  <stop offset="100%" stop-color="#2f6bff" stop-opacity="0.18" />
-                </linearGradient>
-                <linearGradient id="fx-node-fill" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#142441" />
-                  <stop offset="100%" stop-color="#0d182d" />
-                </linearGradient>
-                <linearGradient id="fx-hub-fill" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#1b315b" />
-                  <stop offset="100%" stop-color="#12213d" />
-                </linearGradient>
-                <filter id="fx-soft-glow" x="-40%" y="-40%" width="180%" height="180%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+        <div class="fxe-capabilities" data-reveal style="--delay: 60ms;">
+          <article class="fxe-card">
+            <div class="fxe-card-indicator" aria-hidden="true"></div>
+            <h3>Smart FX Routing</h3>
+            <p>Compare execution pathways including INR &rarr; USD and INR &rarr; CNH &rarr; USD treasury routes.</p>
+          </article>
+          <article class="fxe-card">
+            <div class="fxe-card-indicator" aria-hidden="true"></div>
+            <h3>Forward Premium Analysis</h3>
+            <p>Evaluate forward pricing structures across USD/INR and USD/CNH currency exposures.</p>
+          </article>
+          <article class="fxe-card">
+            <div class="fxe-card-indicator" aria-hidden="true"></div>
+            <h3>Liquidity Optimization</h3>
+            <p>Improve treasury timing, funding coordination, and settlement efficiency.</p>
+          </article>
+        </div>
 
-              <path class="fx-link" d="M230 105 C320 116 360 166 420 200" />
-              <path class="fx-link" d="M455 78 C456 128 454 162 450 200" />
-              <path class="fx-link" d="M670 105 C586 118 530 166 480 200" />
-              <path class="fx-link" d="M260 328 C340 300 380 254 420 224" />
-              <path class="fx-link" d="M640 328 C560 298 520 254 482 224" />
-
-              <path class="fx-link-pulse" d="M230 105 C320 116 360 166 420 200" />
-              <path class="fx-link-pulse fx-link-pulse-delay-1" d="M455 78 C456 128 454 162 450 200" />
-              <path class="fx-link-pulse fx-link-pulse-delay-2" d="M670 105 C586 118 530 166 480 200" />
-              <path class="fx-link-pulse fx-link-pulse-delay-3" d="M260 328 C340 300 380 254 420 224" />
-              <path class="fx-link-pulse fx-link-pulse-delay-4" d="M640 328 C560 298 520 254 482 224" />
-
-              <g class="fx-node" transform="translate(56 70)">
-                <rect width="190" height="72" rx="14"></rect>
-                <text x="24" y="43">Importers</text>
-              </g>
-              <g class="fx-node" transform="translate(352 42)">
-                <rect width="196" height="72" rx="14"></rect>
-                <text x="24" y="43">Treasury Teams</text>
-              </g>
-              <g class="fx-node" transform="translate(654 70)">
-                <rect width="190" height="72" rx="14"></rect>
-                <text x="24" y="43">Banks</text>
-              </g>
-              <g class="fx-node" transform="translate(86 298)">
-                <rect width="190" height="72" rx="14"></rect>
-                <text x="24" y="43">Exporters</text>
-              </g>
-              <g class="fx-node" transform="translate(624 298)">
-                <rect width="220" height="72" rx="14"></rect>
-                <text x="24" y="43">Financial Institutions</text>
-              </g>
-
-              <g class="fx-hub" transform="translate(344 174)" filter="url(#fx-soft-glow)">
-                <rect width="212" height="86" rx="18"></rect>
-                <text class="fx-hub-title" x="106" y="38">RepoReserve</text>
-                <text class="fx-hub-subtitle" x="106" y="61">FX Intelligence Layer</text>
-              </g>
-
-              <g class="fx-label" transform="translate(288 144)">
-                <rect x="-50" y="-16" width="100" height="32" rx="16"></rect>
-                <text>FX Routing</text>
-              </g>
-              <g class="fx-label" transform="translate(610 144)">
-                <rect x="-65" y="-16" width="130" height="32" rx="16"></rect>
-                <text>Spread Visibility</text>
-              </g>
-              <g class="fx-label" transform="translate(450 132)">
-                <rect x="-88" y="-16" width="176" height="32" rx="16"></rect>
-                <text>Treasury Coordination</text>
-              </g>
-              <g class="fx-label" transform="translate(293 270)">
-                <rect x="-74" y="-16" width="148" height="32" rx="16"></rect>
-                <text>Liquidity Visibility</text>
-              </g>
-              <g class="fx-label" transform="translate(604 270)">
-                <rect x="-78" y="-16" width="156" height="32" rx="16"></rect>
-                <text>Execution Oversight</text>
-              </g>
-            </svg>
+        <div class="fxe-routing" data-reveal style="--delay: 140ms;">
+          <div class="fxe-routing-header">
+            <span class="fxe-routing-label">Routing Comparison</span>
+            <span class="fxe-routing-meta">Treasury execution pathways</span>
           </div>
-
-          <div class="fx-network-mobile" aria-label="FX workflow participants">
-            <div class="fx-mobile-hub">
-              <strong>RepoReserve</strong>
-              <span>FX Intelligence Layer</span>
+          <div class="fxe-routing-grid">
+            <article class="fxe-route">
+              <div class="fxe-route-tag">Direct Route</div>
+              <div class="fxe-route-flow">
+                <span class="fxe-route-node">INR</span>
+                <span class="fxe-route-connector" aria-hidden="true">
+                  <span class="fxe-route-line"></span>
+                  <span class="fxe-route-arrow"></span>
+                </span>
+                <span class="fxe-route-node fxe-route-node-end">USD</span>
+              </div>
+              <p class="fxe-route-desc">Standard banking execution through primary FX counterparty.</p>
+            </article>
+            <div class="fxe-routing-divider" aria-hidden="true">
+              <span>vs</span>
             </div>
-            <div class="fx-mobile-participants">
-              <span>Importers</span>
-              <span>Exporters</span>
-              <span>Banks</span>
-              <span>Treasury Teams</span>
-              <span>Financial Institutions</span>
-            </div>
+            <article class="fxe-route">
+              <div class="fxe-route-tag fxe-route-tag-optimized">Optimized Route</div>
+              <div class="fxe-route-flow">
+                <span class="fxe-route-node">INR</span>
+                <span class="fxe-route-connector" aria-hidden="true">
+                  <span class="fxe-route-line"></span>
+                  <span class="fxe-route-arrow"></span>
+                </span>
+                <span class="fxe-route-node fxe-route-node-mid">CNH</span>
+                <span class="fxe-route-connector" aria-hidden="true">
+                  <span class="fxe-route-line"></span>
+                  <span class="fxe-route-arrow"></span>
+                </span>
+                <span class="fxe-route-node fxe-route-node-end">USD</span>
+              </div>
+              <p class="fxe-route-desc">Multi-leg treasury route via offshore CNH for potential cost reduction.</p>
+            </article>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fx-capabilities" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Key Capabilities</h2>
-          <p>Concise operational tools for teams reviewing FX activity across treasury and banking relationships.</p>
-        </div>
-        <div class="cards">
-          <article class="card" data-reveal style="--delay: 40ms;">
-            <h3>FX Execution Visibility</h3>
-            <p>Monitor spreads, routing pathways, and banking execution workflows.</p>
-          </article>
-          <article class="card" data-reveal style="--delay: 110ms;">
-            <h3>Banking Coordination</h3>
-            <p>Coordinate treasury activity across banking relationships and operational teams.</p>
-          </article>
-          <article class="card" data-reveal style="--delay: 180ms;">
-            <h3>Treasury Oversight</h3>
-            <p>Improve execution transparency and cross-border treasury visibility.</p>
-          </article>
         </div>
       </div>
     </section>
@@ -322,40 +252,44 @@
     <section id="fx-workflow" data-section-animate>
       <div class="container">
         <div class="section-header" data-reveal>
-          <h2>Treasury Workflow</h2>
-          <p>Structured coordination from initial treasury request through operational review and oversight.</p>
+          <h2>Treasury Operational Flow</h2>
+          <p>Structured coordination from initial treasury request through execution and settlement visibility.</p>
         </div>
-        <div class="fx-workflow-grid">
-          <article class="fx-workflow-step" data-reveal style="--delay: 40ms;">
-            <span class="fx-step-index">01</span>
-            <h3>Treasury Request</h3>
-            <p>Capture the business context, currency exposure, and operational objective at a review level.</p>
-          </article>
-          <article class="fx-workflow-step" data-reveal style="--delay: 100ms;">
-            <span class="fx-step-index">02</span>
-            <h3>Banking Route Review</h3>
-            <p>Compare available banking pathways and execution considerations without exposing internal logic.</p>
-          </article>
-          <article class="fx-workflow-step" data-reveal style="--delay: 160ms;">
-            <span class="fx-step-index">03</span>
-            <h3>FX Execution Coordination</h3>
-            <p>Support treasury alignment across teams, counterparties, and required operating controls.</p>
-          </article>
-          <article class="fx-workflow-step" data-reveal style="--delay: 220ms;">
-            <span class="fx-step-index">04</span>
-            <h3>Visibility &amp; Oversight</h3>
-            <p>Maintain consistent review context for treasury leadership and operational accountability.</p>
-          </article>
+        <div class="fxe-flow-strip" data-reveal style="--delay: 60ms;">
+          <div class="fxe-flow-step">
+            <span class="fxe-flow-index">01</span>
+            <span class="fxe-flow-title">Treasury Request</span>
+          </div>
+          <span class="fxe-flow-connector" aria-hidden="true"></span>
+          <div class="fxe-flow-step">
+            <span class="fxe-flow-index">02</span>
+            <span class="fxe-flow-title">Route Evaluation</span>
+          </div>
+          <span class="fxe-flow-connector" aria-hidden="true"></span>
+          <div class="fxe-flow-step">
+            <span class="fxe-flow-index">03</span>
+            <span class="fxe-flow-title">FX Coordination</span>
+          </div>
+          <span class="fxe-flow-connector" aria-hidden="true"></span>
+          <div class="fxe-flow-step">
+            <span class="fxe-flow-index">04</span>
+            <span class="fxe-flow-title">Liquidity Optimization</span>
+          </div>
+          <span class="fxe-flow-connector" aria-hidden="true"></span>
+          <div class="fxe-flow-step">
+            <span class="fxe-flow-index">05</span>
+            <span class="fxe-flow-title">Settlement Visibility</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="contact">
       <div class="container">
-        <div class="cta-wrap" data-reveal>
-          <h2>Explore FX Optimization</h2>
-          <p>See how RepoReserve supports treasury execution coordination and operational FX visibility.</p>
-          <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Walkthrough</button>
+        <div class="cta-wrap fxe-cta" data-reveal>
+          <h2>Get Your FX Cost Audit</h2>
+          <p>Share your recent transaction flow and RepoReserve will identify potential optimization opportunities.</p>
+          <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Analysis</button>
         </div>
       </div>
     </section>
