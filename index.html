@@ -90,8 +90,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260516" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260516" />
+  <link rel="preload" href="styles.css?v=20260517f" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260517f" />
 </head>
 <body class="home-page">
   <header class="site-header">
@@ -191,39 +191,102 @@
     <section id="solutions" data-section-animate>
       <div class="container">
         <div class="section-header" data-reveal>
-          <h2>Solutions</h2>
-          <p>Treasury workflows designed for modern cross-border operations and institutional coordination.</p>
+          <h2>Treasury Workflows</h2>
+          <p>Operational infrastructure designed for cross-border payments, FX execution, liquidity coordination, and institutional treasury workflows.</p>
         </div>
-        <div class="cards">
-          <article class="card" data-reveal style="--delay: 40ms;">
-            <h3>FX Optimization</h3>
-            <p>
-              Optimize FX execution across banking counterparties with improved visibility into spreads, execution
-              routes, and treasury workflows.
-            </p>
-          </article>
-          <article class="card" data-reveal style="--delay: 120ms;">
-            <h3>Liquidity Coordination</h3>
-            <p>
-              Coordinate funding decisions, treasury operations, and banking relationships through a unified
-              operational layer.
-            </p>
-          </article>
-          <article class="card" data-reveal style="--delay: 200ms;">
-            <h3>Collateral Visibility</h3>
-            <p>
-              Maintain structured oversight across collateral operations, governance workflows, and institutional
-              treasury activities.
-            </p>
-          </article>
-        </div>
-        <div class="section-page-links" data-reveal style="--delay: 260ms;">
-          <a class="section-page-link" href="solutions.html" aria-label="Explore detailed solutions page">
-            <span class="section-page-label">Detailed Page</span>
-            <span class="section-page-title">Solutions</span>
-            <span class="section-page-text">Explore treasury optimization capabilities across FX, liquidity, and collateral workflows.</span>
-            <span class="section-page-arrow" aria-hidden="true">&#8594;</span>
+        <div class="sol-grid" data-reveal style="--delay: 60ms;">
+
+          <a href="fx.html" class="sol-card">
+            <div class="sol-card-inner">
+              <div class="sol-card-top">
+                <span class="sol-card-tag">Workflow</span>
+                <h3>Import &amp; Export FX Optimization</h3>
+                <p class="sol-card-desc">Reduce currency conversion costs and improve international payment execution with better visibility into exchange rates, banking spreads, and treasury workflows for importers and exporters.</p>
+              </div>
+              <div class="sol-card-indicators">
+                <div class="sol-indicator-group">
+                  <span class="sol-indicator-label">For Importers</span>
+                  <ul class="sol-indicator-list">
+                    <li>Lower international payment costs</li>
+                    <li>Compare FX rates across banks</li>
+                    <li>Better visibility into forward pricing</li>
+                    <li>Smarter payment timing</li>
+                  </ul>
+                </div>
+                <div class="sol-indicator-group">
+                  <span class="sol-indicator-label">For Exporters</span>
+                  <ul class="sol-indicator-list">
+                    <li>Improve export conversion timing</li>
+                    <li>Better visibility into incoming payments</li>
+                    <li>Optimize FX realization workflows</li>
+                    <li>Coordinate collections across banks</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="sol-card-cta">
+                <span>Explore FX Optimization</span>
+                <span class="sol-card-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+            </div>
+            <svg class="sol-card-bg" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="sol-line-a" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="rgba(47,107,255,0)"/>
+                  <stop offset="50%" stop-color="rgba(47,107,255,0.12)"/>
+                  <stop offset="100%" stop-color="rgba(47,107,255,0)"/>
+                </linearGradient>
+              </defs>
+              <line x1="40" y1="320" x2="520" y2="320" stroke="url(#sol-line-a)" stroke-width="0.5"/>
+              <line x1="40" y1="280" x2="520" y2="280" stroke="url(#sol-line-a)" stroke-width="0.5"/>
+              <line x1="40" y1="240" x2="520" y2="240" stroke="url(#sol-line-a)" stroke-width="0.5"/>
+              <circle cx="120" cy="300" r="2" fill="rgba(47,107,255,0.15)"/>
+              <circle cx="280" cy="260" r="2" fill="rgba(47,107,255,0.15)"/>
+              <circle cx="440" cy="290" r="2" fill="rgba(47,107,255,0.15)"/>
+              <line x1="120" y1="300" x2="280" y2="260" stroke="rgba(47,107,255,0.08)" stroke-width="0.5"/>
+              <line x1="280" y1="260" x2="440" y2="290" stroke="rgba(47,107,255,0.08)" stroke-width="0.5"/>
+            </svg>
           </a>
+
+          <a href="solutions.html" class="sol-card">
+            <div class="sol-card-inner">
+              <div class="sol-card-top">
+                <span class="sol-card-tag">Infrastructure</span>
+                <h3>Collateral &amp; Liquidity Infrastructure</h3>
+                <p class="sol-card-desc">Manage liquidity operations, collateral oversight, and treasury coordination through a centralized institutional infrastructure layer.</p>
+              </div>
+              <div class="sol-card-indicators">
+                <div class="sol-indicator-group sol-indicator-group--single">
+                  <span class="sol-indicator-label">Operational Capabilities</span>
+                  <ul class="sol-indicator-list">
+                    <li>Liquidity coordination</li>
+                    <li>Treasury operation visibility</li>
+                    <li>Collateral monitoring workflows</li>
+                    <li>Institutional funding oversight</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="sol-card-cta">
+                <span>Explore Treasury Infrastructure</span>
+                <span class="sol-card-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+            </div>
+            <svg class="sol-card-bg" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="sol-grid-g" cx="50%" cy="60%" r="50%">
+                  <stop offset="0%" stop-color="rgba(47,107,255,0.06)"/>
+                  <stop offset="100%" stop-color="rgba(47,107,255,0)"/>
+                </radialGradient>
+              </defs>
+              <rect x="80" y="200" width="400" height="160" rx="4" fill="url(#sol-grid-g)"/>
+              <line x1="80" y1="240" x2="480" y2="240" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
+              <line x1="80" y1="280" x2="480" y2="280" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
+              <line x1="80" y1="320" x2="480" y2="320" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
+              <line x1="180" y1="200" x2="180" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
+              <line x1="280" y1="200" x2="280" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
+              <line x1="380" y1="200" x2="380" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
+            </svg>
+          </a>
+
         </div>
       </div>
     </section>
