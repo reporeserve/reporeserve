@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260517c" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260517c" />
+  <link rel="preload" href="styles.css?v=20260525fximporters2" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260525fximporters2" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -124,460 +124,145 @@
   </header>
 
   <main id="top">
-    <section class="hero fx-hero">
-      <div class="container hero-grid">
-        <div class="hero-content" data-reveal style="--delay: 40ms;">
-          <span class="eyebrow hero-eyebrow">
-            <span class="eyebrow-icon" aria-hidden="true">
-              <svg viewBox="0 0 10 10" focusable="false">
-                <rect x="1" y="1" width="3" height="3" rx="0.6"></rect>
-                <rect x="6" y="1" width="3" height="3" rx="0.6"></rect>
-                <rect x="1" y="6" width="3" height="3" rx="0.6"></rect>
-                <rect x="6" y="6" width="3" height="3" rx="0.6"></rect>
-              </svg>
-            </span>
-            FX Optimization
-          </span>
-          <h1 class="hero-title">FX Optimization Infrastructure For Treasury Teams</h1>
-          <p class="hero-subtext">
-            Improve cross-border treasury execution through banking coordination, FX visibility, and operational
-            workflow intelligence.
-          </p>
-          <div class="hero-actions">
-            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Walkthrough</button>
-            <a href="#fx-workflow" class="btn btn-secondary">Explore Workflow</a>
+
+    <!-- ═══ HERO: THE PROBLEM ═══ -->
+    <section class="hero fx-hero" id="the-problem">
+      <div class="fxp-rupee-watermark" aria-hidden="true">
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+        <span>₹</span>
+      </div>
+      <div class="container">
+        <div class="fxp-importer-kicker" data-reveal>For Importers</div>
+        <div class="fxp-stats-bar" data-reveal>
+          <div class="fxp-stat"><span class="fxp-stat-dot"></span> Avg. leakage recovered <strong>2.3%</strong></div>
+          <div class="fxp-stat"><span class="fxp-stat-dot"></span> Import-cycle linked <strong>FX strategy</strong></div>
+          <div class="fxp-stat"><span class="fxp-stat-dot"></span> Zero team disruption <strong>guaranteed</strong></div>
+        </div>
+        <div class="fxp-hero-content" data-reveal style="--delay: 80ms;">
+          <h1 class="fxp-hero-title">
+            Find the best way to pay
+            <span class="fxp-hero-accent">foreign suppliers.</span>
+          </h1>
+          <p class="fxp-hero-sub">Many companies negotiate supplier pricing well but still lose significantly through inefficient FX execution, payment timing, and treasury workflows.</p>
+          <div class="fxp-hero-actions">
+            <a href="#the-math" class="btn btn-primary">See Hidden FX Leakage</a>
+            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Request Demo</button>
           </div>
         </div>
-
-        <aside class="fx-hero-visual" aria-label="FX treasury execution overview" data-reveal style="--delay: 150ms;">
-          <div class="fx-visual-head">
-            <span>FX OPERATING LAYER</span>
-            <span>Public Overview</span>
-          </div>
-          <div class="fx-visual-title">
-            <h2>Treasury Execution View</h2>
-            <p>Operational context for route review, bank coordination, and internal treasury oversight.</p>
-          </div>
-          <div class="fx-terminal-stack" aria-label="FX workflow indicators">
-            <div class="fx-terminal-row">
-              <span>Banking route review</span>
-              <strong>Coordinated</strong>
-            </div>
-            <div class="fx-terminal-row">
-              <span>Spread visibility</span>
-              <strong>Contextual</strong>
-            </div>
-            <div class="fx-terminal-row">
-              <span>Execution oversight</span>
-              <strong>Governed</strong>
-            </div>
-          </div>
-          <div class="fx-visual-footer">
-            <span>FX visibility</span>
-            <span>Treasury workflows</span>
-            <span>Banking coordination</span>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section id="fx-engine" data-section-animate>
+    <!-- ═══ WHAT WE DO ═══ -->
+    <section id="what-we-do" data-section-animate>
       <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>FX Optimization Engine</h2>
-          <p>Reduce import and treasury FX costs through intelligent routing, forward analysis, and liquidity optimization.</p>
-        </div>
-
-        <div class="fxe-capabilities" data-reveal style="--delay: 60ms;">
-          <article class="fxe-card">
-            <div class="fxe-card-indicator" aria-hidden="true"></div>
-            <h3>Smart FX Routing</h3>
-            <p>Compare execution pathways including INR &rarr; USD and INR &rarr; CNH &rarr; USD treasury routes.</p>
-          </article>
-          <article class="fxe-card">
-            <div class="fxe-card-indicator" aria-hidden="true"></div>
-            <h3>Forward Premium Analysis</h3>
-            <p>Evaluate forward pricing structures across USD/INR and USD/CNH currency exposures.</p>
-          </article>
-          <article class="fxe-card">
-            <div class="fxe-card-indicator" aria-hidden="true"></div>
-            <h3>Liquidity Optimization</h3>
-            <p>Improve treasury timing, funding coordination, and settlement efficiency.</p>
-          </article>
-        </div>
-
-        <div class="fxe-routing" data-reveal style="--delay: 140ms;">
-          <div class="fxe-routing-header">
-            <span class="fxe-routing-label">Routing Comparison</span>
-            <span class="fxe-routing-meta">Treasury execution pathways</span>
-          </div>
-          <div class="fxe-routing-grid">
-            <article class="fxe-route">
-              <div class="fxe-route-tag">Direct Route</div>
-              <div class="fxe-route-flow">
-                <span class="fxe-route-node">INR</span>
-                <span class="fxe-route-connector" aria-hidden="true">
-                  <span class="fxe-route-line"></span>
-                  <span class="fxe-route-arrow"></span>
-                </span>
-                <span class="fxe-route-node fxe-route-node-end">USD</span>
+        <div class="fxp-split" data-reveal>
+          <div class="fxp-split-visual">
+            <div class="fxp-cost-card">
+              <div class="fxp-cost-header">Procurement vs Treasury &mdash; Cost View</div>
+              <div class="fxp-cost-rows">
+                <div class="fxp-cost-row">
+                  <span>Supplier negotiation</span>
+                  <span class="fxp-cost-val fxp-cost-val--green">&minus;3.0%</span>
+                </div>
+                <div class="fxp-cost-row">
+                  <span>Logistics optimization</span>
+                  <span class="fxp-cost-val fxp-cost-val--green">&minus;1.2%</span>
+                </div>
+                <div class="fxp-cost-row">
+                  <span>Inventory efficiency</span>
+                  <span class="fxp-cost-val fxp-cost-val--green">&minus;0.8%</span>
+                </div>
+                <div class="fxp-cost-row">
+                  <span>FX execution loss</span>
+                  <span class="fxp-cost-val fxp-cost-val--red">+1.4%</span>
+                </div>
+                <div class="fxp-cost-row">
+                  <span>Hedge timing loss</span>
+                  <span class="fxp-cost-val fxp-cost-val--red">+0.7%</span>
+                </div>
+                <div class="fxp-cost-row">
+                  <span>Payment gaps</span>
+                  <span class="fxp-cost-val fxp-cost-val--red">+0.5%</span>
+                </div>
               </div>
-              <p class="fxe-route-desc">Standard banking execution through primary FX counterparty.</p>
-            </article>
-            <div class="fxe-routing-divider" aria-hidden="true">
-              <span>vs</span>
-            </div>
-            <article class="fxe-route">
-              <div class="fxe-route-tag fxe-route-tag-optimized">Optimized Route</div>
-              <div class="fxe-route-flow">
-                <span class="fxe-route-node">INR</span>
-                <span class="fxe-route-connector" aria-hidden="true">
-                  <span class="fxe-route-line"></span>
-                  <span class="fxe-route-arrow"></span>
-                </span>
-                <span class="fxe-route-node fxe-route-node-mid">CNH</span>
-                <span class="fxe-route-connector" aria-hidden="true">
-                  <span class="fxe-route-line"></span>
-                  <span class="fxe-route-arrow"></span>
-                </span>
-                <span class="fxe-route-node fxe-route-node-end">USD</span>
-              </div>
-              <p class="fxe-route-desc">Multi-leg treasury route via offshore CNH for potential cost reduction.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fx-workflow" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Treasury Operational Flow</h2>
-          <p>Structured coordination from initial treasury request through execution and settlement visibility.</p>
-        </div>
-        <div class="fxe-flow-strip" data-reveal style="--delay: 60ms;">
-          <div class="fxe-flow-step">
-            <span class="fxe-flow-index">01</span>
-            <span class="fxe-flow-title">Treasury Request</span>
-          </div>
-          <span class="fxe-flow-connector" aria-hidden="true"></span>
-          <div class="fxe-flow-step">
-            <span class="fxe-flow-index">02</span>
-            <span class="fxe-flow-title">Route Evaluation</span>
-          </div>
-          <span class="fxe-flow-connector" aria-hidden="true"></span>
-          <div class="fxe-flow-step">
-            <span class="fxe-flow-index">03</span>
-            <span class="fxe-flow-title">FX Coordination</span>
-          </div>
-          <span class="fxe-flow-connector" aria-hidden="true"></span>
-          <div class="fxe-flow-step">
-            <span class="fxe-flow-index">04</span>
-            <span class="fxe-flow-title">Liquidity Optimization</span>
-          </div>
-          <span class="fxe-flow-connector" aria-hidden="true"></span>
-          <div class="fxe-flow-step">
-            <span class="fxe-flow-index">05</span>
-            <span class="fxe-flow-title">Settlement Visibility</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 1. FX Execution Impact -->
-    <section id="fx-impact" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>FX Execution Impact</h2>
-          <p>How RepoReserve restructures treasury FX coordination versus traditional single-bank execution.</p>
-        </div>
-        <div class="fxe-impact-grid" data-reveal style="--delay: 60ms;">
-          <div class="fxe-impact-col">
-            <div class="fxe-impact-label">Traditional FX Execution</div>
-            <ul class="fxe-impact-list">
-              <li><span class="fxe-impact-icon fxe-impact-icon--legacy" aria-hidden="true"></span>Single-bank routing</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--legacy" aria-hidden="true"></span>Limited spread visibility</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--legacy" aria-hidden="true"></span>Manual treasury coordination</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--legacy" aria-hidden="true"></span>Static execution timing</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--legacy" aria-hidden="true"></span>Limited operational oversight</li>
-            </ul>
-          </div>
-          <div class="fxe-impact-divider" aria-hidden="true"><span></span></div>
-          <div class="fxe-impact-col fxe-impact-col--optimized">
-            <div class="fxe-impact-label fxe-impact-label--optimized">RepoReserve Optimized Workflow</div>
-            <ul class="fxe-impact-list">
-              <li><span class="fxe-impact-icon fxe-impact-icon--optimized" aria-hidden="true"></span>Multi-route treasury evaluation</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--optimized" aria-hidden="true"></span>Structured routing visibility</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--optimized" aria-hidden="true"></span>Treasury workflow coordination</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--optimized" aria-hidden="true"></span>Liquidity-aware execution</li>
-              <li><span class="fxe-impact-icon fxe-impact-icon--optimized" aria-hidden="true"></span>Centralized operational oversight</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Treasury Participants -->
-    <section id="fx-participants" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Treasury Participants</h2>
-          <p>Institutional stakeholders coordinated within the FX execution workflow.</p>
-        </div>
-        <div class="fxe-participants" data-reveal style="--delay: 60ms;">
-          <article class="fxe-participant">
-            <div class="fxe-participant-marker" aria-hidden="true"></div>
-            <h3>Treasury Teams</h3>
-            <p>Coordinate execution review, routing visibility, and operational treasury workflows across currency exposures.</p>
-          </article>
-          <article class="fxe-participant">
-            <div class="fxe-participant-marker" aria-hidden="true"></div>
-            <h3>Importers</h3>
-            <p>Manage inbound payment obligations, FX timing decisions, and cross-border settlement coordination.</p>
-          </article>
-          <article class="fxe-participant">
-            <div class="fxe-participant-marker" aria-hidden="true"></div>
-            <h3>Exporters</h3>
-            <p>Optimize receivable conversion, forward contract positioning, and repatriation routing efficiency.</p>
-          </article>
-          <article class="fxe-participant">
-            <div class="fxe-participant-marker" aria-hidden="true"></div>
-            <h3>Banking Partners</h3>
-            <p>Provide execution infrastructure, liquidity access, and settlement finality across currency corridors.</p>
-          </article>
-          <article class="fxe-participant">
-            <div class="fxe-participant-marker" aria-hidden="true"></div>
-            <h3>Financial Institutions</h3>
-            <p>Support treasury operations through structured products, credit facilities, and institutional FX access.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Execution Oversight Panel -->
-    <section id="fx-oversight" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Execution Oversight</h2>
-          <p>Centralized operational visibility across active treasury coordination workflows.</p>
-        </div>
-        <div class="fxe-oversight" data-reveal style="--delay: 60ms;">
-          <div class="fxe-oversight-block">
-            <span class="fxe-oversight-key">Route Status</span>
-            <span class="fxe-oversight-val fxe-oversight-val--active">Active</span>
-          </div>
-          <div class="fxe-oversight-block">
-            <span class="fxe-oversight-key">Banking Coordination</span>
-            <span class="fxe-oversight-val fxe-oversight-val--synced">Synced</span>
-          </div>
-          <div class="fxe-oversight-block">
-            <span class="fxe-oversight-key">Treasury Review</span>
-            <span class="fxe-oversight-val fxe-oversight-val--progress">In Progress</span>
-          </div>
-          <div class="fxe-oversight-block">
-            <span class="fxe-oversight-key">Settlement Visibility</span>
-            <span class="fxe-oversight-val fxe-oversight-val--monitored">Monitored</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. FX Execution Lifecycle -->
-    <section id="fx-lifecycle" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>FX Execution Lifecycle</h2>
-          <p>End-to-end treasury coordination from exposure identification through settlement oversight.</p>
-        </div>
-        <div class="fxe-lifecycle" data-reveal style="--delay: 60ms;">
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">01</span>
-            <span class="fxe-lifecycle-label">Exposure Identified</span>
-          </div>
-          <span class="fxe-lifecycle-connector" aria-hidden="true"></span>
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">02</span>
-            <span class="fxe-lifecycle-label">Route Evaluation</span>
-          </div>
-          <span class="fxe-lifecycle-connector" aria-hidden="true"></span>
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">03</span>
-            <span class="fxe-lifecycle-label">Forward Analysis</span>
-          </div>
-          <span class="fxe-lifecycle-connector" aria-hidden="true"></span>
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">04</span>
-            <span class="fxe-lifecycle-label">Bank Coordination</span>
-          </div>
-          <span class="fxe-lifecycle-connector" aria-hidden="true"></span>
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">05</span>
-            <span class="fxe-lifecycle-label">Execution Visibility</span>
-          </div>
-          <span class="fxe-lifecycle-connector" aria-hidden="true"></span>
-          <div class="fxe-lifecycle-step">
-            <span class="fxe-lifecycle-num">06</span>
-            <span class="fxe-lifecycle-label">Settlement Oversight</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Banking Coordination -->
-    <section id="fx-banking" data-section-animate>
-      <div class="container">
-        <div class="fxe-banking" data-reveal>
-          <div class="fxe-banking-header">
-            <span class="fxe-banking-badge">Institutional Positioning</span>
-            <h2>RepoReserve Does Not Replace Banking Relationships</h2>
-            <p>RepoReserve operates as a treasury coordination layer &mdash; improving routing visibility, centralizing operational oversight, and supporting institutional execution coordination alongside existing banking infrastructure.</p>
-          </div>
-          <div class="fxe-banking-grid">
-            <div class="fxe-banking-item">
-              <h4>Workflow Coordination</h4>
-              <p>Structures treasury execution workflows across banking counterparties and currency corridors.</p>
-            </div>
-            <div class="fxe-banking-item">
-              <h4>Routing Visibility</h4>
-              <p>Provides structured comparison of execution pathways without replacing bank execution infrastructure.</p>
-            </div>
-            <div class="fxe-banking-item">
-              <h4>Operational Oversight</h4>
-              <p>Centralizes coordination status, settlement tracking, and treasury review processes.</p>
-            </div>
-            <div class="fxe-banking-item">
-              <h4>Execution Support</h4>
-              <p>Supports institutional decision-making through structured data, forward analysis, and liquidity timing.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Why Routing Matters — SVG Hub Diagram -->
-    <section id="fx-routing-edu" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Why Routing Matters</h2>
-          <p>Core factors that impact treasury FX execution cost and settlement efficiency.</p>
-        </div>
-        <div class="fxe-hub-wrap" data-reveal style="--delay: 60ms;">
-          <svg class="fxe-hub-svg" viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <radialGradient id="hub-core-fill" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="rgba(30,50,90,0.95)"/>
-                <stop offset="100%" stop-color="rgba(14,23,44,0.95)"/>
-              </radialGradient>
-              <linearGradient id="hub-spoke-g" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="rgba(47,107,255,0.04)"/>
-                <stop offset="50%" stop-color="rgba(47,107,255,0.22)"/>
-                <stop offset="100%" stop-color="rgba(47,107,255,0.04)"/>
-              </linearGradient>
-              <filter id="hub-glow">
-                <feGaussianBlur stdDeviation="6" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <filter id="hub-dot-glow">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <!-- Outer ring -->
-            <circle cx="480" cy="260" r="72" fill="none" stroke="rgba(47,107,255,0.08)" stroke-width="1"/>
-            <!-- Inner ring -->
-            <circle cx="480" cy="260" r="56" fill="none" stroke="rgba(47,107,255,0.15)" stroke-width="1"/>
-            <!-- Core -->
-            <circle cx="480" cy="260" r="50" fill="url(#hub-core-fill)" stroke="rgba(47,107,255,0.35)" stroke-width="1" filter="url(#hub-glow)"/>
-            <!-- Core label -->
-            <text x="480" y="254" text-anchor="middle" fill="#2f6bff" font-size="13" font-weight="700" letter-spacing="0.5">FX</text>
-            <text x="480" y="272" text-anchor="middle" fill="#2f6bff" font-size="13" font-weight="700" letter-spacing="0.5">Routing</text>
-            <!-- Spokes -->
-            <line x1="480" y1="208" x2="480" y2="105" stroke="url(#hub-spoke-g)" stroke-width="1"/>
-            <line x1="428" y1="230" x2="248" y2="140" stroke="url(#hub-spoke-g)" stroke-width="1"/>
-            <line x1="532" y1="230" x2="712" y2="140" stroke="url(#hub-spoke-g)" stroke-width="1"/>
-            <line x1="428" y1="290" x2="248" y2="400" stroke="url(#hub-spoke-g)" stroke-width="1"/>
-            <line x1="532" y1="290" x2="712" y2="400" stroke="url(#hub-spoke-g)" stroke-width="1"/>
-            <!-- Endpoint dots -->
-            <circle cx="480" cy="100" r="3.5" fill="#2f6bff" filter="url(#hub-dot-glow)"/>
-            <circle cx="244" cy="138" r="3.5" fill="#2f6bff" filter="url(#hub-dot-glow)"/>
-            <circle cx="716" cy="138" r="3.5" fill="#2f6bff" filter="url(#hub-dot-glow)"/>
-            <circle cx="244" cy="402" r="3.5" fill="#2f6bff" filter="url(#hub-dot-glow)"/>
-            <circle cx="716" cy="402" r="3.5" fill="#2f6bff" filter="url(#hub-dot-glow)"/>
-          </svg>
-          <!-- Overlay HTML nodes -->
-          <div class="fxe-hub-nodes">
-            <div class="fxe-hub-node fxe-hub-node--1">
-              <h4>Direct Routing</h4>
-              <p>Single-leg execution through primary counterparty &mdash; simple but often sub-optimal on spread.</p>
-            </div>
-            <div class="fxe-hub-node fxe-hub-node--2">
-              <h4>Offshore Liquidity</h4>
-              <p>Deeper pools via offshore corridors reduce execution cost on large treasury flows.</p>
-            </div>
-            <div class="fxe-hub-node fxe-hub-node--3">
-              <h4>Spread Fragmentation</h4>
-              <p>Varying spreads across counterparties create optimization when execution is coordinated.</p>
-            </div>
-            <div class="fxe-hub-node fxe-hub-node--4">
-              <h4>Settlement Timing</h4>
-              <p>T+1 vs T+2 windows affect liquidity positioning and funding cost across pairs.</p>
-            </div>
-            <div class="fxe-hub-node fxe-hub-node--5">
-              <h4>Execution Coordination</h4>
-              <p>Structured visibility across treasury stakeholders reduces friction and timing risk.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Governance & Oversight — Concentric Shield -->
-    <section id="fx-governance" data-section-animate>
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <h2>Governance &amp; Oversight</h2>
-          <p>Enterprise-grade operational traceability and institutional coordination standards.</p>
-        </div>
-        <div class="fxe-gov-wrap" data-reveal style="--delay: 60ms;">
-          <div class="fxe-gov-list">
-            <div class="fxe-gov-row fxe-gov-row--1">
-              <span class="fxe-gov-bar" aria-hidden="true"></span>
-              <div class="fxe-gov-row-content">
-                <span class="fxe-gov-tier">Layer 01</span>
-                <h4>Operational Traceability</h4>
-                <p>Full audit trail across treasury workflows, execution decisions, and routing evaluations.</p>
+              <div class="fxp-cost-total">
+                <span>Net saving after treasury leakage</span>
+                <strong class="fxp-cost-total-val">1.4%</strong>
               </div>
             </div>
-            <div class="fxe-gov-row fxe-gov-row--2">
-              <span class="fxe-gov-bar" aria-hidden="true"></span>
-              <div class="fxe-gov-row-content">
-                <span class="fxe-gov-tier">Layer 02</span>
-                <h4>Treasury Oversight</h4>
-                <p>Structured review processes with role-based visibility into execution status and coordination state.</p>
+          </div>
+          <div class="fxp-split-text">
+            <span class="fxp-section-label">What We Do</span>
+            <h2>Procurement optimizes cost. We optimize what comes after.</h2>
+            <p>Your team is good at negotiating supplier price. RepoReserve handles the treasury side &mdash; the part that quietly erases those savings.</p>
+            <a href="#the-math" class="btn btn-primary">See How It Works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THE MATH ═══ -->
+    <section id="the-math" data-section-animate>
+      <div class="container">
+        <div class="fxp-split fxp-split--reverse" data-reveal>
+          <div class="fxp-split-text">
+            <span class="fxp-section-label">The Math</span>
+            <h2>You saved 3%. Treasury gave 2% back.</h2>
+            <p>Supplier negotiation saves $100 &rarr; $97. But inefficient FX execution, poor hedge timing, and payment gaps quietly reclaim most of that gain.</p>
+            <p class="fxp-text-highlight">RepoReserve identifies exactly where the leakage is &mdash; and closes it.</p>
+            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Get a Treasury Review</button>
+          </div>
+          <div class="fxp-split-visual">
+            <div class="fxp-leakage-card">
+              <div class="fxp-leakage-header">Where the 3% Saving Goes</div>
+              <div class="fxp-leakage-rows">
+                <div class="fxp-leakage-row">
+                  <div class="fxp-leakage-info">
+                    <span>Poor hedge timing</span>
+                    <span class="fxp-leakage-val">&minus;0.65%</span>
+                  </div>
+                  <div class="fxp-leakage-bar"><span style="width: 65%"></span></div>
+                </div>
+                <div class="fxp-leakage-row">
+                  <div class="fxp-leakage-info">
+                    <span>Rollover inefficiency</span>
+                    <span class="fxp-leakage-val">&minus;0.40%</span>
+                  </div>
+                  <div class="fxp-leakage-bar"><span style="width: 40%"></span></div>
+                </div>
+                <div class="fxp-leakage-row">
+                  <div class="fxp-leakage-info">
+                    <span>Weak FX execution</span>
+                    <span class="fxp-leakage-val">&minus;0.70%</span>
+                  </div>
+                  <div class="fxp-leakage-bar"><span style="width: 70%"></span></div>
+                </div>
+                <div class="fxp-leakage-row">
+                  <div class="fxp-leakage-info">
+                    <span>Payment structure gaps</span>
+                    <span class="fxp-leakage-val">&minus;0.35%</span>
+                  </div>
+                  <div class="fxp-leakage-bar"><span style="width: 35%"></span></div>
+                </div>
               </div>
-            </div>
-            <div class="fxe-gov-row fxe-gov-row--3">
-              <span class="fxe-gov-bar" aria-hidden="true"></span>
-              <div class="fxe-gov-row-content">
-                <span class="fxe-gov-tier">Layer 03</span>
-                <h4>Workflow Governance</h4>
-                <p>Defined approval hierarchies, execution thresholds, and operational escalation protocols.</p>
-              </div>
-            </div>
-            <div class="fxe-gov-row fxe-gov-row--4">
-              <span class="fxe-gov-bar" aria-hidden="true"></span>
-              <div class="fxe-gov-row-content">
-                <span class="fxe-gov-tier">Layer 04</span>
-                <h4>Execution Visibility</h4>
-                <p>Real-time coordination status across banking partners, settlement windows, and treasury workflows.</p>
-              </div>
-            </div>
-            <div class="fxe-gov-row fxe-gov-row--5">
-              <span class="fxe-gov-bar" aria-hidden="true"></span>
-              <div class="fxe-gov-row-content">
-                <span class="fxe-gov-tier">Layer 05</span>
-                <h4>Institutional Coordination</h4>
-                <p>Unified operational layer connecting treasury teams, banking counterparties, and compliance stakeholders.</p>
+              <div class="fxp-leakage-total">
+                <div>
+                  <span class="fxp-leakage-total-label">Net saving after leakage</span>
+                  <span class="fxp-leakage-total-num">+0.90%</span>
+                  <span class="fxp-leakage-total-of">of 3.00% saved</span>
+                </div>
               </div>
             </div>
           </div>
@@ -585,23 +270,54 @@
       </div>
     </section>
 
-    <!-- 9. Enterprise Positioning -->
-    <section id="fx-positioning" data-section-animate>
+    <!-- ═══ OUR ROLE ═══ -->
+    <section id="our-role" data-section-animate>
       <div class="container">
-        <div class="fxe-positioning" data-reveal>
-          <span class="fxe-positioning-tag">Enterprise Infrastructure</span>
-          <h2>Built For Modern Treasury Operations</h2>
-          <p>RepoReserve supports treasury coordination across FX execution, banking workflows, liquidity visibility, and operational oversight.</p>
+        <div class="fxp-split" data-reveal>
+          <div class="fxp-split-visual">
+            <div class="fxp-role-card">
+              <div class="fxp-role-row">
+                <span>Procurement Team</span>
+                <span class="fxp-role-badge">Existing</span>
+              </div>
+              <div class="fxp-role-row">
+                <span>Finance &amp; Accounts</span>
+                <span class="fxp-role-badge">Existing</span>
+              </div>
+              <div class="fxp-role-row">
+                <span>Bank Relationships</span>
+                <span class="fxp-role-badge">Existing</span>
+              </div>
+              <div class="fxp-role-row fxp-role-row--new">
+                <span>RepoReserve &mdash; FX &amp; Treasury</span>
+                <span class="fxp-role-badge fxp-role-badge--new">New Layer</span>
+              </div>
+            </div>
+          </div>
+          <div class="fxp-split-text">
+            <span class="fxp-section-label">Our Role</span>
+            <h2>We don't replace your team. We add what's missing.</h2>
+            <p>RepoReserve adds a focused FX and treasury optimization layer. Your procurement and finance teams stay exactly as they are.</p>
+            <p class="fxp-text-highlight">No disruption. No restructuring. Just the additional precision layer your import business has never had.</p>
+            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Treasury Review</button>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ═══ CONTACT CTA ═══ -->
     <section id="contact">
       <div class="container">
         <div class="cta-wrap fxe-cta" data-reveal>
-          <h2>Get Your FX Cost Audit</h2>
-          <p>Share your recent transaction flow and RepoReserve will identify potential optimization opportunities.</p>
-          <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Analysis</button>
+          <h2>Want to find your hidden FX losses?</h2>
+          <p>We'll map your FX and payment workflow and show you exactly where the leakage is.</p>
+          <div class="fxp-cta-actions">
+            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Treasury Review</button>
+            <a href="https://wa.me/919999999999" class="btn btn-secondary fxp-wa-btn" target="_blank" rel="noopener noreferrer">
+              <span class="fxp-wa-dot"></span>
+              Connect on WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -851,17 +567,3 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

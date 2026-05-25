@@ -90,8 +90,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260517f" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260517f" />
+  <link rel="preload" href="styles.css?v=20260525" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260525" />
 </head>
 <body class="home-page">
   <header class="site-header">
@@ -144,17 +144,32 @@
         <div class="hero-grid">
           <div class="hero-content" data-reveal style="--delay: 40ms;">
             <span class="eyebrow hero-eyebrow">
-              <span class="eyebrow-icon" aria-hidden="true">
-                <svg viewBox="0 0 10 10" focusable="false">
-                  <rect x="1" y="1" width="3" height="3" rx="0.6"></rect>
-                  <rect x="6" y="1" width="3" height="3" rx="0.6"></rect>
-                  <rect x="1" y="6" width="3" height="3" rx="0.6"></rect>
-                  <rect x="6" y="6" width="3" height="3" rx="0.6"></rect>
-                </svg>
+              <span class="eyebrow-fx-flow" aria-hidden="true">
+                <span class="eyebrow-currency">&#8377;</span>
+                <span class="eyebrow-arrow">&rarr;</span>
+                <span class="eyebrow-currency">$</span>
+                <span class="eyebrow-arrow">&rarr;</span>
+                <span class="eyebrow-currency">&euro;</span>
+                <span class="eyebrow-arrow">&rarr;</span>
+                <span class="eyebrow-currency">AED</span>
+                <span class="eyebrow-arrow">&rarr;</span>
+                <span class="eyebrow-currency">&yen;</span>
               </span>
-              Treasury Optimization Infrastructure
+              <span class="eyebrow-divider"></span>
+              <span class="eyebrow-ticker" aria-live="polite">
+                <span class="eyebrow-ticker-track">
+                  <span class="eyebrow-ticker-item">INR Import Optimization</span>
+                  <span class="eyebrow-ticker-item">FX Rate Comparison</span>
+                  <span class="eyebrow-ticker-item">Export Payment Timing</span>
+                  <span class="eyebrow-ticker-item">Multi-Bank Execution</span>
+                  <span class="eyebrow-ticker-item">Treasury Workflow Engine</span>
+                  <span class="eyebrow-ticker-item">INR Import Optimization</span>
+                </span>
+              </span>
             </span>
-            <h1 class="hero-title">Treasury optimization for modern cross-border businesses.</h1>
+            <div class="hero-title-wrap">
+              <h1 class="hero-title">Treasury optimization for modern cross-border businesses.</h1>
+            </div>
             <p class="hero-subtext">
               RepoReserve helps treasury teams optimize FX execution, liquidity coordination, banking workflows, and
               collateral visibility through a unified operational platform.
@@ -199,92 +214,61 @@
           <a href="fx.html" class="sol-card">
             <div class="sol-card-inner">
               <div class="sol-card-top">
-                <span class="sol-card-tag">Workflow</span>
-                <h3>Import &amp; Export FX Optimization</h3>
-                <p class="sol-card-desc">Reduce currency conversion costs and improve international payment execution with better visibility into exchange rates, banking spreads, and treasury workflows for importers and exporters.</p>
-              </div>
-              <div class="sol-card-indicators">
-                <div class="sol-indicator-group">
-                  <span class="sol-indicator-label">For Importers</span>
-                  <ul class="sol-indicator-list">
-                    <li>Lower international payment costs</li>
-                    <li>Compare FX rates across banks</li>
-                    <li>Better visibility into forward pricing</li>
-                    <li>Smarter payment timing</li>
-                  </ul>
+                <div class="sol-card-icon sol-card-icon--fx" aria-hidden="true">
+                  <span class="sol-icon-currency sol-icon-cur-1">&#8377;</span>
+                  <svg class="sol-icon-arrows" viewBox="0 0 20 12" fill="none">
+                    <path d="M2 6h16M14 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="sol-arrow-right"/>
+                    <path d="M18 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="sol-arrow-left"/>
+                  </svg>
+                  <span class="sol-icon-currency sol-icon-cur-2">$</span>
                 </div>
-                <div class="sol-indicator-group">
-                  <span class="sol-indicator-label">For Exporters</span>
-                  <ul class="sol-indicator-list">
-                    <li>Improve export conversion timing</li>
-                    <li>Better visibility into incoming payments</li>
-                    <li>Optimize FX realization workflows</li>
-                    <li>Coordinate collections across banks</li>
-                  </ul>
+                <div class="sol-card-header">
+                  <span class="sol-card-tag">Workflow</span>
+                  <h3>FX Optimization</h3>
                 </div>
+                <p class="sol-card-desc">Reduce conversion costs and improve payment execution with visibility into exchange rates across banking counterparties.</p>
               </div>
+              <ul class="sol-indicator-list">
+                <li>Compare FX rates across banks</li>
+                <li>Optimize payment timing</li>
+                <li>Forward pricing visibility</li>
+              </ul>
               <div class="sol-card-cta">
                 <span>Explore FX Optimization</span>
                 <span class="sol-card-arrow" aria-hidden="true">&rarr;</span>
               </div>
             </div>
-            <svg class="sol-card-bg" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="sol-line-a" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="rgba(47,107,255,0)"/>
-                  <stop offset="50%" stop-color="rgba(47,107,255,0.12)"/>
-                  <stop offset="100%" stop-color="rgba(47,107,255,0)"/>
-                </linearGradient>
-              </defs>
-              <line x1="40" y1="320" x2="520" y2="320" stroke="url(#sol-line-a)" stroke-width="0.5"/>
-              <line x1="40" y1="280" x2="520" y2="280" stroke="url(#sol-line-a)" stroke-width="0.5"/>
-              <line x1="40" y1="240" x2="520" y2="240" stroke="url(#sol-line-a)" stroke-width="0.5"/>
-              <circle cx="120" cy="300" r="2" fill="rgba(47,107,255,0.15)"/>
-              <circle cx="280" cy="260" r="2" fill="rgba(47,107,255,0.15)"/>
-              <circle cx="440" cy="290" r="2" fill="rgba(47,107,255,0.15)"/>
-              <line x1="120" y1="300" x2="280" y2="260" stroke="rgba(47,107,255,0.08)" stroke-width="0.5"/>
-              <line x1="280" y1="260" x2="440" y2="290" stroke="rgba(47,107,255,0.08)" stroke-width="0.5"/>
-            </svg>
           </a>
 
           <a href="solutions.html" class="sol-card">
             <div class="sol-card-inner">
               <div class="sol-card-top">
-                <span class="sol-card-tag">Infrastructure</span>
-                <h3>Collateral &amp; Liquidity Infrastructure</h3>
-                <p class="sol-card-desc">Manage liquidity operations, collateral oversight, and treasury coordination through a centralized institutional infrastructure layer.</p>
-              </div>
-              <div class="sol-card-indicators">
-                <div class="sol-indicator-group sol-indicator-group--single">
-                  <span class="sol-indicator-label">Operational Capabilities</span>
-                  <ul class="sol-indicator-list">
-                    <li>Liquidity coordination</li>
-                    <li>Treasury operation visibility</li>
-                    <li>Collateral monitoring workflows</li>
-                    <li>Institutional funding oversight</li>
-                  </ul>
+                <div class="sol-card-icon sol-card-icon--infra" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 21V7l8-4 8 4v14"/>
+                    <path d="M4 13h16"/>
+                    <path d="M12 3v18"/>
+                    <path d="M8 7v6M16 7v6"/>
+                    <path d="M8 17v4M16 17v4"/>
+                    <path d="M4 7h16"/>
+                  </svg>
                 </div>
+                <div class="sol-card-header">
+                  <span class="sol-card-tag">Infrastructure</span>
+                  <h3>Collateral &amp; Liquidity</h3>
+                </div>
+                <p class="sol-card-desc">Manage liquidity operations and collateral oversight through a centralized institutional infrastructure layer.</p>
               </div>
+              <ul class="sol-indicator-list">
+                <li>Liquidity coordination</li>
+                <li>Collateral monitoring</li>
+                <li>Funding oversight</li>
+              </ul>
               <div class="sol-card-cta">
-                <span>Explore Treasury Infrastructure</span>
+                <span>Explore Infrastructure</span>
                 <span class="sol-card-arrow" aria-hidden="true">&rarr;</span>
               </div>
             </div>
-            <svg class="sol-card-bg" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <radialGradient id="sol-grid-g" cx="50%" cy="60%" r="50%">
-                  <stop offset="0%" stop-color="rgba(47,107,255,0.06)"/>
-                  <stop offset="100%" stop-color="rgba(47,107,255,0)"/>
-                </radialGradient>
-              </defs>
-              <rect x="80" y="200" width="400" height="160" rx="4" fill="url(#sol-grid-g)"/>
-              <line x1="80" y1="240" x2="480" y2="240" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
-              <line x1="80" y1="280" x2="480" y2="280" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
-              <line x1="80" y1="320" x2="480" y2="320" stroke="rgba(47,107,255,0.06)" stroke-width="0.5"/>
-              <line x1="180" y1="200" x2="180" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
-              <line x1="280" y1="200" x2="280" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
-              <line x1="380" y1="200" x2="380" y2="360" stroke="rgba(47,107,255,0.05)" stroke-width="0.5"/>
-            </svg>
           </a>
 
         </div>
@@ -1223,9 +1207,6 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
 
 
 
