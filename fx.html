@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260526k" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260526k" />
+  <link rel="preload" href="styles.css?v=20260526m" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260526m" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -157,8 +157,8 @@
           </h1>
           <p class="fxp-hero-sub">Many companies negotiate supplier pricing well but still lose significantly through inefficient FX execution, payment timing, and treasury workflows.</p>
           <div class="fxp-hero-actions">
-            <a href="#the-math" class="btn btn-primary">See Hidden FX Leakage</a>
-            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Request Demo</button>
+            <a href="#the-math" class="btn btn-primary">Identify FX Leakage</a>
+            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Unlock Treasury Insights</button>
           </div>
         </div>
       </div>
@@ -207,7 +207,7 @@
             <span class="fxp-section-label">What We Do</span>
             <h2>Procurement optimizes cost. We optimize what comes after.</h2>
             <p>Your team is good at negotiating supplier price. RepoReserve handles the treasury side &mdash; the part that quietly erases those savings.</p>
-            <a href="#the-math" class="btn btn-primary">See How It Works</a>
+            <a href="#the-math" class="btn btn-primary">See Hidden Costs</a>
           </div>
         </div>
       </div>
@@ -222,7 +222,7 @@
             <h2>You saved 3%. Treasury gave 2% back.</h2>
             <p>Supplier negotiation saves $100 &rarr; $97. But inefficient FX execution, poor hedge timing, and payment gaps quietly reclaim most of that gain.</p>
             <p class="fxp-text-highlight">RepoReserve identifies exactly where the leakage is &mdash; and closes it.</p>
-            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Get a Treasury Review</button>
+            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Analyze Treasury Leakage</button>
           </div>
           <div class="fxp-split-visual">
             <div class="fxp-leakage-card">
@@ -299,7 +299,7 @@
             <h2>We don't replace your team. We add what's missing.</h2>
             <p>RepoReserve adds a focused FX and treasury optimization layer. Your procurement and finance teams stay exactly as they are.</p>
             <p class="fxp-text-highlight">No disruption. No restructuring. Just the additional precision layer your import business has never had.</p>
-            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Treasury Review</button>
+            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Audit FX Exposure</button>
           </div>
         </div>
       </div>
@@ -312,7 +312,7 @@
           <h2>Want to find your hidden FX losses?</h2>
           <p>We'll map your FX and payment workflow and show you exactly where the leakage is.</p>
           <div class="fxp-cta-actions">
-            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Request Treasury Review</button>
+            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Map My FX Leakage</button>
             <a href="https://wa.me/917780143759" class="btn btn-secondary fxp-wa-btn" target="_blank" rel="noopener noreferrer">
               <span class="fxp-wa-dot"></span>
               Connect on WhatsApp
@@ -406,79 +406,45 @@
 
   <div class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" aria-hidden="true">
     <div class="demo-modal-panel">
-      <button type="button" class="demo-modal-close" aria-label="Close Request a Demo form">x</button>
-      <h2 id="demo-modal-title">Request a Demo</h2>
+      <button type="button" class="demo-modal-close" aria-label="Close form">&times;</button>
+      <h2 id="demo-modal-title">Get a free FX treasury review for your import business.</h2>
+      <p class="demo-modal-sub">We help importers identify hidden FX leakage and optimize payment workflows.</p>
       <form class="demo-form" novalidate>
-        <div class="demo-field">
-          <label for="business-email">Business Email<span>*</span></label>
-          <input id="business-email" name="business_email" type="email" required />
-        </div>
-
         <div class="demo-grid-two">
           <div class="demo-field">
-            <label for="first-name">First Name<span>*</span></label>
-            <input id="first-name" name="first_name" type="text" required />
+            <input id="fx-name" name="full_name" type="text" required placeholder="Your Name *" />
           </div>
           <div class="demo-field">
-            <label for="last-name">Last Name<span>*</span></label>
-            <input id="last-name" name="last_name" type="text" required />
+            <input id="fx-email" name="business_email" type="email" required placeholder="Email ID *" />
           </div>
         </div>
 
         <div class="demo-grid-two">
-          <div class="demo-field">
-            <label for="company-name">Company Name<span>*</span></label>
-            <input id="company-name" name="company_name" type="text" required />
+          <div class="demo-field demo-field-phone">
+            <span class="demo-phone-prefix"><img src="assets/india-flag.svg" alt="" width="20" height="14" /> +91</span>
+            <input id="fx-phone" name="phone_number" type="tel" required pattern="[0-9]{10}" inputmode="numeric" placeholder="Mobile No *" />
           </div>
           <div class="demo-field">
-            <label for="job-title">Job Title<span>*</span></label>
-            <input id="job-title" name="job_title" type="text" required />
+            <input id="fx-company" name="company_name" type="text" required placeholder="Organization Name *" />
           </div>
         </div>
 
         <div class="demo-field">
-          <label>Service Region</label>
-          <input type="text" value="India" readonly />
-          <input type="hidden" name="service_region" value="India" />
+          <input id="fx-products" name="products" type="text" placeholder="Products / HS Code" />
+        </div>
+
+        <div class="demo-field demo-field-radio">
+          <label class="demo-radio"><input type="radio" name="data_type" value="import" checked /> Import Data</label>
+          <label class="demo-radio"><input type="radio" name="data_type" value="export" /> Export Data</label>
+          <label class="demo-radio"><input type="radio" name="data_type" value="both" /> Both</label>
         </div>
 
         <div class="demo-field">
-          <label for="phone-number">Phone Number (India)<span>*</span></label>
-          <input
-            id="phone-number"
-            name="phone_number"
-            type="tel"
-            required
-            pattern="[0-9]{10}"
-            inputmode="numeric"
-            placeholder="10-digit mobile number"
-          />
+          <textarea id="fx-requirements" name="requirements" rows="3" placeholder="Describe Your Requirements *" required></textarea>
         </div>
-
-        <div class="demo-field">
-          <label for="solution-interest">What is your solution interest?</label>
-          <select id="solution-interest" name="solution_interest">
-            <option value="">Select</option>
-            <option>FX optimization</option>
-            <option>Collateral visibility</option>
-            <option>Operational coordination</option>
-            <option>Risk and governance</option>
-            <option>Institutional briefing</option>
-          </select>
-        </div>
-
-        <div class="demo-assurance" aria-hidden="true">
-          <div class="demo-assurance-title">Institutional Request Handling</div>
-          <div class="demo-assurance-meta">All submissions are reviewed by our internal team.</div>
-        </div>
-
-        <p class="demo-privacy-text">
-          RepoReserve needs the contact information provided to communicate with you about products and services. For
-          information on privacy practices, review the policy links in the footer.
-        </p>
 
         <div class="demo-actions">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Run My Analysis</button>
         </div>
         <p class="demo-success" role="status" aria-live="polite"></p>
       </form>
