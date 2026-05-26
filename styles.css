@@ -8476,58 +8476,95 @@ html {
       gap: 0;
       width: 100vw;
       margin-left: calc(-50vw + 50%);
-      padding: 32px 40px;
+      padding: 0;
       position: relative;
-      background: linear-gradient(180deg,
-        #050b18 0%,
-        #0a1428 50%,
-        #050b18 100%);
-      border-top: 1px solid rgba(47, 107, 255, 0.15);
-      border-bottom: 1px solid rgba(47, 107, 255, 0.15);
+      background: #060d1c;
       overflow: hidden;
       box-sizing: border-box;
+    }
+
+    /* Top edge glow line */
+    .fxp-announce-band::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(47, 107, 255, 0.08) 15%,
+        rgba(47, 107, 255, 0.35) 50%,
+        rgba(47, 107, 255, 0.08) 85%,
+        transparent 100%);
+      z-index: 2;
+    }
+
+    /* Bottom edge glow line */
+    .fxp-announce-band::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(47, 107, 255, 0.08) 15%,
+        rgba(47, 107, 255, 0.35) 50%,
+        rgba(47, 107, 255, 0.08) 85%,
+        transparent 100%);
+      z-index: 2;
     }
 
     .fxp-announce-content {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-      z-index: 2;
+      gap: 20px;
+      z-index: 3;
       position: relative;
+      padding: 28px 40px;
     }
 
     .fxp-announce-icon {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      color: #2f6bff;
-      filter: drop-shadow(0 0 10px rgba(47, 107, 255, 0.4));
+      width: 30px;
+      height: 30px;
+      color: #4d8aff;
+      filter: drop-shadow(0 0 12px rgba(47, 107, 255, 0.6))
+             drop-shadow(0 0 4px rgba(47, 107, 255, 0.3));
     }
 
     .fxp-announce-text {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: #7a90b8;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: rgba(180, 200, 230, 0.55);
       text-transform: uppercase;
       line-height: 1;
       white-space: nowrap;
     }
 
+    .fxp-announce-line1 {
+      /* desktop: inline, same style as parent */
+    }
+
     .fxp-announce-highlight {
-      color: #eaf1ff;
-      background: linear-gradient(90deg, #2f6bff 0%, #5a9cff 50%, #2f6bff 100%);
-      background-size: 200% 100%;
+      color: #a8cbff;
+      background: linear-gradient(90deg, #5a9bff 0%, #8ec5ff 35%, #ffffff 50%, #8ec5ff 65%, #5a9bff 100%);
+      background-size: 300% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
-      letter-spacing: 0.22em;
+      font-weight: 700;
+      letter-spacing: 0.24em;
     }
 
     .motion-ok .fxp-announce-highlight {
-      animation: fxp-highlight-shift 4s ease-in-out infinite;
+      animation: fxp-highlight-shift 6s ease-in-out infinite;
     }
 
     @keyframes fxp-highlight-shift {
@@ -8537,41 +8574,28 @@ html {
 
     /* Glowing accent lines */
     .fxp-announce-glow {
-      flex-shrink: 0;
+      flex-shrink: 1;
       height: 1px;
       position: relative;
-      z-index: 2;
-      width: 160px;
+      z-index: 3;
+      width: 200px;
+      max-width: 14vw;
     }
 
     .fxp-announce-glow--left {
       background: linear-gradient(90deg,
         transparent 0%,
-        rgba(47, 107, 255, 0.04) 20%,
-        rgba(47, 107, 255, 0.45) 100%);
-      margin-right: 28px;
+        rgba(47, 107, 255, 0.03) 30%,
+        rgba(47, 107, 255, 0.3) 100%);
+      margin-right: 0;
     }
 
     .fxp-announce-glow--right {
       background: linear-gradient(90deg,
-        rgba(47, 107, 255, 0.45) 0%,
-        rgba(47, 107, 255, 0.04) 80%,
+        rgba(47, 107, 255, 0.3) 0%,
+        rgba(47, 107, 255, 0.03) 70%,
         transparent 100%);
-      margin-left: 28px;
-    }
-
-    /* Subtle ambient glow */
-    .fxp-announce-band::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 100px;
-      background: radial-gradient(ellipse, rgba(47, 107, 255, 0.07) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
+      margin-left: 0;
     }
 
     /* ── Split Layouts ── */
@@ -9139,8 +9163,9 @@ html {
       }
 
       .fxp-announce-content {
-        flex-direction: row;
-        gap: 14px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
         background: rgba(8, 16, 32, 0.82);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -9151,6 +9176,7 @@ html {
           0 8px 32px rgba(0, 0, 0, 0.5),
           0 0 24px rgba(47, 107, 255, 0.08),
           inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        width: 100%;
       }
 
       .fxp-announce-icon {
@@ -9160,16 +9186,30 @@ html {
       }
 
       .fxp-announce-text {
-        font-size: 0.68rem;
-        letter-spacing: 0.13em;
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
         white-space: normal;
-        text-align: left;
-        line-height: 1.5;
-        color: #9ab0d4;
+        text-align: center;
+        line-height: 1;
+        color: rgba(154, 176, 212, 0.6);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .fxp-announce-line1 {
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: rgba(154, 176, 212, 0.5);
       }
 
       .fxp-announce-highlight {
-        letter-spacing: 0.15em;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        display: block;
       }
 
       /* Hide glow lines on mobile — card design replaces them */
