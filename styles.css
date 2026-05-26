@@ -8096,6 +8096,16 @@ html {
       overflow: hidden;
     }
 
+    .fxp-flag {
+      display: inline-block;
+      width: 22px;
+      height: 15px;
+      vertical-align: -0.1em;
+      margin: 0 4px;
+      border-radius: 2px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+    }
+
     /* Sheen sweep across the kicker pill */
     .fxp-importer-kicker::before {
       content: '';
@@ -8671,85 +8681,57 @@ html {
 
     @media (max-width: 600px) {
 
-      /* Uniform grid pattern for mobile — 8 symbols, symmetric */
-      .fxp-rupee-watermark span {
-        font-size: 2.6rem !important;
-        --rupee-rotate: -12deg !important;
-        --rupee-opacity: 0.12 !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
+      /* ── Bold mobile hero — title-first experience ── */
+
+      /* Hide rupee watermarks on mobile for clean look */
+      .fxp-rupee-watermark {
+        display: none !important;
       }
 
-      /* Row 1 — top edge */
-      .fxp-rupee-watermark span:nth-child(1) {
-        left: 4% !important;
-        top: 2% !important;
-      }
-      .fxp-rupee-watermark span:nth-child(2) {
-        left: 38% !important;
-        top: 0% !important;
-        --rupee-rotate: 8deg !important;
-      }
-      .fxp-rupee-watermark span:nth-child(3) {
-        right: 6% !important;
-        top: 3% !important;
+      /* Compact kicker */
+      .fxp-importer-kicker {
+        font-size: 0.72rem !important;
+        padding: 8px 18px !important;
+        letter-spacing: 0.22em !important;
+        margin-bottom: 16px !important;
       }
 
-      /* Row 2 — sides, vertically centered */
-      .fxp-rupee-watermark span:nth-child(4) {
-        left: -2% !important;
-        top: 36% !important;
-        --rupee-rotate: 6deg !important;
-      }
-      .fxp-rupee-watermark span:nth-child(5) {
-        right: -1% !important;
-        top: 32% !important;
-        --rupee-rotate: -8deg !important;
+      /* Hide stats bar on mobile */
+      .fxp-stats-bar {
+        display: none !important;
       }
 
-      /* Row 3 — bottom edge */
-      .fxp-rupee-watermark span:nth-child(6) {
-        left: 6% !important;
-        bottom: 4% !important;
-        --rupee-rotate: 10deg !important;
+      /* HERO TITLE — big, bold, screen-filling */
+      .fxp-hero-title {
+        font-size: clamp(2.6rem, 11vw, 3.6rem) !important;
+        width: 100%;
+        text-align: center;
+        line-height: 1.0 !important;
+        letter-spacing: -0.03em !important;
+        margin-bottom: 20px !important;
       }
-      .fxp-rupee-watermark span:nth-child(7) {
-        left: 42% !important;
-        bottom: 1% !important;
-        --rupee-rotate: -6deg !important;
-      }
-      .fxp-rupee-watermark span:nth-child(8) {
-        right: 4% !important;
-        bottom: 5% !important;
-      }
-      /* Tighten section gaps on mobile FX page */
-      .fx-page section {
-        padding: 24px 0;
+
+      .fxp-hero-sub {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 28px !important;
+        padding: 0 4px;
       }
 
       .fx-page .fx-hero {
-        padding-top: clamp(10px, 2vh, 20px);
-        padding-bottom: clamp(10px, 2vh, 20px);
+        min-height: auto !important;
+        padding-top: 16px !important;
+        padding-bottom: 24px !important;
+      }
+
+      /* ── Section spacing — compact ── */
+      .fx-page section {
+        padding: 24px 0;
       }
 
       .fxp-split {
         padding: 8px 0 !important;
         gap: 28px;
-      }
-
-      .fxp-stats-bar {
-        gap: 8px;
-        padding: 12px 16px;
-      }
-
-      .fxp-stat {
-        font-size: 0.76rem;
-      }
-
-      .fxp-split {
-        padding: 36px 0;
       }
 
       /* Center text blocks in split sections on mobile */
