@@ -6139,6 +6139,124 @@ html {
         --home-copy-line: 1.58;
       }
 
+      .hero-grid {
+        overflow: hidden;
+        max-width: 100%;
+      }
+
+      .hero-grid > * {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .hero-content {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .eyebrow {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 0.78rem;
+        border-radius: 14px;
+        border: 1px solid rgba(47, 107, 255, 0.35);
+        background: linear-gradient(135deg, rgba(17, 28, 52, 0.9), rgba(24, 40, 72, 0.8));
+        box-shadow:
+          0 4px 20px rgba(47, 107, 255, 0.15),
+          0 0 0 1px rgba(47, 107, 255, 0.08) inset;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .motion-ok .eyebrow {
+        animation: eyebrow-mobile-glow 4s ease-in-out infinite;
+      }
+
+      @keyframes eyebrow-mobile-glow {
+        0%, 100% {
+          border-color: rgba(47, 107, 255, 0.35);
+          box-shadow: 0 4px 20px rgba(47, 107, 255, 0.15), 0 0 0 1px rgba(47, 107, 255, 0.08) inset;
+        }
+        50% {
+          border-color: rgba(47, 107, 255, 0.6);
+          box-shadow: 0 4px 28px rgba(47, 107, 255, 0.3), 0 0 0 1px rgba(47, 107, 255, 0.15) inset;
+        }
+      }
+
+      .eyebrow-fx-flow {
+        display: inline-flex;
+        gap: 4px;
+      }
+
+      .eyebrow-fx-flow .eyebrow-currency {
+        font-size: 0.8rem;
+      }
+
+      /* Show only ₹ → $ on mobile */
+      .eyebrow-fx-flow .eyebrow-currency:nth-child(n+5),
+      .eyebrow-fx-flow .eyebrow-arrow:nth-child(n+4) {
+        display: none;
+      }
+
+      .eyebrow-divider {
+        height: 16px;
+        background: rgba(47, 107, 255, 0.4);
+      }
+
+      .eyebrow-ticker {
+        min-width: 0;
+        flex: 1;
+        text-align: center;
+      }
+
+      .eyebrow-ticker-item {
+        font-size: 0.76rem;
+        letter-spacing: 0.02em;
+      }
+
+      .hero-subtext {
+        max-width: 100% !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .hero-panel {
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .hero-title {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .hero-list li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .section-header {
+        max-width: 100%;
+      }
+
+      .section-header h2,
+      .section-header p,
+      .home-page #solutions .section-header p,
+      .home-page #ecosystem .section-header p,
+      .home-page #security .section-header p,
+      .home-page #faq .section-header p,
+      .home-page .section-header p {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        text-wrap: wrap !important;
+      }
+
       .home-page .hero-title {
         max-width: 13.5ch;
         line-height: 1.12;
@@ -7958,7 +8076,7 @@ html {
       align-items: center;
       justify-content: center;
       margin: 0 auto clamp(16px, 2.4vh, 22px);
-      padding: 10px 24px;
+      padding: 10px 28px;
       border: 1px solid rgba(83, 126, 205, 0.28);
       border-radius: 999px;
       background:
@@ -7975,6 +8093,59 @@ html {
         0 0 22px rgba(47, 107, 255, 0.08);
       position: relative;
       z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Sheen sweep across the kicker pill */
+    .fxp-importer-kicker::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 38%,
+        rgba(255, 255, 255, 0.08) 44%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.08) 56%,
+        transparent 62%,
+        transparent 100%
+      );
+      background-size: 250% 100%;
+      background-position: 100% 0;
+      pointer-events: none;
+    }
+
+    .motion-ok .fxp-importer-kicker::before {
+      animation: fxp-kicker-sheen 5s var(--ease-premium) 1.5s infinite;
+    }
+
+    /* Border glow breathe */
+    .motion-ok .fxp-importer-kicker {
+      animation: fxp-kicker-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes fxp-kicker-sheen {
+      0%   { background-position: 100% 0; }
+      30%  { background-position: -60% 0; }
+      100% { background-position: -60% 0; }
+    }
+
+    @keyframes fxp-kicker-glow {
+      0%, 100% {
+        border-color: rgba(83, 126, 205, 0.28);
+        box-shadow:
+          inset 0 0 12px rgba(255, 255, 255, 0.04),
+          0 0 22px rgba(47, 107, 255, 0.08);
+      }
+      50% {
+        border-color: rgba(83, 126, 205, 0.52);
+        box-shadow:
+          inset 0 0 14px rgba(255, 255, 255, 0.06),
+          0 0 28px rgba(47, 107, 255, 0.18),
+          0 0 48px rgba(47, 107, 255, 0.06);
+      }
     }
 
     .fxp-stats-bar {
@@ -8464,7 +8635,8 @@ html {
         direction: ltr;
       }
 
-      .fxp-split--reverse .fxp-split-text {
+      /* Text always comes before card on mobile */
+      .fxp-split-text {
         order: -1;
       }
 
@@ -8475,7 +8647,9 @@ html {
       }
 
       .fxp-hero-title {
-        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        font-size: clamp(2rem, 7.5vw, 2.8rem);
+        width: 100%;
+        text-align: center;
       }
 
       .fxp-hero-sub {
@@ -8496,6 +8670,75 @@ html {
     }
 
     @media (max-width: 600px) {
+
+      /* Uniform grid pattern for mobile — 8 symbols, symmetric */
+      .fxp-rupee-watermark span {
+        font-size: 2.6rem !important;
+        --rupee-rotate: -12deg !important;
+        --rupee-opacity: 0.12 !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+      }
+
+      /* Row 1 — top edge */
+      .fxp-rupee-watermark span:nth-child(1) {
+        left: 4% !important;
+        top: 2% !important;
+      }
+      .fxp-rupee-watermark span:nth-child(2) {
+        left: 38% !important;
+        top: 0% !important;
+        --rupee-rotate: 8deg !important;
+      }
+      .fxp-rupee-watermark span:nth-child(3) {
+        right: 6% !important;
+        top: 3% !important;
+      }
+
+      /* Row 2 — sides, vertically centered */
+      .fxp-rupee-watermark span:nth-child(4) {
+        left: -2% !important;
+        top: 36% !important;
+        --rupee-rotate: 6deg !important;
+      }
+      .fxp-rupee-watermark span:nth-child(5) {
+        right: -1% !important;
+        top: 32% !important;
+        --rupee-rotate: -8deg !important;
+      }
+
+      /* Row 3 — bottom edge */
+      .fxp-rupee-watermark span:nth-child(6) {
+        left: 6% !important;
+        bottom: 4% !important;
+        --rupee-rotate: 10deg !important;
+      }
+      .fxp-rupee-watermark span:nth-child(7) {
+        left: 42% !important;
+        bottom: 1% !important;
+        --rupee-rotate: -6deg !important;
+      }
+      .fxp-rupee-watermark span:nth-child(8) {
+        right: 4% !important;
+        bottom: 5% !important;
+      }
+      /* Tighten section gaps on mobile FX page */
+      .fx-page section {
+        padding: 24px 0;
+      }
+
+      .fx-page .fx-hero {
+        padding-top: clamp(10px, 2vh, 20px);
+        padding-bottom: clamp(10px, 2vh, 20px);
+      }
+
+      .fxp-split {
+        padding: 8px 0 !important;
+        gap: 28px;
+      }
+
       .fxp-stats-bar {
         gap: 8px;
         padding: 12px 16px;
@@ -8507,6 +8750,28 @@ html {
 
       .fxp-split {
         padding: 36px 0;
+      }
+
+      /* Center text blocks in split sections on mobile */
+      .fxp-split-text {
+        text-align: center;
+        align-items: center;
+      }
+
+      .fxp-split-text p {
+        max-width: 100%;
+      }
+
+      .fxp-split-text .btn {
+        align-self: stretch;
+      }
+
+      .fxp-text-highlight {
+        text-align: left;
+      }
+
+      .fxp-section-label {
+        text-align: center;
       }
 
       .fxp-cost-row,
