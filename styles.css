@@ -4956,6 +4956,189 @@ html {
       color: #b93b56;
     }
 
+    /* ── FX Form: subtitle, phone prefix, radio, textarea ── */
+
+    .demo-modal-sub {
+      margin: -4px 0 16px;
+      font-size: 0.86rem;
+      color: #5e7397;
+      line-height: 1.5;
+    }
+
+    .demo-field textarea {
+      width: 100%;
+      min-height: 80px;
+      border: 1px solid #9eb0cc;
+      border-radius: 3px;
+      background: #f9fbff;
+      color: #1f2f47;
+      font-size: 0.94rem;
+      padding: 0.52rem 0.62rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .demo-field textarea:focus {
+      border-color: #4f75ba;
+      outline: 2px solid rgba(79, 117, 186, 0.2);
+      outline-offset: 1px;
+      background: #ffffff;
+    }
+
+    .demo-field-phone {
+      position: relative;
+    }
+
+    .demo-phone-prefix {
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      bottom: 1px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 10px;
+      background: #eef3fb;
+      border-right: 1px solid #9eb0cc;
+      border-radius: 3px 0 0 3px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2a4772;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .demo-phone-prefix img {
+      border-radius: 2px;
+    }
+
+    .demo-field-phone input {
+      padding-left: 72px !important;
+    }
+
+    .demo-field-radio {
+      display: flex !important;
+      align-items: center;
+      gap: 20px;
+      padding: 8px 0;
+      border: none !important;
+      min-height: auto !important;
+      background: none !important;
+    }
+
+    .demo-radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem !important;
+      color: #2a4772 !important;
+      font-weight: 500 !important;
+      cursor: pointer;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .demo-radio input[type="radio"] {
+      width: 16px !important;
+      height: 16px !important;
+      min-height: 16px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      accent-color: #2f6bff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── FX Page: Dark Form Override ── */
+
+    .fx-page .demo-modal {
+      background: rgba(2, 6, 16, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .fx-page .demo-modal-panel {
+      background: linear-gradient(180deg, #0f1b32, #0b1426);
+      border: 1px solid rgba(47, 107, 255, 0.2);
+      color: #e6edf7;
+      box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(47, 107, 255, 0.06);
+    }
+
+    .fx-page .demo-modal-close {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(154, 176, 212, 0.2);
+      color: #9ab0d4;
+    }
+
+    .fx-page .demo-modal-close:hover,
+    .fx-page .demo-modal-close:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(154, 176, 212, 0.4);
+      color: #eaf1ff;
+    }
+
+    .fx-page .demo-modal h2 {
+      color: #eaf1ff;
+    }
+
+    .fx-page .demo-modal-sub {
+      color: #7a90b8;
+    }
+
+    .fx-page .demo-field input,
+    .fx-page .demo-field select,
+    .fx-page .demo-field textarea {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(154, 176, 212, 0.22);
+      color: #e6edf7;
+    }
+
+    .fx-page .demo-field input::placeholder,
+    .fx-page .demo-field textarea::placeholder {
+      color: #5a7199;
+    }
+
+    .fx-page .demo-field input:focus,
+    .fx-page .demo-field select:focus,
+    .fx-page .demo-field textarea:focus {
+      border-color: rgba(47, 107, 255, 0.5);
+      outline: 2px solid rgba(47, 107, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .fx-page .demo-phone-prefix {
+      background: rgba(47, 107, 255, 0.1);
+      border-right: 1px solid rgba(154, 176, 212, 0.22);
+      color: #c0d4f0;
+    }
+
+    .fx-page .demo-field-radio {
+      border: none !important;
+      background: none !important;
+    }
+
+    .fx-page .demo-radio {
+      color: #9ab0d4 !important;
+      font-size: 0.85rem !important;
+    }
+
+    .fx-page .demo-radio input[type="radio"] {
+      accent-color: #2f6bff;
+    }
+
+    .fx-page .demo-actions .btn {
+      min-width: 140px;
+    }
+
+    .fx-page .demo-success {
+      color: #4cd89d;
+    }
+
+    .fx-page .demo-success.is-error {
+      color: #f06060;
+    }
+
     .briefing-modal-panel {
       width: min(820px, 96vw);
       background: linear-gradient(180deg, #eef3fb 0%, #e8eef8 100%);
@@ -8098,12 +8281,16 @@ html {
 
     .fxp-flag {
       display: inline-block;
-      width: 22px;
-      height: 15px;
-      vertical-align: -0.1em;
-      margin: 0 4px;
-      border-radius: 2px;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+      width: 28px;
+      height: 19px;
+      vertical-align: -0.15em;
+      margin: 0 6px;
+      border-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(47, 107, 255, 0.1);
+      object-fit: cover;
     }
 
     /* Sheen sweep across the kicker pill */
@@ -8270,6 +8457,11 @@ html {
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    /* ── Mobile Hero Image (hidden on desktop) ── */
+    .fxp-hero-mobile-img {
+      display: none;
     }
 
     /* ── Split Layouts ── */
@@ -8770,6 +8962,24 @@ html {
       .fxp-cta-actions {
         flex-direction: column;
         align-items: stretch;
+      }
+
+      /* ── Mobile Hero Image ── */
+      .fxp-hero-mobile-img {
+        display: block;
+        margin: 32px -16px -16px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(47, 107, 255, 0.12);
+      }
+
+      .fxp-hero-mobile-img img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        max-height: 260px;
       }
 
       .fxp-rupee-watermark span:nth-child(n + 9) {

@@ -160,6 +160,9 @@
             <a href="#the-math" class="btn btn-primary">Identify FX Leakage</a>
             <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Unlock Treasury Insights</button>
           </div>
+          <div class="fxp-hero-mobile-img">
+            <img src="assets/cargo vessel.jpg" alt="Container cargo vessel at sea" width="800" height="533" loading="eager" />
+          </div>
         </div>
       </div>
     </section>
@@ -415,27 +418,18 @@
             <input id="fx-name" name="full_name" type="text" required placeholder="Your Name *" />
           </div>
           <div class="demo-field">
-            <input id="fx-email" name="business_email" type="email" required placeholder="Email ID *" />
+            <input id="fx-company" name="company_name" type="text" required placeholder="Company Name *" />
           </div>
         </div>
 
-        <div class="demo-grid-two">
-          <div class="demo-field demo-field-phone">
-            <span class="demo-phone-prefix"><img src="assets/india-flag.svg" alt="" width="20" height="14" /> +91</span>
-            <input id="fx-phone" name="phone_number" type="tel" required pattern="[0-9]{10}" inputmode="numeric" placeholder="Mobile No *" />
-          </div>
-          <div class="demo-field">
-            <input id="fx-company" name="company_name" type="text" required placeholder="Organization Name *" />
-          </div>
-        </div>
-
-        <div class="demo-field">
-          <input id="fx-products" name="products" type="text" placeholder="Products / HS Code" />
+        <div class="demo-field demo-field-phone">
+          <span class="demo-phone-prefix"><img src="assets/india-flag.svg" alt="" width="20" height="14" /> +91</span>
+          <input id="fx-phone" name="phone_number" type="tel" required pattern="[0-9]{10}" inputmode="numeric" placeholder="Mobile No *" />
         </div>
 
         <div class="demo-field demo-field-radio">
-          <label class="demo-radio"><input type="radio" name="data_type" value="import" checked /> Import Data</label>
-          <label class="demo-radio"><input type="radio" name="data_type" value="export" /> Export Data</label>
+          <label class="demo-radio"><input type="radio" name="data_type" value="importer" checked /> Importer</label>
+          <label class="demo-radio"><input type="radio" name="data_type" value="exporter" /> Exporter</label>
           <label class="demo-radio"><input type="radio" name="data_type" value="both" /> Both</label>
         </div>
 
