@@ -8459,9 +8459,119 @@ html {
       flex-wrap: wrap;
     }
 
-    /* ── Mobile Hero Image (hidden on desktop) ── */
+    /* ── Mobile Hero Image & Button (hidden on desktop) ── */
     .fxp-hero-mobile-img {
       display: none;
+    }
+
+    .fxp-hero-mobile-btn {
+      display: none !important;
+    }
+
+    /* ── Announcement Band ── */
+    .fxp-announce-band {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 32px 40px;
+      position: relative;
+      background: linear-gradient(180deg,
+        #050b18 0%,
+        #0a1428 50%,
+        #050b18 100%);
+      border-top: 1px solid rgba(47, 107, 255, 0.15);
+      border-bottom: 1px solid rgba(47, 107, 255, 0.15);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .fxp-announce-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .fxp-announce-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      color: #2f6bff;
+      filter: drop-shadow(0 0 10px rgba(47, 107, 255, 0.4));
+    }
+
+    .fxp-announce-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #7a90b8;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .fxp-announce-highlight {
+      color: #eaf1ff;
+      background: linear-gradient(90deg, #2f6bff 0%, #5a9cff 50%, #2f6bff 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+    }
+
+    .motion-ok .fxp-announce-highlight {
+      animation: fxp-highlight-shift 4s ease-in-out infinite;
+    }
+
+    @keyframes fxp-highlight-shift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    /* Glowing accent lines */
+    .fxp-announce-glow {
+      flex-shrink: 0;
+      height: 1px;
+      position: relative;
+      z-index: 2;
+      width: 160px;
+    }
+
+    .fxp-announce-glow--left {
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(47, 107, 255, 0.04) 20%,
+        rgba(47, 107, 255, 0.45) 100%);
+      margin-right: 28px;
+    }
+
+    .fxp-announce-glow--right {
+      background: linear-gradient(90deg,
+        rgba(47, 107, 255, 0.45) 0%,
+        rgba(47, 107, 255, 0.04) 80%,
+        transparent 100%);
+      margin-left: 28px;
+    }
+
+    /* Subtle ambient glow */
+    .fxp-announce-band::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 100px;
+      background: radial-gradient(ellipse, rgba(47, 107, 255, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     /* ── Split Layouts ── */
@@ -8964,22 +9074,107 @@ html {
         align-items: stretch;
       }
 
-      /* ── Mobile Hero Image ── */
+      /* ── Hide desktop hero buttons, show single mobile CTA ── */
+      .fxp-hero-desktop-btn {
+        display: none !important;
+      }
+
+      .fxp-hero-mobile-btn {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 18px 32px !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        border-radius: 60px !important;
+        letter-spacing: 0.01em;
+      }
+
+      /* ── Mobile Hero Image + Overlapping Band ── */
       .fxp-hero-mobile-img {
         display: block;
-        margin: 32px -16px -16px;
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                    0 0 0 1px rgba(47, 107, 255, 0.12);
+        margin: 32px -16px 0;
+        height: 260px;
+        overflow: visible;
+        position: relative;
       }
 
       .fxp-hero-mobile-img img {
         display: block;
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
-        max-height: 260px;
+        object-position: center 30%;
+        border-radius: 16px 16px 0 0;
+      }
+
+      /* Gradient fade at bottom of image */
+      .fxp-hero-mobile-img::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, #0b1426 0%, transparent 100%);
+        pointer-events: none;
+      }
+
+      /* ── Mobile Announcement Band — glass card overlapping image ── */
+      .fxp-announce-band {
+        width: auto;
+        margin: -44px 16px 0;
+        margin-left: 16px !important;
+        padding: 0;
+        background: none !important;
+        border: none !important;
+        position: relative;
+        z-index: 3;
+        overflow: visible;
+      }
+
+      .fxp-announce-band::before {
+        display: none;
+      }
+
+      .fxp-announce-content {
+        flex-direction: row;
+        gap: 14px;
+        background: rgba(8, 16, 32, 0.82);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(47, 107, 255, 0.22);
+        border-radius: 14px;
+        padding: 18px 22px;
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.5),
+          0 0 24px rgba(47, 107, 255, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+
+      .fxp-announce-icon {
+        width: 28px;
+        height: 28px;
+        filter: drop-shadow(0 0 8px rgba(47, 107, 255, 0.5));
+      }
+
+      .fxp-announce-text {
+        font-size: 0.68rem;
+        letter-spacing: 0.13em;
+        white-space: normal;
+        text-align: left;
+        line-height: 1.5;
+        color: #9ab0d4;
+      }
+
+      .fxp-announce-highlight {
+        letter-spacing: 0.15em;
+      }
+
+      /* Hide glow lines on mobile — card design replaces them */
+      .fxp-announce-glow {
+        display: none;
       }
 
       .fxp-rupee-watermark span:nth-child(n + 9) {

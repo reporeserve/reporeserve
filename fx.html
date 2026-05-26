@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260526m" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260526m" />
+  <link rel="preload" href="styles.css?v=20260526s" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260526s" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -157,15 +157,30 @@
           </h1>
           <p class="fxp-hero-sub">Many companies negotiate supplier pricing well but still lose significantly through inefficient FX execution, payment timing, and treasury workflows.</p>
           <div class="fxp-hero-actions">
-            <a href="#the-math" class="btn btn-primary">Identify FX Leakage</a>
-            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Unlock Treasury Insights</button>
+            <a href="#the-math" class="btn btn-primary fxp-hero-desktop-btn">Identify FX Leakage</a>
+            <button type="button" class="btn btn-secondary demo-trigger fxp-hero-desktop-btn" data-open-demo>Unlock Treasury Insights</button>
+            <button type="button" class="btn btn-primary demo-trigger fxp-hero-mobile-btn" data-open-demo>Identify FX Leakage in Minutes</button>
           </div>
           <div class="fxp-hero-mobile-img">
             <img src="assets/cargo vessel.jpg" alt="Container cargo vessel at sea" width="800" height="533" loading="eager" />
           </div>
+
         </div>
       </div>
     </section>
+
+    <!-- ── Announcement Band ── -->
+    <div class="fxp-announce-band">
+      <div class="fxp-announce-glow fxp-announce-glow--left"></div>
+      <div class="fxp-announce-content">
+        <svg class="fxp-announce-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L3 7v6c0 5.25 3.75 10.14 9 11.25C17.25 23.14 21 18.25 21 13V7l-9-5z" stroke="currentColor" stroke-width="1.5" fill="rgba(47,107,255,0.15)"/>
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="fxp-announce-text">WE ARE HERE TO <span class="fxp-announce-highlight">SAVE YOU IMPORT COSTS</span></span>
+      </div>
+      <div class="fxp-announce-glow fxp-announce-glow--right"></div>
+    </div>
 
     <!-- ═══ WHAT WE DO ═══ -->
     <section id="what-we-do" data-section-animate>
