@@ -8949,6 +8949,142 @@ html {
       50%      { opacity: 0.6; box-shadow: 0 0 16px rgba(37, 211, 102, 0.7); }
     }
 
+    /* ═══ What We Optimize — Card Grid ═══ */
+
+    #what-we-optimize {
+      padding: 52px 0;
+    }
+
+    .fxp-optimize-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+
+    .fxp-optimize-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #eaf1ff;
+      line-height: 1.22;
+      margin: 12px 0 14px;
+    }
+
+    .fxp-optimize-sub {
+      font-size: 0.95rem;
+      color: #9ab0d4;
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .fxp-optimize-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .fxp-optimize-card {
+      position: relative;
+      background: linear-gradient(168deg, rgba(15, 25, 50, 0.95) 0%, rgba(8, 14, 30, 0.98) 100%);
+      border: 1px solid rgba(47, 107, 255, 0.08);
+      border-radius: 14px;
+      padding: 22px 20px 20px;
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+      overflow: hidden;
+    }
+
+    .fxp-optimize-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 14px 0 0 14px;
+      background: linear-gradient(180deg, #4d8aff, #2f6bff);
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .fxp-optimize-card:nth-child(1)::before { background: linear-gradient(180deg, #4d8aff, #2f6bff); }
+    .fxp-optimize-card:nth-child(2)::before { background: linear-gradient(180deg, #38d9a9, #20c997); }
+    .fxp-optimize-card:nth-child(3)::before { background: linear-gradient(180deg, #a78bfa, #8b5cf6); }
+    .fxp-optimize-card:nth-child(4)::before { background: linear-gradient(180deg, #f59e42, #e8860c); }
+    .fxp-optimize-card:nth-child(5)::before { background: linear-gradient(180deg, #f472b6, #ec4899); }
+    .fxp-optimize-card:nth-child(6)::before { background: linear-gradient(180deg, #22d3ee, #06b6d4); }
+
+    .fxp-optimize-card:nth-child(1) .fxp-optimize-icon-wrap { border-color: rgba(77, 138, 255, 0.2); background: rgba(77, 138, 255, 0.07); }
+    .fxp-optimize-card:nth-child(1) .fxp-optimize-icon { color: #4d8aff; }
+    .fxp-optimize-card:nth-child(2) .fxp-optimize-icon-wrap { border-color: rgba(56, 217, 169, 0.2); background: rgba(56, 217, 169, 0.07); }
+    .fxp-optimize-card:nth-child(2) .fxp-optimize-icon { color: #38d9a9; }
+    .fxp-optimize-card:nth-child(3) .fxp-optimize-icon-wrap { border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.07); }
+    .fxp-optimize-card:nth-child(3) .fxp-optimize-icon { color: #a78bfa; }
+    .fxp-optimize-card:nth-child(4) .fxp-optimize-icon-wrap { border-color: rgba(245, 158, 66, 0.2); background: rgba(245, 158, 66, 0.07); }
+    .fxp-optimize-card:nth-child(4) .fxp-optimize-icon { color: #f59e42; }
+    .fxp-optimize-card:nth-child(5) .fxp-optimize-icon-wrap { border-color: rgba(244, 114, 182, 0.2); background: rgba(244, 114, 182, 0.07); }
+    .fxp-optimize-card:nth-child(5) .fxp-optimize-icon { color: #f472b6; }
+    .fxp-optimize-card:nth-child(6) .fxp-optimize-icon-wrap { border-color: rgba(34, 211, 238, 0.2); background: rgba(34, 211, 238, 0.07); }
+    .fxp-optimize-card:nth-child(6) .fxp-optimize-icon { color: #22d3ee; }
+
+    .fxp-optimize-card:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .fxp-optimize-card:hover::before {
+      opacity: 1;
+    }
+
+    .fxp-optimize-num {
+      display: none;
+    }
+
+    .fxp-optimize-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      margin: 0;
+      border-radius: 12px;
+      background: rgba(47, 107, 255, 0.06);
+      border: 1px solid rgba(47, 107, 255, 0.12);
+    }
+
+    .fxp-optimize-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      color: #5a9bff;
+      filter: drop-shadow(0 0 6px currentColor);
+    }
+
+    .fxp-optimize-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #eaf1ff;
+      margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .fxp-optimize-divider {
+      display: none;
+    }
+
+    .fxp-optimize-card p {
+      font-size: 0.82rem;
+      color: #7a90b8;
+      line-height: 1.5;
+      margin: 0;
+    }
+
     /* ═══ FXP Responsive ═══ */
 
     @media (max-width: 900px) {
@@ -9096,6 +9232,106 @@ html {
       .fxp-cta-actions {
         flex-direction: column;
         align-items: stretch;
+      }
+
+      /* ── Optimize Grid — mobile redesign ── */
+      .fxp-optimize-header {
+        margin-bottom: 32px;
+      }
+
+      .fxp-optimize-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .fxp-optimize-header h2 {
+        font-size: 1.45rem;
+      }
+
+      .fxp-optimize-sub {
+        font-size: 0.85rem;
+      }
+
+      .fxp-optimize-card {
+        padding: 20px 16px 18px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 14px;
+        background: linear-gradient(170deg, rgba(20, 35, 65, 0.9) 0%, rgba(8, 14, 30, 0.95) 100%);
+        border: 1px solid rgba(47, 107, 255, 0.10);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .fxp-optimize-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #4d8aff, transparent);
+        opacity: 0.5;
+      }
+
+      .fxp-optimize-card:nth-child(1)::before { background: linear-gradient(90deg, transparent, #4d8aff, transparent); }
+      .fxp-optimize-card:nth-child(2)::before { background: linear-gradient(90deg, transparent, #38d9a9, transparent); }
+      .fxp-optimize-card:nth-child(3)::before { background: linear-gradient(90deg, transparent, #a78bfa, transparent); }
+      .fxp-optimize-card:nth-child(4)::before { background: linear-gradient(90deg, transparent, #f59e42, transparent); }
+      .fxp-optimize-card:nth-child(5)::before { background: linear-gradient(90deg, transparent, #f472b6, transparent); }
+      .fxp-optimize-card:nth-child(6)::before { background: linear-gradient(90deg, transparent, #22d3ee, transparent); }
+
+      .fxp-optimize-card:nth-child(1) .fxp-optimize-icon-wrap { border-color: rgba(77, 138, 255, 0.22); background: rgba(77, 138, 255, 0.08); }
+      .fxp-optimize-card:nth-child(1) .fxp-optimize-icon { color: #4d8aff; }
+      .fxp-optimize-card:nth-child(2) .fxp-optimize-icon-wrap { border-color: rgba(56, 217, 169, 0.22); background: rgba(56, 217, 169, 0.08); }
+      .fxp-optimize-card:nth-child(2) .fxp-optimize-icon { color: #38d9a9; }
+      .fxp-optimize-card:nth-child(3) .fxp-optimize-icon-wrap { border-color: rgba(167, 139, 250, 0.22); background: rgba(167, 139, 250, 0.08); }
+      .fxp-optimize-card:nth-child(3) .fxp-optimize-icon { color: #a78bfa; }
+      .fxp-optimize-card:nth-child(4) .fxp-optimize-icon-wrap { border-color: rgba(245, 158, 66, 0.22); background: rgba(245, 158, 66, 0.08); }
+      .fxp-optimize-card:nth-child(4) .fxp-optimize-icon { color: #f59e42; }
+      .fxp-optimize-card:nth-child(5) .fxp-optimize-icon-wrap { border-color: rgba(244, 114, 182, 0.22); background: rgba(244, 114, 182, 0.08); }
+      .fxp-optimize-card:nth-child(5) .fxp-optimize-icon { color: #f472b6; }
+      .fxp-optimize-card:nth-child(6) .fxp-optimize-icon-wrap { border-color: rgba(34, 211, 238, 0.22); background: rgba(34, 211, 238, 0.08); }
+      .fxp-optimize-card:nth-child(6) .fxp-optimize-icon { color: #22d3ee; }
+
+      .fxp-optimize-num {
+        display: none;
+      }
+
+      .fxp-optimize-icon-wrap {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        margin: 0 auto 12px;
+        border-radius: 13px;
+      }
+
+      .fxp-optimize-icon {
+        width: 26px;
+        height: 26px;
+        filter: drop-shadow(0 0 8px currentColor);
+      }
+
+      .fxp-optimize-card h3 {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        line-height: 1.25;
+      }
+
+      .fxp-optimize-divider {
+        width: 20px;
+        margin: 0 auto 8px;
+        opacity: 0;
+        height: 0;
+      }
+
+      .fxp-optimize-card p {
+        font-size: 0.72rem;
+        line-height: 1.45;
+        margin-top: 0;
+        color: rgba(154, 176, 212, 0.7);
       }
 
       /* ── Hide desktop hero buttons, show single mobile CTA ── */
