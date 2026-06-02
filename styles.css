@@ -8459,8 +8459,10 @@ html {
       flex-wrap: wrap;
     }
 
-    /* ── Mobile Hero Image & Button (hidden on desktop) ── */
-    .fxp-hero-mobile-img {
+    /* ── Mobile-only Images & Button (hidden on desktop) ── */
+    .fxp-hero-mobile-img,
+    .fxp-role-mobile-img,
+    .fxp-math-mobile-img {
       display: none;
     }
 
@@ -9379,6 +9381,72 @@ html {
         height: 80px;
         background: linear-gradient(to top, #0b1426 0%, transparent 100%);
         pointer-events: none;
+      }
+
+      /* ── Mobile Our Role Image ── */
+      .fxp-role-mobile-img {
+        display: block;
+        margin: 0 -16px;
+        height: 240px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .fxp-role-mobile-img img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        border-radius: 0;
+      }
+
+      .fxp-role-mobile-img::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(to top, #0b1426 0%, transparent 100%);
+        pointer-events: none;
+      }
+
+      .fxp-role-mobile-img::before {
+        display: none;
+      }
+
+      /* ── Mobile The Math Image ── */
+      .fxp-math-mobile-img {
+        display: block;
+        margin: 0 -16px;
+        height: 240px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .fxp-math-mobile-img img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        border-radius: 0;
+      }
+
+      .fxp-math-mobile-img::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(to top, #0b1426 0%, transparent 100%);
+        pointer-events: none;
+      }
+
+      .fxp-math-mobile-img::before {
+        display: none;
       }
 
       /* ── Mobile Announcement Band — glass card overlapping image ── */
