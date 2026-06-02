@@ -8672,7 +8672,182 @@ html {
       font-style: italic;
     }
 
-    /* ═══ Cost Comparison Card ═══ */
+    /* ═══ What We Do — Savings vs Leakage Ledger ═══ */
+
+    #what-we-do {
+      padding: 64px 0;
+    }
+
+    .fxp-wwd-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .fxp-wwd-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fxp-wwd-heading {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 800;
+      color: #eaf1ff;
+      line-height: 1.16;
+      letter-spacing: -0.015em;
+      margin: 18px 0 18px;
+    }
+
+    .fxp-wwd-desc {
+      font-size: 1rem;
+      color: #9ab0d4;
+      line-height: 1.7;
+      margin: 0 0 30px;
+      max-width: 480px;
+    }
+
+    /* ── Ledger card ── */
+    .fxp-wwd-card {
+      border: 1px solid rgba(47, 107, 255, 0.16);
+      border-radius: 20px;
+      background:
+        radial-gradient(130% 80% at 0% 0%, rgba(47, 107, 255, 0.08) 0%, transparent 50%),
+        linear-gradient(165deg, rgba(16, 27, 52, 0.92) 0%, rgba(9, 16, 32, 0.96) 100%);
+      box-shadow: 0 28px 70px rgba(2, 6, 14, 0.45);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .fxp-wwd-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid rgba(47, 107, 255, 0.12);
+    }
+
+    .fxp-wwd-card-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #eaf1ff;
+    }
+
+    .fxp-wwd-card-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #5a9bff;
+      padding: 4px 11px;
+      border-radius: 20px;
+      background: rgba(47, 107, 255, 0.1);
+      border: 1px solid rgba(47, 107, 255, 0.22);
+    }
+
+    .fxp-wwd-group {
+      padding: 14px 0 4px;
+    }
+
+    .fxp-wwd-group-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .fxp-wwd-group-label svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .fxp-wwd-group-label--save {
+      color: #38d9a9;
+    }
+
+    .fxp-wwd-group-label--leak {
+      color: #f0846a;
+    }
+
+    .fxp-wwd-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      font-size: 0.92rem;
+      color: rgba(200, 220, 255, 0.78);
+    }
+
+    .fxp-wwd-val {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .fxp-wwd-val--green {
+      color: #38d9a9;
+    }
+
+    .fxp-wwd-val--red {
+      color: #f0846a;
+    }
+
+    .fxp-wwd-net {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(47, 107, 255, 0.14), rgba(47, 107, 255, 0.05));
+      border: 1px solid rgba(47, 107, 255, 0.25);
+    }
+
+    .fxp-wwd-net-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .fxp-wwd-net-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #eaf1ff;
+    }
+
+    .fxp-wwd-net-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #5a9bff;
+      letter-spacing: -0.01em;
+    }
+
+    .fxp-wwd-net-bar {
+      height: 7px;
+      border-radius: 6px;
+      background: rgba(240, 132, 106, 0.18);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .fxp-wwd-net-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #38d9a9, #5a9bff);
+    }
+
+    .fxp-wwd-net-note {
+      font-size: 0.76rem;
+      color: #9ab0d4;
+    }
+
+    /* ═══ Cost Comparison Card (legacy) ═══ */
 
     .fxp-cost-card {
       width: 100%;
@@ -8852,68 +9027,285 @@ html {
       color: rgba(150, 175, 220, 0.5);
     }
 
-    /* ═══ Role Card ═══ */
 
-    .fxp-role-card {
-      width: 100%;
-      max-width: 460px;
-      border: 1px solid rgba(36, 54, 90, 0.55);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(14, 23, 44, 0.92), rgba(11, 20, 38, 0.85));
-      overflow: hidden;
-      box-shadow: 0 16px 48px rgba(2, 6, 14, 0.35);
+    /* ═══ Role Section — Unified Panel ═══ */
+
+    #our-role,
+    #the-math {
+      padding: 60px 0;
     }
 
-    .fxp-role-row {
+    .fxp-role-panel {
+      max-width: 1160px;
+      margin: 0 auto;
+      border: 1px solid rgba(47, 107, 255, 0.14);
+      border-radius: 24px;
+      background:
+        radial-gradient(120% 100% at 100% 0%, rgba(47, 107, 255, 0.08) 0%, transparent 55%),
+        linear-gradient(160deg, rgba(16, 27, 52, 0.9) 0%, rgba(9, 16, 32, 0.95) 100%);
+      box-shadow: 0 30px 80px rgba(2, 6, 14, 0.45);
+      overflow: hidden;
+    }
+
+    .fxp-role-panel-top {
+      display: grid;
+      grid-template-columns: 42% 1fr;
+      align-items: stretch;
+    }
+
+    /* ── Visual side — full-bleed image filling the panel half ── */
+    .fxp-role-visual {
+      position: relative;
+      align-self: stretch;
+      min-height: 100%;
+    }
+
+    .fxp-role-visual-inner {
+      position: absolute;
+      inset: 0;
+    }
+
+    .fxp-role-visual-inner img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .fxp-role-visual-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #eaf1ff;
+      background: rgba(10, 18, 34, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(47, 107, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(2, 6, 14, 0.5);
+    }
+
+    .fxp-role-visual-badge svg {
+      width: 17px;
+      height: 17px;
+      color: #5a9bff;
+    }
+
+    /* ── Body side ── */
+    .fxp-role-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 48px 44px;
+    }
+
+    .fxp-role-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #5a9bff;
+      padding: 6px 14px 6px 12px;
+      border-radius: 30px;
+      background: rgba(47, 107, 255, 0.08);
+      border: 1px solid rgba(47, 107, 255, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .fxp-role-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5a9bff;
+      box-shadow: 0 0 8px rgba(90, 155, 255, 0.8);
+    }
+
+    .fxp-role-heading {
+      font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+      font-weight: 800;
+      color: #eaf1ff;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      margin: 0 0 16px;
+    }
+
+    .fxp-role-desc {
+      font-size: 0.98rem;
+      color: #9ab0d4;
+      line-height: 1.7;
+      margin: 0 0 30px;
+      max-width: 480px;
+    }
+
+    .fxp-role-action {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      font-size: 0.9rem;
-      color: rgba(200, 220, 255, 0.78);
-      border-bottom: 1px solid rgba(36, 54, 90, 0.3);
-      transition: background 0.2s ease;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
-    .fxp-role-row:last-child {
-      border-bottom: none;
+    .fxp-role-cta {
+      padding: 13px 26px;
+      font-size: 0.88rem;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 10px;
     }
 
-    .fxp-role-row:hover {
+    .fxp-role-cta-arrow {
+      font-size: 1.05rem;
+      transition: transform 0.25s ease;
+    }
+
+    .fxp-role-cta:hover .fxp-role-cta-arrow {
+      transform: translateX(3px);
+    }
+
+    .fxp-role-action-note {
+      font-size: 0.82rem;
+      color: #7a90b8;
+      font-weight: 500;
+    }
+
+    /* ── Bottom capability strip ── */
+    .fxp-role-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(47, 107, 255, 0.12);
+    }
+
+    .fxp-role-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 22px;
+      border-right: 1px solid rgba(47, 107, 255, 0.1);
+      transition: background 0.25s ease;
+    }
+
+    .fxp-role-chip:last-child {
+      border-right: none;
+    }
+
+    .fxp-role-chip:hover {
       background: rgba(47, 107, 255, 0.04);
     }
 
-    .fxp-role-row--new {
-      background: rgba(47, 107, 255, 0.08);
-      border-bottom: none;
+    .fxp-role-chip-icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(56, 217, 169, 0.1);
+      border: 1px solid rgba(56, 217, 169, 0.3);
+      color: #38d9a9;
     }
 
-    .fxp-role-row--new:hover {
-      background: rgba(47, 107, 255, 0.12);
+    .fxp-role-chip-icon svg {
+      width: 16px;
+      height: 16px;
     }
 
-    .fxp-role-row--new span:first-child {
-      color: #eaf1ff;
+    .fxp-role-chip-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .fxp-role-chip-text strong {
+      font-size: 0.86rem;
       font-weight: 600;
+      color: rgba(220, 230, 250, 0.9);
+      line-height: 1.2;
     }
 
-    .fxp-role-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
+    .fxp-role-chip-text small {
+      font-size: 0.68rem;
+      color: #7a90b8;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(36, 54, 90, 0.4);
-      color: rgba(150, 175, 220, 0.6);
-      white-space: nowrap;
+      letter-spacing: 0.05em;
     }
 
-    .fxp-role-badge--new {
-      background: rgba(47, 107, 255, 0.2);
-      color: var(--accent);
-      border: 1px solid rgba(47, 107, 255, 0.3);
-      box-shadow: 0 0 12px rgba(47, 107, 255, 0.15);
+    .fxp-role-chip--new {
+      background: linear-gradient(160deg, rgba(47, 107, 255, 0.14), rgba(47, 107, 255, 0.05));
+    }
+
+    .fxp-role-chip--new:hover {
+      background: linear-gradient(160deg, rgba(47, 107, 255, 0.2), rgba(47, 107, 255, 0.08));
+    }
+
+    .fxp-role-chip--new .fxp-role-chip-icon {
+      background: linear-gradient(135deg, #4d8aff, #2f6bff);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(47, 107, 255, 0.45);
+    }
+
+    .fxp-role-chip--new .fxp-role-chip-text strong {
+      color: #eaf1ff;
+      font-weight: 700;
+    }
+
+    .fxp-role-chip--new .fxp-role-chip-text small {
+      color: #6ba2ff;
+    }
+
+    /* ── Reverse variant (text left, image right) — used by The Math ── */
+    .fxp-role-panel--reverse {
+      background:
+        radial-gradient(120% 100% at 0% 0%, rgba(47, 107, 255, 0.08) 0%, transparent 55%),
+        linear-gradient(160deg, rgba(16, 27, 52, 0.9) 0%, rgba(9, 16, 32, 0.95) 100%);
+    }
+
+    .fxp-role-panel--reverse .fxp-role-panel-top {
+      grid-template-columns: 1fr 42%;
+    }
+
+    .fxp-role-panel--reverse .fxp-role-visual-badge {
+      left: auto;
+      right: 16px;
+    }
+
+    /* alert badge (amber) for leakage stat */
+    .fxp-role-visual-badge--alert {
+      border-color: rgba(245, 158, 66, 0.4);
+    }
+
+    .fxp-role-visual-badge--alert svg {
+      color: #f5a93f;
+    }
+
+    /* loss chips (amber/red) for leakage breakdown */
+    .fxp-role-chip--loss .fxp-role-chip-icon {
+      background: rgba(245, 130, 110, 0.1);
+      border: 1px solid rgba(245, 130, 110, 0.3);
+      color: #f0846a;
+    }
+
+    .fxp-role-chip--loss .fxp-role-chip-text small {
+      color: #f0846a;
+      font-weight: 700;
+      font-size: 0.74rem;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     /* ═══ Contact CTA ═══ */
@@ -9193,6 +9585,38 @@ html {
         padding: 24px 0;
       }
 
+      /* ── What We Do — mobile ── */
+      #what-we-do {
+        padding: 28px 0;
+      }
+
+      .fxp-wwd-layout {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 0 16px;
+      }
+
+      .fxp-wwd-text {
+        text-align: center;
+        align-items: center;
+      }
+
+      .fxp-wwd-heading {
+        font-size: 1.6rem;
+      }
+
+      .fxp-wwd-desc {
+        font-size: 0.92rem;
+      }
+
+      .fxp-wwd-card {
+        padding: 20px;
+      }
+
+      .fxp-wwd-net-val {
+        font-size: 1.3rem;
+      }
+
       .fxp-split {
         padding: 8px 0 !important;
         gap: 28px;
@@ -9225,9 +9649,86 @@ html {
         font-size: 0.82rem;
       }
 
-      .fxp-role-row {
-        padding: 14px 18px;
-        font-size: 0.84rem;
+      /* ── Our Role + The Math — mobile overrides ── */
+      #our-role,
+      #the-math {
+        padding: 24px 0;
+      }
+
+      /* reverse panel collapses same as default on mobile */
+      .fxp-role-panel--reverse .fxp-role-panel-top {
+        grid-template-columns: 1fr;
+      }
+
+      .fxp-role-panel {
+        border: none;
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+      }
+
+      .fxp-role-panel-top {
+        grid-template-columns: 1fr;
+      }
+
+      /* desktop image hidden — mobile-img at top of section handles it */
+      .fxp-role-visual {
+        display: none;
+      }
+
+      .fxp-role-body {
+        padding: 0 16px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .fxp-role-eyebrow {
+        align-self: center;
+      }
+
+      .fxp-role-heading {
+        font-size: 1.5rem;
+      }
+
+      .fxp-role-desc {
+        font-size: 0.9rem;
+      }
+
+      .fxp-role-action {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        width: 100%;
+        margin-bottom: 24px;
+      }
+
+      .fxp-role-cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .fxp-role-action-note {
+        text-align: center;
+      }
+
+      /* capability strip → vertical cards on mobile */
+      .fxp-role-strip {
+        grid-template-columns: 1fr;
+        border-top: none;
+        gap: 10px;
+        padding: 0 16px;
+      }
+
+      .fxp-role-chip {
+        border: 1px solid rgba(47, 107, 255, 0.14);
+        border-radius: 12px;
+        background: rgba(14, 23, 44, 0.5);
+        padding: 13px 16px;
+      }
+
+      .fxp-role-chip:last-child {
+        border: 1px solid rgba(47, 107, 255, 0.14);
       }
 
       .fxp-hero-actions,
@@ -9383,68 +9884,30 @@ html {
         pointer-events: none;
       }
 
-      /* ── Mobile Our Role Image ── */
-      .fxp-role-mobile-img {
-        display: block;
-        margin: 0 -16px;
-        height: 240px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .fxp-role-mobile-img img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center 25%;
-        border-radius: 0;
-      }
-
-      .fxp-role-mobile-img::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 40px;
-        background: linear-gradient(to top, #0b1426 0%, transparent 100%);
-        pointer-events: none;
-      }
-
-      .fxp-role-mobile-img::before {
-        display: none;
-      }
-
-      /* ── Mobile The Math Image ── */
+      /* ── Mobile section images — clean framed cards ── */
+      .fxp-role-mobile-img,
       .fxp-math-mobile-img {
         display: block;
-        margin: 0 -16px;
-        height: 240px;
+        margin: 0 16px 22px;
+        border-radius: 16px;
         overflow: hidden;
         position: relative;
+        border: 1px solid rgba(47, 107, 255, 0.18);
+        box-shadow: 0 16px 40px rgba(2, 6, 14, 0.4);
       }
 
+      .fxp-role-mobile-img img,
       .fxp-math-mobile-img img {
         display: block;
         width: 100%;
-        height: 100%;
+        height: auto;
         object-fit: cover;
-        object-position: center 30%;
-        border-radius: 0;
+        border-radius: 16px;
       }
 
-      .fxp-math-mobile-img::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 40px;
-        background: linear-gradient(to top, #0b1426 0%, transparent 100%);
-        pointer-events: none;
-      }
-
+      .fxp-role-mobile-img::after,
+      .fxp-role-mobile-img::before,
+      .fxp-math-mobile-img::after,
       .fxp-math-mobile-img::before {
         display: none;
       }

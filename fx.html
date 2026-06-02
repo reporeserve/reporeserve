@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260527j" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260527j" />
+  <link rel="preload" href="styles.css?v=20260527u" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260527u" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -195,48 +195,47 @@
 
     <!-- ═══ WHAT WE DO ═══ -->
     <section id="what-we-do" data-section-animate>
-      <div class="container">
-        <div class="fxp-split" data-reveal>
-          <div class="fxp-split-visual">
-            <div class="fxp-cost-card">
-              <div class="fxp-cost-header">Procurement vs Treasury &mdash; Cost View</div>
-              <div class="fxp-cost-rows">
-                <div class="fxp-cost-row">
-                  <span>Supplier negotiation</span>
-                  <span class="fxp-cost-val fxp-cost-val--green">&minus;3.0%</span>
-                </div>
-                <div class="fxp-cost-row">
-                  <span>Logistics optimization</span>
-                  <span class="fxp-cost-val fxp-cost-val--green">&minus;1.2%</span>
-                </div>
-                <div class="fxp-cost-row">
-                  <span>Inventory efficiency</span>
-                  <span class="fxp-cost-val fxp-cost-val--green">&minus;0.8%</span>
-                </div>
-                <div class="fxp-cost-row">
-                  <span>FX execution loss</span>
-                  <span class="fxp-cost-val fxp-cost-val--red">+1.4%</span>
-                </div>
-                <div class="fxp-cost-row">
-                  <span>Hedge timing loss</span>
-                  <span class="fxp-cost-val fxp-cost-val--red">+0.7%</span>
-                </div>
-                <div class="fxp-cost-row">
-                  <span>Payment gaps</span>
-                  <span class="fxp-cost-val fxp-cost-val--red">+0.5%</span>
-                </div>
-              </div>
-              <div class="fxp-cost-total">
-                <span>Net saving after treasury leakage</span>
-                <strong class="fxp-cost-total-val">1.4%</strong>
-              </div>
-            </div>
+      <div class="fxp-wwd-layout">
+        <div class="fxp-wwd-text">
+          <span class="fxp-role-eyebrow"><span class="fxp-role-eyebrow-dot"></span>What We Do</span>
+          <h2 class="fxp-wwd-heading">Procurement optimizes cost. <span class="fxp-hero-accent">We optimize what comes after.</span></h2>
+          <p class="fxp-wwd-desc">Your team is great at negotiating supplier price. RepoReserve handles the treasury side — the part that quietly erases those hard-won savings before they ever reach your bottom line.</p>
+          <a href="#the-math" class="btn btn-primary fxp-role-cta">See Hidden Costs <span class="fxp-role-cta-arrow">&rarr;</span></a>
+        </div>
+
+        <div class="fxp-wwd-card">
+          <div class="fxp-wwd-card-head">
+            <span class="fxp-wwd-card-title">Procurement vs Treasury</span>
+            <span class="fxp-wwd-card-tag">Cost View</span>
           </div>
-          <div class="fxp-split-text">
-            <span class="fxp-section-label">What We Do</span>
-            <h2>Procurement optimizes cost. We optimize what comes after.</h2>
-            <p>Your team is good at negotiating supplier price. RepoReserve handles the treasury side &mdash; the part that quietly erases those savings.</p>
-            <a href="#the-math" class="btn btn-primary">See Hidden Costs</a>
+
+          <div class="fxp-wwd-group">
+            <div class="fxp-wwd-group-label fxp-wwd-group-label--save">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Procurement saves
+            </div>
+            <div class="fxp-wwd-row"><span>Supplier negotiation</span><span class="fxp-wwd-val fxp-wwd-val--green">&minus;3.0%</span></div>
+            <div class="fxp-wwd-row"><span>Logistics optimization</span><span class="fxp-wwd-val fxp-wwd-val--green">&minus;1.2%</span></div>
+            <div class="fxp-wwd-row"><span>Inventory efficiency</span><span class="fxp-wwd-val fxp-wwd-val--green">&minus;0.8%</span></div>
+          </div>
+
+          <div class="fxp-wwd-group">
+            <div class="fxp-wwd-group-label fxp-wwd-group-label--leak">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Treasury leaks back
+            </div>
+            <div class="fxp-wwd-row"><span>FX execution loss</span><span class="fxp-wwd-val fxp-wwd-val--red">+1.4%</span></div>
+            <div class="fxp-wwd-row"><span>Hedge timing loss</span><span class="fxp-wwd-val fxp-wwd-val--red">+0.7%</span></div>
+            <div class="fxp-wwd-row"><span>Payment gaps</span><span class="fxp-wwd-val fxp-wwd-val--red">+0.5%</span></div>
+          </div>
+
+          <div class="fxp-wwd-net">
+            <div class="fxp-wwd-net-top">
+              <span class="fxp-wwd-net-label">Net saving that survives</span>
+              <strong class="fxp-wwd-net-val">1.4%</strong>
+            </div>
+            <div class="fxp-wwd-net-bar"><span style="width: 47%"></span></div>
+            <span class="fxp-wwd-net-note">Treasury leakage quietly erases over half your savings.</span>
           </div>
         </div>
       </div>
@@ -349,56 +348,44 @@
       <div class="fxp-math-mobile-img">
         <img src="assets/the-math.png" alt="Import cost optimization presentation showing estimated annual savings" width="800" height="533" loading="lazy" />
       </div>
-      <div class="container">
-        <div class="fxp-split fxp-split--reverse" data-reveal>
-          <div class="fxp-split-text">
-            <span class="fxp-section-label">The Math</span>
-            <h2>You saved 3%. Treasury gave 2% back.</h2>
-            <p>Supplier negotiation saves $100 &rarr; $97. But inefficient FX execution, poor hedge timing, and payment gaps quietly reclaim most of that gain.</p>
-            <p class="fxp-text-highlight">RepoReserve identifies exactly where the leakage is &mdash; and closes it.</p>
-            <button type="button" class="btn btn-secondary demo-trigger" data-open-demo>Analyze Treasury Leakage</button>
-          </div>
-          <div class="fxp-split-visual">
-            <div class="fxp-leakage-card">
-              <div class="fxp-leakage-header">Where the 3% Saving Goes</div>
-              <div class="fxp-leakage-rows">
-                <div class="fxp-leakage-row">
-                  <div class="fxp-leakage-info">
-                    <span>Poor hedge timing</span>
-                    <span class="fxp-leakage-val">&minus;0.65%</span>
-                  </div>
-                  <div class="fxp-leakage-bar"><span style="width: 65%"></span></div>
-                </div>
-                <div class="fxp-leakage-row">
-                  <div class="fxp-leakage-info">
-                    <span>Rollover inefficiency</span>
-                    <span class="fxp-leakage-val">&minus;0.40%</span>
-                  </div>
-                  <div class="fxp-leakage-bar"><span style="width: 40%"></span></div>
-                </div>
-                <div class="fxp-leakage-row">
-                  <div class="fxp-leakage-info">
-                    <span>Weak FX execution</span>
-                    <span class="fxp-leakage-val">&minus;0.70%</span>
-                  </div>
-                  <div class="fxp-leakage-bar"><span style="width: 70%"></span></div>
-                </div>
-                <div class="fxp-leakage-row">
-                  <div class="fxp-leakage-info">
-                    <span>Payment structure gaps</span>
-                    <span class="fxp-leakage-val">&minus;0.35%</span>
-                  </div>
-                  <div class="fxp-leakage-bar"><span style="width: 35%"></span></div>
-                </div>
-              </div>
-              <div class="fxp-leakage-total">
-                <div>
-                  <span class="fxp-leakage-total-label">Net saving after leakage</span>
-                  <span class="fxp-leakage-total-num">+0.90%</span>
-                  <span class="fxp-leakage-total-of">of 3.00% saved</span>
-                </div>
-              </div>
+      <div class="fxp-role-panel fxp-role-panel--reverse">
+        <div class="fxp-role-panel-top">
+          <div class="fxp-role-body">
+            <span class="fxp-role-eyebrow"><span class="fxp-role-eyebrow-dot"></span>The Math</span>
+            <h2 class="fxp-role-heading">You saved 3%. <span class="fxp-hero-accent">Treasury gave 2% back.</span></h2>
+            <p class="fxp-role-desc">Supplier negotiation saves $100 &rarr; $97. But inefficient FX execution, poor hedge timing, and payment gaps quietly reclaim most of that gain — RepoReserve finds exactly where the leakage is and closes it.</p>
+            <div class="fxp-role-action">
+              <button type="button" class="btn btn-primary demo-trigger fxp-role-cta" data-open-demo>Analyze Treasury Leakage <span class="fxp-role-cta-arrow">&rarr;</span></button>
+              <span class="fxp-role-action-note">Net saving after leakage: only +0.90%</span>
             </div>
+          </div>
+          <div class="fxp-role-visual">
+            <div class="fxp-role-visual-inner">
+              <img src="assets/the-math.png" alt="Import cost optimization presentation showing estimated annual savings" width="800" height="533" loading="lazy" />
+              <span class="fxp-role-visual-badge fxp-role-visual-badge--alert">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 4.3 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                2.1% lost to treasury leakage
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fxp-role-strip">
+          <div class="fxp-role-chip fxp-role-chip--loss">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Poor hedge timing</strong><small>&minus;0.65%</small></span>
+          </div>
+          <div class="fxp-role-chip fxp-role-chip--loss">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Weak FX execution</strong><small>&minus;0.70%</small></span>
+          </div>
+          <div class="fxp-role-chip fxp-role-chip--loss">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Rollover inefficiency</strong><small>&minus;0.40%</small></span>
+          </div>
+          <div class="fxp-role-chip fxp-role-chip--loss">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Payment structure gaps</strong><small>&minus;0.35%</small></span>
           </div>
         </div>
       </div>
@@ -409,34 +396,44 @@
       <div class="fxp-role-mobile-img">
         <img src="assets/our-role.png" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
       </div>
-      <div class="container">
-        <div class="fxp-split" data-reveal>
-          <div class="fxp-split-visual">
-            <div class="fxp-role-card">
-              <div class="fxp-role-row">
-                <span>Procurement Team</span>
-                <span class="fxp-role-badge">Existing</span>
-              </div>
-              <div class="fxp-role-row">
-                <span>Finance &amp; Accounts</span>
-                <span class="fxp-role-badge">Existing</span>
-              </div>
-              <div class="fxp-role-row">
-                <span>Bank Relationships</span>
-                <span class="fxp-role-badge">Existing</span>
-              </div>
-              <div class="fxp-role-row fxp-role-row--new">
-                <span>RepoReserve &mdash; FX &amp; Treasury</span>
-                <span class="fxp-role-badge fxp-role-badge--new">New Layer</span>
-              </div>
+      <div class="fxp-role-panel">
+        <div class="fxp-role-panel-top">
+          <div class="fxp-role-visual">
+            <div class="fxp-role-visual-inner">
+              <img src="assets/our-role.png" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
+              <span class="fxp-role-visual-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l-8 4v5c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V7l-8-4z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Non-disruptive integration
+              </span>
             </div>
           </div>
-          <div class="fxp-split-text">
-            <span class="fxp-section-label">Our Role</span>
-            <h2>We don't replace your team. We add what's missing.</h2>
-            <p>RepoReserve adds a focused FX and treasury optimization layer. Your procurement and finance teams stay exactly as they are.</p>
-            <p class="fxp-text-highlight">No disruption. No restructuring. Just the additional precision layer your import business has never had.</p>
-            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Audit FX Exposure</button>
+          <div class="fxp-role-body">
+            <span class="fxp-role-eyebrow"><span class="fxp-role-eyebrow-dot"></span>Our Role</span>
+            <h2 class="fxp-role-heading">We don't replace your team. <span class="fxp-hero-accent">We add what's missing.</span></h2>
+            <p class="fxp-role-desc">RepoReserve adds a focused FX and treasury optimization layer that works on top of your existing setup. Your procurement, finance, and banking relationships stay exactly as they are.</p>
+            <div class="fxp-role-action">
+              <button type="button" class="btn btn-primary demo-trigger fxp-role-cta" data-open-demo>Audit FX Exposure <span class="fxp-role-cta-arrow">&rarr;</span></button>
+              <span class="fxp-role-action-note">No disruption. No restructuring.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fxp-role-strip">
+          <div class="fxp-role-chip">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Procurement Team</strong><small>In place</small></span>
+          </div>
+          <div class="fxp-role-chip">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Finance &amp; Accounts</strong><small>In place</small></span>
+          </div>
+          <div class="fxp-role-chip">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>Bank Relationships</strong><small>In place</small></span>
+          </div>
+          <div class="fxp-role-chip fxp-role-chip--new">
+            <span class="fxp-role-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>
+            <span class="fxp-role-chip-text"><strong>RepoReserve FX &amp; Treasury</strong><small>New layer added</small></span>
           </div>
         </div>
       </div>
