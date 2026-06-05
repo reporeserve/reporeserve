@@ -673,6 +673,11 @@ const ensureDemoRecaptchaMarkup = () => {
     return;
   }
 
+  // Native formsubmit.co forms (with an action) don't use reCAPTCHA.
+  if (demoForm.getAttribute("action")) {
+    return;
+  }
+
   if (demoRecaptchaContainer) {
     return;
   }
@@ -1059,6 +1064,18 @@ if (briefingModal) {
 
 if (demoForm) {
   demoForm.addEventListener("submit", async (event) => {
+    // Native submission path: when the form has an action (formsubmit.co),
+    // let the browser submit it directly so file attachments are delivered by email.
+    if (demoForm.getAttribute("action")) {
+      if (!demoForm.checkValidity()) {
+        event.preventDefault();
+        demoForm.reportValidity();
+        return;
+      }
+      setDemoStatus("Uploading your transaction…");
+      return; // allow native submit (no preventDefault)
+    }
+
     event.preventDefault();
 
     if (demoSubmissionInFlight) {
@@ -1272,5 +1289,39 @@ document.querySelectorAll(".sol-card").forEach((card) => {
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     card.style.setProperty("--sol-mx", x + "%");
     card.style.setProperty("--sol-my", y + "%");
+  });
+});
+
+/* ── FAQ accordion ── */
+document.querySelectorAll(".fxfaq-item").forEach((item) => {
+  const btn = item.querySelector(".fxfaq-q");
+  const panel = item.querySelector(".fxfaq-a");
+  if (!btn || !panel) {
+    return;
+  }
+
+  btn.addEventListener("click", () => {
+    const isOpen = item.classList.contains("is-open");
+
+    if (isOpen) {
+      // collapse: lock current height, then animate to 0
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      window.requestAnimationFrame(() => {
+        panel.style.maxHeight = "0px";
+      });
+      item.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+    } else {
+      item.classList.add("is-open");
+      btn.setAttribute("aria-expanded", "true");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+
+  // once open, release the fixed height so content can reflow responsively
+  panel.addEventListener("transitionend", () => {
+    if (item.classList.contains("is-open")) {
+      panel.style.maxHeight = "none";
+    }
   });
 });

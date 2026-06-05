@@ -5127,6 +5127,71 @@ html {
       accent-color: #2f6bff;
     }
 
+    /* ── File upload field ── */
+    .fx-page .demo-file-field {
+      border: none !important;
+      background: none !important;
+      padding: 0 !important;
+    }
+
+    .demo-file-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 1.5px dashed rgba(47, 107, 255, 0.4);
+      border-radius: 10px;
+      background: rgba(47, 107, 255, 0.05);
+      color: #9ab0d4;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .demo-file-label:hover {
+      border-color: rgba(47, 107, 255, 0.7);
+      background: rgba(47, 107, 255, 0.09);
+    }
+
+    .demo-file-label svg {
+      width: 22px;
+      height: 22px;
+      color: #5a9bff;
+      flex-shrink: 0;
+    }
+
+    .demo-file-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #c8d8f0;
+    }
+
+    .demo-file-text small {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: #7a90b8;
+    }
+
+    #fx-file {
+      width: 100%;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #9ab0d4;
+    }
+
+    #fx-file::file-selector-button {
+      margin-right: 10px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(47, 107, 255, 0.3);
+      background: rgba(47, 107, 255, 0.12);
+      color: #cfe0f5;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     .fx-page .demo-actions .btn {
       min-width: 140px;
     }
@@ -9799,6 +9864,233 @@ html {
       flex-shrink: 0;
     }
 
+    /* ═══ WhatsApp floating button (FX page) — replaces cookie FAB ═══ */
+
+    .fx-page .cookie-fab {
+      display: none !important;
+    }
+
+    .wa-fab {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 60;
+      width: 42px;
+      height: 42px;
+      display: block;
+      background: none;
+      border: none;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    .wa-fab img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .wa-fab:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    /* ═══ Nav WhatsApp + CTA group (FX page) ═══ */
+
+    .nav-cta-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-wa {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      color: #25d366;
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid rgba(37, 211, 102, 0.32);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-wa:hover {
+      background: rgba(37, 211, 102, 0.18);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.2);
+    }
+
+    .nav-wa svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    /* ═══ FAQ — Accordion ═══ */
+
+    #faq {
+      padding: 56px 0;
+    }
+
+    .fxfaq-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .fxfaq-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .fxfaq-header .fxp-role-eyebrow {
+      margin: 0 auto 16px;
+    }
+
+    .fxfaq-heading {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 800;
+      color: #f5f9ff;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+    }
+
+    .fxfaq-heading .fxp-hero-accent {
+      display: inline;
+      padding-bottom: 0.08em;
+    }
+
+    .fxfaq-sub {
+      font-size: 1rem;
+      color: #9ab0d4;
+      line-height: 1.65;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .fxfaq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fxfaq-item {
+      border: 1px solid rgba(47, 107, 255, 0.14);
+      border-radius: 14px;
+      background: linear-gradient(170deg, rgba(16, 27, 52, 0.7) 0%, rgba(9, 16, 32, 0.85) 100%);
+      overflow: hidden;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .fxfaq-item.is-open {
+      border-color: rgba(56, 217, 169, 0.3);
+      background: linear-gradient(170deg, rgba(20, 34, 60, 0.8) 0%, rgba(10, 18, 34, 0.9) 100%);
+    }
+
+    .fxfaq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #eaf1ff;
+      transition: color 0.2s ease;
+    }
+
+    .fxfaq-q:hover {
+      color: #ffffff;
+    }
+
+    .fxfaq-item.is-open .fxfaq-q {
+      color: #4ee6ad;
+    }
+
+    .fxfaq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: #5a9bff;
+      transition: transform 0.3s ease, color 0.2s ease;
+    }
+
+    .fxfaq-item.is-open .fxfaq-icon {
+      transform: rotate(180deg);
+      color: #4ee6ad;
+    }
+
+    .fxfaq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease;
+    }
+
+    .fxfaq-a-inner {
+      padding: 0 24px 22px;
+    }
+
+    .fxfaq-a-inner p {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #9ab0d4;
+      margin: 0 0 10px;
+    }
+
+    .fxfaq-a-inner p:last-child {
+      margin-bottom: 0;
+    }
+
+    .fxfaq-no,
+    .fxfaq-yes {
+      font-weight: 700;
+    }
+
+    .fxfaq-no {
+      color: #f0846a;
+    }
+
+    .fxfaq-yes {
+      color: #4ee6ad;
+    }
+
+    .fxfaq-bullets {
+      list-style: none;
+      margin: 0 0 12px;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+    }
+
+    .fxfaq-bullets li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.9rem;
+      color: #c8d8f0;
+      line-height: 1.45;
+    }
+
+    .fxfaq-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38d9a9;
+    }
+
     /* ═══ Cost Comparison Card (legacy) ═══ */
 
     .fxp-cost-card {
@@ -10542,8 +10834,9 @@ html {
         display: none;
       }
 
+      /* hide the hero upload card on mobile */
       .fxh-card {
-        padding: 20px;
+        display: none;
       }
 
       .fxh-card-title {
@@ -10762,6 +11055,42 @@ html {
 
       .fxr-report {
         padding: 12px;
+      }
+
+      /* ── FAQ — mobile ── */
+      #faq {
+        padding: 30px 0;
+      }
+
+      .fxfaq-wrap {
+        padding: 0 16px;
+      }
+
+      .fxfaq-header {
+        margin-bottom: 28px;
+      }
+
+      .fxfaq-heading {
+        font-size: 1.6rem;
+      }
+
+      .fxfaq-sub {
+        font-size: 0.92rem;
+      }
+
+      .fxfaq-q {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+        gap: 12px;
+      }
+
+      .fxfaq-a-inner {
+        padding: 0 18px 18px;
+      }
+
+      .fxfaq-bullets {
+        grid-template-columns: 1fr;
+        gap: 7px;
       }
 
       .fxp-split {
