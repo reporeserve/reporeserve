@@ -1292,6 +1292,62 @@ document.querySelectorAll(".sol-card").forEach((card) => {
   });
 });
 
+/* ── Post-submit confirmation toast (after formsubmit.co redirect) ── */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("submitted") !== "1") {
+    return;
+  }
+
+  const toast = document.createElement("div");
+  toast.className = "fx-submit-toast";
+  toast.setAttribute("role", "status");
+  toast.innerHTML =
+    '<span class="fx-submit-toast-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9" opacity="0.4"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+    '<span class="fx-submit-toast-text"><strong>Thank you — your transaction has been submitted.</strong>Our team will review it and get back to you within 24–48 hours.</span>' +
+    '<button type="button" class="fx-submit-toast-close" aria-label="Dismiss">&times;</button>';
+  document.body.appendChild(toast);
+
+  window.requestAnimationFrame(() => toast.classList.add("show"));
+
+  const dismiss = () => {
+    toast.classList.remove("show");
+    window.setTimeout(() => toast.remove(), 400);
+  };
+  toast.querySelector(".fx-submit-toast-close").addEventListener("click", dismiss);
+  window.setTimeout(dismiss, 9000);
+
+  // clean the ?submitted=1 from the URL without reloading
+  const cleanUrl = window.location.pathname + window.location.hash;
+  window.history.replaceState({}, document.title, cleanUrl);
+})();
+
+/* ── Show selected file count on the upload field ── */
+(function () {
+  const fileInput = document.getElementById("fx-file");
+  const field = document.querySelector(".demo-file-field");
+  if (!fileInput || !field) {
+    return;
+  }
+
+  fileInput.addEventListener("change", () => {
+    const existing = field.querySelector(".demo-file-count");
+    if (existing) {
+      existing.remove();
+    }
+    const count = fileInput.files ? fileInput.files.length : 0;
+    if (count > 0) {
+      const span = document.createElement("span");
+      span.className = "demo-file-count";
+      span.textContent =
+        count === 1
+          ? "1 file selected: " + fileInput.files[0].name
+          : count + " files selected";
+      field.appendChild(span);
+    }
+  });
+})();
+
 /* ── FAQ accordion ── */
 document.querySelectorAll(".fxfaq-item").forEach((item) => {
   const btn = item.querySelector(".fxfaq-q");
