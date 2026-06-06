@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260529q" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260529q" />
+  <link rel="preload" href="styles.css?v=20260529r" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260529r" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -523,7 +523,7 @@
               </span>
             </div>
             <div class="fxr-report-frame">
-              <img src="assets/your-report.webp" alt="Sample RepoReserve treasury review report" loading="lazy" />
+              <img src="assets/your-report.webp" class="fx-zoomable" alt="Sample RepoReserve treasury review report" loading="lazy" />
             </div>
           </div>
           <p class="fxr-report-note">
@@ -915,6 +915,15 @@
     <img src="assets/whatsapp.png" alt="WhatsApp" width="56" height="56" />
   </a>
 
-  <script src="script.js?v=20260529j" defer></script>
+  <!-- Image lightbox (tap to view larger / zoom) -->
+  <div class="fx-lightbox" id="fx-lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button type="button" class="fx-lightbox-close" aria-label="Close image">&times;</button>
+    <div class="fx-lightbox-scroll">
+      <img class="fx-lightbox-img" src="" alt="" />
+    </div>
+    <span class="fx-lightbox-hint">Tap image to zoom</span>
+  </div>
+
+  <script src="script.js?v=20260529r" defer></script>
 </body>
 </html>

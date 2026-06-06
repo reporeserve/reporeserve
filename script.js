@@ -1429,6 +1429,68 @@ document.querySelectorAll(".sol-card").forEach((card) => {
   });
 })();
 
+/* ── Image lightbox: tap to view larger, tap again to zoom & pan ── */
+(function () {
+  const lb = document.getElementById("fx-lightbox");
+  if (!lb) {
+    return;
+  }
+  const img = lb.querySelector(".fx-lightbox-img");
+  const closeBtn = lb.querySelector(".fx-lightbox-close");
+  const scroll = lb.querySelector(".fx-lightbox-scroll");
+  const hint = lb.querySelector(".fx-lightbox-hint");
+
+  const open = (src, alt) => {
+    img.classList.remove("zoomed");
+    img.src = src;
+    img.alt = alt || "";
+    if (hint) {
+      hint.style.display = "";
+    }
+    lb.classList.add("is-open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const close = () => {
+    lb.classList.remove("is-open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    img.src = "";
+  };
+
+  document.querySelectorAll(".fx-zoomable").forEach((el) => {
+    el.addEventListener("click", () => open(el.currentSrc || el.src, el.alt));
+  });
+
+  img.addEventListener("click", (e) => {
+    e.stopPropagation();
+    img.classList.toggle("zoomed");
+    if (hint) {
+      hint.style.display = img.classList.contains("zoomed") ? "none" : "";
+    }
+    // recenter scroll when zooming in
+    if (img.classList.contains("zoomed")) {
+      window.requestAnimationFrame(() => {
+        scroll.scrollLeft = (scroll.scrollWidth - scroll.clientWidth) / 2;
+        scroll.scrollTop = (scroll.scrollHeight - scroll.clientHeight) / 2;
+      });
+    }
+  });
+
+  closeBtn.addEventListener("click", close);
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb || e.target === scroll) {
+      close();
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lb.classList.contains("is-open")) {
+      close();
+    }
+  });
+})();
+
 /* ── FAQ accordion ── */
 document.querySelectorAll(".fxfaq-item").forEach((item) => {
   const btn = item.querySelector(".fxfaq-q");
