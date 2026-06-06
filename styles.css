@@ -10987,6 +10987,7 @@ html {
       .fxh-actions {
         width: 100%;
         flex-direction: column;
+        margin-bottom: 4px;
       }
 
       .fxh-cta-primary {
@@ -11020,11 +11021,11 @@ html {
         border-radius: 18px;
       }
 
-      /* upload card hidden on mobile — image + button replace it (Wise-style) */
+      /* upload card shown on mobile, below the hero image */
       .fxh-card {
-        display: none;
+        display: block;
         padding: 18px;
-        margin-top: 4px;
+        margin-top: 22px;
         border-radius: 18px;
       }
 
