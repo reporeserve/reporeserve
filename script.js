@@ -1453,7 +1453,8 @@ document.querySelectorAll(".sol-card").forEach((card) => {
   };
 
   const close = () => {
-    lb.classList.remove("is-open");
+    lb.classList.remove("is-open", "is-zoomed");
+    img.classList.remove("zoomed");
     lb.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     img.src = "";
@@ -1465,12 +1466,13 @@ document.querySelectorAll(".sol-card").forEach((card) => {
 
   img.addEventListener("click", (e) => {
     e.stopPropagation();
-    img.classList.toggle("zoomed");
+    const isZoomed = img.classList.toggle("zoomed");
+    lb.classList.toggle("is-zoomed", isZoomed);
     if (hint) {
-      hint.style.display = img.classList.contains("zoomed") ? "none" : "";
+      hint.style.display = isZoomed ? "none" : "";
     }
-    // recenter scroll when zooming in
-    if (img.classList.contains("zoomed")) {
+    // recenter scroll when zooming in so you start in the middle
+    if (isZoomed) {
       window.requestAnimationFrame(() => {
         scroll.scrollLeft = (scroll.scrollWidth - scroll.clientWidth) / 2;
         scroll.scrollTop = (scroll.scrollHeight - scroll.clientHeight) / 2;
