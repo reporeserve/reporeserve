@@ -75,8 +75,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="preload" href="styles.css?v=20260529f" as="style" />
-  <link rel="stylesheet" href="styles.css?v=20260529f" />
+  <link rel="preload" href="styles.css?v=20260529p" as="style" />
+  <link rel="stylesheet" href="styles.css?v=20260529p" />
 </head>
 <body class="fx-page">
   <header class="site-header">
@@ -166,6 +166,11 @@
               </a>
             </div>
 
+            <!-- mobile-only hero image (Wise-style) -->
+            <div class="fxh-hero-img">
+              <img src="assets/heroimage.webp" alt="RepoReserve treasury review for Indian importers" width="800" height="600" loading="eager" />
+            </div>
+
             <div class="fxh-trust-indicators">
               <div class="fxh-ti">
                 <span class="fxh-ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg></span>
@@ -201,13 +206,26 @@
               <span class="fxh-doctag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke-linejoin="round"/><path d="M14 3v5h5" stroke-linejoin="round"/></svg> Payment Advice</span>
             </div>
 
-            <button type="button" class="fxh-dropzone demo-trigger" data-open-demo>
-              <span class="fxh-dropzone-plus">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
-              </span>
-              <span class="fxh-dropzone-t1">Drag &amp; drop your file here</span>
-              <span class="fxh-dropzone-t2">or click to upload</span>
-            </button>
+            <div class="fxh-dropzone" id="fxh-dropzone" role="button" tabindex="0" aria-label="Upload a transaction document">
+              <input type="file" id="fxh-file-input" accept=".pdf,.jpg,.jpeg,.png" multiple hidden />
+              <div class="fxh-dropzone-default">
+                <span class="fxh-dropzone-plus">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
+                </span>
+                <span class="fxh-dropzone-t1">Drag &amp; drop your file here</span>
+                <span class="fxh-dropzone-t2">or click to upload</span>
+              </div>
+              <div class="fxh-dropzone-selected" hidden>
+                <span class="fxh-dropzone-check">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="fxh-dropzone-files"></span>
+                <div class="fxh-dropzone-actions">
+                  <button type="button" class="btn btn-primary fxh-dropzone-send">Send <span class="fxp-role-cta-arrow">&rarr;</span></button>
+                  <button type="button" class="fxh-dropzone-clear">Choose a different file</button>
+                </div>
+              </div>
+            </div>
             <p class="fxh-formats">PDF, JPG, PNG up to 10MB</p>
 
             <div class="fxh-confidential">
@@ -250,7 +268,7 @@
           <div class="fxj2-card">
             <!-- IMAGE PLACEHOLDER (replace with <img src="..."> later) -->
             <div class="fxj2-img" data-img="01">
-              <img src="assets/importer-1.png" alt="Importer negotiating supplier price" width="800" height="500" loading="lazy" />
+              <img src="assets/importer-1.webp" alt="Importer negotiating supplier price" width="800" height="500" loading="lazy" />
             </div>
             <div class="fxj2-card-body">
               <div class="fxj2-card-top">
@@ -267,7 +285,7 @@
           <!-- CARD 02 -->
           <div class="fxj2-card fxj2-card--hot">
             <div class="fxj2-img" data-img="02">
-              <img src="assets/importer-2.png" alt="FX conversion and exchange rate analysis" width="800" height="500" loading="lazy" />
+              <img src="assets/importer-2.webp" alt="FX conversion and exchange rate analysis" width="800" height="500" loading="lazy" />
             </div>
             <div class="fxj2-card-body">
               <div class="fxj2-card-top">
@@ -288,7 +306,7 @@
           <!-- CARD 03 -->
           <div class="fxj2-card fxj2-card--hot">
             <div class="fxj2-img" data-img="03">
-              <img src="assets/importer-3.png" alt="Payment timing and trade finance decisions" width="800" height="500" loading="lazy" />
+              <img src="assets/importer-3.webp" alt="Payment timing and trade finance decisions" width="800" height="500" loading="lazy" />
             </div>
             <div class="fxj2-card-body">
               <div class="fxj2-card-top">
@@ -309,7 +327,7 @@
           <!-- CARD 04 -->
           <div class="fxj2-card fxj2-card--final">
             <div class="fxj2-img" data-img="04">
-              <img src="assets/importer-4.png" alt="Final import cost summary and profitability" width="800" height="500" loading="lazy" />
+              <img src="assets/importer-4.webp" alt="Final import cost summary and profitability" width="800" height="500" loading="lazy" />
             </div>
             <div class="fxj2-card-body">
               <div class="fxj2-card-top">
@@ -330,7 +348,7 @@
         <div class="fxj2-panel">
           <div class="fxj2-panel-left">
             <span class="fxj2-panel-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M8 12v-1M11 12V9M14 12v-2" stroke-linecap="round"/></svg>
+              <img src="assets/box-logo.svg" alt="RepoReserve" />
             </span>
             <h3 class="fxj2-panel-title"><span class="fxp-hero-accent">RepoReserve identifies</span> where import costs quietly increase.</h3>
           </div>
@@ -505,7 +523,7 @@
               </span>
             </div>
             <div class="fxr-report-frame">
-              <img src="assets/your-report.png" alt="Sample RepoReserve treasury review report" loading="lazy" />
+              <img src="assets/your-report.webp" alt="Sample RepoReserve treasury review report" loading="lazy" />
             </div>
           </div>
           <p class="fxr-report-note">
@@ -519,13 +537,13 @@
     <!-- ═══ OUR ROLE ═══ -->
     <section id="our-role" data-section-animate>
       <div class="fxp-role-mobile-img">
-        <img src="assets/our-role.png" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
+        <img src="assets/our-role.webp" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
       </div>
       <div class="fxp-role-panel">
         <div class="fxp-role-panel-top">
           <div class="fxp-role-visual">
             <div class="fxp-role-visual-inner">
-              <img src="assets/our-role.png" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
+              <img src="assets/our-role.webp" alt="Import-export professionals reviewing treasury documents at a shipping port" width="800" height="533" loading="lazy" />
               <span class="fxp-role-visual-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l-8 4v5c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V7l-8-4z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Non-disruptive integration
@@ -678,14 +696,11 @@
     <section id="contact">
       <div class="container">
         <div class="cta-wrap fxe-cta" data-reveal>
-          <h2>Want to find your hidden FX losses?</h2>
-          <p>We'll map your FX and payment workflow and show you exactly where the leakage is.</p>
+          <h2>Stop guessing where costs are leaking.</h2>
+          <p>Upload one import transaction and receive a treasury review focused on FX execution, payment timing, banking costs, and trade finance decisions.</p>
           <div class="fxp-cta-actions">
-            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Map My FX Leakage</button>
-            <a href="https://wa.me/917780143759" class="btn btn-secondary fxp-wa-btn" target="_blank" rel="noopener noreferrer">
-              <span class="fxp-wa-dot"></span>
-              Connect on WhatsApp
-            </a>
+            <button type="button" class="btn btn-primary demo-trigger" data-open-demo>Upload a Transaction</button>
+            <a href="#real-output" class="btn btn-secondary">View Sample Review</a>
           </div>
         </div>
       </div>
@@ -800,26 +815,16 @@
           <input id="fx-phone" name="Phone" type="tel" required pattern="[0-9]{10}" inputmode="numeric" placeholder="Mobile No *" />
         </div>
 
-        <div class="demo-field demo-field-radio">
-          <label class="demo-radio"><input type="radio" name="Profile" value="Importer" checked /> Importer</label>
-          <label class="demo-radio"><input type="radio" name="Profile" value="Exporter" /> Exporter</label>
-          <label class="demo-radio"><input type="radio" name="Profile" value="Both" /> Both</label>
-        </div>
-
-        <div class="demo-field">
-          <textarea id="fx-requirements" name="Requirements" rows="2" placeholder="Briefly describe your requirement (optional)"></textarea>
-        </div>
-
         <div class="demo-field demo-file-field">
           <label for="fx-file" class="demo-file-label">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4M7 9l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20h14" stroke-linecap="round"/></svg>
-            <span class="demo-file-text">Attach your transaction documents <small>Invoice, SWIFT, LC or Payment Advice — you can select multiple (PDF, JPG, PNG)</small></span>
+            <span class="demo-file-text">Attach your transaction documents <small>Invoice, SWIFT, LC or Payment Advice (PDF, JPG, PNG)</small></span>
           </label>
           <input id="fx-file" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple />
         </div>
 
         <div class="demo-actions">
-          <button type="submit" class="btn btn-primary">Submit for Treasury Review</button>
+          <button type="submit" class="btn btn-primary">Send for Treasury Review</button>
         </div>
         <p class="demo-success" role="status" aria-live="polite"></p>
       </form>
@@ -910,6 +915,6 @@
     <img src="assets/whatsapp.png" alt="WhatsApp" width="56" height="56" />
   </a>
 
-  <script src="script.js?v=20260529f" defer></script>
+  <script src="script.js?v=20260529j" defer></script>
 </body>
 </html>

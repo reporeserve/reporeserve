@@ -1322,6 +1322,87 @@ document.querySelectorAll(".sol-card").forEach((card) => {
   window.history.replaceState({}, document.title, cleanUrl);
 })();
 
+/* ── Hero dropzone: accept file first, then "Send" opens the form ── */
+(function () {
+  const dz = document.getElementById("fxh-dropzone");
+  const input = document.getElementById("fxh-file-input");
+  const modalFileInput = document.getElementById("fx-file");
+  if (!dz || !input) {
+    return;
+  }
+
+  const defaultView = dz.querySelector(".fxh-dropzone-default");
+  const selectedView = dz.querySelector(".fxh-dropzone-selected");
+  const filesLabel = dz.querySelector(".fxh-dropzone-files");
+  const sendBtn = dz.querySelector(".fxh-dropzone-send");
+  const clearBtn = dz.querySelector(".fxh-dropzone-clear");
+  let chosen = null;
+
+  const showSelected = (files) => {
+    if (!files || !files.length) {
+      return;
+    }
+    chosen = files;
+    const names = Array.from(files).map((f) => f.name);
+    filesLabel.textContent =
+      names.length === 1 ? names[0] : names.length + " files ready to send";
+    defaultView.hidden = true;
+    selectedView.hidden = false;
+  };
+
+  const reset = () => {
+    chosen = null;
+    input.value = "";
+    defaultView.hidden = false;
+    selectedView.hidden = true;
+  };
+
+  defaultView.addEventListener("click", () => input.click());
+  dz.addEventListener("keydown", (e) => {
+    if ((e.key === "Enter" || e.key === " ") && selectedView.hidden) {
+      e.preventDefault();
+      input.click();
+    }
+  });
+  input.addEventListener("change", () => showSelected(input.files));
+
+  ["dragenter", "dragover"].forEach((ev) =>
+    dz.addEventListener(ev, (e) => {
+      e.preventDefault();
+      dz.classList.add("is-dragover");
+    })
+  );
+  ["dragleave", "dragend"].forEach((ev) =>
+    dz.addEventListener(ev, () => dz.classList.remove("is-dragover"))
+  );
+  dz.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dz.classList.remove("is-dragover");
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      showSelected(e.dataTransfer.files);
+    }
+  });
+
+  clearBtn.addEventListener("click", reset);
+
+  sendBtn.addEventListener("click", () => {
+    // move the chosen files into the form's file input so they submit together
+    if (chosen && modalFileInput) {
+      try {
+        const dt = new DataTransfer();
+        Array.from(chosen).forEach((f) => dt.items.add(f));
+        modalFileInput.files = dt.files;
+        modalFileInput.dispatchEvent(new Event("change"));
+      } catch (err) {
+        /* DataTransfer unsupported — form still lets the user attach */
+      }
+    }
+    if (typeof openDemoModal === "function") {
+      openDemoModal();
+    }
+  });
+})();
+
 /* ── Show selected file count on the upload field ── */
 (function () {
   const fileInput = document.getElementById("fx-file");

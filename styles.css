@@ -8162,25 +8162,21 @@ html {
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
-      color: rgba(156, 190, 255, 0.95);
+      /* premium dot-grid texture */
+      background-image: radial-gradient(rgba(120, 160, 230, 0.9) 1.4px, transparent 1.6px);
+      background-size: 30px 30px;
+      background-position: 0 0;
+      opacity: 0.16;
+      /* fade the centre so the pattern never competes with the content */
       -webkit-mask-image:
-        radial-gradient(ellipse 38% 42% at 50% 49%, transparent 0 44%, rgba(0, 0, 0, 0.34) 58%, rgba(0, 0, 0, 0.95) 100%);
+        radial-gradient(ellipse 66% 62% at 50% 50%, transparent 0 26%, rgba(0, 0, 0, 0.5) 58%, #000 100%);
       mask-image:
-        radial-gradient(ellipse 38% 42% at 50% 49%, transparent 0 44%, rgba(0, 0, 0, 0.34) 58%, rgba(0, 0, 0, 0.95) 100%);
+        radial-gradient(ellipse 66% 62% at 50% 50%, transparent 0 26%, rgba(0, 0, 0, 0.5) 58%, #000 100%);
     }
 
+    /* legacy scattered symbols no longer used */
     .fxp-rupee-watermark span {
-      position: absolute;
-      display: block;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: 0;
-      opacity: var(--rupee-opacity, 0.16);
-      transform: rotate(var(--rupee-rotate, 0deg));
-      text-shadow:
-        0 0 18px rgba(100, 154, 255, 0.2),
-        0 0 34px rgba(47, 107, 255, 0.08);
-      user-select: none;
+      display: none;
     }
 
     .fxp-rupee-watermark span:nth-child(1) {
@@ -8519,6 +8515,11 @@ html {
       align-items: center;
     }
 
+    /* mobile hero image hidden on desktop */
+    .fxh-hero-img {
+      display: none;
+    }
+
     .fxh-left {
       display: flex;
       flex-direction: column;
@@ -8748,23 +8749,103 @@ html {
 
     .fxh-dropzone {
       width: 100%;
+      border-radius: 16px;
+      border: 1.5px dashed rgba(47, 107, 255, 0.38);
+      background: rgba(47, 107, 255, 0.04);
+      font-family: inherit;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .fxh-dropzone.is-dragover {
+      border-color: rgba(56, 217, 169, 0.6);
+      background: rgba(56, 217, 169, 0.08);
+    }
+
+    /* [hidden] must win over the flex display rules below */
+    .fxh-dropzone-default[hidden],
+    .fxh-dropzone-selected[hidden] {
+      display: none !important;
+    }
+
+    .fxh-dropzone-default {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
       padding: 52px 20px;
-      border-radius: 16px;
-      border: 1.5px dashed rgba(47, 107, 255, 0.38);
-      background: rgba(47, 107, 255, 0.04);
       cursor: pointer;
-      font-family: inherit;
-      transition: border-color 0.25s ease, background 0.25s ease;
     }
 
-    .fxh-dropzone:hover {
-      border-color: rgba(47, 107, 255, 0.65);
-      background: rgba(47, 107, 255, 0.08);
+    .fxh-dropzone-default:hover {
+      opacity: 0.92;
+    }
+
+    /* selected (file ready) state */
+    .fxh-dropzone-selected {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 34px 20px;
+      text-align: center;
+    }
+
+    .fxh-dropzone-check {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(56, 217, 169, 0.12);
+      border: 1px solid rgba(56, 217, 169, 0.4);
+      color: #38d9a9;
+    }
+
+    .fxh-dropzone-check svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .fxh-dropzone-files {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #eaf1ff;
+      word-break: break-word;
+      max-width: 90%;
+    }
+
+    .fxh-dropzone-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      margin-top: 4px;
+    }
+
+    .fxh-dropzone-send {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .fxh-dropzone-clear {
+      background: none;
+      border: none;
+      color: #7a90b8;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 2px;
+    }
+
+    .fxh-dropzone-clear:hover {
+      color: #9ab0d4;
     }
 
     .fxh-dropzone-plus {
@@ -9542,21 +9623,23 @@ html {
     }
 
     .fxj2-panel-icon {
-      width: 50px;
-      height: 50px;
+      width: 58px;
+      height: 58px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 14px;
-      background: rgba(56, 217, 169, 0.1);
-      border: 1px solid rgba(56, 217, 169, 0.28);
-      color: #38d9a9;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(47, 107, 255, 0.14), rgba(47, 107, 255, 0.04));
+      border: 1px solid rgba(47, 107, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 18px rgba(2, 6, 14, 0.3);
     }
 
-    .fxj2-panel-icon svg {
-      width: 26px;
-      height: 26px;
+    .fxj2-panel-icon img {
+      width: 34px;
+      height: 34px;
+      display: block;
+      object-fit: contain;
     }
 
     .fxj2-panel-title {
@@ -10906,19 +10989,40 @@ html {
         flex-direction: column;
       }
 
-      .fxh-cta-primary,
-      .fxh-cta-secondary {
+      .fxh-cta-primary {
         width: 100%;
         justify-content: center;
+      }
+
+      /* only one button on mobile */
+      .fxh-cta-secondary {
+        display: none;
       }
 
       .fxh-trust-indicators {
         display: none;
       }
 
-      /* hero upload card — compact on mobile */
-      .fxh-card {
+      /* Wise-style hero image on mobile */
+      .fxh-hero-img {
         display: block;
+        width: 100%;
+        margin-top: 24px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(2, 6, 14, 0.5);
+      }
+
+      .fxh-hero-img img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+      }
+
+      /* upload card hidden on mobile — image + button replace it (Wise-style) */
+      .fxh-card {
+        display: none;
         padding: 18px;
         margin-top: 4px;
         border-radius: 18px;
